@@ -20,7 +20,7 @@ public class WelcomeActivity extends BaseActivity<WelcomePresenter>implements We
     @Override
     public void showContent(int image) {
         //ivWelcomeBg.setImageResource(image);
-        ivWelcomeBg.animate().scaleX(1.12f).scaleY(1.12f).setDuration(2000).setStartDelay(100).start();
+        //ivWelcomeBg.animate().scaleX(1.12f).scaleY(1.12f).setDuration(2000).setStartDelay(100).start();
     }
 
     @Override

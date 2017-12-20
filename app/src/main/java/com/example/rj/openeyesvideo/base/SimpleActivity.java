@@ -20,9 +20,10 @@ public abstract class SimpleActivity extends SupportActivity {
     protected Context mContext;
     private Unbinder unbinder;
 
+
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
-        super.onCreate(savedInstanceState, persistentState);
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         setContentView(getLayout());
         onViewCreate();
         unbinder= ButterKnife.bind(this);
