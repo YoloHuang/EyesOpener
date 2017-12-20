@@ -20,7 +20,7 @@ public abstract class BaseFragment<T extends BasePresenter> extends SimpleFragme
     @Inject
     T mPresenter;
 
-    FragmentComponent getFragmentComponent(){
+    protected FragmentComponent getFragmentComponent(){
         return DaggerFragmentComponent.builder().appComponent(App.getAppComponent()).fragmentModule(getFragmentModule()).build();
     }
 
@@ -30,9 +30,9 @@ public abstract class BaseFragment<T extends BasePresenter> extends SimpleFragme
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        mPresenter.attachView(this);
         initInject();
+        mPresenter.attachView(this);
+        super.onViewCreated(view, savedInstanceState);
     }
 
     @Override

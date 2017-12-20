@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">OpenEyesVideo</string>
+    <string name="action_search">搜索</string>
 </resources>

@@ -22,6 +22,9 @@ public class App extends Application {
     public static AppComponent appComponent;
 
     public static synchronized App getApp(){
+        if(app==null){
+            app=new App();
+        }
         return app;
     }
 

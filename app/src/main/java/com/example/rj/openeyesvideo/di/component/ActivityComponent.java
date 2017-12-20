@@ -4,6 +4,7 @@ import android.app.Activity;
 
 import com.example.rj.openeyesvideo.di.module.ActivityModule;
 import com.example.rj.openeyesvideo.di.scope.ActivityScope;
+import com.example.rj.openeyesvideo.ui.activity.MainActivity;
 import com.example.rj.openeyesvideo.ui.activity.WelcomeActivity;
 
 import dagger.Component;
@@ -16,4 +17,5 @@ import dagger.Component;
 public interface ActivityComponent {
     Activity getActivity();
     void inject(WelcomeActivity welcomeActivity);
+    void inject(MainActivity mainActivity);
 }
