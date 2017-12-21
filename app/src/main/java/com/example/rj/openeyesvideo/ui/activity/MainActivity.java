@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 
 import android.support.design.widget.TabLayout;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
@@ -34,6 +35,8 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
     ViewPager mViewPager;
     @BindView(R.id.tab_openeyes)
     TabLayout mTabLayout;
+    @BindView(R.id.toolbar)
+    Toolbar mToolbar;
 
     MainAdapter mMainAdapter;
     MenuItem mSearchMenuItem;
@@ -44,6 +47,8 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
     @Override
     protected void initEventAndData() {
         toolbar_title.setText(R.string.app_name);
+        mToolbar.setTitle("");
+        setSupportActionBar(mToolbar);
         fragments.add(new DailyFragment());
         fragments.add(new DailyFragment());
         fragments.add(new DailyFragment());
@@ -72,6 +77,10 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
                 return false;
             }
         });
+        mMaterialSearchView.setVoiceSearch(false);
+        mMaterialSearchView.setCursorDrawable(R.drawable.custom_cursor);
+        mPresenter.getSearchSuggestions();
+
 
     }
 
@@ -79,6 +88,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_menu,menu);
         MenuItem item=menu.findItem(R.id.action_search);
+        item.setVisible(true);
         mMaterialSearchView.setMenuItem(item);
         mSearchMenuItem=item;
         return true;
@@ -92,6 +102,11 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
     @Override
     public void setSearchDisable() {
 
+    }
+
+    @Override
+    public void showSearchSuggestions(List<String> strings) {
+        //mMaterialSearchView.setSuggestions(strings);
     }
 
     @Override

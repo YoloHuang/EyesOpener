@@ -8,8 +8,11 @@ import com.example.rj.openeyesvideo.di.component.AppComponent;
 import com.example.rj.openeyesvideo.di.component.DaggerAppComponent;
 import com.example.rj.openeyesvideo.di.module.AppModule;
 
+import java.io.File;
 import java.util.HashSet;
 import java.util.Set;
+
+import io.realm.Realm;
 
 /**
  * Created by rj on 2017/12/15.
@@ -20,6 +23,7 @@ public class App extends Application {
     private static App app;
     private Set<Activity> activities;
     public static AppComponent appComponent;
+
 
     public static synchronized App getApp(){
         if(app==null){
@@ -32,6 +36,7 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
         app=this;
+        Realm.init(getApplicationContext());
 
     }
 
