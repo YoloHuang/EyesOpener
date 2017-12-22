@@ -18,6 +18,7 @@ import javax.inject.Inject;
 public abstract class BaseFragment<T extends BasePresenter> extends SimpleFragment implements BaseView  {
 
     @Inject
+    protected
     T mPresenter;
 
     protected FragmentComponent getFragmentComponent(){
