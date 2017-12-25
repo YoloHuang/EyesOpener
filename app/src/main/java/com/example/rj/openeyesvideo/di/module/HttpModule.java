@@ -50,7 +50,7 @@ public class HttpModule {
     @Singleton
     OkHttpClient provideOkhttpClient(OkHttpClient.Builder builder){
         File cacheFile=new File(Constants.PATH_CACHE);
-        final Cache cache = new Cache(cacheFile,1024*1024*50);
+        Cache cache = new Cache(cacheFile,1024*1024*50);
         Interceptor cacheInterceptor=new Interceptor() {
             @Override
             public Response intercept(Chain chain) throws IOException {

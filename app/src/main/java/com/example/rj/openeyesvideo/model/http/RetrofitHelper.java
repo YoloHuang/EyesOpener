@@ -1,5 +1,6 @@
 package com.example.rj.openeyesvideo.model.http;
 
+import com.example.rj.openeyesvideo.model.bean.DailyBean;
 import com.example.rj.openeyesvideo.model.bean.SearchResultBean;
 
 import java.util.List;
@@ -26,5 +27,15 @@ public class RetrofitHelper implements ApiHelper {
     @Override
     public Flowable<SearchResultBean> query(String key, int start) {
         return api.query(key,start);
+    }
+
+    @Override
+    public Flowable<DailyBean> getDailyBean() {
+        return api.getDailyBean();
+    }
+
+    @Override
+    public Flowable<DailyBean> getDailyBean(long date) {
+        return api.getDailyBean(date);
     }
 }

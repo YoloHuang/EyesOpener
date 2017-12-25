@@ -1,6 +1,7 @@
 package com.example.rj.openeyesvideo.model;
 
 import com.example.rj.openeyesvideo.model.DB.DBHelper;
+import com.example.rj.openeyesvideo.model.bean.DailyBean;
 import com.example.rj.openeyesvideo.model.bean.HistoryBean;
 import com.example.rj.openeyesvideo.model.bean.LikeBean;
 import com.example.rj.openeyesvideo.model.bean.SearchResultBean;
@@ -35,6 +36,16 @@ public class DataManager implements ApiHelper,DBHelper{
     @Override
     public Flowable<SearchResultBean> query(String key, int start) {
         return mApiHelper.query(key,start);
+    }
+
+    @Override
+    public Flowable<DailyBean> getDailyBean() {
+        return mApiHelper.getDailyBean();
+    }
+
+    @Override
+    public Flowable<DailyBean> getDailyBean(long date) {
+        return mApiHelper.getDailyBean(date);
     }
 
     @Override

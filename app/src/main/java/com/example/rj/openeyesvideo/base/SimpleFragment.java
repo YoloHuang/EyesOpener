@@ -34,7 +34,7 @@ public abstract class SimpleFragment extends SupportFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        unbinder= ButterKnife.bind(view);
+        unbinder= ButterKnife.bind(this,view);
     }
 
     @Nullable

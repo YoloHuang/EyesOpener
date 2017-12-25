@@ -1,5 +1,6 @@
 package com.example.rj.openeyesvideo.model.http;
 
+import com.example.rj.openeyesvideo.model.bean.DailyBean;
 import com.example.rj.openeyesvideo.model.bean.SearchResultBean;
 
 import java.util.List;
@@ -14,4 +15,7 @@ public interface ApiHelper {
     Flowable<List<String>> getTrendingTagInfo();
 
     Flowable<SearchResultBean> query(String key,int start);
+
+    Flowable<DailyBean> getDailyBean();
+    Flowable<DailyBean> getDailyBean(long date);
 }

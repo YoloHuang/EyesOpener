@@ -18,6 +18,7 @@ import com.example.rj.openeyesvideo.base.Contract.MainContract;
 import com.example.rj.openeyesvideo.presenter.MainPresenter;
 import com.example.rj.openeyesvideo.ui.adapter.MainAdapter;
 import com.example.rj.openeyesvideo.ui.fragment.DailyFragment;
+import com.example.rj.openeyesvideo.ui.fragment.HotFragment;
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 
 import java.util.ArrayList;
@@ -50,9 +51,9 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
         mToolbar.setTitle("");
         setSupportActionBar(mToolbar);
         fragments.add(new DailyFragment());
-        fragments.add(new DailyFragment());
-        fragments.add(new DailyFragment());
-        fragments.add(new DailyFragment());
+        fragments.add(new HotFragment());
+        fragments.add(new HotFragment());
+        fragments.add(new HotFragment());
         mMainAdapter=new MainAdapter(getSupportFragmentManager(),fragments);
         mViewPager.setAdapter(mMainAdapter);
         mTabLayout.addTab(mTabLayout.newTab().setText(tabTitle[0]));

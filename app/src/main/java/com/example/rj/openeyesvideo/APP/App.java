@@ -26,9 +26,6 @@ public class App extends Application {
 
 
     public static synchronized App getApp(){
-        if(app==null){
-            app=new App();
-        }
         return app;
     }
 
@@ -37,7 +34,6 @@ public class App extends Application {
         super.onCreate();
         app=this;
         Realm.init(getApplicationContext());
-
     }
 
     public static AppComponent getAppComponent(){

@@ -1,5 +1,6 @@
 package com.example.rj.openeyesvideo.model.http;
 
+import com.example.rj.openeyesvideo.model.bean.DailyBean;
 import com.example.rj.openeyesvideo.model.bean.SearchResultBean;
 
 import java.util.List;
@@ -21,4 +22,10 @@ public interface Api {
 
     @GET("v1/search?num=10")
     Flowable<SearchResultBean> query(@Query("query") String key, @Query("start") int start);
+
+    @GET("v2/feed?num=2")
+    Flowable<DailyBean> getDailyBean();
+
+    @GET("v2/feed?num=2")
+    Flowable<DailyBean> getDailyBean(@Query("date") long date);
 }

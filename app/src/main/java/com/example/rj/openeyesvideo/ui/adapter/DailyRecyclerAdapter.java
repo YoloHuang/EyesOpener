@@ -1,7 +1,9 @@
 package com.example.rj.openeyesvideo.ui.adapter;
 
 import android.content.Context;
+import android.support.v7.util.DiffUtil;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -11,8 +13,10 @@ import com.example.rj.openeyesvideo.R;
 import com.example.rj.openeyesvideo.component.ImageLoader;
 import com.example.rj.openeyesvideo.model.DataManager;
 import com.example.rj.openeyesvideo.model.bean.DailyBean;
+import com.example.rj.openeyesvideo.util.DiffUtilCallBack;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -44,13 +48,13 @@ public class DailyRecyclerAdapter extends BaseRecyclerAdapter<DailyBean.IssueLis
 
     @Override
     public int getItemCount() {
-        return 0;
+        return datas.size();
     }
 
 
     public DailyRecyclerAdapter(Context context, List<DailyBean.IssueListBean.ItemListBean> datas) {
         super(context, datas);
-
+        Log.d("hzj", "DailyRecyclerAdapter: "+datas.size());
     }
 
 
@@ -70,7 +74,7 @@ public class DailyRecyclerAdapter extends BaseRecyclerAdapter<DailyBean.IssueLis
             String date=getDate();
             ((DateViewHolder)holder).textView.setText(date);
         }else {
-            String detail=datas.get(position-1).getData().getAuthor().getName()+" / #" +datas.get(position-1).getData().getTags().get(0);
+            String detail=datas.get(position-1).getData().getAuthor().getName()+" / #" +datas.get(position-1).getData().getTags().get(0).getName();
             ((ItemViewHolder)holder).mAuthorText.setText(detail);
             ((ItemViewHolder)holder).mTitleTest.setText(datas.get(position-1).getData().getTitle());
             ImageLoader.load(mContext,datas.get(position-1).getData().getAuthor().getIcon(),((ItemViewHolder)holder).mAuthorImage);
@@ -92,7 +96,7 @@ public class DailyRecyclerAdapter extends BaseRecyclerAdapter<DailyBean.IssueLis
 
         public DateViewHolder(View itemView) {
             super(itemView);
-            ButterKnife.bind(this,textView);
+            ButterKnife.bind(this,itemView);
         }
     }
 
@@ -112,4 +116,12 @@ public class DailyRecyclerAdapter extends BaseRecyclerAdapter<DailyBean.IssueLis
             ButterKnife.bind(this,itemView);
         }
     }
+
+    public void addDailyData(List<DailyBean.IssueListBean.ItemListBean> listBeans){
+        Log.d("hzj", "addDailyData: "+datas.size());
+        DiffUtil.DiffResult diffResult=DiffUtil.calculateDiff(new DiffUtilCallBack(datas,listBeans),false);
+        datas=listBeans;
+        diffResult.dispatchUpdatesTo(this);
+    }
+
 }

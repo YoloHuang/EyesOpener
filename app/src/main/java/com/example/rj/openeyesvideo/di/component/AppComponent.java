@@ -4,6 +4,7 @@ import com.example.rj.openeyesvideo.APP.App;
 import com.example.rj.openeyesvideo.di.module.AppModule;
 import com.example.rj.openeyesvideo.di.module.HttpModule;
 import com.example.rj.openeyesvideo.model.DB.RealmHelper;
+import com.example.rj.openeyesvideo.model.DataManager;
 import com.example.rj.openeyesvideo.model.http.RetrofitHelper;
 
 import javax.inject.Singleton;
@@ -20,4 +21,5 @@ public interface AppComponent {
 
     RetrofitHelper retrofitHelper();
     RealmHelper realmHelper();
+    DataManager getDataManager();
 }

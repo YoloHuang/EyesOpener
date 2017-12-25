@@ -5,6 +5,7 @@ import android.app.Activity;
 import com.example.rj.openeyesvideo.di.module.FragmentModule;
 import com.example.rj.openeyesvideo.di.scope.FragmentScope;
 import com.example.rj.openeyesvideo.ui.fragment.DailyFragment;
+import com.example.rj.openeyesvideo.ui.fragment.HotFragment;
 
 import dagger.Component;
 
@@ -16,5 +17,6 @@ import dagger.Component;
 public interface FragmentComponent {
     Activity getActivity();
     void inject(DailyFragment dailyFragment);
+    void inject(HotFragment hotFragment);
 
 }

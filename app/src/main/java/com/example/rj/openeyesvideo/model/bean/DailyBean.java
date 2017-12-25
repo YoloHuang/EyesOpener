@@ -13,6 +13,16 @@ public class DailyBean {
     private String nextPageUrl;
     private List<IssueListBean> issueList;
 
+    public Long getNextPublishTime() {
+        return nextPublishTime;
+    }
+
+    public void setNextPublishTime(Long nextPublishTime) {
+        this.nextPublishTime = nextPublishTime;
+    }
+
+    private Long nextPublishTime;
+
     public String getNextPageUrl() {
         return nextPageUrl;
     }
