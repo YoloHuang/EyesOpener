@@ -1,7 +1,10 @@
 package com.example.rj.openeyesvideo.model.http;
 
 import com.example.rj.openeyesvideo.model.bean.DailyBean;
+import com.example.rj.openeyesvideo.model.bean.HotBean;
 import com.example.rj.openeyesvideo.model.bean.SearchResultBean;
+import com.example.rj.openeyesvideo.model.bean.TagChildBean;
+import com.example.rj.openeyesvideo.model.bean.TagsBean;
 
 import java.util.List;
 
@@ -18,4 +21,10 @@ public interface ApiHelper {
 
     Flowable<DailyBean> getDailyBean();
     Flowable<DailyBean> getDailyBean(long date);
+
+    //Flowable<HotBean> getMonthHotBean();
+    Flowable<HotBean> getWeekHotBean(String type);
+    //Flowable<HotBean> getHistroicalHotBean();
+    Flowable<List<TagsBean>> getTagsBean();
+    Flowable<TagChildBean> getTagChildBean(int start,int num,int id);
 }

@@ -3,6 +3,7 @@ package com.example.rj.openeyesvideo.util;
 import android.support.v7.util.DiffUtil;
 
 import com.example.rj.openeyesvideo.model.bean.DailyBean;
+import com.example.rj.openeyesvideo.model.bean.TagChildBean;
 
 import java.util.List;
 
@@ -19,6 +20,7 @@ public class DiffUtilCallBack extends DiffUtil.Callback {
         this.moldDatas=OldDatas;
         this.mNewDatas=NewDatas;
     }
+
 
     @Override
     public int getOldListSize() {

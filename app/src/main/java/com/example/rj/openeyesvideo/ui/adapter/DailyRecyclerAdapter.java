@@ -54,7 +54,6 @@ public class DailyRecyclerAdapter extends BaseRecyclerAdapter<DailyBean.IssueLis
 
     public DailyRecyclerAdapter(Context context, List<DailyBean.IssueListBean.ItemListBean> datas) {
         super(context, datas);
-        Log.d("hzj", "DailyRecyclerAdapter: "+datas.size());
     }
 
 
@@ -74,7 +73,7 @@ public class DailyRecyclerAdapter extends BaseRecyclerAdapter<DailyBean.IssueLis
             String date=getDate();
             ((DateViewHolder)holder).textView.setText(date);
         }else {
-            String detail=datas.get(position-1).getData().getAuthor().getName()+" / #" +datas.get(position-1).getData().getTags().get(0).getName();
+            String detail=datas.get(position-1).getData().getAuthor().getName()+" / #" +datas.get(position-1).getData().getCategory();
             ((ItemViewHolder)holder).mAuthorText.setText(detail);
             ((ItemViewHolder)holder).mTitleTest.setText(datas.get(position-1).getData().getTitle());
             ImageLoader.load(mContext,datas.get(position-1).getData().getAuthor().getIcon(),((ItemViewHolder)holder).mAuthorImage);
@@ -120,7 +119,9 @@ public class DailyRecyclerAdapter extends BaseRecyclerAdapter<DailyBean.IssueLis
     public void addDailyData(List<DailyBean.IssueListBean.ItemListBean> listBeans){
         Log.d("hzj", "addDailyData: "+datas.size());
         DiffUtil.DiffResult diffResult=DiffUtil.calculateDiff(new DiffUtilCallBack(datas,listBeans),false);
-        datas=listBeans;
+        datas.clear();
+        datas.addAll(listBeans);
+        //datas=listBeans;
         diffResult.dispatchUpdatesTo(this);
     }
 

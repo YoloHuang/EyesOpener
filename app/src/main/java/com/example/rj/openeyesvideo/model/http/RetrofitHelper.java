@@ -1,7 +1,10 @@
 package com.example.rj.openeyesvideo.model.http;
 
 import com.example.rj.openeyesvideo.model.bean.DailyBean;
+import com.example.rj.openeyesvideo.model.bean.HotBean;
 import com.example.rj.openeyesvideo.model.bean.SearchResultBean;
+import com.example.rj.openeyesvideo.model.bean.TagChildBean;
+import com.example.rj.openeyesvideo.model.bean.TagsBean;
 
 import java.util.List;
 
@@ -38,4 +41,29 @@ public class RetrofitHelper implements ApiHelper {
     public Flowable<DailyBean> getDailyBean(long date) {
         return api.getDailyBean(date);
     }
+
+//    @Override
+//    public Flowable<HotBean> getMonthHotBean() {
+//        return api.getMonthHotBean();
+//    }
+
+    @Override
+    public Flowable<HotBean> getWeekHotBean(String type) {
+        return api.getWeekHotBean(type);
+    }
+
+    @Override
+    public Flowable<List<TagsBean>> getTagsBean() {
+        return api.getTagsBean();
+    }
+
+    @Override
+    public Flowable<TagChildBean> getTagChildBean(int start, int num, int id) {
+        return api.getTagChildBean(start,num,id);
+    }
+
+//    @Override
+//    public Flowable<HotBean> getHistroicalHotBean() {
+//        return api.getHistoricalHotBean();
+//    }
 }

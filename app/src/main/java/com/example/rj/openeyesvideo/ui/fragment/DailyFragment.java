@@ -31,7 +31,7 @@ public class DailyFragment extends RootFragment<DailyPresenter> implements Daily
     @BindView(R.id.view_refresh)
     SwipeRefreshLayout mSwipeRefreshLayout;
 
-    List<DailyBean.IssueListBean.ItemListBean> itemListBeans = new ArrayList<>();
+    private List<DailyBean.IssueListBean.ItemListBean> itemListBeans = new ArrayList<>();
 
     LinearLayoutManager mLayoutManager;
 
@@ -71,6 +71,7 @@ public class DailyFragment extends RootFragment<DailyPresenter> implements Daily
                 super.onScrolled(recyclerView, dx, dy);
                 int lastItemPositon= mLayoutManager.findLastCompletelyVisibleItemPosition();
                 int totalPotions=mLayoutManager.getItemCount();
+                Log.d("hzj", "onScrolled: lastItemPositon:"+lastItemPositon+",totalPotions:"+totalPotions+";isloading:"+isLoading);
                 if(lastItemPositon>=totalPotions-6 && dy>0){
                     if(isLoading){
                         Log.d("hzj", "onScrolled: "+isLoading);

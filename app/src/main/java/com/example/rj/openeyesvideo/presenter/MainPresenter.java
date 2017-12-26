@@ -12,7 +12,7 @@ import javax.inject.Inject;
 
 public class MainPresenter extends RxPresenter<MainContract.View> implements MainContract.Presenter {
 
-    DataManager mDataManager;
+
 
     @Inject
     public MainPresenter(DataManager dataManager){

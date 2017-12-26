@@ -1,5 +1,7 @@
 package com.example.rj.openeyesvideo.base;
 
+import com.example.rj.openeyesvideo.model.DataManager;
+
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 
@@ -11,6 +13,7 @@ public class RxPresenter<T extends BaseView> implements BasePresenter<T> {
 
     protected T mView;
     protected CompositeDisposable mCompositeDisposable;
+    protected DataManager mDataManager;
 
     protected  void addSubscribe(Disposable disposable){
         if(mCompositeDisposable==null){

@@ -3,8 +3,11 @@ package com.example.rj.openeyesvideo.model;
 import com.example.rj.openeyesvideo.model.DB.DBHelper;
 import com.example.rj.openeyesvideo.model.bean.DailyBean;
 import com.example.rj.openeyesvideo.model.bean.HistoryBean;
+import com.example.rj.openeyesvideo.model.bean.HotBean;
 import com.example.rj.openeyesvideo.model.bean.LikeBean;
 import com.example.rj.openeyesvideo.model.bean.SearchResultBean;
+import com.example.rj.openeyesvideo.model.bean.TagChildBean;
+import com.example.rj.openeyesvideo.model.bean.TagsBean;
 import com.example.rj.openeyesvideo.model.http.ApiHelper;
 
 import java.util.List;
@@ -47,6 +50,31 @@ public class DataManager implements ApiHelper,DBHelper{
     public Flowable<DailyBean> getDailyBean(long date) {
         return mApiHelper.getDailyBean(date);
     }
+
+//    @Override
+//    public Flowable<HotBean> getMonthHotBean() {
+//        return mApiHelper.getMonthHotBean();
+//    }
+
+    @Override
+    public Flowable<HotBean> getWeekHotBean(String type) {
+        return mApiHelper.getWeekHotBean(type);
+    }
+
+    @Override
+    public Flowable<List<TagsBean>> getTagsBean() {
+        return mApiHelper.getTagsBean();
+    }
+
+    @Override
+    public Flowable<TagChildBean> getTagChildBean(int start, int num, int id) {
+        return mApiHelper.getTagChildBean(start,num,id);
+    }
+
+//    @Override
+//    public Flowable<HotBean> getHistroicalHotBean() {
+//        return mApiHelper.getHistroicalHotBean();
+//    }
 
     @Override
     public void insertReadId(HistoryBean historyBean) {

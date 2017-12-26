@@ -21,7 +21,6 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
 public class DailyPresenter extends RxPresenter<DailyContract.View> implements DailyContract.Presenter {
 
-    DataManager mDataManager;
     List<DailyBean.IssueListBean.ItemListBean> itemListBeans;
     List<DailyBean.IssueListBean.ItemListBean> moreItemListBeans;
     String nextUrl;
