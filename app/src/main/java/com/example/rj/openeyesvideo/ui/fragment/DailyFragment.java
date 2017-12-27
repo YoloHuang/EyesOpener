@@ -1,6 +1,8 @@
 package com.example.rj.openeyesvideo.ui.fragment;
 
+import android.content.Intent;
 import android.graphics.Color;
+import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,6 +15,7 @@ import com.example.rj.openeyesvideo.base.RootFragment;
 import com.example.rj.openeyesvideo.model.bean.DailyBean;
 import com.example.rj.openeyesvideo.model.bean.ItemListBean;
 import com.example.rj.openeyesvideo.presenter.DailyPresenter;
+import com.example.rj.openeyesvideo.ui.adapter.BaseRecyclerAdapter;
 import com.example.rj.openeyesvideo.ui.adapter.DailyRecyclerAdapter;
 
 import java.util.ArrayList;
@@ -58,7 +61,6 @@ public class DailyFragment extends RootFragment<DailyPresenter> implements Daily
         mLayoutManager=new LinearLayoutManager(mContext);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mAdapter=new DailyRecyclerAdapter(mContext,itemListBeans);
-        Log.d("hzj", "initRecyclerView: "+itemListBeans.size());
         mRecyclerView.setAdapter(mAdapter);
         mPresenter.getDailyData();
         mRecyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -81,6 +83,18 @@ public class DailyFragment extends RootFragment<DailyPresenter> implements Daily
                         mPresenter.getMoreData();
                     }
                 }
+            }
+        });
+        initOnItemClickListener(mAdapter,itemListBeans);
+    }
+
+    private void initOnItemClickListener(BaseRecyclerAdapter mAdapter, List<ItemListBean> itemListBeans) {
+        mAdapter.setOnItemClickListener(new BaseRecyclerAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int id) {
+                Intent intent=new Intent();
+                Bundle bundle=new Bundle();
+                //intent.setClass(mContext,)
             }
         });
     }

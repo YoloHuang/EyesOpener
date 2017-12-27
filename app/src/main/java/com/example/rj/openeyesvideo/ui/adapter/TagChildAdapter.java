@@ -3,6 +3,7 @@ package com.example.rj.openeyesvideo.ui.adapter;
 import android.content.Context;
 import android.support.v7.util.DiffUtil;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -34,16 +35,16 @@ public class TagChildAdapter extends BaseRecyclerAdapter<ItemListBean> {
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new HotTopAdapter.ItemViewHolder(mLayoutInflater.inflate(R.layout.item_daily,parent,false));
+        return new ItemViewHolder(mLayoutInflater.inflate(R.layout.item_daily,parent,false));
     }
 
     @Override
     public void convert(RecyclerView.ViewHolder holder, int position) {
         String detail=datas.get(position).getData().getAuthor().getName()+" / #" +datas.get(position).getData().getCategory();
-        ((HotTopAdapter.ItemViewHolder)holder).mAuthorText.setText(detail);
-        ((HotTopAdapter.ItemViewHolder)holder).mTitleTest.setText(datas.get(position).getData().getTitle());
-        ImageLoader.load(mContext,datas.get(position).getData().getAuthor().getIcon(),((HotTopAdapter.ItemViewHolder)holder).mAuthorImage);
-        ImageLoader.load(mContext,datas.get(position).getData().getCover().getFeed(),((HotTopAdapter.ItemViewHolder)holder).mDailyImage);
+        ((ItemViewHolder)holder).mAuthorText.setText(detail);
+        ((ItemViewHolder)holder).mTitleTest.setText(datas.get(position).getData().getTitle());
+        ImageLoader.load(mContext,datas.get(position).getData().getAuthor().getIcon(),((ItemViewHolder)holder).mAuthorImage);
+        ImageLoader.load(mContext,datas.get(position).getData().getCover().getFeed(),((ItemViewHolder)holder).mDailyImage);
     }
 
     @Override
@@ -71,6 +72,7 @@ public class TagChildAdapter extends BaseRecyclerAdapter<ItemListBean> {
         DiffUtil.DiffResult diffResult=DiffUtil.calculateDiff(new DiffUtilCallBack(datas,itemListBeans),false);
         datas.clear();
         datas.addAll(itemListBeans);
+        Log.d("hzj", "addTagChildData: datas"+datas.size());
         //datas=listBeans;
         diffResult.dispatchUpdatesTo(this);
     }

@@ -1,12 +1,13 @@
 package com.example.rj.openeyesvideo.model.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by rj on 2017/12/27.
  */
 
-public  class ItemListBean {
+public  class ItemListBean implements Serializable{
     /**
      * type : banner2
      * data : {"dataType":"Banner","id":0,"title":"","description":"","image":"http://img.kaiyanapp.com/eef24aa10ab6cf17b5a512943ec22053.jpeg?imageMogr2/quality/60/format/jpg","actionUrl":"","adTrack":null,"shade":false,"label":null,"labelList":null,"header":null}

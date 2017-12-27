@@ -19,6 +19,7 @@ import com.example.rj.openeyesvideo.presenter.MainPresenter;
 import com.example.rj.openeyesvideo.ui.adapter.MainAdapter;
 import com.example.rj.openeyesvideo.ui.fragment.DailyFragment;
 import com.example.rj.openeyesvideo.ui.fragment.HotFragment;
+import com.example.rj.openeyesvideo.ui.fragment.MyFragment;
 import com.example.rj.openeyesvideo.ui.fragment.TagsFragment;
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 
@@ -54,7 +55,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
         fragments.add(new DailyFragment());
         fragments.add(new HotFragment());
         fragments.add(new TagsFragment());
-        fragments.add(new TagsFragment());
+        fragments.add(new MyFragment());
         mMainAdapter=new MainAdapter(getSupportFragmentManager(),fragments);
         mViewPager.setAdapter(mMainAdapter);
         mTabLayout.addTab(mTabLayout.newTab().setText(tabTitle[0]));

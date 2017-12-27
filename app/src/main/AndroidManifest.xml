@@ -28,7 +28,8 @@
         <activity
             android:name=".ui.activity.MainActivity"
             android:theme="@style/AppTheme" />
-        <activity android:name=".ui.activity.TagActivity"></activity>
+        <activity android:name=".ui.activity.TagActivity" />
+        <activity android:name=".ui.activity.DetailActivity"></activity>
     </application>
 
 </manifest>

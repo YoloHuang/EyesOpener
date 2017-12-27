@@ -38,7 +38,7 @@ public interface Api {
     @GET("v2/categories")
     Flowable<List<TagsBean>> getTagsBean();
 
-    @GET("v4/categories/videoList")
+    @GET("v4/categories/videoList?strategy=date")
     Flowable<TagChildBean> getTagChildBean(@Query("start")int start,@Query("num")int num,@Query("id")int id);
 
 }

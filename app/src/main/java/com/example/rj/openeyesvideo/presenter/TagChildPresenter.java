@@ -1,5 +1,7 @@
 package com.example.rj.openeyesvideo.presenter;
 
+import android.util.Log;
+
 import com.example.rj.openeyesvideo.base.Contract.TagChildContract;
 import com.example.rj.openeyesvideo.base.RxPresenter;
 import com.example.rj.openeyesvideo.model.DataManager;
@@ -38,6 +40,7 @@ public class TagChildPresenter extends RxPresenter<TagChildContract.View> implem
             public void onNext(TagChildBean tagChildBean) {
                 totalItems=tagChildBean.getCount();
                 listBeans=tagChildBean.getItemList();
+                Log.d("hzj", "onNext: listBeans"+listBeans+"totalItems:"+totalItems);
                 mView.showContents(listBeans);
             }
         }));
@@ -51,8 +54,9 @@ public class TagChildPresenter extends RxPresenter<TagChildContract.View> implem
             @Override
             public void onNext(TagChildBean tagChildBean) {
                 totalItems=totalItems+tagChildBean.getCount();
+                listBeans.clear();
                 listBeans.addAll(tagChildBean.getItemList());
-                mView.showContents(listBeans);
+                mView.showMoreContents(listBeans);
             }
         }));
     }

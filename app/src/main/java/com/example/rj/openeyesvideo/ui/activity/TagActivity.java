@@ -7,6 +7,8 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -15,8 +17,6 @@ import com.example.rj.openeyesvideo.base.Contract.TagChildContract;
 import com.example.rj.openeyesvideo.base.RootActivity;
 import com.example.rj.openeyesvideo.component.ImageLoader;
 import com.example.rj.openeyesvideo.model.bean.ItemListBean;
-import com.example.rj.openeyesvideo.model.bean.TagChildBean;
-import com.example.rj.openeyesvideo.model.bean.TagsBean;
 import com.example.rj.openeyesvideo.presenter.TagChildPresenter;
 import com.example.rj.openeyesvideo.ui.adapter.TagChildAdapter;
 import com.example.rj.openeyesvideo.util.SystemUtil;
@@ -40,28 +40,97 @@ public class TagActivity extends RootActivity<TagChildPresenter> implements TagC
     AppBarLayout appbar;
     @BindView(R.id.toolbar_title)
     TextView toolbar_title;
+//    @BindView(R.id.swipe_refresh)
+//    SwipeRefreshLayout swipeRefresh;
 
 
-    List<ItemListBean> itemListBeans=new ArrayList<>();
+    List<ItemListBean> mItemListBeans=new ArrayList<>();
     TagChildAdapter mAdapter;
+    boolean isLoading=true;
+    LinearLayoutManager mLinearLayoutManager;
+     int tagId;
 
 
     @Override
     protected void initEventAndData() {
         super.initEventAndData();
+        initRecyclerView();
+        initIntent();
+        //initRefreashView();
+        stateLoading();
+    }
+
+//    private void initRefreashView() {
+//        appbar.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
+//            @Override
+//            public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
+//                if (verticalOffset >= 0) {
+//                    swipeRefresh.setEnabled(true);
+//                } else {
+//                    swipeRefresh.setEnabled(false);
+//                    float rate = (float)(SystemUtil.dp2px(mContext, 256) + verticalOffset * 2) / SystemUtil.dp2px(mContext, 256);
+//                    if (rate >= 0)
+//                        ivOrigin.setAlpha(rate);
+//                }
+//            }
+//        });
+//        swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+//            @Override
+//            public void onRefresh() {
+//                mPresenter.getTagChildData(tagId);
+//            }
+//        });
+//    }
+
+    private void initIntent() {
         Intent intent=getIntent();
-        final int tagId=intent.getExtras().getInt("TagId");
+        tagId=intent.getExtras().getInt("TagId");
         final String tagName=intent.getExtras().getString("TagName");
         final String TagImage=intent.getExtras().getString("TagImage");
         final String TagSlogen=intent.getExtras().getString("TagSlogen");
         toolbar_title.setText(tagName);
+        mToolBar.setTitle("");
+        setSupportActionBar(mToolBar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        mToolBar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressedSupport();
+            }
+        });
         ImageLoader.load(mContext,TagImage,ivOrigin);
         tvDes.setText(TagSlogen);
-        mAdapter=new TagChildAdapter(mContext,itemListBeans);
-        rvThemeChildList.setLayoutManager(new LinearLayoutManager(mContext));
-        rvThemeChildList.setAdapter(mAdapter);
-        stateLoading();
         mPresenter.getTagChildData(tagId);
+    }
+
+    private void initRecyclerView() {
+        mAdapter=new TagChildAdapter(mContext,mItemListBeans);
+        mLinearLayoutManager=new LinearLayoutManager(mContext);
+        rvThemeChildList.setLayoutManager(mLinearLayoutManager);
+        rvThemeChildList.setAdapter(mAdapter);
+        rvThemeChildList.setOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                int lastItemPositon= mLinearLayoutManager.findLastCompletelyVisibleItemPosition();
+                int totalPotions=mLinearLayoutManager.getItemCount();
+                Log.d("hzj", "onScrolled: lastItemPositon:"+lastItemPositon+",totalPotions:"+totalPotions+";isloading:"+isLoading);
+                if(lastItemPositon>=totalPotions-6 && dy>0 && totalPotions<=66){
+                    if(isLoading){
+                        Log.d("hzj", "onScrolled: "+isLoading);
+                    }else {
+                        isLoading=true;
+                        mPresenter.getMoreData(tagId);
+                    }
+                }
+            }
+        });
     }
 
     @Override
@@ -71,13 +140,26 @@ public class TagActivity extends RootActivity<TagChildPresenter> implements TagC
 
     @Override
     public void showContents(List<ItemListBean> itemListBeans) {
-        this.itemListBeans.addAll(itemListBeans);
-
+//        if(swipeRefresh.isRefreshing()) {
+//            swipeRefresh.setRefreshing(false);
+//        }
+        mItemListBeans.clear();
+        mItemListBeans.addAll(itemListBeans);
+        Log.d("hzj", "showContents: mItemListBeans"+mItemListBeans.size());
+        mAdapter.addTagChildData(mItemListBeans);
+        stateStart();
+        isLoading=false;
     }
 
     @Override
     public void showMoreContents(List<ItemListBean> itemListBeans) {
-
+//        if(swipeRefresh.isRefreshing()) {
+//            swipeRefresh.setRefreshing(false);
+//        }
+        mItemListBeans.addAll(itemListBeans);
+        mAdapter.addTagChildData(mItemListBeans);
+        stateStart();
+        isLoading=false;
     }
 
     @Override
