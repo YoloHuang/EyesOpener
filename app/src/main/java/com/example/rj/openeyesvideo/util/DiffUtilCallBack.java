@@ -3,6 +3,7 @@ package com.example.rj.openeyesvideo.util;
 import android.support.v7.util.DiffUtil;
 
 import com.example.rj.openeyesvideo.model.bean.DailyBean;
+import com.example.rj.openeyesvideo.model.bean.ItemListBean;
 import com.example.rj.openeyesvideo.model.bean.TagChildBean;
 
 import java.util.List;
@@ -13,10 +14,10 @@ import java.util.List;
 
 public class DiffUtilCallBack extends DiffUtil.Callback {
 
-    private List<DailyBean.IssueListBean.ItemListBean> moldDatas,mNewDatas;
+    private List<ItemListBean> moldDatas,mNewDatas;
 
 
-    public DiffUtilCallBack(List<DailyBean.IssueListBean.ItemListBean> OldDatas,List<DailyBean.IssueListBean.ItemListBean> NewDatas){
+    public DiffUtilCallBack(List<ItemListBean> OldDatas,List<ItemListBean> NewDatas){
         this.moldDatas=OldDatas;
         this.mNewDatas=NewDatas;
     }
@@ -39,8 +40,8 @@ public class DiffUtilCallBack extends DiffUtil.Callback {
 
     @Override
     public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
-        DailyBean.IssueListBean.ItemListBean oldItem=moldDatas.get(oldItemPosition);
-        DailyBean.IssueListBean.ItemListBean newItem=mNewDatas.get(newItemPosition);
+        ItemListBean oldItem=moldDatas.get(oldItemPosition);
+        ItemListBean newItem=mNewDatas.get(newItemPosition);
         if(!oldItem.getData().getTags().get(0).getName().equals(newItem.getData().getTags().get(0).getName())){
             return false;
         }

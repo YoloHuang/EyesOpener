@@ -10,7 +10,7 @@ public class SearchResultBean {
 
     public int count;
     public int total;
-    public List<DailyBean.IssueListBean.ItemListBean> itemList;
+    public List<ItemListBean> itemList;
 
     public int getCount() {
         return count;
@@ -28,11 +28,11 @@ public class SearchResultBean {
         this.total = total;
     }
 
-    public List<DailyBean.IssueListBean.ItemListBean> getItemList() {
+    public List<ItemListBean> getItemList() {
         return itemList;
     }
 
-    public void setItemList(List<DailyBean.IssueListBean.ItemListBean> itemList) {
+    public void setItemList(List<ItemListBean> itemList) {
         this.itemList = itemList;
     }
 }

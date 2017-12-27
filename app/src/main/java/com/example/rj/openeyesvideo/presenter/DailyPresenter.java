@@ -6,6 +6,7 @@ import com.example.rj.openeyesvideo.base.Contract.DailyContract;
 import com.example.rj.openeyesvideo.base.RxPresenter;
 import com.example.rj.openeyesvideo.model.DataManager;
 import com.example.rj.openeyesvideo.model.bean.DailyBean;
+import com.example.rj.openeyesvideo.model.bean.ItemListBean;
 import com.example.rj.openeyesvideo.util.RxUtil;
 import com.example.rj.openeyesvideo.widget.CommonSubscriber;
 
@@ -21,8 +22,8 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
 public class DailyPresenter extends RxPresenter<DailyContract.View> implements DailyContract.Presenter {
 
-    List<DailyBean.IssueListBean.ItemListBean> itemListBeans;
-    List<DailyBean.IssueListBean.ItemListBean> moreItemListBeans;
+    List<ItemListBean> itemListBeans;
+    List<ItemListBean> moreItemListBeans;
     String nextUrl;
     long nextDate;
 

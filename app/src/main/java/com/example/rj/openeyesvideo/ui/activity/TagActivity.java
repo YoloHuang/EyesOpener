@@ -14,6 +14,7 @@ import com.example.rj.openeyesvideo.R;
 import com.example.rj.openeyesvideo.base.Contract.TagChildContract;
 import com.example.rj.openeyesvideo.base.RootActivity;
 import com.example.rj.openeyesvideo.component.ImageLoader;
+import com.example.rj.openeyesvideo.model.bean.ItemListBean;
 import com.example.rj.openeyesvideo.model.bean.TagChildBean;
 import com.example.rj.openeyesvideo.model.bean.TagsBean;
 import com.example.rj.openeyesvideo.presenter.TagChildPresenter;
@@ -41,7 +42,7 @@ public class TagActivity extends RootActivity<TagChildPresenter> implements TagC
     TextView toolbar_title;
 
 
-    List<TagChildBean.ItemListBean> itemListBeans=new ArrayList<>();
+    List<ItemListBean> itemListBeans=new ArrayList<>();
     TagChildAdapter mAdapter;
 
 
@@ -69,13 +70,13 @@ public class TagActivity extends RootActivity<TagChildPresenter> implements TagC
     }
 
     @Override
-    public void showContents(List<TagChildBean.ItemListBean> itemListBeans) {
+    public void showContents(List<ItemListBean> itemListBeans) {
         this.itemListBeans.addAll(itemListBeans);
 
     }
 
     @Override
-    public void showMoreContents(List<TagChildBean.ItemListBean> itemListBeans) {
+    public void showMoreContents(List<ItemListBean> itemListBeans) {
 
     }
 

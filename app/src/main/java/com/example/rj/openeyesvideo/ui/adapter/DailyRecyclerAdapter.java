@@ -13,6 +13,7 @@ import com.example.rj.openeyesvideo.R;
 import com.example.rj.openeyesvideo.component.ImageLoader;
 import com.example.rj.openeyesvideo.model.DataManager;
 import com.example.rj.openeyesvideo.model.bean.DailyBean;
+import com.example.rj.openeyesvideo.model.bean.ItemListBean;
 import com.example.rj.openeyesvideo.util.DiffUtilCallBack;
 
 import java.text.SimpleDateFormat;
@@ -27,7 +28,7 @@ import butterknife.ButterKnife;
  * Created by rj on 2017/12/22.
  */
 
-public class DailyRecyclerAdapter extends BaseRecyclerAdapter<DailyBean.IssueListBean.ItemListBean> {
+public class DailyRecyclerAdapter extends BaseRecyclerAdapter<ItemListBean> {
 
 
     public enum ITEM_TYPE{
@@ -52,7 +53,7 @@ public class DailyRecyclerAdapter extends BaseRecyclerAdapter<DailyBean.IssueLis
     }
 
 
-    public DailyRecyclerAdapter(Context context, List<DailyBean.IssueListBean.ItemListBean> datas) {
+    public DailyRecyclerAdapter(Context context, List<ItemListBean> datas) {
         super(context, datas);
     }
 
@@ -116,7 +117,7 @@ public class DailyRecyclerAdapter extends BaseRecyclerAdapter<DailyBean.IssueLis
         }
     }
 
-    public void addDailyData(List<DailyBean.IssueListBean.ItemListBean> listBeans){
+    public void addDailyData(List<ItemListBean> listBeans){
         Log.d("hzj", "addDailyData: "+datas.size());
         DiffUtil.DiffResult diffResult=DiffUtil.calculateDiff(new DiffUtilCallBack(datas,listBeans),false);
         datas.clear();

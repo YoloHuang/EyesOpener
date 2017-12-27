@@ -4,6 +4,7 @@ import com.example.rj.openeyesvideo.base.BasePresenter;
 import com.example.rj.openeyesvideo.base.BaseView;
 import com.example.rj.openeyesvideo.model.bean.DailyBean;
 import com.example.rj.openeyesvideo.model.bean.HotBean;
+import com.example.rj.openeyesvideo.model.bean.ItemListBean;
 
 import java.util.List;
 
@@ -13,7 +14,7 @@ import java.util.List;
 
 public interface HotTopContract {
     interface View extends BaseView{
-        void showContents(List<HotBean.ItemListBean>  listBean);
+        void showContents(List<ItemListBean>  listBean);
     }
     interface Presenter extends BasePresenter<View>{
         void getHotData(String type);

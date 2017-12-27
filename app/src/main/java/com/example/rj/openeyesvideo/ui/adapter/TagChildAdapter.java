@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.example.rj.openeyesvideo.R;
 import com.example.rj.openeyesvideo.component.ImageLoader;
+import com.example.rj.openeyesvideo.model.bean.ItemListBean;
 import com.example.rj.openeyesvideo.model.bean.TagChildBean;
 import com.example.rj.openeyesvideo.util.DiffUtilCallBack;
 
@@ -22,11 +23,11 @@ import butterknife.ButterKnife;
  * Created by rj on 2017/12/26.
  */
 
-public class TagChildAdapter extends BaseRecyclerAdapter<TagChildBean.ItemListBean> {
+public class TagChildAdapter extends BaseRecyclerAdapter<ItemListBean> {
 
 
 
-    public TagChildAdapter(Context context, List<TagChildBean.ItemListBean> datas) {
+    public TagChildAdapter(Context context, List<ItemListBean> datas) {
         super(context, datas);
     }
 
@@ -66,7 +67,7 @@ public class TagChildAdapter extends BaseRecyclerAdapter<TagChildBean.ItemListBe
             ButterKnife.bind(this,itemView);
         }
     }
-    public void addTagChildData(List<TagChildBean.ItemListBean> itemListBeans){
+    public void addTagChildData(List<ItemListBean> itemListBeans){
         DiffUtil.DiffResult diffResult=DiffUtil.calculateDiff(new DiffUtilCallBack(datas,itemListBeans),false);
         datas.clear();
         datas.addAll(itemListBeans);

@@ -7,6 +7,7 @@ import com.example.rj.openeyesvideo.R;
 import com.example.rj.openeyesvideo.base.Contract.HotTopContract;
 import com.example.rj.openeyesvideo.base.RootFragment;
 import com.example.rj.openeyesvideo.model.bean.HotBean;
+import com.example.rj.openeyesvideo.model.bean.ItemListBean;
 import com.example.rj.openeyesvideo.presenter.WeekPresenter;
 import com.example.rj.openeyesvideo.ui.adapter.HotTopAdapter;
 
@@ -23,7 +24,7 @@ public abstract class BaseHotFragment extends RootFragment<WeekPresenter> implem
 
     @BindView(R.id.view_main)
     RecyclerView mRecyclerView;
-    private List<HotBean.ItemListBean> itemListBeans = new ArrayList<>();
+    private List<ItemListBean> itemListBeans = new ArrayList<>();
 
     LinearLayoutManager mLayoutManager;
 
@@ -31,8 +32,8 @@ public abstract class BaseHotFragment extends RootFragment<WeekPresenter> implem
 
 
     @Override
-    public void showContents(List<HotBean.ItemListBean> listBean) {
-        for(HotBean.ItemListBean itemListBean: listBean){
+    public void showContents(List<ItemListBean> listBean) {
+        for(ItemListBean itemListBean: listBean){
             if (itemListBean.getType().equals("video")){
                 itemListBeans.add(itemListBean);
             }

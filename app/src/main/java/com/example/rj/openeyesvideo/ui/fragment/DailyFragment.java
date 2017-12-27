@@ -11,6 +11,7 @@ import com.example.rj.openeyesvideo.base.BaseFragment;
 import com.example.rj.openeyesvideo.base.Contract.DailyContract;
 import com.example.rj.openeyesvideo.base.RootFragment;
 import com.example.rj.openeyesvideo.model.bean.DailyBean;
+import com.example.rj.openeyesvideo.model.bean.ItemListBean;
 import com.example.rj.openeyesvideo.presenter.DailyPresenter;
 import com.example.rj.openeyesvideo.ui.adapter.DailyRecyclerAdapter;
 
@@ -31,7 +32,7 @@ public class DailyFragment extends RootFragment<DailyPresenter> implements Daily
     @BindView(R.id.view_refresh)
     SwipeRefreshLayout mSwipeRefreshLayout;
 
-    private List<DailyBean.IssueListBean.ItemListBean> itemListBeans = new ArrayList<>();
+    private List<ItemListBean> itemListBeans = new ArrayList<>();
 
     LinearLayoutManager mLayoutManager;
 
@@ -101,8 +102,8 @@ public class DailyFragment extends RootFragment<DailyPresenter> implements Daily
 
 
     @Override
-    public void showContent(List<DailyBean.IssueListBean.ItemListBean> list) {
-        for(DailyBean.IssueListBean.ItemListBean itemListBean: list){
+    public void showContent(List<ItemListBean> list) {
+        for(ItemListBean itemListBean: list){
             if (itemListBean.getType().equals("video")){
                         itemListBeans.add(itemListBean);
             }

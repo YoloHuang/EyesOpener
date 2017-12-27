@@ -4,6 +4,7 @@ import com.example.rj.openeyesvideo.base.Contract.HotTopContract;
 import com.example.rj.openeyesvideo.base.RxPresenter;
 import com.example.rj.openeyesvideo.model.DataManager;
 import com.example.rj.openeyesvideo.model.bean.HotBean;
+import com.example.rj.openeyesvideo.model.bean.ItemListBean;
 import com.example.rj.openeyesvideo.util.RxUtil;
 import com.example.rj.openeyesvideo.widget.CommonSubscriber;
 
@@ -17,7 +18,7 @@ import javax.inject.Inject;
 
 public class WeekPresenter extends RxPresenter<HotTopContract.View> implements HotTopContract.Presenter {
 
-    List<HotBean.ItemListBean> itemListBeans;
+    List<ItemListBean> itemListBeans;
 
     @Inject
     public WeekPresenter(DataManager dataManager){

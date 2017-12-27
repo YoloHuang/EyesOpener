@@ -3,6 +3,7 @@ package com.example.rj.openeyesvideo.presenter;
 import com.example.rj.openeyesvideo.base.Contract.TagChildContract;
 import com.example.rj.openeyesvideo.base.RxPresenter;
 import com.example.rj.openeyesvideo.model.DataManager;
+import com.example.rj.openeyesvideo.model.bean.ItemListBean;
 import com.example.rj.openeyesvideo.model.bean.TagChildBean;
 import com.example.rj.openeyesvideo.model.bean.TagsBean;
 import com.example.rj.openeyesvideo.util.RxUtil;
@@ -20,7 +21,7 @@ public class TagChildPresenter extends RxPresenter<TagChildContract.View> implem
 
 
     int totalItems;
-    List<TagChildBean.ItemListBean> listBeans;
+    List<ItemListBean> listBeans;
 
     @Inject
     public TagChildPresenter(DataManager dataManager){

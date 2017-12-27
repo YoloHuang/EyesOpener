@@ -12,6 +12,7 @@ import com.example.rj.openeyesvideo.R;
 import com.example.rj.openeyesvideo.component.ImageLoader;
 import com.example.rj.openeyesvideo.model.bean.DailyBean;
 import com.example.rj.openeyesvideo.model.bean.HotBean;
+import com.example.rj.openeyesvideo.model.bean.ItemListBean;
 import com.example.rj.openeyesvideo.util.DiffUtilCallBack;
 
 import java.util.List;
@@ -23,10 +24,10 @@ import butterknife.ButterKnife;
  * Created by rj on 2017/12/26.
  */
 
-public class HotTopAdapter extends BaseRecyclerAdapter<HotBean.ItemListBean> {
+public class HotTopAdapter extends BaseRecyclerAdapter<ItemListBean> {
 
 
-    public HotTopAdapter(Context context, List<HotBean.ItemListBean> datas) {
+    public HotTopAdapter(Context context, List<ItemListBean> datas) {
         super(context, datas);
     }
 
@@ -66,7 +67,7 @@ public class HotTopAdapter extends BaseRecyclerAdapter<HotBean.ItemListBean> {
         return datas.size();
     }
 
-    public void  addHotTopData(List<HotBean.ItemListBean> itemListBeans){
+    public void  addHotTopData(List<ItemListBean> itemListBeans){
         datas.clear();
         datas.addAll(itemListBeans);
         //datas=listBeans;
