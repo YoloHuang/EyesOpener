@@ -15,6 +15,7 @@ import com.example.rj.openeyesvideo.base.RootFragment;
 import com.example.rj.openeyesvideo.model.bean.DailyBean;
 import com.example.rj.openeyesvideo.model.bean.ItemListBean;
 import com.example.rj.openeyesvideo.presenter.DailyPresenter;
+import com.example.rj.openeyesvideo.ui.activity.DetailActivity;
 import com.example.rj.openeyesvideo.ui.adapter.BaseRecyclerAdapter;
 import com.example.rj.openeyesvideo.ui.adapter.DailyRecyclerAdapter;
 
@@ -85,16 +86,38 @@ public class DailyFragment extends RootFragment<DailyPresenter> implements Daily
                 }
             }
         });
-        initOnItemClickListener(mAdapter,itemListBeans);
+        mAdapter.setOnItemClickListener(new DailyRecyclerAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int id) {
+                Intent intent=new Intent();
+                Bundle bundle=new Bundle();
+                Log.d("hzj", "onItemClick: ");
+                intent.setClass(mContext, DetailActivity.class);
+                ItemListBean itemListBean=itemListBeans.get(id-1);
+                mPresenter.addHistoryBeanToDB(itemListBean);
+                //intent.putExtra("itemListBean",itemListBean);
+                String Url =itemListBean.getData().getPlayUrl();
+                String image=itemListBean.getData().getCover().getFeed();
+                int itemId=itemListBean.getData().getId();
+                intent.putExtra("url",Url);
+                intent.putExtra("image",image);
+                intent.putExtra("itemId",id);
+                mContext.startActivity(intent);
+            }
+        });
     }
 
-    private void initOnItemClickListener(BaseRecyclerAdapter mAdapter, List<ItemListBean> itemListBeans) {
+    private void initOnItemClickListener(BaseRecyclerAdapter mAdapter, final List<ItemListBean> listBeans) {
         mAdapter.setOnItemClickListener(new BaseRecyclerAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int id) {
                 Intent intent=new Intent();
                 Bundle bundle=new Bundle();
-                //intent.setClass(mContext,)
+                Log.d("hzj", "onItemClick: ");
+                intent.setClass(mContext, DetailActivity.class);
+                ItemListBean itemListBean=listBeans.get(id);
+
+                mContext.startActivity(intent);
             }
         });
     }

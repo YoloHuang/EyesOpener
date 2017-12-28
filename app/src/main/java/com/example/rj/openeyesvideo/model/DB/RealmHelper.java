@@ -80,4 +80,10 @@ public class RealmHelper implements DBHelper {
     public void checkLikeTime(int id, long time) {
 
     }
+
+    @Override
+    public HistoryBean getHistoryBean(int id) {
+        //RealmResults<HistoryBean> historyBeans=mRealm.where(HistoryBean.class).equalTo("id",);
+        return null;
+    }
 }

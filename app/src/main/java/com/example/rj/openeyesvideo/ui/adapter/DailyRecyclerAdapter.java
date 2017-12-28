@@ -68,7 +68,7 @@ public class DailyRecyclerAdapter extends BaseRecyclerAdapter<ItemListBean> {
     }
 
     @Override
-    public void convert(RecyclerView.ViewHolder holder, int position) {
+    public void convert(RecyclerView.ViewHolder holder, final int position) {
 
         if(holder instanceof DateViewHolder){
             String date=getDate();
@@ -79,6 +79,14 @@ public class DailyRecyclerAdapter extends BaseRecyclerAdapter<ItemListBean> {
             ((ItemViewHolder)holder).mTitleTest.setText(datas.get(position-1).getData().getTitle());
             ImageLoader.load(mContext,datas.get(position-1).getData().getAuthor().getIcon(),((ItemViewHolder)holder).mAuthorImage);
             ImageLoader.load(mContext,datas.get(position-1).getData().getCover().getFeed(),((ItemViewHolder)holder).mDailyImage);
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(onItemClickListener!=null){
+                        onItemClickListener.onItemClick(position);
+                    }
+                }
+            });
         }
     }
 

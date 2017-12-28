@@ -29,7 +29,9 @@
             android:name=".ui.activity.MainActivity"
             android:theme="@style/AppTheme" />
         <activity android:name=".ui.activity.TagActivity" />
-        <activity android:name=".ui.activity.DetailActivity"></activity>
+        <activity android:name=".ui.activity.DetailActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

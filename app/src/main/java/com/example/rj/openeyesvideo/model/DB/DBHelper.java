@@ -30,5 +30,5 @@ public interface DBHelper {
 
     void checkLikeTime(int id ,long time);
 
-
+    HistoryBean getHistoryBean(int id);
 }

@@ -1,6 +1,9 @@
 package com.example.rj.openeyesvideo.base;
 
 import com.example.rj.openeyesvideo.model.DataManager;
+import com.example.rj.openeyesvideo.model.bean.HistoryBean;
+import com.example.rj.openeyesvideo.model.bean.ItemListBean;
+import com.example.rj.openeyesvideo.model.bean.LikeBean;
 
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
@@ -29,6 +32,22 @@ public class RxPresenter<T extends BaseView> implements BasePresenter<T> {
     }
 
 
+    public void addHistoryBeanToDB(ItemListBean itemListBean){
+        HistoryBean historyBean=new HistoryBean();
+        historyBean.setId(itemListBean.getData().getId());
+        historyBean.setItemListBean(itemListBean);
+    }
+
+    public void addLikeBeanToDB(ItemListBean itemListBean){
+        LikeBean likeBean=new LikeBean();
+        likeBean.setId(itemListBean.getData().getId());
+        likeBean.setItemListBean(itemListBean);
+    }
+
+    public ItemListBean getItemListBean(int id){
+        return null;
+        //mDataManager.
+    }
 
     @Override
     public void attachView(T view) {
