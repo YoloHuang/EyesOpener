@@ -110,4 +110,9 @@ public class DataManager implements ApiHelper,DBHelper{
     public void checkLikeTime(int id, long time) {
 
     }
+
+    @Override
+    public HistoryBean getHistoryBean(int id) {
+        return null;
+    }
 }

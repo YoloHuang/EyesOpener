@@ -9,6 +9,7 @@ import javax.inject.Inject;
 
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
+import io.realm.RealmQuery;
 import io.realm.RealmResults;
 
 /**
@@ -83,7 +84,8 @@ public class RealmHelper implements DBHelper {
 
     @Override
     public HistoryBean getHistoryBean(int id) {
-        //RealmResults<HistoryBean> historyBeans=mRealm.where(HistoryBean.class).equalTo("id",);
+        RealmQuery<HistoryBean> historyBean;
+        historyBean = mRealm.where(HistoryBean.class).equalTo("id",id);
         return null;
     }
 }

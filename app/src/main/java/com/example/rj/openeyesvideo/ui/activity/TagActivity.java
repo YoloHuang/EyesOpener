@@ -15,7 +15,6 @@ import android.widget.TextView;
 import com.example.rj.openeyesvideo.R;
 import com.example.rj.openeyesvideo.base.Contract.TagChildContract;
 import com.example.rj.openeyesvideo.base.RootActivity;
-import com.example.rj.openeyesvideo.base.SingleActivity;
 import com.example.rj.openeyesvideo.component.ImageLoader;
 import com.example.rj.openeyesvideo.model.bean.ItemListBean;
 import com.example.rj.openeyesvideo.presenter.TagChildPresenter;
@@ -27,7 +26,7 @@ import java.util.List;
 
 import butterknife.BindView;
 
-public class TagActivity extends SingleActivity<TagChildPresenter> implements TagChildContract.View {
+public class TagActivity extends RootActivity<TagChildPresenter> implements TagChildContract.View {
 
     @BindView(R.id.view_main)
     RecyclerView rvThemeChildList;

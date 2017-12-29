@@ -3,6 +3,7 @@ package com.example.rj.openeyesvideo.ui.activity;
 import android.content.res.Configuration;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -11,7 +12,6 @@ import com.bumptech.glide.Glide;
 import com.example.rj.openeyesvideo.R;
 import com.example.rj.openeyesvideo.base.Contract.DetailContract;
 import com.example.rj.openeyesvideo.base.RootActivity;
-import com.example.rj.openeyesvideo.base.SingleActivity;
 import com.example.rj.openeyesvideo.component.ImageLoader;
 import com.example.rj.openeyesvideo.component.SimpleListener;
 import com.example.rj.openeyesvideo.model.bean.ItemListBean;
@@ -26,11 +26,14 @@ import com.shuyu.gsyvideoplayer.video.base.GSYVideoPlayer;
 import butterknife.BindView;
 import butterknife.Unbinder;
 
-public class DetailActivity extends SingleActivity<DetailPresenter> implements DetailContract.View {
+public class DetailActivity extends RootActivity<DetailPresenter> implements DetailContract.View {
 
 
     @BindView(R.id.vedio_player)
     StandardGSYVideoPlayer vedioPlayer;
+
+    @BindView(R.id.view_main)
+    RecyclerView recyclerView;
 
     private ItemListBean itemListBean;
     String Url;
@@ -45,6 +48,8 @@ public class DetailActivity extends SingleActivity<DetailPresenter> implements D
     protected void initEventAndData() {
         super.initEventAndData();
         getIntentData();
+        initRecyclerView();
+        stateLoading();
         //vedioPlayer.setThumbImageView(imageView);
         vedioPlayer.getTitleTextView().setVisibility(View.GONE);
         vedioPlayer.getBackButton().setVisibility(View.GONE);
@@ -114,13 +119,19 @@ public class DetailActivity extends SingleActivity<DetailPresenter> implements D
         });
     }
 
-    private void getIntentData() {
-        //itemListBean=(ItemListBean) getIntent().getSerializableExtra("itemListBean");
-        //Url=itemListBean.getData().getPlayUrl();
-        Url=getIntent().getExtras().getString("url");
-        String image=getIntent().getExtras().getString("image");
-        int id=getIntent().getExtras().getInt("itemId");
+    private void initRecyclerView() {
 
+
+    }
+
+    private void getIntentData() {
+        itemListBean=(ItemListBean) getIntent().getSerializableExtra("itemListBean");
+        Url=itemListBean.getData().getPlayUrl();
+        //Url=getIntent().getExtras().getString("url");
+        //String image=getIntent().getExtras().getString("image");
+        //int id=getIntent().getExtras().getInt("itemId");
+        String image=itemListBean.getData().getCover().getFeed();
+        int id=itemListBean.getData().getId();
         Log.d("hzj", "getIntentData: "+Url);
         imageView=new ImageView(this);
         imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
@@ -150,8 +161,21 @@ public class DetailActivity extends SingleActivity<DetailPresenter> implements D
     }
 
 
+//    @Override
+//    public void onBackPresse() {
+//        Log.d("hzj", "onBackPressedSupport: ");
+//        if (orientationUtils!=null){
+//            Log.d("hzj", "onBackPressedSupport: orientationUtils");
+//            orientationUtils.backToProtVideo();
+//        }
+//        if (StandardGSYVideoPlayer.backFromWindowFull(this)){
+//            return;
+//        }
+//        super.onBackPressed();
+//    }
+
     @Override
-    public void onBackPressed() {
+    public void onBackPressedSupport() {
         Log.d("hzj", "onBackPressedSupport: ");
         if (orientationUtils!=null){
             Log.d("hzj", "onBackPressedSupport: orientationUtils");
@@ -160,7 +184,7 @@ public class DetailActivity extends SingleActivity<DetailPresenter> implements D
         if (StandardGSYVideoPlayer.backFromWindowFull(this)){
             return;
         }
-        super.onBackPressed();
+        super.onBackPressedSupport();
     }
 
     @Override

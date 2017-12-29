@@ -3,6 +3,8 @@ package com.example.rj.openeyesvideo.model.bean;
 import java.io.Serializable;
 import java.util.List;
 
+import io.realm.RealmObject;
+
 /**
  * Created by rj on 2017/12/27.
  */
@@ -35,7 +37,7 @@ public  class ItemListBean implements Serializable{
         this.data = data;
     }
 
-    public static class DataBean {
+    public static class DataBean implements Serializable{
 
         /**
          * dataType : VideoBeanForClient
@@ -441,7 +443,7 @@ public  class ItemListBean implements Serializable{
             this.subtitles = subtitles;
         }
 
-        public static class ProviderBean {
+        public static class ProviderBean implements Serializable{
             /**
              * name : YouTube
              * alias : youtube
@@ -477,7 +479,7 @@ public  class ItemListBean implements Serializable{
             }
         }
 
-        public static class AuthorBean {
+        public static class AuthorBean implements Serializable{
             /**
              * id : 2165
              * icon : http://img.kaiyanapp.com/924ebc6780d59925c8a346a5dafc90bb.jpeg
@@ -602,7 +604,7 @@ public  class ItemListBean implements Serializable{
                 this.ifPgc = ifPgc;
             }
 
-            public static class FollowBean {
+            public static class FollowBean implements Serializable{
                 /**
                  * itemType : author
                  * itemId : 2165
@@ -638,7 +640,7 @@ public  class ItemListBean implements Serializable{
                 }
             }
 
-            public static class ShieldBean {
+            public static class ShieldBean implements Serializable{
                 /**
                  * itemType : author
                  * itemId : 2165
@@ -675,7 +677,7 @@ public  class ItemListBean implements Serializable{
             }
         }
 
-        public static class CoverBean {
+        public static class CoverBean implements Serializable{
             /**
              * feed : http://img.kaiyanapp.com/16fda01339d2eadd6580dfc90c4cb133.jpeg?imageMogr2/quality/60/format/jpg
              * detail : http://img.kaiyanapp.com/16fda01339d2eadd6580dfc90c4cb133.jpeg?imageMogr2/quality/60/format/jpg
@@ -731,7 +733,7 @@ public  class ItemListBean implements Serializable{
             }
         }
 
-        public static class WebUrlBean {
+        public static class WebUrlBean implements Serializable{
             /**
              * raw : http://www.eyepetizer.net/detail.html?vid=28140
              * forWeibo : http://wandou.im/3npa1u
@@ -757,7 +759,7 @@ public  class ItemListBean implements Serializable{
             }
         }
 
-        public static class ConsumptionBean {
+        public static class ConsumptionBean implements Serializable{
             /**
              * collectionCount : 613
              * shareCount : 648
@@ -793,7 +795,7 @@ public  class ItemListBean implements Serializable{
             }
         }
 
-        public static class PlayInfoBean {
+        public static class PlayInfoBean implements Serializable{
             /**
              * height : 480
              * width : 854
@@ -858,7 +860,7 @@ public  class ItemListBean implements Serializable{
                 this.urlList = urlList;
             }
 
-            public static class UrlListBean {
+            public static class UrlListBean implements Serializable{
                 /**
                  * name : aliyun
                  * url : http://baobab.kaiyanapp.com/api/v1/playUrl?vid=28140&editionType=normal&source=aliyun
@@ -895,7 +897,7 @@ public  class ItemListBean implements Serializable{
             }
         }
 
-        public static class TagsBean {
+        public static class TagsBean implements Serializable{
             /**
              * id : 112
              * name : 友情

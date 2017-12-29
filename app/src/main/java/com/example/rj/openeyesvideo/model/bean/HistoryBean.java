@@ -11,16 +11,6 @@ public class HistoryBean extends RealmObject {
     @PrimaryKey
     private int id;
 
-    private ItemListBean itemListBean;
-
-    public ItemListBean getItemListBean() {
-        return itemListBean;
-    }
-
-    public void setItemListBean(ItemListBean itemListBean) {
-        this.itemListBean = itemListBean;
-    }
-
     public int getId() {
         return id;
     }
@@ -28,6 +18,8 @@ public class HistoryBean extends RealmObject {
     public void setId(int id) {
         this.id = id;
     }
+
+
 
 
 }

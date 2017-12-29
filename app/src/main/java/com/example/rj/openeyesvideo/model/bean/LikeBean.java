@@ -12,15 +12,6 @@ public class LikeBean extends RealmObject{
     @PrimaryKey
     private int id;
 
-    public ItemListBean getItemListBean() {
-        return itemListBean;
-    }
-
-    public void setItemListBean(ItemListBean itemListBean) {
-        this.itemListBean = itemListBean;
-    }
-
-    private ItemListBean itemListBean;
 
     public int getId() {
         return id;

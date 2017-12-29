@@ -34,14 +34,10 @@ public class RxPresenter<T extends BaseView> implements BasePresenter<T> {
 
     public void addHistoryBeanToDB(ItemListBean itemListBean){
         HistoryBean historyBean=new HistoryBean();
-        historyBean.setId(itemListBean.getData().getId());
-        historyBean.setItemListBean(itemListBean);
     }
 
     public void addLikeBeanToDB(ItemListBean itemListBean){
         LikeBean likeBean=new LikeBean();
-        likeBean.setId(itemListBean.getData().getId());
-        likeBean.setItemListBean(itemListBean);
     }
 
     public ItemListBean getItemListBean(int id){
