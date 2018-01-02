@@ -33,7 +33,6 @@ public class MyFragment extends SimpleFragment{
     @Override
     protected void initEventAndData() {
         list.clear();
-        list.add("");
         list.add("观看记录");
         list.add("我的喜欢");
         list.add("我的缓存");

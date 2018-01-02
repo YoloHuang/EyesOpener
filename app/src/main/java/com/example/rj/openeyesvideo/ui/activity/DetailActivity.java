@@ -3,6 +3,7 @@ package com.example.rj.openeyesvideo.ui.activity;
 import android.content.res.Configuration;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
@@ -16,12 +17,16 @@ import com.example.rj.openeyesvideo.component.ImageLoader;
 import com.example.rj.openeyesvideo.component.SimpleListener;
 import com.example.rj.openeyesvideo.model.bean.ItemListBean;
 import com.example.rj.openeyesvideo.presenter.DetailPresenter;
+import com.example.rj.openeyesvideo.ui.adapter.DetailAdapter;
 import com.shuyu.gsyvideoplayer.builder.GSYVideoOptionBuilder;
 import com.shuyu.gsyvideoplayer.listener.GSYVideoProgressListener;
 import com.shuyu.gsyvideoplayer.listener.LockClickListener;
 import com.shuyu.gsyvideoplayer.utils.OrientationUtils;
 import com.shuyu.gsyvideoplayer.video.StandardGSYVideoPlayer;
 import com.shuyu.gsyvideoplayer.video.base.GSYVideoPlayer;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.Unbinder;
@@ -39,8 +44,13 @@ public class DetailActivity extends RootActivity<DetailPresenter> implements Det
     String Url;
     private OrientationUtils orientationUtils;
     ImageView imageView;
+    LinearLayoutManager mLinearLayoutManager;
     boolean isPlay;
     boolean isPause;
+    int id;
+
+    DetailAdapter mAdapter;
+    private List<ItemListBean> listBeans =new ArrayList<>();
 
 
 
@@ -50,6 +60,7 @@ public class DetailActivity extends RootActivity<DetailPresenter> implements Det
         getIntentData();
         initRecyclerView();
         stateLoading();
+        mPresenter.getVedioData(id);
         //vedioPlayer.setThumbImageView(imageView);
         vedioPlayer.getTitleTextView().setVisibility(View.GONE);
         vedioPlayer.getBackButton().setVisibility(View.GONE);
@@ -120,8 +131,12 @@ public class DetailActivity extends RootActivity<DetailPresenter> implements Det
     }
 
     private void initRecyclerView() {
-
-
+        mLinearLayoutManager=new LinearLayoutManager(mContext);
+        recyclerView.setLayoutManager(mLinearLayoutManager);
+        mAdapter=new DetailAdapter(mContext,listBeans);
+        mAdapter.getItemData(itemListBean);
+        recyclerView.setAdapter(mAdapter);
+        Log.d("hzj", "initRecyclerView: ");
     }
 
     private void getIntentData() {
@@ -131,7 +146,7 @@ public class DetailActivity extends RootActivity<DetailPresenter> implements Det
         //String image=getIntent().getExtras().getString("image");
         //int id=getIntent().getExtras().getInt("itemId");
         String image=itemListBean.getData().getCover().getFeed();
-        int id=itemListBean.getData().getId();
+        id=itemListBean.getData().getId();
         Log.d("hzj", "getIntentData: "+Url);
         imageView=new ImageView(this);
         imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
@@ -144,8 +159,15 @@ public class DetailActivity extends RootActivity<DetailPresenter> implements Det
     }
 
     @Override
-    public void showContent() {
-
+    public void showContent(List<ItemListBean> itemListBeans) {
+        stateStart();
+        for(ItemListBean itemListBean: itemListBeans){
+            if (itemListBean.getType().equals("videoSmallCard")){
+                listBeans.add(itemListBean);
+            }
+        }
+        Log.d("hzj", "showContent: "+listBeans.size());
+        mAdapter.getData(listBeans);
     }
 
     @Override

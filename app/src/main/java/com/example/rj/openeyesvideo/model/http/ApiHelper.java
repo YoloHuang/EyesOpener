@@ -2,6 +2,8 @@ package com.example.rj.openeyesvideo.model.http;
 
 import com.example.rj.openeyesvideo.model.bean.DailyBean;
 import com.example.rj.openeyesvideo.model.bean.HotBean;
+import com.example.rj.openeyesvideo.model.bean.ItemListBean;
+import com.example.rj.openeyesvideo.model.bean.RelateBean;
 import com.example.rj.openeyesvideo.model.bean.SearchResultBean;
 import com.example.rj.openeyesvideo.model.bean.TagChildBean;
 import com.example.rj.openeyesvideo.model.bean.TagsBean;
@@ -27,4 +29,5 @@ public interface ApiHelper {
     //Flowable<HotBean> getHistroicalHotBean();
     Flowable<List<TagsBean>> getTagsBean();
     Flowable<TagChildBean> getTagChildBean(int start,int num,int id);
+    Flowable<RelateBean> getRelateBean(int id);
 }

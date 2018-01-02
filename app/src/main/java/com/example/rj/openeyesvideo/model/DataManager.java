@@ -4,7 +4,9 @@ import com.example.rj.openeyesvideo.model.DB.DBHelper;
 import com.example.rj.openeyesvideo.model.bean.DailyBean;
 import com.example.rj.openeyesvideo.model.bean.HistoryBean;
 import com.example.rj.openeyesvideo.model.bean.HotBean;
+import com.example.rj.openeyesvideo.model.bean.ItemListBean;
 import com.example.rj.openeyesvideo.model.bean.LikeBean;
+import com.example.rj.openeyesvideo.model.bean.RelateBean;
 import com.example.rj.openeyesvideo.model.bean.SearchResultBean;
 import com.example.rj.openeyesvideo.model.bean.TagChildBean;
 import com.example.rj.openeyesvideo.model.bean.TagsBean;
@@ -69,6 +71,11 @@ public class DataManager implements ApiHelper,DBHelper{
     @Override
     public Flowable<TagChildBean> getTagChildBean(int start, int num, int id) {
         return mApiHelper.getTagChildBean(start,num,id);
+    }
+
+    @Override
+    public Flowable<RelateBean> getRelateBean(int id) {
+        return mApiHelper.getRelateBean(id);
     }
 
 //    @Override

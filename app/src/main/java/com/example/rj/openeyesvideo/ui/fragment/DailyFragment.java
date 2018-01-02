@@ -76,7 +76,7 @@ public class DailyFragment extends RootFragment<DailyPresenter> implements Daily
                 int lastItemPositon= mLayoutManager.findLastCompletelyVisibleItemPosition();
                 int totalPotions=mLayoutManager.getItemCount();
                 Log.d("hzj", "onScrolled: lastItemPositon:"+lastItemPositon+",totalPotions:"+totalPotions+";isloading:"+isLoading);
-                if(lastItemPositon>=totalPotions-6 && dy>0){
+                if(lastItemPositon>=totalPotions-4 && dy>0 && totalPotions>5){
                     if(isLoading){
                         Log.d("hzj", "onScrolled: "+isLoading);
                     }else {
@@ -96,12 +96,6 @@ public class DailyFragment extends RootFragment<DailyPresenter> implements Daily
                 ItemListBean itemListBean=itemListBeans.get(id-1);
                 mPresenter.addHistoryBeanToDB(itemListBean);
                 intent.putExtra("itemListBean",itemListBean);
-//                String Url =itemListBean.getData().getPlayUrl();
-//                String image=itemListBean.getData().getCover().getFeed();
-//                int itemId=itemListBean.getData().getId();
-//                intent.putExtra("url",Url);
-//                intent.putExtra("image",image);
-//                intent.putExtra("itemId",id);
                 mContext.startActivity(intent);
             }
         });

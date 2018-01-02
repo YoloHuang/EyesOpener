@@ -10,9 +10,15 @@
         android:layout_width="match_parent"
         android:layout_height="250dp"
         android:id="@+id/vedio_player"/>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/view_main"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/vedio_player"
+        android:background="@mipmap/recommend_bg_unlike"
+        android:overScrollMode="never" />
+
 
 </RelativeLayout>

@@ -2,6 +2,8 @@ package com.example.rj.openeyesvideo.model.http;
 
 import com.example.rj.openeyesvideo.model.bean.DailyBean;
 import com.example.rj.openeyesvideo.model.bean.HotBean;
+import com.example.rj.openeyesvideo.model.bean.ItemListBean;
+import com.example.rj.openeyesvideo.model.bean.RelateBean;
 import com.example.rj.openeyesvideo.model.bean.SearchResultBean;
 import com.example.rj.openeyesvideo.model.bean.TagChildBean;
 import com.example.rj.openeyesvideo.model.bean.TagsBean;
@@ -60,6 +62,11 @@ public class RetrofitHelper implements ApiHelper {
     @Override
     public Flowable<TagChildBean> getTagChildBean(int start, int num, int id) {
         return api.getTagChildBean(start,num,id);
+    }
+
+    @Override
+    public Flowable<RelateBean> getRelateBean(int id) {
+        return api.getRelateBean(id);
     }
 
 //    @Override
