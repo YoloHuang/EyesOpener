@@ -3,7 +3,7 @@
     android:id="@+id/view_loading"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/transparent"
+    android:background="@mipmap/recommend_bg_unlike"
     android:gravity="center"
     android:layout_gravity="center"
     android:padding="30dp">

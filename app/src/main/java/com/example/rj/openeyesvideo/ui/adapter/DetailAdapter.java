@@ -62,21 +62,29 @@ ItemListBean data;
     }
 
     @Override
-    public void convert(RecyclerView.ViewHolder holder, int position) {
+    public void convert(RecyclerView.ViewHolder holder, final int position) {
         if(holder instanceof InfoViewHolder){
             ((InfoViewHolder)holder).detailDescribe.setText(data.getData().getDescription());
-            ((InfoViewHolder)holder).detailTag.setText(data.getData().getCategory());
+            ((InfoViewHolder)holder).detailTag.setText("#"+data.getData().getCategory());
             ((InfoViewHolder)holder).detailTitle.setText(data.getData().getTitle());
-            ((InfoViewHolder)holder).likenum.setText(data.getData().getConsumption().getCollectionCount());
-            ((InfoViewHolder)holder).replynum.setText(data.getData().getConsumption().getReplyCount());
-            ((InfoViewHolder)holder).sharenum.setText(data.getData().getConsumption().getShareCount());
+            ((InfoViewHolder)holder).likenum.setText(""+data.getData().getConsumption().getCollectionCount());
+            ((InfoViewHolder)holder).replynum.setText(""+data.getData().getConsumption().getReplyCount());
+            ((InfoViewHolder)holder).sharenum.setText(""+data.getData().getConsumption().getShareCount());
             ((InfoViewHolder)holder).textAuthor.setText(data.getData().getAuthor().getName());
             ((InfoViewHolder)holder).textdiscribtion.setText(data.getData().getAuthor().getDescription());
             ImageLoader.load(mContext,data.getData().getAuthor().getIcon(),((InfoViewHolder)holder).imageAuthor);
         }else if(holder instanceof RelateViewHolder) {
             ((RelateViewHolder)holder).relateItemName.setText(datas.get(position-2).getData().getTitle());
-            ((RelateViewHolder)holder).relateITemTag.setText(datas.get(position-2).getData().getCategory());
+            ((RelateViewHolder)holder).relateITemTag.setText("#"+datas.get(position-2).getData().getCategory());
             ImageLoader.load (mContext,datas.get(position-2).getData().getCover().getFeed() ,((RelateViewHolder)holder).videoImage);
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(onItemClickListener!=null){
+                        onItemClickListener.onItemClick(position);
+                    }
+                }
+            });
         }
     }
 
@@ -122,6 +130,7 @@ ItemListBean data;
         public InfoViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this,itemView);
+            
         }
     }
 

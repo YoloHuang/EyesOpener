@@ -3,13 +3,135 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:orientation="vertical"
-    android:layout_height="match_parent">
-    <include layout="@layout/item_detail_slogen"/>
-    <view
+    android:layout_height="wrap_content">
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="5dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="48px"
+            android:text="@string/app_name"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="6dp"
+            android:textColor="@color/colorWhite"
+            android:id="@+id/detail_title"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/app_name"
+            android:textSize="35px"
+            android:layout_marginStart="10dp"
+            android:textColor="@color/colorWhite"
+            android:layout_marginBottom="10dp"
+            android:id="@+id/detail_tag"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/app_name"
+            android:layout_marginStart="6dp"
+            android:textColor="@color/colorWhite"
+            android:id="@+id/detail_describe"
+            android:layout_marginBottom="20dp"
+            android:textSize="35px"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:text="66633"
+                android:textSize="35px"
+                android:drawablePadding="10dp"
+                android:gravity="center"
+                android:drawableLeft="@mipmap/ic_action_favorites_without_padding"
+                android:textColor="@color/colorWhite"
+                android:id="@+id/tv_likenum"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:text="24433"
+                android:textSize="35px"
+                android:drawablePadding="10dp"
+                android:gravity="center"
+                android:drawableLeft="@mipmap/ic_action_share_without_padding"
+                android:textColor="@color/colorWhite"
+                android:id="@+id/tv_sharenum"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorWhite"
+                android:text="23333"
+                android:textSize="35px"
+                android:layout_marginRight="20dp"
+                android:gravity="center"
+                android:drawablePadding="10dp"
+                android:drawableLeft="@mipmap/ic_action_reply_without_padding"
+                android:id="@+id/tv_reply"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="35px"
+                android:textColor="@color/colorWhite"
+                android:text="缓存"
+                android:layout_marginRight="30dp"
+                android:gravity="center"
+                android:drawablePadding="10dp"
+                android:drawableLeft="@mipmap/ic_action_offline_without_padding"
+                android:id="@+id/tv_download"/>
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:background="#55ffffff"/>
-    <include layout="@layout/item_detail_author"/>
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_margin="15dp"
+            android:id="@+id/iv_item_author"
+            android:src="@mipmap/pgc_default_avatar"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            android:layout_marginTop="15dp"
+            android:layout_weight="1"
+            android:layout_toRightOf="@id/iv_item_author">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorWhite"
+                android:textSize="40px"
+                android:id="@+id/tv_item_author_name"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorWhite"
+                android:singleLine="true"
+                android:textSize="35px"
+                android:id="@+id/tv_item_author_dis"/>
+        </LinearLayout>
+
+    </LinearLayout>
 
 
 </LinearLayout>

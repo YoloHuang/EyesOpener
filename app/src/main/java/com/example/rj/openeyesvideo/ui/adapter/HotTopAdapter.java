@@ -37,12 +37,21 @@ public class HotTopAdapter extends BaseRecyclerAdapter<ItemListBean> {
     }
 
     @Override
-    public void convert(RecyclerView.ViewHolder holder, int position) {
+    public void convert(RecyclerView.ViewHolder holder, final int position) {
         String detail=datas.get(position).getData().getAuthor().getName()+" / #" +datas.get(position).getData().getCategory();
         ((ItemViewHolder)holder).mAuthorText.setText(detail);
         ((ItemViewHolder)holder).mTitleTest.setText(datas.get(position).getData().getTitle());
         ImageLoader.load(mContext,datas.get(position).getData().getAuthor().getIcon(),((ItemViewHolder)holder).mAuthorImage);
         ImageLoader.load(mContext,datas.get(position).getData().getCover().getFeed(),((ItemViewHolder)holder).mDailyImage);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(onItemClickListener!=null){
+                    onItemClickListener.onItemClick(position);
+
+                }
+            }
+        });
     }
 
     public static class ItemViewHolder extends RecyclerView.ViewHolder{

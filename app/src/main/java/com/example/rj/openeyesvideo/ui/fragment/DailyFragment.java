@@ -90,7 +90,6 @@ public class DailyFragment extends RootFragment<DailyPresenter> implements Daily
             @Override
             public void onItemClick(int id) {
                 Intent intent=new Intent();
-                Bundle bundle=new Bundle();
                 Log.d("hzj", "onItemClick: ");
                 intent.setClass(mContext, DetailActivity.class);
                 ItemListBean itemListBean=itemListBeans.get(id-1);

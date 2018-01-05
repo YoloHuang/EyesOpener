@@ -18,6 +18,7 @@ import com.example.rj.openeyesvideo.base.RootActivity;
 import com.example.rj.openeyesvideo.component.ImageLoader;
 import com.example.rj.openeyesvideo.model.bean.ItemListBean;
 import com.example.rj.openeyesvideo.presenter.TagChildPresenter;
+import com.example.rj.openeyesvideo.ui.adapter.BaseRecyclerAdapter;
 import com.example.rj.openeyesvideo.ui.adapter.TagChildAdapter;
 import com.example.rj.openeyesvideo.util.SystemUtil;
 
@@ -102,6 +103,16 @@ public class TagActivity extends RootActivity<TagChildPresenter> implements TagC
         ImageLoader.load(mContext,TagImage,ivOrigin);
         tvDes.setText(TagSlogen);
         mPresenter.getTagChildData(tagId);
+        mAdapter.setOnItemClickListener(new TagChildAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int id) {
+                Intent childIntent=new Intent();
+                ItemListBean itemListBean=mItemListBeans.get(id);
+                childIntent.putExtra("itemListBean",itemListBean);
+                childIntent.setClass(mContext,DetailActivity.class);
+                mContext.startActivity(childIntent);
+            }
+        });
     }
 
     private void initRecyclerView() {

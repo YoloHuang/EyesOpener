@@ -1,5 +1,6 @@
 package com.example.rj.openeyesvideo.ui.activity;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,6 +18,7 @@ import com.example.rj.openeyesvideo.component.ImageLoader;
 import com.example.rj.openeyesvideo.component.SimpleListener;
 import com.example.rj.openeyesvideo.model.bean.ItemListBean;
 import com.example.rj.openeyesvideo.presenter.DetailPresenter;
+import com.example.rj.openeyesvideo.ui.adapter.BaseRecyclerAdapter;
 import com.example.rj.openeyesvideo.ui.adapter.DetailAdapter;
 import com.shuyu.gsyvideoplayer.builder.GSYVideoOptionBuilder;
 import com.shuyu.gsyvideoplayer.listener.GSYVideoProgressListener;
@@ -61,7 +63,11 @@ public class DetailActivity extends RootActivity<DetailPresenter> implements Det
         initRecyclerView();
         stateLoading();
         mPresenter.getVedioData(id);
-        //vedioPlayer.setThumbImageView(imageView);
+        initVedio();
+
+    }
+
+    private void initVedio() {
         vedioPlayer.getTitleTextView().setVisibility(View.GONE);
         vedioPlayer.getBackButton().setVisibility(View.GONE);
         orientationUtils=new OrientationUtils(this,vedioPlayer);
@@ -137,6 +143,16 @@ public class DetailActivity extends RootActivity<DetailPresenter> implements Det
         mAdapter.getItemData(itemListBean);
         recyclerView.setAdapter(mAdapter);
         Log.d("hzj", "initRecyclerView: ");
+        mAdapter.setOnItemClickListener(new DetailAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int id) {
+                Intent intent=new Intent();
+                intent.setClass(mContext,DetailActivity.class);
+                ItemListBean itemListBean=listBeans.get(id-2);
+                intent.putExtra("itemListBean",itemListBean);
+                mContext.startActivity(intent);
+            }
+        });
     }
 
     private void getIntentData() {

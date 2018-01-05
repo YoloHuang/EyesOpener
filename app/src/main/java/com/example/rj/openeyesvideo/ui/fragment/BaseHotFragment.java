@@ -1,5 +1,6 @@
 package com.example.rj.openeyesvideo.ui.fragment;
 
+import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
@@ -9,6 +10,8 @@ import com.example.rj.openeyesvideo.base.RootFragment;
 import com.example.rj.openeyesvideo.model.bean.HotBean;
 import com.example.rj.openeyesvideo.model.bean.ItemListBean;
 import com.example.rj.openeyesvideo.presenter.WeekPresenter;
+import com.example.rj.openeyesvideo.ui.activity.DetailActivity;
+import com.example.rj.openeyesvideo.ui.adapter.BaseRecyclerAdapter;
 import com.example.rj.openeyesvideo.ui.adapter.HotTopAdapter;
 
 import java.util.ArrayList;
@@ -59,6 +62,16 @@ public abstract class BaseHotFragment extends RootFragment<WeekPresenter> implem
         mAdapter=new HotTopAdapter(mContext,itemListBeans);
         mRecyclerView.setAdapter(mAdapter);
         getHotData();
+        mAdapter.setOnItemClickListener(new HotTopAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int id) {
+                Intent intent=new Intent();
+                intent.setClass(mContext, DetailActivity.class);
+                ItemListBean itemListBean=itemListBeans.get(id);
+                intent.putExtra("itemListBean",itemListBean);
+                mContext.startActivity(intent);
+            }
+        });
     }
 
     protected abstract void getHotData();
