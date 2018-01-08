@@ -62,7 +62,7 @@ ItemListBean data;
     }
 
     @Override
-    public void convert(RecyclerView.ViewHolder holder, final int position) {
+    public void convert(final RecyclerView.ViewHolder holder, final int position) {
         if(holder instanceof InfoViewHolder){
             ((InfoViewHolder)holder).detailDescribe.setText(data.getData().getDescription());
             ((InfoViewHolder)holder).detailTag.setText("#"+data.getData().getCategory());
@@ -73,6 +73,19 @@ ItemListBean data;
             ((InfoViewHolder)holder).textAuthor.setText(data.getData().getAuthor().getName());
             ((InfoViewHolder)holder).textdiscribtion.setText(data.getData().getAuthor().getDescription());
             ImageLoader.load(mContext,data.getData().getAuthor().getIcon(),((InfoViewHolder)holder).imageAuthor);
+            ((InfoViewHolder) holder).likenum.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(onItemClickListener!=null){
+                        onItemClickListener.onItemClick(9999);
+                        if(((InfoViewHolder) holder).likenum.isSelected()){
+                            ((InfoViewHolder) holder).likenum.setSelected(false);
+                        }else {
+                            ((InfoViewHolder) holder).likenum.setSelected(true);
+                        }
+                    }
+                }
+            });
         }else if(holder instanceof RelateViewHolder) {
             ((RelateViewHolder)holder).relateItemName.setText(datas.get(position-2).getData().getTitle());
             ((RelateViewHolder)holder).relateITemTag.setText("#"+datas.get(position-2).getData().getCategory());

@@ -151,11 +151,14 @@ public class TagActivity extends RootActivity<TagChildPresenter> implements TagC
 
     @Override
     public void showContents(List<ItemListBean> itemListBeans) {
-//        if(swipeRefresh.isRefreshing()) {
-//            swipeRefresh.setRefreshing(false);
-//        }
         mItemListBeans.clear();
-        mItemListBeans.addAll(itemListBeans);
+        for(ItemListBean itemListBean: itemListBeans){
+            if (itemListBean.getType().equals("video")){
+                if(itemListBean.getData().getAuthor()!=null){
+                    mItemListBeans.add(itemListBean);
+                }
+            }
+        }
         Log.d("hzj", "showContents: mItemListBeans"+mItemListBeans.size());
         mAdapter.addTagChildData(mItemListBeans);
         stateStart();
@@ -164,10 +167,13 @@ public class TagActivity extends RootActivity<TagChildPresenter> implements TagC
 
     @Override
     public void showMoreContents(List<ItemListBean> itemListBeans) {
-//        if(swipeRefresh.isRefreshing()) {
-//            swipeRefresh.setRefreshing(false);
-//        }
-        mItemListBeans.addAll(itemListBeans);
+        for(ItemListBean itemListBean: itemListBeans){
+            if (itemListBean.getType().equals("video")){
+                if(itemListBean.getData().getAuthor()!=null){
+                    mItemListBeans.add(itemListBean);
+                }
+            }
+        }
         mAdapter.addTagChildData(mItemListBeans);
         stateStart();
         isLoading=false;

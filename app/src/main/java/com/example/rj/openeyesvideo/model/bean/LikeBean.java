@@ -12,6 +12,45 @@ public class LikeBean extends RealmObject{
     @PrimaryKey
     private int id;
 
+    private String image;
+    private String authorName;
+    private String authorSlogen;
+    private String authorIcon;
+    private String title;
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public String getAuthorName() {
+        return authorName;
+    }
+
+    public void setAuthorName(String authorName) {
+        this.authorName = authorName;
+    }
+
+    public String getAuthorSlogen() {
+        return authorSlogen;
+    }
+
+    public void setAuthorSlogen(String authorSlogen) {
+        this.authorSlogen = authorSlogen;
+    }
+
+    public String getAuthorIcon() {
+        return authorIcon;
+    }
+
+    public void setAuthorIcon(String authorIcon) {
+        this.authorIcon = authorIcon;
+    }
+
+    public LikeBean(){}
 
     public int getId() {
         return id;
@@ -22,4 +61,11 @@ public class LikeBean extends RealmObject{
     }
 
 
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
 }

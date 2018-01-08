@@ -1,6 +1,9 @@
 package com.example.rj.openeyesvideo.model.DB;
 
+import android.util.Log;
+
 import com.example.rj.openeyesvideo.model.bean.HistoryBean;
+import com.example.rj.openeyesvideo.model.bean.ItemListBean;
 import com.example.rj.openeyesvideo.model.bean.LikeBean;
 
 import java.util.List;
@@ -27,27 +30,44 @@ public class RealmHelper implements DBHelper {
         .deleteRealmIfMigrationNeeded()
         .name(DB_NAME)
         .build());
+        Log.d("hzj", "RealmHelper: ");
     }
 
     /**
      * 增加阅读数据
-     * @param historyBean
+     * @param itemListBean
      */
     @Override
-    public void insertReadId(HistoryBean historyBean) {
-        mRealm.beginTransaction();
-        mRealm.copyToRealmOrUpdate(historyBean);
-        mRealm.commitTransaction();
+    public void insertReadId(ItemListBean itemListBean) {
+        HistoryBean historyBean=new HistoryBean();
+            historyBean.setId(itemListBean.getData().getId());
+            historyBean.setAuthorIcon(itemListBean.getData().getAuthor().getIcon());
+            historyBean.setAuthorName(itemListBean.getData().getAuthor().getName());
+            historyBean.setAuthorSlogen(itemListBean.getData().getAuthor().getDescription());
+            historyBean.setImage(itemListBean.getData().getCover().getFeed());
+            historyBean.setTitle(itemListBean.getData().getTitle());
+            mRealm.beginTransaction();
+            mRealm.copyToRealmOrUpdate(historyBean);
+            mRealm.commitTransaction();
+        Log.d("hzj", "insertReadId: ");
     }
 
 
 
     @Override
-    public void insertLikeId(LikeBean likeBean) {
+    public void insertLikeId(ItemListBean itemListBean) {
+        LikeBean likeBean=new LikeBean();
+        likeBean.setId(itemListBean.getData().getId());
+        likeBean.setAuthorIcon(itemListBean.getData().getAuthor().getIcon());
+        likeBean.setAuthorName(itemListBean.getData().getAuthor().getName());
+        likeBean.setAuthorSlogen(itemListBean.getData().getCategory());
+        likeBean.setImage(itemListBean.getData().getCover().getFeed());
+        likeBean.setTitle(itemListBean.getData().getTitle());
         mRealm.beginTransaction();
         mRealm.copyToRealmOrUpdate(likeBean);
         mRealm.commitTransaction();
     }
+
 
 
     @Override
@@ -62,13 +82,13 @@ public class RealmHelper implements DBHelper {
 
     @Override
     public List<HistoryBean> getHistoryBeans() {
-        RealmResults<HistoryBean> realmResults=mRealm.where(HistoryBean.class).findAllSorted("time");
+        RealmResults<HistoryBean> realmResults=mRealm.where(HistoryBean.class).findAll();
         return mRealm.copyFromRealm(realmResults);
     }
 
     @Override
     public List<LikeBean> getLikeBeans() {
-        RealmResults<LikeBean> realmResults=mRealm.where(LikeBean.class).findAllSorted("time");
+        RealmResults<LikeBean> realmResults=mRealm.where(LikeBean.class).findAll();
         return mRealm.copyFromRealm(realmResults);
     }
 
@@ -84,8 +104,13 @@ public class RealmHelper implements DBHelper {
 
     @Override
     public HistoryBean getHistoryBean(int id) {
-        RealmQuery<HistoryBean> historyBean;
-        historyBean = mRealm.where(HistoryBean.class).equalTo("id",id);
-        return null;
+        HistoryBean historyBean;
+        Log.d("hzj", "getHistoryBean: "+id);
+        historyBean = mRealm.where(HistoryBean.class).equalTo("id",id).findFirst();
+        if(historyBean==null){
+            return null;
+        }else {
+            return mRealm.copyFromRealm(historyBean);
+        }
     }
 }

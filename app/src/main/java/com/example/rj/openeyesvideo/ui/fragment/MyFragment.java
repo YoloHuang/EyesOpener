@@ -1,5 +1,6 @@
 package com.example.rj.openeyesvideo.ui.fragment;
 
+import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.ImageView;
@@ -8,7 +9,9 @@ import android.widget.TextView;
 import com.example.rj.openeyesvideo.R;
 import com.example.rj.openeyesvideo.base.BaseFragment;
 import com.example.rj.openeyesvideo.base.SimpleFragment;
+import com.example.rj.openeyesvideo.ui.activity.HistoryActivity;
 import com.example.rj.openeyesvideo.ui.adapter.BaseRecyclerAdapter;
+import com.example.rj.openeyesvideo.ui.adapter.HistoryAdapter;
 import com.example.rj.openeyesvideo.ui.adapter.MyRecycleradapter;
 
 import java.util.ArrayList;
@@ -49,7 +52,25 @@ public class MyFragment extends SimpleFragment{
         mAdapter.setOnItemClickListener(new MyRecycleradapter.OnItemClickListener() {
             @Override
             public void onItemClick(int id) {
-
+                switch (id){
+                    case 0:
+                        break;
+                    case 1:
+                        Intent intent=new Intent();
+                        intent.setClass(mContext, HistoryActivity.class);
+                        mContext.startActivity(intent);
+                        break;
+                    case 2:
+                        break;
+                    case 3:
+                        break;
+                    case 4:
+                        break;
+                    case 5:
+                        break;
+                    case 6:
+                        break;
+                }
             }
         });
     }

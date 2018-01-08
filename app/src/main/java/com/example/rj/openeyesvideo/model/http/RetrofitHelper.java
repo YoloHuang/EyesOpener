@@ -69,6 +69,11 @@ public class RetrofitHelper implements ApiHelper {
         return api.getRelateBean(id);
     }
 
+    @Override
+    public Flowable<ItemListBean.DataBean> getDataBean(int id) {
+        return api.getDataBean(id);
+    }
+
 //    @Override
 //    public Flowable<HotBean> getHistroicalHotBean() {
 //        return api.getHistoricalHotBean();

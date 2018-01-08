@@ -53,10 +53,7 @@ public class DataManager implements ApiHelper,DBHelper{
         return mApiHelper.getDailyBean(date);
     }
 
-//    @Override
-//    public Flowable<HotBean> getMonthHotBean() {
-//        return mApiHelper.getMonthHotBean();
-//    }
+
 
     @Override
     public Flowable<HotBean> getWeekHotBean(String type) {
@@ -78,19 +75,24 @@ public class DataManager implements ApiHelper,DBHelper{
         return mApiHelper.getRelateBean(id);
     }
 
+    @Override
+    public Flowable<ItemListBean.DataBean> getDataBean(int id) {
+        return mApiHelper.getDataBean(id);
+    }
+
 //    @Override
 //    public Flowable<HotBean> getHistroicalHotBean() {
 //        return mApiHelper.getHistroicalHotBean();
 //    }
 
     @Override
-    public void insertReadId(HistoryBean historyBean) {
-
+    public void insertReadId(ItemListBean historyBean) {
+        mDBHelper.insertReadId(historyBean);
     }
 
     @Override
-    public void insertLikeId(LikeBean likeBean) {
-
+    public void insertLikeId(ItemListBean likeBean) {
+        mDBHelper.insertLikeId(likeBean);
     }
 
     @Override
@@ -120,6 +122,6 @@ public class DataManager implements ApiHelper,DBHelper{
 
     @Override
     public HistoryBean getHistoryBean(int id) {
-        return null;
+        return mDBHelper.getHistoryBean(id);
     }
 }

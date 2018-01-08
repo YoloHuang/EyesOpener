@@ -51,9 +51,17 @@ public class MyRecycleradapter extends BaseRecyclerAdapter<String> {
     }
 
     @Override
-    public void convert(RecyclerView.ViewHolder holder, int position) {
+    public void convert(RecyclerView.ViewHolder holder, final int position) {
         if(holder instanceof TextViewHolder) {
             ((TextViewHolder) holder).textView.setText(datas.get(position-1));
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(onItemClickListener!=null){
+                        onItemClickListener.onItemClick(position);
+                    }
+                }
+            });
         }else {
             ((ImageViewHolder)holder).imageView.setImageResource(R.mipmap.my_image);
         }

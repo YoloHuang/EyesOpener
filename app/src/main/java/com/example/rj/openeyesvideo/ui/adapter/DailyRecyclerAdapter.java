@@ -74,10 +74,15 @@ public class DailyRecyclerAdapter extends BaseRecyclerAdapter<ItemListBean> {
             String date=getDate();
             ((DateViewHolder)holder).textView.setText(date);
         }else {
-            String detail=datas.get(position-1).getData().getAuthor().getName()+" / #" +datas.get(position-1).getData().getCategory();
+            String detail;
+            if(datas.get(position-1).getData().getAuthor()==null){
+                detail="开眼精选 / # "+datas.get(position-1).getData().getCategory();
+            }else {
+                detail=datas.get(position-1).getData().getAuthor().getName()+" / #" +datas.get(position-1).getData().getCategory();
+                ImageLoader.load(mContext,datas.get(position-1).getData().getAuthor().getIcon(),((ItemViewHolder)holder).mAuthorImage);
+            }
             ((ItemViewHolder)holder).mAuthorText.setText(detail);
             ((ItemViewHolder)holder).mTitleTest.setText(datas.get(position-1).getData().getTitle());
-            ImageLoader.load(mContext,datas.get(position-1).getData().getAuthor().getIcon(),((ItemViewHolder)holder).mAuthorImage);
             ImageLoader.load(mContext,datas.get(position-1).getData().getCover().getFeed(),((ItemViewHolder)holder).mDailyImage);
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

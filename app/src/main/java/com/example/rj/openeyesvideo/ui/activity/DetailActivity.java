@@ -146,6 +146,9 @@ public class DetailActivity extends RootActivity<DetailPresenter> implements Det
         mAdapter.setOnItemClickListener(new DetailAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int id) {
+                if(id==999){
+
+                }
                 Intent intent=new Intent();
                 intent.setClass(mContext,DetailActivity.class);
                 ItemListBean itemListBean=listBeans.get(id-2);
@@ -157,16 +160,25 @@ public class DetailActivity extends RootActivity<DetailPresenter> implements Det
 
     private void getIntentData() {
         itemListBean=(ItemListBean) getIntent().getSerializableExtra("itemListBean");
+        Log.d("hzj", "getIntentData: itemListBean"+itemListBean.getData().getPlayUrl());
         Url=itemListBean.getData().getPlayUrl();
         //Url=getIntent().getExtras().getString("url");
         //String image=getIntent().getExtras().getString("image");
         //int id=getIntent().getExtras().getInt("itemId");
-        String image=itemListBean.getData().getCover().getFeed();
+        String image;
+        if(itemListBean.getData().getCover()==null){
+            image=itemListBean.getData().getCoverForFeed();
+        }else {
+            image=itemListBean.getData().getCover().getFeed();
+        }
         id=itemListBean.getData().getId();
         Log.d("hzj", "getIntentData: "+Url);
         imageView=new ImageView(this);
         imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
         ImageLoader.load(this,image,imageView);
+        if(!mPresenter.isRead(id)){
+            mPresenter.addToHistory(itemListBean);
+        }
     }
 
     @Override

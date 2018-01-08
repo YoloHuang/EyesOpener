@@ -30,4 +30,5 @@ public interface ApiHelper {
     Flowable<List<TagsBean>> getTagsBean();
     Flowable<TagChildBean> getTagChildBean(int start,int num,int id);
     Flowable<RelateBean> getRelateBean(int id);
+    Flowable<ItemListBean.DataBean> getDataBean(int id);
 }

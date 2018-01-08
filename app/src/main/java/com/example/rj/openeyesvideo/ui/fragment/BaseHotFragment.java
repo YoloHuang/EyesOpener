@@ -38,7 +38,9 @@ public abstract class BaseHotFragment extends RootFragment<WeekPresenter> implem
     public void showContents(List<ItemListBean> listBean) {
         for(ItemListBean itemListBean: listBean){
             if (itemListBean.getType().equals("video")){
-                itemListBeans.add(itemListBean);
+                if(itemListBean.getData().getAuthor()!=null){
+                    itemListBeans.add(itemListBean);
+                }
             }
         }
         stateStart();

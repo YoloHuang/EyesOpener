@@ -9,7 +9,7 @@ import io.realm.RealmObject;
  * Created by rj on 2017/12/27.
  */
 
-public  class ItemListBean implements Serializable{
+public  class ItemListBean  implements Serializable {
     /**
      * type : banner2
      * data : {"dataType":"Banner","id":0,"title":"","description":"","image":"http://img.kaiyanapp.com/eef24aa10ab6cf17b5a512943ec22053.jpeg?imageMogr2/quality/60/format/jpg","actionUrl":"","adTrack":null,"shade":false,"label":null,"labelList":null,"header":null}
@@ -122,6 +122,7 @@ public  class ItemListBean implements Serializable{
         private List<TagsBean> tags;
         private List<?> labelList;
         private List<?> subtitles;
+        private String coverForFeed;
 
         public String getDataType() {
             return dataType;
@@ -441,6 +442,14 @@ public  class ItemListBean implements Serializable{
 
         public void setSubtitles(List<?> subtitles) {
             this.subtitles = subtitles;
+        }
+
+        public String getCoverForFeed() {
+            return coverForFeed;
+        }
+
+        public void setCoverForFeed(String coverForFeed) {
+            this.coverForFeed = coverForFeed;
         }
 
         public static class ProviderBean implements Serializable{

@@ -12,6 +12,7 @@ import java.util.List;
 
 import io.reactivex.Flowable;
 import retrofit2.http.GET;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 /**
@@ -55,4 +56,7 @@ public interface Api {
     //相关视频推荐
     @GET("v4/video/related?")
     Flowable<RelateBean> getRelateBean(@Query("id")int id);
+
+    @GET("v1/video/{id}")
+    Flowable<ItemListBean.DataBean> getDataBean(@Path("id") int id);
 }

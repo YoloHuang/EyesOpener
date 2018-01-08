@@ -2,6 +2,7 @@ package com.example.rj.openeyesvideo.model.DB;
 
 import com.example.rj.openeyesvideo.model.bean.DailyBean;
 import com.example.rj.openeyesvideo.model.bean.HistoryBean;
+import com.example.rj.openeyesvideo.model.bean.ItemListBean;
 import com.example.rj.openeyesvideo.model.bean.LikeBean;
 
 import java.util.List;
@@ -12,11 +13,11 @@ import java.util.List;
 
 public interface DBHelper {
 
-    void insertReadId(HistoryBean historyBean);
+    void insertReadId(ItemListBean itemListBean);
 
 
 
-    void insertLikeId(LikeBean likeBean);
+    void insertLikeId(ItemListBean itemListBean);
 
 
 

@@ -135,7 +135,9 @@ public class DailyFragment extends RootFragment<DailyPresenter> implements Daily
     public void showContent(List<ItemListBean> list) {
         for(ItemListBean itemListBean: list){
             if (itemListBean.getType().equals("video")){
-                        itemListBeans.add(itemListBean);
+                if(itemListBean.getData().getAuthor()!=null){
+                    itemListBeans.add(itemListBean);
+                }
             }
         }
         stateStart();

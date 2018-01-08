@@ -14,7 +14,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="48px"
-            android:text="@string/app_name"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="8dp"
             android:layout_marginStart="6dp"
@@ -23,7 +22,6 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/app_name"
             android:textSize="35px"
             android:layout_marginStart="10dp"
             android:textColor="@color/colorWhite"
@@ -32,7 +30,6 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/app_name"
             android:layout_marginStart="6dp"
             android:textColor="@color/colorWhite"
             android:id="@+id/detail_describe"
@@ -52,7 +49,7 @@
                 android:textSize="35px"
                 android:drawablePadding="10dp"
                 android:gravity="center"
-                android:drawableLeft="@mipmap/ic_action_favorites_without_padding"
+                android:drawableLeft="@drawable/like_select"
                 android:textColor="@color/colorWhite"
                 android:id="@+id/tv_likenum"/>
             <TextView

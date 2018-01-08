@@ -1,5 +1,7 @@
 package com.example.rj.openeyesvideo.presenter;
 
+import android.util.Log;
+
 import com.example.rj.openeyesvideo.base.Contract.DailyContract;
 import com.example.rj.openeyesvideo.base.Contract.DetailContract;
 import com.example.rj.openeyesvideo.base.RxPresenter;
@@ -37,4 +39,20 @@ public class DetailPresenter extends RxPresenter<DetailContract.View> implements
             }
         }));
     }
+
+    @Override
+    public void addToHistory(ItemListBean itemListBean) {
+        mDataManager.insertReadId(itemListBean);
+    }
+
+    @Override
+    public boolean isRead(int id) {
+        if(mDataManager.getHistoryBean(id)==null){
+            return false;
+        }else {
+            Log.d("hzj", "isRead: mDataManager.getHistoryBean(id)"+mDataManager.getHistoryBean(id).getId());
+            return true;
+        }
+    }
+
 }
