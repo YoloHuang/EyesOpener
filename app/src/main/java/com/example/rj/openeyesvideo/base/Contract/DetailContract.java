@@ -13,10 +13,14 @@ import java.util.List;
 public interface DetailContract {
     interface View extends BaseView{
         void showContent(List<ItemListBean> itemListBeans);
+        void  setlike(boolean like);
     }
     interface Presenter extends BasePresenter<View>{
         void getVedioData(int id);
         void addToHistory(ItemListBean itemListBean);
         boolean isRead(int id);
+        void isLike(int id);
+        void deleteLikeId(int id);
+        void insertLikeId(ItemListBean itemListBean);
     }
 }

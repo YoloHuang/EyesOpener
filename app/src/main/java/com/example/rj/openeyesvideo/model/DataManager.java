@@ -97,7 +97,7 @@ public class DataManager implements ApiHelper,DBHelper{
 
     @Override
     public void deleteLikeId(int id) {
-
+        mDBHelper.deleteLikeId(id);
     }
 
     @Override
@@ -123,5 +123,10 @@ public class DataManager implements ApiHelper,DBHelper{
     @Override
     public HistoryBean getHistoryBean(int id) {
         return mDBHelper.getHistoryBean(id);
+    }
+
+    @Override
+    public boolean checkLike(int id) {
+        return mDBHelper.checkLike(id);
     }
 }

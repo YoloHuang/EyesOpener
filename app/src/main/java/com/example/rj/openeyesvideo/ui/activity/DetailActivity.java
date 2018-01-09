@@ -50,6 +50,7 @@ public class DetailActivity extends RootActivity<DetailPresenter> implements Det
     boolean isPlay;
     boolean isPause;
     int id;
+    boolean islike=false;
 
     DetailAdapter mAdapter;
     private List<ItemListBean> listBeans =new ArrayList<>();
@@ -140,20 +141,30 @@ public class DetailActivity extends RootActivity<DetailPresenter> implements Det
         mLinearLayoutManager=new LinearLayoutManager(mContext);
         recyclerView.setLayoutManager(mLinearLayoutManager);
         mAdapter=new DetailAdapter(mContext,listBeans);
+        mPresenter.isLike(id);
         mAdapter.getItemData(itemListBean);
         recyclerView.setAdapter(mAdapter);
         Log.d("hzj", "initRecyclerView: ");
         mAdapter.setOnItemClickListener(new DetailAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int id) {
-                if(id==999){
-
-                }
                 Intent intent=new Intent();
                 intent.setClass(mContext,DetailActivity.class);
                 ItemListBean itemListBean=listBeans.get(id-2);
                 intent.putExtra("itemListBean",itemListBean);
                 mContext.startActivity(intent);
+            }
+        });
+        mAdapter.setOnButtonClickListener(new DetailAdapter.OnButtonClickListener() {
+            @Override
+            public void onButtonClick(View view, int position) {
+                if(islike){
+                    mPresenter.deleteLikeId(id);
+                    islike=false;
+                }else {
+                    mPresenter.insertLikeId(itemListBean);
+                    islike=true;
+                }
             }
         });
     }
@@ -196,6 +207,13 @@ public class DetailActivity extends RootActivity<DetailPresenter> implements Det
         }
         Log.d("hzj", "showContent: "+listBeans.size());
         mAdapter.getData(listBeans);
+
+    }
+
+    @Override
+    public void setlike(boolean islike) {
+        mAdapter.setlike(islike);
+        this.islike=islike;
     }
 
     @Override

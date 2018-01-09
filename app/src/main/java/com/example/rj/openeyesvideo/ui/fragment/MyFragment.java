@@ -10,6 +10,7 @@ import com.example.rj.openeyesvideo.R;
 import com.example.rj.openeyesvideo.base.BaseFragment;
 import com.example.rj.openeyesvideo.base.SimpleFragment;
 import com.example.rj.openeyesvideo.ui.activity.HistoryActivity;
+import com.example.rj.openeyesvideo.ui.activity.LikeActivity;
 import com.example.rj.openeyesvideo.ui.adapter.BaseRecyclerAdapter;
 import com.example.rj.openeyesvideo.ui.adapter.HistoryAdapter;
 import com.example.rj.openeyesvideo.ui.adapter.MyRecycleradapter;
@@ -61,6 +62,9 @@ public class MyFragment extends SimpleFragment{
                         mContext.startActivity(intent);
                         break;
                     case 2:
+                        Intent intent2=new Intent();
+                        intent2.setClass(mContext, LikeActivity.class);
+                        mContext.startActivity(intent2);
                         break;
                     case 3:
                         break;

@@ -26,6 +26,7 @@ import butterknife.ButterKnife;
 public class DetailAdapter extends BaseRecyclerAdapter<ItemListBean> {
 
 ItemListBean data;
+boolean islike;
 
     public enum ITEM_TYPE{
         TYPE_INFO,
@@ -68,6 +69,7 @@ ItemListBean data;
             ((InfoViewHolder)holder).detailTag.setText("#"+data.getData().getCategory());
             ((InfoViewHolder)holder).detailTitle.setText(data.getData().getTitle());
             ((InfoViewHolder)holder).likenum.setText(""+data.getData().getConsumption().getCollectionCount());
+            ((InfoViewHolder)holder).likenum.setSelected(islike);
             ((InfoViewHolder)holder).replynum.setText(""+data.getData().getConsumption().getReplyCount());
             ((InfoViewHolder)holder).sharenum.setText(""+data.getData().getConsumption().getShareCount());
             ((InfoViewHolder)holder).textAuthor.setText(data.getData().getAuthor().getName());
@@ -76,8 +78,8 @@ ItemListBean data;
             ((InfoViewHolder) holder).likenum.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(onItemClickListener!=null){
-                        onItemClickListener.onItemClick(9999);
+                    if(onButtonClickListener!=null){
+                        onButtonClickListener.onButtonClick(v,0);
                         if(((InfoViewHolder) holder).likenum.isSelected()){
                             ((InfoViewHolder) holder).likenum.setSelected(false);
                         }else {
@@ -103,6 +105,10 @@ ItemListBean data;
 
     public void getItemData(ItemListBean itemListBean){
         this.data=itemListBean;
+    }
+
+    public void setlike(boolean islike){
+        this.islike=islike;
     }
 
     public void getData(List<ItemListBean> itemListBeans){
@@ -172,4 +178,6 @@ ItemListBean data;
             ButterKnife.bind(this,itemView);
         }
     }
+
+
 }

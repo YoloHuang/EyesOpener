@@ -55,4 +55,21 @@ public class DetailPresenter extends RxPresenter<DetailContract.View> implements
         }
     }
 
+    @Override
+    public void isLike(int id) {
+        boolean like= mDataManager.checkLike(id);
+        mView.setlike(like);
+    }
+
+    @Override
+    public void deleteLikeId(int id) {
+        mDataManager.deleteLikeId(id);
+    }
+
+    @Override
+    public void insertLikeId(ItemListBean itemListBean) {
+        mDataManager.insertLikeId(itemListBean);
+    }
+
+
 }

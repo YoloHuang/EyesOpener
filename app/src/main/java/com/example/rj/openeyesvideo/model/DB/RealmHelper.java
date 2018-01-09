@@ -113,4 +113,14 @@ public class RealmHelper implements DBHelper {
             return mRealm.copyFromRealm(historyBean);
         }
     }
+
+    @Override
+    public boolean checkLike(int id) {
+        LikeBean likeBean=mRealm.where(LikeBean.class).equalTo("id",id).findFirst();
+        if(likeBean==null){
+            return false;
+        }else {
+            return true;
+        }
+    }
 }

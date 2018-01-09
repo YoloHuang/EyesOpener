@@ -33,7 +33,8 @@
             android:name=".ui.activity.DetailActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait" />
-        <activity android:name=".ui.activity.HistoryActivity"></activity>
+        <activity android:name=".ui.activity.HistoryActivity" />
+        <activity android:name=".ui.activity.LikeActivity"></activity>
     </application>
 
 </manifest>

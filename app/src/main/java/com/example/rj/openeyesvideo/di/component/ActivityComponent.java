@@ -6,6 +6,7 @@ import com.example.rj.openeyesvideo.di.module.ActivityModule;
 import com.example.rj.openeyesvideo.di.scope.ActivityScope;
 import com.example.rj.openeyesvideo.ui.activity.DetailActivity;
 import com.example.rj.openeyesvideo.ui.activity.HistoryActivity;
+import com.example.rj.openeyesvideo.ui.activity.LikeActivity;
 import com.example.rj.openeyesvideo.ui.activity.MainActivity;
 import com.example.rj.openeyesvideo.ui.activity.TagActivity;
 import com.example.rj.openeyesvideo.ui.activity.WelcomeActivity;
@@ -24,4 +25,5 @@ public interface ActivityComponent {
     void inject(TagActivity tagActivity);
     void inject(DetailActivity detailActivity);
     void inject(HistoryActivity historyActivity);
+    void inject(LikeActivity likeActivity);
 }

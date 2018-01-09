@@ -20,6 +20,7 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter {
     protected Context mContext;
     protected LayoutInflater mLayoutInflater;
     protected OnItemClickListener onItemClickListener;
+    protected OnButtonClickListener onButtonClickListener;
 
 
     public BaseRecyclerAdapter(Context context, List<T> datas){
@@ -47,5 +48,11 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter {
 
     public interface OnItemClickListener{
         void onItemClick(int id);
-    };
+    }
+    public interface OnButtonClickListener{
+        void onButtonClick(View view,int position);
+    }
+    public void setOnButtonClickListener(OnButtonClickListener onButtonClickListener){
+        this.onButtonClickListener=onButtonClickListener;
+    }
 }
