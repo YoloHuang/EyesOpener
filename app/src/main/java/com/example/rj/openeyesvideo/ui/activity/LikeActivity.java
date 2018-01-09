@@ -1,8 +1,7 @@
 package com.example.rj.openeyesvideo.ui.activity;
 
-import android.app.Activity;
+
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -10,13 +9,10 @@ import android.util.Log;
 import android.widget.TextView;
 
 import com.example.rj.openeyesvideo.R;
-import com.example.rj.openeyesvideo.base.Contract.HistroyContract;
 import com.example.rj.openeyesvideo.base.Contract.LikeContract;
 import com.example.rj.openeyesvideo.base.RootActivity;
-import com.example.rj.openeyesvideo.model.bean.HistoryBean;
 import com.example.rj.openeyesvideo.model.bean.ItemListBean;
 import com.example.rj.openeyesvideo.model.bean.LikeBean;
-import com.example.rj.openeyesvideo.presenter.HistoryPresenter;
 import com.example.rj.openeyesvideo.presenter.LikePresenter;
 import com.example.rj.openeyesvideo.ui.adapter.HistoryAdapter;
 import com.example.rj.openeyesvideo.ui.adapter.LikeAdapter;
@@ -74,7 +70,7 @@ public class LikeActivity extends RootActivity<LikePresenter> implements LikeCon
     @Override
     public void showContent(List<LikeBean> LikeBeans) {
         stateStart();
-        LikeBeans=LikeBeans;
+        this.LikeBeans=LikeBeans;
         Log.d("hzj", "showContent: historyBeans"+LikeBeans.size());
         mAdapter.addLikeData(LikeBeans);
     }
