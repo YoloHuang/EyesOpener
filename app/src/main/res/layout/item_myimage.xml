@@ -4,5 +4,5 @@
     android:layout_width="match_parent"
     android:layout_height="220dp"
     android:scaleType="centerCrop"
-    android:src="@mipmap/my_image"
+    android:src="@mipmap/iv_top"
     android:id="@+id/view_my"/>

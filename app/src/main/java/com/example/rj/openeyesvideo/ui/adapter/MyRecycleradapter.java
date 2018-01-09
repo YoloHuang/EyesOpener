@@ -63,7 +63,7 @@ public class MyRecycleradapter extends BaseRecyclerAdapter<String> {
                 }
             });
         }else {
-            ((ImageViewHolder)holder).imageView.setImageResource(R.mipmap.my_image);
+            ((ImageViewHolder)holder).imageView.setImageResource(R.mipmap.iv_top);
         }
     }
 
