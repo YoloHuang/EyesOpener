@@ -66,7 +66,9 @@ boolean islike;
     public void convert(final RecyclerView.ViewHolder holder, final int position) {
         if(holder instanceof InfoViewHolder){
             ((InfoViewHolder)holder).detailDescribe.setText(data.getData().getDescription());
-            ((InfoViewHolder)holder).detailTag.setText("#"+data.getData().getCategory());
+            int duration=data.getData().getDuration();
+            String time=duration/60+"'"+duration%60+"''";
+            ((InfoViewHolder)holder).detailTag.setText("#"+data.getData().getCategory()+" / "+time+" / "+"开眼精选");
             ((InfoViewHolder)holder).detailTitle.setText(data.getData().getTitle());
             ((InfoViewHolder)holder).likenum.setText(""+data.getData().getConsumption().getCollectionCount());
             ((InfoViewHolder)holder).likenum.setSelected(islike);
@@ -88,7 +90,32 @@ boolean islike;
                     }
                 }
             });
+            ((InfoViewHolder)holder).sharenum.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(onButtonClickListener!=null){
+                        onButtonClickListener.onButtonClick(v,1);
+                    }
+                }
+            });
+            ((InfoViewHolder)holder).replynum.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(onButtonClickListener!=null){
+                        onButtonClickListener.onButtonClick(v,2);
+                    }
+                }
+            });
+            ((InfoViewHolder)holder).download.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(onButtonClickListener!=null){
+                        onButtonClickListener.onButtonClick(v,3);
+                    }
+                }
+            });
         }else if(holder instanceof RelateViewHolder) {
+
             ((RelateViewHolder)holder).relateItemName.setText(datas.get(position-2).getData().getTitle());
             ((RelateViewHolder)holder).relateITemTag.setText("#"+datas.get(position-2).getData().getCategory());
             ImageLoader.load (mContext,datas.get(position-2).getData().getCover().getFeed() ,((RelateViewHolder)holder).videoImage);
@@ -143,6 +170,8 @@ boolean islike;
         TextView sharenum;
         @BindView(R.id.tv_reply)
         TextView replynum;
+        @BindView(R.id.tv_download)
+        TextView download;
 
 
 

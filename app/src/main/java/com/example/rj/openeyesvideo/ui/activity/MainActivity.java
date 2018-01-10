@@ -7,11 +7,14 @@ import android.support.v4.view.ViewPager;
 
 import android.support.design.widget.TabLayout;
 import android.support.v7.widget.Toolbar;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.rj.openeyesvideo.APP.App;
 import com.example.rj.openeyesvideo.R;
 import com.example.rj.openeyesvideo.base.BaseActivity;
 import com.example.rj.openeyesvideo.base.Contract.MainContract;
@@ -21,6 +24,7 @@ import com.example.rj.openeyesvideo.ui.fragment.DailyFragment;
 import com.example.rj.openeyesvideo.ui.fragment.HotFragment;
 import com.example.rj.openeyesvideo.ui.fragment.MyFragment;
 import com.example.rj.openeyesvideo.ui.fragment.TagsFragment;
+import com.example.rj.openeyesvideo.util.SystemUtil;
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 
 import java.util.ArrayList;
@@ -43,6 +47,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
 
     MainAdapter mMainAdapter;
     MenuItem mSearchMenuItem;
+    private long exitTime;
 
     String[] tabTitle = new String[]{"首页","热门","专栏","我"};
     List<Fragment> fragments = new ArrayList<Fragment>();
@@ -83,8 +88,6 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
         mMaterialSearchView.setVoiceSearch(false);
         mMaterialSearchView.setCursorDrawable(R.drawable.custom_cursor);
         mPresenter.getSearchSuggestions();
-
-
     }
 
     @Override
@@ -95,6 +98,25 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
         mMaterialSearchView.setMenuItem(item);
         mSearchMenuItem=item;
         return true;
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode==KeyEvent.KEYCODE_BACK && event.getRepeatCount()==0){
+            exitApp();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
+    private void exitApp() {
+        if(System.currentTimeMillis()-exitTime>2000){
+            Toast.makeText(mContext,"连按两次退出哦~",Toast.LENGTH_SHORT).show();
+            exitTime= System.currentTimeMillis();
+        }else {
+            finish();
+            App.exitApp();
+        }
     }
 
     @Override

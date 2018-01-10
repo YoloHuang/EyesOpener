@@ -4,6 +4,7 @@ import com.example.rj.openeyesvideo.model.bean.DailyBean;
 import com.example.rj.openeyesvideo.model.bean.HotBean;
 import com.example.rj.openeyesvideo.model.bean.ItemListBean;
 import com.example.rj.openeyesvideo.model.bean.RelateBean;
+import com.example.rj.openeyesvideo.model.bean.ReplyBean;
 import com.example.rj.openeyesvideo.model.bean.SearchResultBean;
 import com.example.rj.openeyesvideo.model.bean.TagChildBean;
 import com.example.rj.openeyesvideo.model.bean.TagsBean;
@@ -59,4 +60,8 @@ public interface Api {
 
     @GET("v1/video/{id}")
     Flowable<ItemListBean.DataBean> getDataBean(@Path("id") int id);
+
+    @GET("v2/replies/video?")
+    Flowable<ReplyBean> getReplyBean(@Query("videoId")int id);
+
 }

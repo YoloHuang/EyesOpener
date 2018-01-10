@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.rj.openeyesvideo.R;
@@ -17,6 +18,7 @@ import com.example.rj.openeyesvideo.base.RootActivity;
 import com.example.rj.openeyesvideo.component.ImageLoader;
 import com.example.rj.openeyesvideo.component.SimpleListener;
 import com.example.rj.openeyesvideo.model.bean.ItemListBean;
+import com.example.rj.openeyesvideo.model.bean.ReplyBean;
 import com.example.rj.openeyesvideo.presenter.DetailPresenter;
 import com.example.rj.openeyesvideo.ui.adapter.BaseRecyclerAdapter;
 import com.example.rj.openeyesvideo.ui.adapter.DetailAdapter;
@@ -158,15 +160,48 @@ public class DetailActivity extends RootActivity<DetailPresenter> implements Det
         mAdapter.setOnButtonClickListener(new DetailAdapter.OnButtonClickListener() {
             @Override
             public void onButtonClick(View view, int position) {
-                if(islike){
-                    mPresenter.deleteLikeId(id);
-                    islike=false;
-                }else {
-                    mPresenter.insertLikeId(itemListBean);
-                    islike=true;
+                switch (position){
+                    case 0:
+                        if(islike){
+                            mPresenter.deleteLikeId(id);
+                            islike=false;
+                        }else {
+                            mPresenter.insertLikeId(itemListBean);
+                            islike=true;
+                        }
+                        break;
+                    case 1:
+                        Intent intent=new Intent();
+                        intent.setAction(Intent.ACTION_SEND);
+                        intent.setType("text/plain");
+                        intent.putExtra(Intent.EXTRA_TEXT,itemListBean.getData().getWebUrl().getRaw());
+                        mContext.startActivity(Intent.createChooser(intent,"分享给……"));
+                        break;
+                    case 2:
+                        mPresenter.getReplyData(itemListBean.getData().getId());
+                        //Toast.makeText(mContext,"暂未实现",Toast.LENGTH_SHORT).show();
+                        break;
+                    case 3:
+                        Toast.makeText(mContext,"暂未实现",Toast.LENGTH_SHORT).show();
+                        break;
                 }
+
+
             }
         });
+    }
+
+
+    /**
+     *获取databean中的image信息
+     * 由于从likebean转过来的itemlistBean中会存在没有cover的情况，所以在此判断
+     */
+    private String getImageUrl(){
+        if(itemListBean.getData().getCover()==null){
+            return itemListBean.getData().getCoverForFeed();
+        }else {
+            return itemListBean.getData().getCover().getFeed();
+        }
     }
 
     private void getIntentData() {
@@ -176,17 +211,11 @@ public class DetailActivity extends RootActivity<DetailPresenter> implements Det
         //Url=getIntent().getExtras().getString("url");
         //String image=getIntent().getExtras().getString("image");
         //int id=getIntent().getExtras().getInt("itemId");
-        String image;
-        if(itemListBean.getData().getCover()==null){
-            image=itemListBean.getData().getCoverForFeed();
-        }else {
-            image=itemListBean.getData().getCover().getFeed();
-        }
         id=itemListBean.getData().getId();
         Log.d("hzj", "getIntentData: "+Url);
         imageView=new ImageView(this);
         imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-        ImageLoader.load(this,image,imageView);
+        ImageLoader.load(this,getImageUrl(),imageView);
         if(!mPresenter.isRead(id)){
             mPresenter.addToHistory(itemListBean);
         }
@@ -214,6 +243,11 @@ public class DetailActivity extends RootActivity<DetailPresenter> implements Det
     public void setlike(boolean islike) {
         mAdapter.setlike(islike);
         this.islike=islike;
+    }
+
+    @Override
+    public void showReply(ReplyBean replyBean) {
+
     }
 
     @Override

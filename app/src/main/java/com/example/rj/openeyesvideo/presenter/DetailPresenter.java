@@ -8,6 +8,7 @@ import com.example.rj.openeyesvideo.base.RxPresenter;
 import com.example.rj.openeyesvideo.model.DataManager;
 import com.example.rj.openeyesvideo.model.bean.ItemListBean;
 import com.example.rj.openeyesvideo.model.bean.RelateBean;
+import com.example.rj.openeyesvideo.model.bean.ReplyBean;
 import com.example.rj.openeyesvideo.util.RxUtil;
 import com.example.rj.openeyesvideo.widget.CommonSubscriber;
 
@@ -36,6 +37,18 @@ public class DetailPresenter extends RxPresenter<DetailContract.View> implements
             @Override
             public void onNext(RelateBean relateBean) {
                 mView.showContent(relateBean.getItemList());
+            }
+        }));
+    }
+
+    @Override
+    public void getReplyData(int id) {
+        addSubscribe(mDataManager.getReplyBean(id)
+        .compose(RxUtil.<ReplyBean>rxSchedulerHelper())
+        .subscribeWith(new CommonSubscriber<ReplyBean>(mView) {
+            @Override
+            public void onNext(ReplyBean replyBean) {
+                mView.showReply(replyBean);
             }
         }));
     }

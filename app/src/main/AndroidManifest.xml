@@ -28,13 +28,17 @@
         <activity
             android:name=".ui.activity.MainActivity"
             android:theme="@style/AppTheme" />
-        <activity android:name=".ui.activity.TagActivity" />
+        <activity android:name=".ui.activity.TagActivity"
+            android:theme="@style/MainTheme"/>
         <activity
             android:name=".ui.activity.DetailActivity"
+            android:theme="@style/MainTheme"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait" />
-        <activity android:name=".ui.activity.HistoryActivity" />
-        <activity android:name=".ui.activity.LikeActivity"></activity>
+        <activity android:name=".ui.activity.HistoryActivity"
+            android:theme="@style/MainTheme"/>
+        <activity android:name=".ui.activity.LikeActivity"
+            android:theme="@style/MainTheme"/>
     </application>
 
 </manifest>

@@ -21,7 +21,7 @@ import io.realm.Realm;
 public class App extends Application {
 
     private static App app;
-    private Set<Activity> activities;
+    private static Set<Activity> activities;
     public static AppComponent appComponent;
 
 
@@ -54,7 +54,7 @@ public class App extends Application {
             activities.remove(activity);
         }
     }
-    public void exitApp(){
+    public static void exitApp(){
         if(activities!=null){
             synchronized (activities){
                 for(Activity activity: activities){

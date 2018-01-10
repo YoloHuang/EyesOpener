@@ -7,6 +7,7 @@ import com.example.rj.openeyesvideo.model.bean.HotBean;
 import com.example.rj.openeyesvideo.model.bean.ItemListBean;
 import com.example.rj.openeyesvideo.model.bean.LikeBean;
 import com.example.rj.openeyesvideo.model.bean.RelateBean;
+import com.example.rj.openeyesvideo.model.bean.ReplyBean;
 import com.example.rj.openeyesvideo.model.bean.SearchResultBean;
 import com.example.rj.openeyesvideo.model.bean.TagChildBean;
 import com.example.rj.openeyesvideo.model.bean.TagsBean;
@@ -80,6 +81,11 @@ public class DataManager implements ApiHelper,DBHelper{
         return mApiHelper.getDataBean(id);
     }
 
+    @Override
+    public Flowable<ReplyBean> getReplyBean(int id) {
+        return mApiHelper.getReplyBean(id);
+    }
+
 //    @Override
 //    public Flowable<HotBean> getHistroicalHotBean() {
 //        return mApiHelper.getHistroicalHotBean();
@@ -129,4 +135,6 @@ public class DataManager implements ApiHelper,DBHelper{
     public boolean checkLike(int id) {
         return mDBHelper.checkLike(id);
     }
+
+
 }

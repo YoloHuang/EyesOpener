@@ -4,6 +4,7 @@ import com.example.rj.openeyesvideo.model.bean.DailyBean;
 import com.example.rj.openeyesvideo.model.bean.HotBean;
 import com.example.rj.openeyesvideo.model.bean.ItemListBean;
 import com.example.rj.openeyesvideo.model.bean.RelateBean;
+import com.example.rj.openeyesvideo.model.bean.ReplyBean;
 import com.example.rj.openeyesvideo.model.bean.SearchResultBean;
 import com.example.rj.openeyesvideo.model.bean.TagChildBean;
 import com.example.rj.openeyesvideo.model.bean.TagsBean;
@@ -72,6 +73,11 @@ public class RetrofitHelper implements ApiHelper {
     @Override
     public Flowable<ItemListBean.DataBean> getDataBean(int id) {
         return api.getDataBean(id);
+    }
+
+    @Override
+    public Flowable<ReplyBean> getReplyBean(int id) {
+        return api.getReplyBean(id);
     }
 
 //    @Override
