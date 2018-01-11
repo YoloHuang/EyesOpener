@@ -30,10 +30,12 @@ public class DetailAuthorView extends RelativeLayout {
 
     public DetailAuthorView(Context context) {
         super(context);
+        new DetailAuthorView(context,null);
     }
 
     public DetailAuthorView(Context context, AttributeSet attrs) {
         super(context, attrs);
+        new DetailAuthorView(context,null,0);
     }
 
     public DetailAuthorView(Context context, AttributeSet attrs, int defStyleAttr) {
@@ -42,11 +44,7 @@ public class DetailAuthorView extends RelativeLayout {
         initView();
     }
 
-    public DetailAuthorView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-        super(context, attrs, defStyleAttr, defStyleRes);
-        this.context=context;
-        initView();
-    }
+
 
     private void initView() {
         View.inflate(context,R.layout.item_detail_author,this);

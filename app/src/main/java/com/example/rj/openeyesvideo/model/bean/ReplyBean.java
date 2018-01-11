@@ -167,6 +167,7 @@ public class ReplyBean {
             private boolean showConversationButton;
             private String sid;
             private boolean userBlocked;
+            private String text;
 
             public String getDataType() {
                 return dataType;
@@ -350,6 +351,14 @@ public class ReplyBean {
 
             public void setUserBlocked(boolean userBlocked) {
                 this.userBlocked = userBlocked;
+            }
+
+            public String getText() {
+                return text;
+            }
+
+            public void setText(String text) {
+                this.text = text;
             }
 
             public static class UserBean {

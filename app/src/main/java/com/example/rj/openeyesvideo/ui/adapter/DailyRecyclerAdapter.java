@@ -3,6 +3,7 @@ package com.example.rj.openeyesvideo.ui.adapter;
 import android.content.Context;
 import android.support.v7.util.DiffUtil;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import com.example.rj.openeyesvideo.component.ImageLoader;
 import com.example.rj.openeyesvideo.model.DataManager;
 import com.example.rj.openeyesvideo.model.bean.DailyBean;
 import com.example.rj.openeyesvideo.model.bean.ItemListBean;
+import com.example.rj.openeyesvideo.ui.view.ItemDailyView;
 import com.example.rj.openeyesvideo.util.DiffUtilCallBack;
 
 import java.text.SimpleDateFormat;
@@ -59,7 +61,7 @@ public class DailyRecyclerAdapter extends BaseRecyclerAdapter<ItemListBean> {
 
 
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if(viewType==ITEM_TYPE.TYPE_DATE.ordinal()){
             return new DateViewHolder(mLayoutInflater.inflate(R.layout.item_date,parent,false));
         }else {
@@ -68,7 +70,7 @@ public class DailyRecyclerAdapter extends BaseRecyclerAdapter<ItemListBean> {
     }
 
     @Override
-    public void convert(RecyclerView.ViewHolder holder, final int position) {
+    public void convert(ViewHolder holder, final int position) {
 
         if(holder instanceof DateViewHolder){
             String date=getDate();
@@ -102,7 +104,7 @@ public class DailyRecyclerAdapter extends BaseRecyclerAdapter<ItemListBean> {
         return dateString;
     }
 
-    public static class DateViewHolder extends RecyclerView.ViewHolder{
+    public static class DateViewHolder extends ViewHolder{
 
         @BindView(R.id.text_date)
         TextView textView;
@@ -113,7 +115,7 @@ public class DailyRecyclerAdapter extends BaseRecyclerAdapter<ItemListBean> {
         }
     }
 
-    public static class ItemViewHolder extends RecyclerView.ViewHolder{
+    public static class ItemViewHolder extends ViewHolder{
 
         @BindView(R.id.iv_daily_item_image)
         ImageView mDailyImage;

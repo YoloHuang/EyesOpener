@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -22,6 +23,8 @@ import com.example.rj.openeyesvideo.model.bean.ReplyBean;
 import com.example.rj.openeyesvideo.presenter.DetailPresenter;
 import com.example.rj.openeyesvideo.ui.adapter.BaseRecyclerAdapter;
 import com.example.rj.openeyesvideo.ui.adapter.DetailAdapter;
+import com.example.rj.openeyesvideo.ui.adapter.ReplyAdapter;
+import com.example.rj.openeyesvideo.ui.view.ReplyView;
 import com.shuyu.gsyvideoplayer.builder.GSYVideoOptionBuilder;
 import com.shuyu.gsyvideoplayer.listener.GSYVideoProgressListener;
 import com.shuyu.gsyvideoplayer.listener.LockClickListener;
@@ -57,7 +60,11 @@ public class DetailActivity extends RootActivity<DetailPresenter> implements Det
     DetailAdapter mAdapter;
     private List<ItemListBean> listBeans =new ArrayList<>();
 
-
+    //评论相关
+    ReplyView mReplyView;
+    ReplyAdapter mReplyAdapter;
+    RelativeLayout.LayoutParams mLayoutParams;
+    RelativeLayout root ;
 
     @Override
     protected void initEventAndData() {
@@ -67,7 +74,7 @@ public class DetailActivity extends RootActivity<DetailPresenter> implements Det
         stateLoading();
         mPresenter.getVedioData(id);
         initVedio();
-
+        root=(RelativeLayout)findViewById(R.id.detail_root);
     }
 
     private void initVedio() {
@@ -247,7 +254,23 @@ public class DetailActivity extends RootActivity<DetailPresenter> implements Det
 
     @Override
     public void showReply(ReplyBean replyBean) {
+        mReplyView=new ReplyView(mContext);
+        mLayoutParams=new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,RelativeLayout.LayoutParams.MATCH_PARENT);
+        mLayoutParams.addRule(RelativeLayout.BELOW,R.id.vedio_player);
+        mReplyView.setLayoutParams(mLayoutParams);
+        mReplyView.getData(replyBean);
+        root.addView(mReplyView);
+        mReplyView.replyClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                closeReply();
+            }
+        });
+        //mReplyView.recyclerView.setOnScrollListener();
+    }
 
+    private void closeReply() {
+        root.removeView(mReplyView);
     }
 
     @Override
