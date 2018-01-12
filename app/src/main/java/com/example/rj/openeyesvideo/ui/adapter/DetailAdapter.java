@@ -27,6 +27,7 @@ public class DetailAdapter extends BaseRecyclerAdapter<ItemListBean> {
 
 ItemListBean data;
 boolean islike;
+int likeCount;
 
     public enum ITEM_TYPE{
         TYPE_INFO,
@@ -70,7 +71,11 @@ boolean islike;
             String time=duration/60+"'"+duration%60+"''";
             ((InfoViewHolder)holder).detailTag.setText("#"+data.getData().getCategory()+" / "+time+" / "+"开眼精选");
             ((InfoViewHolder)holder).detailTitle.setText(data.getData().getTitle());
-            ((InfoViewHolder)holder).likenum.setText(""+data.getData().getConsumption().getCollectionCount());
+            likeCount=data.getData().getConsumption().getCollectionCount();
+            if(islike){
+                likeCount++;
+            }
+            ((InfoViewHolder)holder).likenum.setText(""+likeCount);
             ((InfoViewHolder)holder).likenum.setSelected(islike);
             ((InfoViewHolder)holder).replynum.setText(""+data.getData().getConsumption().getReplyCount());
             ((InfoViewHolder)holder).sharenum.setText(""+data.getData().getConsumption().getShareCount());
@@ -84,8 +89,12 @@ boolean islike;
                         onButtonClickListener.onButtonClick(v,0);
                         if(((InfoViewHolder) holder).likenum.isSelected()){
                             ((InfoViewHolder) holder).likenum.setSelected(false);
+                            likeCount--;
+                            ((InfoViewHolder)holder).likenum.setText(""+likeCount);
                         }else {
                             ((InfoViewHolder) holder).likenum.setSelected(true);
+                            likeCount++;
+                            ((InfoViewHolder)holder).likenum.setText(""+likeCount);
                         }
                     }
                 }

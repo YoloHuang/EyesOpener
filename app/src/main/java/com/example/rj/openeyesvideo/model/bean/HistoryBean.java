@@ -16,6 +16,7 @@ public class HistoryBean extends RealmObject {
     private String slogen;
     private String authorIcon;
     private String title;
+    private long time;
 
     public String getImage() {
         return image;
@@ -66,5 +67,13 @@ public class HistoryBean extends RealmObject {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public long getTime() {
+        return time;
+    }
+
+    public void setTime(long time) {
+        this.time = time;
     }
 }

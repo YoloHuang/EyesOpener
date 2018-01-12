@@ -80,6 +80,11 @@ public class DetailPresenter extends RxPresenter<DetailContract.View> implements
     }
 
     @Override
+    public void deleteReadId(int id) {
+        mDataManager.deleteReadId(id);
+    }
+
+    @Override
     public void insertLikeId(ItemListBean itemListBean) {
         mDataManager.insertLikeId(itemListBean);
     }

@@ -10,8 +10,9 @@
         android:layout_marginTop="6dp"
         android:layout_marginBottom="6dp"
         android:textColor="@color/colorWhite"
-        android:text="@string/app_name"
-        android:textSize="35px"/>
+        android:id="@+id/tv_replytitle"
+        android:textStyle="bold"
+        android:textSize="40px"/>
 </RelativeLayout>
 
 

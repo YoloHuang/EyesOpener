@@ -24,6 +24,7 @@ public interface DetailContract {
         boolean isRead(int id);
         void isLike(int id);
         void deleteLikeId(int id);
+        void deleteReadId(int id);
         void insertLikeId(ItemListBean itemListBean);
     }
 }

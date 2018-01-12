@@ -5,6 +5,7 @@ import android.util.Log;
 import com.example.rj.openeyesvideo.model.bean.HistoryBean;
 import com.example.rj.openeyesvideo.model.bean.ItemListBean;
 import com.example.rj.openeyesvideo.model.bean.LikeBean;
+import com.example.rj.openeyesvideo.util.SystemUtil;
 
 import java.util.List;
 
@@ -14,6 +15,7 @@ import io.realm.Realm;
 import io.realm.RealmConfiguration;
 import io.realm.RealmQuery;
 import io.realm.RealmResults;
+import io.realm.Sort;
 
 /**
  * Created by rj on 2017/12/21.
@@ -46,6 +48,7 @@ public class RealmHelper implements DBHelper {
             historyBean.setAuthorSlogen(itemListBean.getData().getAuthor().getDescription());
             historyBean.setImage(itemListBean.getData().getCover().getFeed());
             historyBean.setTitle(itemListBean.getData().getTitle());
+            historyBean.setTime(System.currentTimeMillis());
             mRealm.beginTransaction();
             mRealm.copyToRealmOrUpdate(historyBean);
             mRealm.commitTransaction();
@@ -63,6 +66,7 @@ public class RealmHelper implements DBHelper {
         likeBean.setAuthorSlogen(itemListBean.getData().getCategory());
         likeBean.setImage(itemListBean.getData().getCover().getFeed());
         likeBean.setTitle(itemListBean.getData().getTitle());
+        likeBean.setTime(System.currentTimeMillis());
         mRealm.beginTransaction();
         mRealm.copyToRealmOrUpdate(likeBean);
         mRealm.commitTransaction();
@@ -81,14 +85,24 @@ public class RealmHelper implements DBHelper {
     }
 
     @Override
+    public void deleteReadId(int id) {
+        HistoryBean bean=mRealm.where(HistoryBean.class).equalTo("id",id).findFirst();
+        mRealm.beginTransaction();
+        if(bean!=null){
+            bean.deleteFromRealm();
+        }
+        mRealm.commitTransaction();
+    }
+
+    @Override
     public List<HistoryBean> getHistoryBeans() {
-        RealmResults<HistoryBean> realmResults=mRealm.where(HistoryBean.class).findAll();
+        RealmResults<HistoryBean> realmResults=mRealm.where(HistoryBean.class).findAllSorted("time", Sort.DESCENDING);
         return mRealm.copyFromRealm(realmResults);
     }
 
     @Override
     public List<LikeBean> getLikeBeans() {
-        RealmResults<LikeBean> realmResults=mRealm.where(LikeBean.class).findAll();
+        RealmResults<LikeBean> realmResults=mRealm.where(LikeBean.class).findAllSorted("time",Sort.DESCENDING);
         return mRealm.copyFromRealm(realmResults);
     }
 

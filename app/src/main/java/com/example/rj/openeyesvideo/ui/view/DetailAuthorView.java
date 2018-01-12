@@ -29,13 +29,11 @@ public class DetailAuthorView extends RelativeLayout {
 
 
     public DetailAuthorView(Context context) {
-        super(context);
-        new DetailAuthorView(context,null);
+        this(context,null);
     }
 
     public DetailAuthorView(Context context, AttributeSet attrs) {
-        super(context, attrs);
-        new DetailAuthorView(context,null,0);
+        this(context,null,0);
     }
 
     public DetailAuthorView(Context context, AttributeSet attrs, int defStyleAttr) {

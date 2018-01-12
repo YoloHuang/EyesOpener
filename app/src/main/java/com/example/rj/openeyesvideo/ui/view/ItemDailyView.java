@@ -17,13 +17,11 @@ public class ItemDailyView extends LinearLayout {
     Context context;
 
     public ItemDailyView(Context context) {
-        super(context);
-        new ItemDailyView(context,null);
+        this(context,null);
     }
 
     public ItemDailyView(Context context, @Nullable AttributeSet attrs) {
-        super(context, attrs);
-        new ItemDailyView(context,null,0);
+        this(context,null,0);
     }
 
     public ItemDailyView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {

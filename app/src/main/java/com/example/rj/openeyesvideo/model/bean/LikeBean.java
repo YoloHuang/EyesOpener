@@ -17,6 +17,7 @@ public class LikeBean extends RealmObject{
     private String authorSlogen;
     private String authorIcon;
     private String title;
+    private long time;
 
     public String getImage() {
         return image;
@@ -67,5 +68,13 @@ public class LikeBean extends RealmObject{
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public long getTime() {
+        return time;
+    }
+
+    public void setTime(long time) {
+        this.time = time;
     }
 }

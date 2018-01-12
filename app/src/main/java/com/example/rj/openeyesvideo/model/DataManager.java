@@ -107,6 +107,11 @@ public class DataManager implements ApiHelper,DBHelper{
     }
 
     @Override
+    public void deleteReadId(int id) {
+        mDBHelper.deleteReadId(id);
+    }
+
+    @Override
     public List<HistoryBean> getHistoryBeans() {
         return mDBHelper.getHistoryBeans();
     }

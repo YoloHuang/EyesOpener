@@ -34,6 +34,7 @@ import com.shuyu.gsyvideoplayer.video.base.GSYVideoPlayer;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 import butterknife.BindView;
 import butterknife.Unbinder;
@@ -65,6 +66,7 @@ public class DetailActivity extends RootActivity<DetailPresenter> implements Det
     ReplyAdapter mReplyAdapter;
     RelativeLayout.LayoutParams mLayoutParams;
     RelativeLayout root ;
+    Stack<ReplyView> replyViews=new Stack<ReplyView>();
 
     @Override
     protected void initEventAndData() {
@@ -186,6 +188,7 @@ public class DetailActivity extends RootActivity<DetailPresenter> implements Det
                         break;
                     case 2:
                         mPresenter.getReplyData(itemListBean.getData().getId());
+                        Log.d("hzj", "onButtonClick:+id= "+itemListBean.getData().getId());
                         //Toast.makeText(mContext,"暂未实现",Toast.LENGTH_SHORT).show();
                         break;
                     case 3:
@@ -225,6 +228,9 @@ public class DetailActivity extends RootActivity<DetailPresenter> implements Det
         ImageLoader.load(this,getImageUrl(),imageView);
         if(!mPresenter.isRead(id)){
             mPresenter.addToHistory(itemListBean);
+        }else {
+            mPresenter.deleteReadId(id);
+            mPresenter.addToHistory(itemListBean);
         }
     }
 
@@ -254,12 +260,14 @@ public class DetailActivity extends RootActivity<DetailPresenter> implements Det
 
     @Override
     public void showReply(ReplyBean replyBean) {
+        Log.d("hzj", "showReply: ");
         mReplyView=new ReplyView(mContext);
         mLayoutParams=new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,RelativeLayout.LayoutParams.MATCH_PARENT);
         mLayoutParams.addRule(RelativeLayout.BELOW,R.id.vedio_player);
         mReplyView.setLayoutParams(mLayoutParams);
         mReplyView.getData(replyBean);
         root.addView(mReplyView);
+        replyViews.push(mReplyView);
         mReplyView.replyClose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -267,10 +275,16 @@ public class DetailActivity extends RootActivity<DetailPresenter> implements Det
             }
         });
         //mReplyView.recyclerView.setOnScrollListener();
+
     }
 
-    private void closeReply() {
+    private boolean closeReply() {
+        if(replyViews.size()==0){
+            return false;
+        }
         root.removeView(mReplyView);
+        replyViews.pop();
+        return true;
     }
 
     @Override
@@ -307,6 +321,9 @@ public class DetailActivity extends RootActivity<DetailPresenter> implements Det
             orientationUtils.backToProtVideo();
         }
         if (StandardGSYVideoPlayer.backFromWindowFull(this)){
+            return;
+        }
+        if(closeReply()){
             return;
         }
         super.onBackPressedSupport();

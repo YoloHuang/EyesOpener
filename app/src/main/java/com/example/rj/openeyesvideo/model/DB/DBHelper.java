@@ -23,6 +23,8 @@ public interface DBHelper {
 
     void deleteLikeId(int id);
 
+    void deleteReadId(int id);
+
     List<HistoryBean> getHistoryBeans();
 
     List<LikeBean> getLikeBeans();

@@ -18,13 +18,11 @@ public class ListEndView extends FrameLayout {
     Context context;
 
     public ListEndView(@NonNull Context context) {
-        super(context);
-        new ListEndView(context,null);
+        this(context,null);
     }
 
     public ListEndView(@NonNull Context context, @Nullable AttributeSet attrs) {
-        super(context, attrs);
-        new  ListEndView(context,null,0);
+        this(context,null,0);
     }
 
     public ListEndView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {

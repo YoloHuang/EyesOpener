@@ -2,6 +2,7 @@ package com.example.rj.openeyesvideo.ui.view;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -22,13 +23,11 @@ public class ItemReplyTitleView extends RelativeLayout {
     TextView replyTitle;
 
     public ItemReplyTitleView(Context context) {
-        super(context);
-        new ItemReplyTitleView(context,null);
+        this(context,null);
     }
 
     public ItemReplyTitleView(Context context, AttributeSet attrs) {
-        super(context, attrs);
-        new ItemReplyTitleView(context,null,0);
+        this(context,null,0);
     }
 
     public ItemReplyTitleView(Context context, AttributeSet attrs, int defStyleAttr) {
@@ -44,7 +43,8 @@ public class ItemReplyTitleView extends RelativeLayout {
     }
 
     public void setData(ReplyBean.ItemListBean itemListBean){
-        if(itemListBean.getType()=="leftAlignTextHeader"){
+        Log.d("hzj", "setData: "+itemListBean.getType());
+        if(itemListBean.getType().equals("leftAlignTextHeader")){
             replyTitle.setText(itemListBean.getData().getText());
         }
     }
