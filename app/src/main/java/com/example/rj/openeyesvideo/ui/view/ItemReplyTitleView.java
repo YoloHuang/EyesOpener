@@ -37,6 +37,11 @@ public class ItemReplyTitleView extends RelativeLayout {
 
     }
 
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+    }
+
     private void initView() {
         View.inflate(context, R.layout.item_replytitle,this);
         ButterKnife.bind(this);

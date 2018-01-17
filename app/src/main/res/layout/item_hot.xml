@@ -7,6 +7,10 @@
         android:layout_height="250dp"
         android:id="@+id/iv_hot_item"
         android:scaleType="centerCrop"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:background="#5000" />
     <RelativeLayout
         android:layout_width="match_parent"
         android:gravity="center"
@@ -40,11 +44,11 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginEnd="7dp"
-            android:layout_marginBottom="7dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
             android:textColor="@color/colorWhite"
-            android:textSize="30px"
-            android:paddingStart="3dp"/>
+            android:textSize="35px"
+            android:paddingStart="5dp"/>
     </RelativeLayout>
 
 </FrameLayout>

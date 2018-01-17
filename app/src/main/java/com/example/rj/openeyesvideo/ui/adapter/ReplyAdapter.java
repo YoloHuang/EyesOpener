@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 
 import com.example.rj.openeyesvideo.model.bean.ReplyBean;
 import com.example.rj.openeyesvideo.ui.view.ItemReplyTitleView;
@@ -56,6 +57,7 @@ public class ReplyAdapter extends BaseRecyclerAdapter<ReplyBean.ItemListBean> {
         View itemView;
         if(viewType==ITEM_TYPE.TYPE_END.ordinal()){
             itemView=new ListEndView(mContext);
+            itemView.setLayoutParams(new RecyclerView.LayoutParams(RecyclerView.LayoutParams.MATCH_PARENT,RecyclerView.LayoutParams.WRAP_CONTENT));
         }else if(viewType==ITEM_TYPE.TYPE_TITLE.ordinal()){
             itemView=new ItemReplyTitleView(mContext);
         }else {
