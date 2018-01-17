@@ -31,7 +31,7 @@ public class ReplyView extends RelativeLayout {
     public RecyclerView recyclerView;
 
     Context context;
-    LinearLayoutManager linearLayoutManager;
+    public LinearLayoutManager linearLayoutManager;
     ReplyAdapter replyAdapter;
     List<ReplyBean.ItemListBean> listBeans=new ArrayList<>();
 
@@ -60,11 +60,16 @@ public class ReplyView extends RelativeLayout {
         recyclerView.setAdapter(replyAdapter);
         linearLayoutManager=new LinearLayoutManager(context);
         recyclerView.setLayoutManager(linearLayoutManager);
+
     }
 
     public void getData(ReplyBean replyBean){
         Log.d("hzj", "getData: ");
         replyAdapter.getData(replyBean);
+    }
+
+    public  void getMoreData(ReplyBean replyBean){
+        replyAdapter.getMoreData(replyBean);
     }
 
 }

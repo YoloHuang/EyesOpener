@@ -57,6 +57,7 @@ public class DetailActivity extends RootActivity<DetailPresenter> implements Det
     boolean isPause;
     int id;
     boolean islike=false;
+    boolean isloading=false;
 
     DetailAdapter mAdapter;
     private List<ItemListBean> listBeans =new ArrayList<>();
@@ -259,7 +260,7 @@ public class DetailActivity extends RootActivity<DetailPresenter> implements Det
     }
 
     @Override
-    public void showReply(ReplyBean replyBean) {
+    public void showReply(final ReplyBean replyBean) {
         Log.d("hzj", "showReply: ");
         mReplyView=new ReplyView(mContext);
         mLayoutParams=new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,RelativeLayout.LayoutParams.MATCH_PARENT);
@@ -274,8 +275,32 @@ public class DetailActivity extends RootActivity<DetailPresenter> implements Det
                 closeReply();
             }
         });
-        //mReplyView.recyclerView.setOnScrollListener();
+        mReplyView.recyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+            }
 
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                int lastItemPositon= mReplyView.linearLayoutManager.findLastCompletelyVisibleItemPosition();
+                int totalPotions=mReplyView.linearLayoutManager.getItemCount();
+                if(lastItemPositon>totalPotions-4 && dy>0 && totalPotions < replyBean.getTotal()){
+                    if(!isloading){
+                        isloading=true;
+                        mPresenter.getMoreReplyData(itemListBean.getData().getId());
+                    }
+                }
+            }
+        });
+
+    }
+
+    @Override
+    public void showMoreReply(ReplyBean replyBean) {
+        mReplyView.getMoreData(replyBean);
+        isloading=false;
     }
 
     private boolean closeReply() {

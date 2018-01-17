@@ -86,6 +86,11 @@ public class DataManager implements ApiHelper,DBHelper{
         return mApiHelper.getReplyBean(id);
     }
 
+    @Override
+    public Flowable<ReplyBean> getMoreReplyBean(int id, int lastId, int num) {
+        return mApiHelper.getMoreReplyBean(id,lastId,num);
+    }
+
 //    @Override
 //    public Flowable<HotBean> getHistroicalHotBean() {
 //        return mApiHelper.getHistroicalHotBean();

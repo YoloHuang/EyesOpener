@@ -16,10 +16,12 @@ public interface DetailContract {
         void showContent(List<ItemListBean> itemListBeans);
         void  setlike(boolean like);
         void showReply(ReplyBean replyBean);
+        void showMoreReply(ReplyBean replyBean);
     }
     interface Presenter extends BasePresenter<View>{
         void getVedioData(int id);
         void getReplyData(int id);
+        void getMoreReplyData(int id );
         void addToHistory(ItemListBean itemListBean);
         boolean isRead(int id);
         void isLike(int id);

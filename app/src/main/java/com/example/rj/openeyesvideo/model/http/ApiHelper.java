@@ -33,4 +33,5 @@ public interface ApiHelper {
     Flowable<RelateBean> getRelateBean(int id);
     Flowable<ItemListBean.DataBean> getDataBean(int id);
     Flowable<ReplyBean> getReplyBean(int id);
+    Flowable<ReplyBean> getMoreReplyBean(int id,int lastId,int num);
 }

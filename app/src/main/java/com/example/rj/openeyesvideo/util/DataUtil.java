@@ -18,10 +18,11 @@ public class DataUtil {
         String year=calendar.get(Calendar.YEAR)+"/";
         String month;
         String day;
-        if(calendar.get(Calendar.MONTH)<10){
-            month="0"+calendar.get(Calendar.MONTH)+"/";
+        int monthnum=calendar.get(Calendar.MONTH)+1;
+        if(monthnum<10){
+            month="0"+monthnum+"/";
         }else {
-            month=calendar.get(Calendar.MONTH)+"/";
+            month=monthnum+"/";
         }
         if (calendar.get(Calendar.DAY_OF_MONTH)<10){
             day="0"+calendar.get(Calendar.DAY_OF_MONTH);

@@ -23,6 +23,8 @@ import javax.inject.Inject;
 public class DetailPresenter extends RxPresenter<DetailContract.View> implements DetailContract.Presenter {
 
 
+    String NextUrl;
+
     @Inject
     public DetailPresenter(DataManager manager){
         this.mDataManager=manager;
@@ -49,8 +51,29 @@ public class DetailPresenter extends RxPresenter<DetailContract.View> implements
             @Override
             public void onNext(ReplyBean replyBean) {
                 mView.showReply(replyBean);
+                NextUrl=replyBean.getNextPageUrl();
             }
         }));
+    }
+
+    @Override
+    public void getMoreReplyData(int id) {
+        if(NextUrl==null){
+            return;
+        }else {
+            String lastIdName=NextUrl.substring(NextUrl.indexOf("=")+1,NextUrl.indexOf("&"));
+            Log.d("hzj", "getMoreReplyData: "+lastIdName);
+            int lastId= Integer.valueOf(lastIdName).intValue();
+            addSubscribe(mDataManager.getMoreReplyBean(id,lastId,10)
+            .compose(RxUtil.<ReplyBean>rxSchedulerHelper())
+            .subscribeWith(new CommonSubscriber<ReplyBean>(mView) {
+                @Override
+                public void onNext(ReplyBean replyBean) {
+                    mView.showMoreReply(replyBean);
+                    NextUrl=replyBean.getNextPageUrl();
+                }
+            }));
+        }
     }
 
     @Override

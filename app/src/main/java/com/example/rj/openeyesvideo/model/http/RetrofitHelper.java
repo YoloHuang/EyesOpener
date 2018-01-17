@@ -80,6 +80,11 @@ public class RetrofitHelper implements ApiHelper {
         return api.getReplyBean(id);
     }
 
+    @Override
+    public Flowable<ReplyBean> getMoreReplyBean(int id, int lastId, int num) {
+        return api.getMoreReplyBean(id,lastId,num);
+    }
+
 //    @Override
 //    public Flowable<HotBean> getHistroicalHotBean() {
 //        return api.getHistoricalHotBean();

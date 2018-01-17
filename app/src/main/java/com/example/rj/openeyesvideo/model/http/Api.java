@@ -64,4 +64,6 @@ public interface Api {
     @GET("v2/replies/video?")
     Flowable<ReplyBean> getReplyBean(@Query("videoId")int id);
 
+    @GET("v2/replies/video?")
+    Flowable<ReplyBean> getMoreReplyBean(@Query("videoId")int id,@Query("lastId")int lastId,@Query("num")int num);
 }

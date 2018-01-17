@@ -3,6 +3,7 @@ package com.example.rj.openeyesvideo.ui.adapter;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.ViewHolder;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -33,7 +34,7 @@ public class ReplyAdapter extends BaseRecyclerAdapter<ReplyBean.ItemListBean> {
 
     @Override
     public int getItemViewType(int position) {
-        if(datas.get(position)==null){
+        if(position==datas.size()){
             return ITEM_TYPE.TYPE_END.ordinal();
         }
         switch (datas.get(position).getType()){
@@ -78,7 +79,7 @@ public class ReplyAdapter extends BaseRecyclerAdapter<ReplyBean.ItemListBean> {
 
     @Override
     public int getItemCount() {
-        return datas.size();
+        return datas.size()+1;
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{
@@ -95,5 +96,17 @@ public class ReplyAdapter extends BaseRecyclerAdapter<ReplyBean.ItemListBean> {
             }
         }
         datas=replyBean.getItemList();
+    }
+
+    public void getMoreData(ReplyBean replyBean){
+        for (ReplyBean.ItemListBean itemListBean :replyBean.getItemList()){
+            if (itemListBean.getType().equals("videoSmallCard")){
+                replyBean.getItemList().remove(itemListBean);
+            }
+        }
+        Log.d("hzj", "getMoreData: "+datas.size());
+        datas.addAll(replyBean.getItemList());
+        Log.d("hzj", "getMoreData: "+datas.size());
+        notifyDataSetChanged();
     }
 }
