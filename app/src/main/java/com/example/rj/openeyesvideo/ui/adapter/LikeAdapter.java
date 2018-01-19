@@ -38,7 +38,7 @@ public class LikeAdapter extends BaseRecyclerAdapter<LikeBean> {
         String detail=datas.get(position).getAuthorName()+" / #" +datas.get(position).getAuthorSlogen();
         ((ItemViewHolder)holder).mAuthorText.setText(detail);
         ((ItemViewHolder)holder).mTitleTest.setText(datas.get(position).getTitle());
-        ImageLoader.load(mContext,datas.get(position).getAuthorIcon(),((ItemViewHolder)holder).mAuthorImage);
+        ImageLoader.loadCircle(mContext,datas.get(position).getAuthorIcon(),((ItemViewHolder)holder).mAuthorImage);
         ImageLoader.load(mContext,datas.get(position).getImage(),((ItemViewHolder)holder).mDailyImage);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

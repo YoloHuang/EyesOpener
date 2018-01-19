@@ -35,8 +35,9 @@
             android:layout_height="wrap_content"
             android:background="@color/colorWhite"
             app:tabIndicatorColor="@color/colorWhite"
-            app:tabSelectedTextColor="@color/colorGrey"
-            app:tabTextColor="@color/colorBlack"
+            app:tabIndicatorHeight="0dp"
+            app:tabSelectedTextColor="@color/colorBlack"
+            app:tabTextColor="@color/colorGrey"
             />
     </LinearLayout>
 

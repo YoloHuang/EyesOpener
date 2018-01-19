@@ -10,7 +10,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.Window;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,12 +46,20 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
     TabLayout mTabLayout;
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
+//    @BindView(R.id.iv_tab)
+//    ImageView imageTab;
+//    @BindView(R.id.tv_tab)
+//    TextView textTab;
 
     MainAdapter mMainAdapter;
     MenuItem mSearchMenuItem;
     private long exitTime;
 
     String[] tabTitle = new String[]{"首页","热门","专栏","我"};
+    int[] tabIcon=new int[]{
+      R.mipmap.ic_tab_strip_icon_feed,R.mipmap.ic_tab_strip_icon_follow,R.mipmap.ic_tab_strip_icon_category,R.mipmap.ic_tab_strip_icon_profile
+    };
+    int[] tabIconSelect=new int[]{R.mipmap.ic_tab_strip_icon_feed_selected,R.mipmap.ic_tab_strip_icon_follow_selected,R.mipmap.ic_tab_strip_icon_category_selected,R.mipmap.ic_tab_strip_icon_profile_selected};
     List<Fragment> fragments = new ArrayList<Fragment>();
 
     @Override
@@ -63,16 +73,54 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
         fragments.add(new MyFragment());
         mMainAdapter=new MainAdapter(getSupportFragmentManager(),fragments);
         mViewPager.setAdapter(mMainAdapter);
-        mTabLayout.addTab(mTabLayout.newTab().setText(tabTitle[0]));
-        mTabLayout.addTab(mTabLayout.newTab().setText(tabTitle[1]));
-        mTabLayout.addTab(mTabLayout.newTab().setText(tabTitle[2]));
-        mTabLayout.addTab(mTabLayout.newTab().setText(tabTitle[3]));
+//        mTabLayout.addTab(mTabLayout.newTab().setText(tabTitle[0]));
+//        mTabLayout.addTab(mTabLayout.newTab().setText(tabTitle[1]));
+//        mTabLayout.addTab(mTabLayout.newTab().setText(tabTitle[2]));
+//        mTabLayout.addTab(mTabLayout.newTab().setText(tabTitle[3]));
         mTabLayout.setupWithViewPager(mViewPager);
-        mTabLayout.getTabAt(0).setText(tabTitle[0]);
-        mTabLayout.getTabAt(1).setText(tabTitle[1]);
-        mTabLayout.getTabAt(2).setText(tabTitle[2]);
-        mTabLayout.getTabAt(3).setText(tabTitle[3]);
+        for (int i=0;i<mMainAdapter.getCount();i++){
+            TabLayout.Tab tab=mTabLayout.getTabAt(i);
+            tab.setCustomView(R.layout.item_tabtitle);
+            TextView textView=tab.getCustomView().findViewById(R.id.tv_tab);
+            textView.setText(tabTitle[i]);
+            if(i==0)textView.setSelected(true);
+            ImageView imageView=tab.getCustomView().findViewById(R.id.iv_tab);
+            if(i==0){
+                imageView.setImageResource(tabIconSelect[i]);
+            }else {
+                imageView.setImageResource(tabIcon[i]);
+            }
+        }
+//        mTabLayout.getTabAt(0).setText(tabTitle[0]).setIcon(tabIcon[0]);
+//        mTabLayout.getTabAt(1).setText(tabTitle[1]).setIcon(tabIcon[1]);
+//        mTabLayout.getTabAt(2).setText(tabTitle[2]).setIcon(tabIcon[2]);
+//        mTabLayout.getTabAt(3).setText(tabTitle[3]).setIcon(tabIcon[3]);
+//        mTabLayout.getTabAt(0).select();
+        mTabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+               // tab.setIcon(tabIconSelect[tab.getPosition()]);
+                ImageView imageView= tab.getCustomView().findViewById(R.id.iv_tab);
+                TextView textView=tab.getCustomView().findViewById(R.id.tv_tab);
+                textView.setSelected(true);
+                imageView.setImageResource(tabIconSelect[tab.getPosition()]);
 
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+                //tab.setIcon(tabIcon[tab.getPosition()]);
+                ImageView imageView= tab.getCustomView().findViewById(R.id.iv_tab);
+                TextView textView=tab.getCustomView().findViewById(R.id.tv_tab);
+                textView.setSelected(false);
+                imageView.setImageResource(tabIcon[tab.getPosition()]);
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
 
         mMaterialSearchView.setOnQueryTextListener(new MaterialSearchView.OnQueryTextListener() {
             @Override
@@ -89,6 +137,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
         mMaterialSearchView.setCursorDrawable(R.drawable.custom_cursor);
         mPresenter.getSearchSuggestions();
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

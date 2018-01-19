@@ -81,7 +81,7 @@ int likeCount;
             ((InfoViewHolder)holder).sharenum.setText(""+data.getData().getConsumption().getShareCount());
             ((InfoViewHolder)holder).textAuthor.setText(data.getData().getAuthor().getName());
             ((InfoViewHolder)holder).textdiscribtion.setText(data.getData().getAuthor().getDescription());
-            ImageLoader.load(mContext,data.getData().getAuthor().getIcon(),((InfoViewHolder)holder).imageAuthor);
+            ImageLoader.loadCircle(mContext,data.getData().getAuthor().getIcon(),((InfoViewHolder)holder).imageAuthor);
             ((InfoViewHolder) holder).likenum.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

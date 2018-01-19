@@ -50,4 +50,8 @@
         <item name="android:hint">@string/search_hint</item>
     </style>
 
+    <style name="TabSelect" >
+        <item name="android:textSize">12px</item>
+    </style>
+
 </resources>

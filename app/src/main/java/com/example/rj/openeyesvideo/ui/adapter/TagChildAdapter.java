@@ -35,7 +35,7 @@ public class TagChildAdapter extends BaseRecyclerAdapter<ItemListBean> {
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ItemViewHolder(mLayoutInflater.inflate(R.layout.item_daily,parent,false));
+        return new ItemViewHolder(mLayoutInflater.inflate(R.layout.item_tagchild,parent,false));
     }
 
     @Override
@@ -43,7 +43,7 @@ public class TagChildAdapter extends BaseRecyclerAdapter<ItemListBean> {
         String detail=datas.get(position).getData().getAuthor().getName()+" / #" +datas.get(position).getData().getCategory();
         ((ItemViewHolder)holder).mAuthorText.setText(detail);
         ((ItemViewHolder)holder).mTitleTest.setText(datas.get(position).getData().getTitle());
-        ImageLoader.load(mContext,datas.get(position).getData().getAuthor().getIcon(),((ItemViewHolder)holder).mAuthorImage);
+        ImageLoader.loadCircle(mContext,datas.get(position).getData().getAuthor().getIcon(),((ItemViewHolder)holder).mAuthorImage);
         ImageLoader.load(mContext,datas.get(position).getData().getCover().getFeed(),((ItemViewHolder)holder).mDailyImage);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

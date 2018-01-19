@@ -46,7 +46,11 @@ public class RealmHelper implements DBHelper {
             historyBean.setAuthorIcon(itemListBean.getData().getAuthor().getIcon());
             historyBean.setAuthorName(itemListBean.getData().getAuthor().getName());
             historyBean.setAuthorSlogen(itemListBean.getData().getAuthor().getDescription());
-            historyBean.setImage(itemListBean.getData().getCover().getFeed());
+            if(itemListBean.getData().getCover()==null){
+                historyBean.setImage(itemListBean.getData().getCoverForFeed());
+            }else {
+                historyBean.setImage(itemListBean.getData().getCover().getFeed());
+            }
             historyBean.setTitle(itemListBean.getData().getTitle());
             historyBean.setTime(System.currentTimeMillis());
             mRealm.beginTransaction();
@@ -64,7 +68,11 @@ public class RealmHelper implements DBHelper {
         likeBean.setAuthorIcon(itemListBean.getData().getAuthor().getIcon());
         likeBean.setAuthorName(itemListBean.getData().getAuthor().getName());
         likeBean.setAuthorSlogen(itemListBean.getData().getCategory());
-        likeBean.setImage(itemListBean.getData().getCover().getFeed());
+        if(itemListBean.getData().getCover()==null){
+            likeBean.setImage(itemListBean.getData().getCoverForFeed());
+        }else {
+            likeBean.setImage(itemListBean.getData().getCover().getFeed());
+        }
         likeBean.setTitle(itemListBean.getData().getTitle());
         likeBean.setTime(System.currentTimeMillis());
         mRealm.beginTransaction();

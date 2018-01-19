@@ -69,7 +69,7 @@ public class ItemReplyView extends LinearLayout {
     public void setData(ReplyBean.ItemListBean itemListBean){
         replyLike.setText(""+itemListBean.getData().getLikeCount());
         replytime.setText(DataUtil.timeFormat(itemListBean.getData().getCreateTime()) );
-        ImageLoader.load(context,itemListBean.getData().getUser().getAvatar(),replyAvatar);
+        ImageLoader.loadCircle(context,itemListBean.getData().getUser().getAvatar(),replyAvatar);
         replyName.setText(itemListBean.getData().getUser().getNickname());
         replyMessage.setText(itemListBean.getData().getMessage());
         if(itemListBean.getData().getParentReply()==null){
@@ -79,7 +79,7 @@ public class ItemReplyView extends LinearLayout {
             relpyParent.setText("回复:"+itemListBean.getData().getParentReply().getUser().getNickname());
             parentReplyName.setText(itemListBean.getData().getParentReply().getUser().getNickname());
             parentReplyMessage.setText(itemListBean.getData().getParentReply().getMessage());
-            ImageLoader.load(context,itemListBean.getData().getParentReply().getUser().getAvatar(),parentreplyAvatar);
+            ImageLoader.loadCircle(context,itemListBean.getData().getParentReply().getUser().getAvatar(),parentreplyAvatar);
         }
     }
 }

@@ -81,7 +81,7 @@ public class DailyRecyclerAdapter extends BaseRecyclerAdapter<ItemListBean> {
                 detail="开眼精选 / # "+datas.get(position-1).getData().getCategory();
             }else {
                 detail=datas.get(position-1).getData().getAuthor().getName()+" / #" +datas.get(position-1).getData().getCategory();
-                ImageLoader.load(mContext,datas.get(position-1).getData().getAuthor().getIcon(),((ItemViewHolder)holder).mAuthorImage);
+                ImageLoader.loadCircle(mContext,datas.get(position-1).getData().getAuthor().getIcon(),((ItemViewHolder)holder).mAuthorImage);
             }
             ((ItemViewHolder)holder).mAuthorText.setText(detail);
             ((ItemViewHolder)holder).mTitleTest.setText(datas.get(position-1).getData().getTitle());

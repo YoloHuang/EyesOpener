@@ -112,7 +112,6 @@
             android:layout_marginBottom="10dp"
             android:layout_marginEnd="15dp"
             android:id="@+id/iv_item_author"
-            android:src="@mipmap/pgc_default_avatar"
             />
 
         <LinearLayout

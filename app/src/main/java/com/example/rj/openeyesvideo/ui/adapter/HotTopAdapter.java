@@ -40,7 +40,7 @@ public class HotTopAdapter extends BaseRecyclerAdapter<ItemListBean> {
     public void convert(RecyclerView.ViewHolder holder, final int position) {
         String detail=datas.get(position).getData().getAuthor().getName()+" / #" +datas.get(position).getData().getCategory();
         int duration=datas.get(position).getData().getDuration();
-        String time=duration/60+"'"+duration%60+"''";
+        String time=duration/60+":"+duration%60;
         ((ItemViewHolder)holder).mHotTag.setText(detail);
         ((ItemViewHolder)holder).mHotTitle.setText(datas.get(position).getData().getTitle());
         ((ItemViewHolder)holder).mHotTime.setText(time);
