@@ -5,6 +5,7 @@ import android.app.Activity;
 import com.example.rj.openeyesvideo.di.module.ActivityModule;
 import com.example.rj.openeyesvideo.di.scope.ActivityScope;
 import com.example.rj.openeyesvideo.ui.activity.DetailActivity;
+import com.example.rj.openeyesvideo.ui.activity.DownloadActivity;
 import com.example.rj.openeyesvideo.ui.activity.HistoryActivity;
 import com.example.rj.openeyesvideo.ui.activity.LikeActivity;
 import com.example.rj.openeyesvideo.ui.activity.MainActivity;
@@ -26,4 +27,5 @@ public interface ActivityComponent {
     void inject(DetailActivity detailActivity);
     void inject(HistoryActivity historyActivity);
     void inject(LikeActivity likeActivity);
+    void inject(DownloadActivity downloadActivity);
 }

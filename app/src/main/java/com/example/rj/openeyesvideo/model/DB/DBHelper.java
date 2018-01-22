@@ -1,9 +1,11 @@
 package com.example.rj.openeyesvideo.model.DB;
 
 import com.example.rj.openeyesvideo.model.bean.DailyBean;
+import com.example.rj.openeyesvideo.model.bean.DownloadBean;
 import com.example.rj.openeyesvideo.model.bean.HistoryBean;
 import com.example.rj.openeyesvideo.model.bean.ItemListBean;
 import com.example.rj.openeyesvideo.model.bean.LikeBean;
+import com.example.rj.openeyesvideo.ui.view.ListEndView;
 
 import java.util.List;
 
@@ -36,4 +38,11 @@ public interface DBHelper {
     HistoryBean getHistoryBean(int id);
 
     boolean checkLike(int id);
+
+    int checkDownload(int id);
+
+    List<DownloadBean> getDownloadBeans();
+    void insertDownloadId(ItemListBean itemListBean);
+    void deleteDownloadId(int id);
+    void setDownload(int id);
 }

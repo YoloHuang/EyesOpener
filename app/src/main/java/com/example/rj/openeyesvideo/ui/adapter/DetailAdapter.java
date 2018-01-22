@@ -127,7 +127,7 @@ int likeCount;
 
             ((RelateViewHolder)holder).relateItemName.setText(datas.get(position-2).getData().getTitle());
             ((RelateViewHolder)holder).relateITemTag.setText("#"+datas.get(position-2).getData().getCategory());
-            ImageLoader.load (mContext,datas.get(position-2).getData().getCover().getFeed() ,((RelateViewHolder)holder).videoImage);
+            ImageLoader.loadRound (mContext,datas.get(position-2).getData().getCover().getFeed() ,((RelateViewHolder)holder).videoImage);
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

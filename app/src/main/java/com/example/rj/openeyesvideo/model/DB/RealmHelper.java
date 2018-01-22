@@ -2,6 +2,7 @@ package com.example.rj.openeyesvideo.model.DB;
 
 import android.util.Log;
 
+import com.example.rj.openeyesvideo.model.bean.DownloadBean;
 import com.example.rj.openeyesvideo.model.bean.HistoryBean;
 import com.example.rj.openeyesvideo.model.bean.ItemListBean;
 import com.example.rj.openeyesvideo.model.bean.LikeBean;
@@ -144,5 +145,61 @@ public class RealmHelper implements DBHelper {
         }else {
             return true;
         }
+    }
+
+    @Override
+    public int checkDownload(int id) {
+        DownloadBean downloadBean=mRealm.where(DownloadBean.class).equalTo("id",id).findFirst();
+        if(downloadBean==null){
+            return 0;
+        }else {
+            return downloadBean.getIsdownload();
+        }
+    }
+
+    @Override
+    public List<DownloadBean> getDownloadBeans() {
+        RealmResults<DownloadBean> list=mRealm.where(DownloadBean.class).findAllSorted("time",Sort.ASCENDING);
+        return mRealm.copyFromRealm(list);
+    }
+
+    @Override
+    public void insertDownloadId(ItemListBean itemListBean) {
+        DownloadBean downloadBean=new DownloadBean();
+        downloadBean.setId(itemListBean.getData().getId());
+        downloadBean.setAuthorIcon(itemListBean.getData().getAuthor().getIcon());
+        downloadBean.setAuthorName(itemListBean.getData().getAuthor().getName());
+        downloadBean.setAuthorSlogen(itemListBean.getData().getCategory());
+        downloadBean.setIsdownload(1);
+        if(itemListBean.getData().getCover()==null){
+            downloadBean.setImage(itemListBean.getData().getCoverForFeed());
+        }else {
+            downloadBean.setImage(itemListBean.getData().getCover().getFeed());
+        }
+        downloadBean.setTitle(itemListBean.getData().getTitle());
+        downloadBean.setTime(System.currentTimeMillis());
+        mRealm.beginTransaction();
+        mRealm.copyToRealmOrUpdate(downloadBean);
+        mRealm.commitTransaction();
+    }
+
+    @Override
+    public void deleteDownloadId(int id) {
+        DownloadBean bean = mRealm.where(DownloadBean.class).equalTo("id",id).findFirst();
+        mRealm.beginTransaction();
+        if(bean!=null){
+            bean.deleteFromRealm();
+        }
+        mRealm.commitTransaction();
+    }
+
+    @Override
+    public void setDownload(int id) {
+        DownloadBean bean=mRealm.where(DownloadBean.class).equalTo("id",id).findFirst();
+        mRealm.beginTransaction();
+        if(bean!=null){
+            bean.setIsdownload(2);
+        }
+        mRealm.commitTransaction();
     }
 }

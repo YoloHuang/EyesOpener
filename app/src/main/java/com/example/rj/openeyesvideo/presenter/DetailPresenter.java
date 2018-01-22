@@ -112,5 +112,22 @@ public class DetailPresenter extends RxPresenter<DetailContract.View> implements
         mDataManager.insertLikeId(itemListBean);
     }
 
+    @Override
+    public void download(String url, ItemListBean itemListBean) {
+        switch (mDataManager.checkDownload(itemListBean.getData().getId())){
+            case 0:
+                mDataManager.insertDownloadId(itemListBean);
+                mDataManager.download(url,itemListBean);
+                mView.showDownload();
+                break;
+            case 1:
+                mView.showIsDownload();
+                break;
+            case 2:
+                mView.showHadDownload();
+                break;
+        }
+    }
+
 
 }

@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.example.rj.openeyesvideo.R;
 import com.example.rj.openeyesvideo.base.BaseFragment;
 import com.example.rj.openeyesvideo.base.SimpleFragment;
+import com.example.rj.openeyesvideo.ui.activity.DownloadActivity;
 import com.example.rj.openeyesvideo.ui.activity.HistoryActivity;
 import com.example.rj.openeyesvideo.ui.activity.LikeActivity;
 import com.example.rj.openeyesvideo.ui.adapter.BaseRecyclerAdapter;
@@ -17,6 +18,8 @@ import com.example.rj.openeyesvideo.ui.adapter.MyRecycleradapter;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 
@@ -67,6 +70,9 @@ public class MyFragment extends SimpleFragment{
                         mContext.startActivity(intent2);
                         break;
                     case 3:
+                        Intent intent3=new Intent();
+                        intent3.setClass(mContext, DownloadActivity.class);
+                        mContext.startActivity(intent3);
                         break;
                     case 4:
                         break;

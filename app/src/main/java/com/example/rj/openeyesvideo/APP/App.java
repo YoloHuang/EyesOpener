@@ -7,6 +7,7 @@ import android.content.Context;
 import com.example.rj.openeyesvideo.di.component.AppComponent;
 import com.example.rj.openeyesvideo.di.component.DaggerAppComponent;
 import com.example.rj.openeyesvideo.di.module.AppModule;
+import com.liulishuo.filedownloader.FileDownloader;
 
 import java.io.File;
 import java.util.HashSet;
@@ -34,6 +35,7 @@ public class App extends Application {
         super.onCreate();
         app=this;
         Realm.init(getApplicationContext());
+
     }
 
     public static AppComponent getAppComponent(){

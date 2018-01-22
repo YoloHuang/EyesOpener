@@ -89,6 +89,8 @@ public class DetailActivity extends RootActivity<DetailPresenter> implements Det
         builder.setThumbImageView(imageView)
                 .setIsTouchWiget(true)
                 .setRotateViewAuto(false)
+                .setRotateWithSystem(false)
+                .setThumbPlay(true)
                 .setLockLand(false)
                 .setShowFullAnimation(true)
                 .setNeedLockFull(true)
@@ -193,7 +195,8 @@ public class DetailActivity extends RootActivity<DetailPresenter> implements Det
                         //Toast.makeText(mContext,"暂未实现",Toast.LENGTH_SHORT).show();
                         break;
                     case 3:
-                        Toast.makeText(mContext,"暂未实现",Toast.LENGTH_SHORT).show();
+                        mPresenter.download(Url,itemListBean);
+                        //Toast.makeText(mContext,"暂未实现",Toast.LENGTH_SHORT).show();
                         break;
                 }
 
@@ -301,6 +304,21 @@ public class DetailActivity extends RootActivity<DetailPresenter> implements Det
     public void showMoreReply(ReplyBean replyBean) {
         mReplyView.getMoreData(replyBean);
         isloading=false;
+    }
+
+    @Override
+    public void showDownload() {
+        Toast.makeText(mContext,"下载中~可进入我的缓存查看进度",Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void showIsDownload() {
+        Toast.makeText(mContext,"已经在下载啦~",Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void showHadDownload() {
+        Toast.makeText(mContext,"已经下载过啦~",Toast.LENGTH_SHORT).show();
     }
 
     private boolean closeReply() {

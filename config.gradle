@@ -69,6 +69,8 @@ ext {
             "leakcanary-android-no-op"  : "com.squareup.leakcanary:leakcanary-android-no-op:${dependVersion.leakcanary}",
 
             //vedioplayer
-            "GSYVideoPlayer"            :"com.shuyu:GSYVideoPlayer:2.1.3"
+            "GSYVideoPlayer"            :"com.shuyu:GSYVideoPlayer:2.1.3",
+            //文件下载
+            "filedownloader"            :"com.liulishuo.filedownloader:library:1.6.9"
     ]
 }

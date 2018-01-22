@@ -27,6 +27,7 @@ import com.example.rj.openeyesvideo.ui.fragment.HotFragment;
 import com.example.rj.openeyesvideo.ui.fragment.MyFragment;
 import com.example.rj.openeyesvideo.ui.fragment.TagsFragment;
 import com.example.rj.openeyesvideo.util.SystemUtil;
+import com.liulishuo.filedownloader.FileDownloader;
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 
 import java.util.ArrayList;
@@ -64,6 +65,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
 
     @Override
     protected void initEventAndData() {
+        FileDownloader.setup(mContext);
         toolbar_title.setText(R.string.app_name);
         mToolbar.setTitle("");
         setSupportActionBar(mToolbar);

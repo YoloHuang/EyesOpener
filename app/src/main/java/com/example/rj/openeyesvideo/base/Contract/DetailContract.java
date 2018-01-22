@@ -17,6 +17,9 @@ public interface DetailContract {
         void  setlike(boolean like);
         void showReply(ReplyBean replyBean);
         void showMoreReply(ReplyBean replyBean);
+        void showDownload();
+        void showIsDownload();
+        void showHadDownload();
     }
     interface Presenter extends BasePresenter<View>{
         void getVedioData(int id);
@@ -28,5 +31,6 @@ public interface DetailContract {
         void deleteLikeId(int id);
         void deleteReadId(int id);
         void insertLikeId(ItemListBean itemListBean);
+        void download(String url,ItemListBean itemListBean);
     }
 }

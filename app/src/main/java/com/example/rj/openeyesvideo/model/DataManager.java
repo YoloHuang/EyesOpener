@@ -1,7 +1,9 @@
 package com.example.rj.openeyesvideo.model;
 
+import com.example.rj.openeyesvideo.APP.Constants;
 import com.example.rj.openeyesvideo.model.DB.DBHelper;
 import com.example.rj.openeyesvideo.model.bean.DailyBean;
+import com.example.rj.openeyesvideo.model.bean.DownloadBean;
 import com.example.rj.openeyesvideo.model.bean.HistoryBean;
 import com.example.rj.openeyesvideo.model.bean.HotBean;
 import com.example.rj.openeyesvideo.model.bean.ItemListBean;
@@ -12,6 +14,9 @@ import com.example.rj.openeyesvideo.model.bean.SearchResultBean;
 import com.example.rj.openeyesvideo.model.bean.TagChildBean;
 import com.example.rj.openeyesvideo.model.bean.TagsBean;
 import com.example.rj.openeyesvideo.model.http.ApiHelper;
+import com.liulishuo.filedownloader.BaseDownloadTask;
+import com.liulishuo.filedownloader.FileDownloadListener;
+import com.liulishuo.filedownloader.FileDownloader;
 
 import java.util.List;
 
@@ -27,6 +32,7 @@ public class DataManager implements ApiHelper,DBHelper{
 
     ApiHelper mApiHelper;
     DBHelper mDBHelper;
+
 
 
     public DataManager(ApiHelper apiHelper, DBHelper dbHelper){
@@ -146,5 +152,65 @@ public class DataManager implements ApiHelper,DBHelper{
         return mDBHelper.checkLike(id);
     }
 
+    @Override
+    public int checkDownload(int id) {
+        return mDBHelper.checkDownload(id);
+    }
+
+    @Override
+    public List<DownloadBean> getDownloadBeans() {
+        return mDBHelper.getDownloadBeans();
+    }
+
+    @Override
+    public void insertDownloadId(ItemListBean itemListBean) {
+        mDBHelper.insertDownloadId(itemListBean);
+    }
+
+    @Override
+    public void deleteDownloadId(int id) {
+        mDBHelper.deleteDownloadId(id);
+    }
+
+    @Override
+    public void setDownload(int id) {
+        mDBHelper.setDownload(id);
+    }
+
+    public void download(String url, final ItemListBean itemListBean){
+        FileDownloader.getImpl().create(url)
+                .setPath(Constants.PATH_DOWNLOAD)
+                .setListener(new FileDownloadListener() {
+                    @Override
+                    protected void pending(BaseDownloadTask task, int soFarBytes, int totalBytes) {
+
+                    }
+
+                    @Override
+                    protected void progress(BaseDownloadTask task, int soFarBytes, int totalBytes) {
+
+                    }
+
+                    @Override
+                    protected void completed(BaseDownloadTask task) {
+                        setDownload(itemListBean.getData().getId());
+                    }
+
+                    @Override
+                    protected void paused(BaseDownloadTask task, int soFarBytes, int totalBytes) {
+
+                    }
+
+                    @Override
+                    protected void error(BaseDownloadTask task, Throwable e) {
+
+                    }
+
+                    @Override
+                    protected void warn(BaseDownloadTask task) {
+
+                    }
+                }).start();
+    }
 
 }

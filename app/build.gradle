@@ -78,4 +78,6 @@ dependencies {
 
     //vedioplayer
     compile rootProject.ext.dependencies["GSYVideoPlayer"]
+    //文件下载
+    compile rootProject.ext.dependencies["filedownloader"]
 }
