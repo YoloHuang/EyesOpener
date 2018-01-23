@@ -13,6 +13,7 @@ import com.example.rj.openeyesvideo.component.ImageLoader;
 import com.example.rj.openeyesvideo.model.bean.ItemListBean;
 import com.example.rj.openeyesvideo.ui.activity.DetailActivity;
 import com.example.rj.openeyesvideo.util.DiffUtilCallBack;
+import com.example.rj.openeyesvideo.widget.JumpShowTextView;
 
 import java.util.List;
 
@@ -168,11 +169,11 @@ int likeCount;
         @BindView(R.id.iv_item_author)
         ImageView imageAuthor;
         @BindView(R.id.detail_title)
-        TextView detailTitle;
+        JumpShowTextView detailTitle;
         @BindView(R.id.detail_tag)
-        TextView detailTag;
+        JumpShowTextView detailTag;
         @BindView(R.id.detail_describe)
-        TextView detailDescribe;
+        JumpShowTextView detailDescribe;
         @BindView(R.id.tv_likenum)
         TextView likenum;
         @BindView(R.id.tv_sharenum)

@@ -32,19 +32,6 @@ public class RxPresenter<T extends BaseView> implements BasePresenter<T> {
     }
 
 
-    public void addHistoryBeanToDB(ItemListBean itemListBean){
-        HistoryBean historyBean=new HistoryBean();
-    }
-
-    public void addLikeBeanToDB(ItemListBean itemListBean){
-        LikeBean likeBean=new LikeBean();
-    }
-
-    public ItemListBean getItemListBean(int id){
-        return null;
-        //mDataManager.
-    }
-
     @Override
     public void attachView(T view) {
         this.mView=view;

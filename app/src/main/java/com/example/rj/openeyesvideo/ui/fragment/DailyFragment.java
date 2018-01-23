@@ -75,10 +75,9 @@ public class DailyFragment extends RootFragment<DailyPresenter> implements Daily
                 super.onScrolled(recyclerView, dx, dy);
                 int lastItemPositon= mLayoutManager.findLastCompletelyVisibleItemPosition();
                 int totalPotions=mLayoutManager.getItemCount();
-                Log.d("hzj", "onScrolled: lastItemPositon:"+lastItemPositon+",totalPotions:"+totalPotions+";isloading:"+isLoading);
                 if(lastItemPositon>=totalPotions-4 && dy>0 && totalPotions>5){
                     if(isLoading){
-                        Log.d("hzj", "onScrolled: "+isLoading);
+
                     }else {
                         isLoading=true;
                         mPresenter.getMoreData();
@@ -90,10 +89,8 @@ public class DailyFragment extends RootFragment<DailyPresenter> implements Daily
             @Override
             public void onItemClick(int id) {
                 Intent intent=new Intent();
-                Log.d("hzj", "onItemClick: ");
                 intent.setClass(mContext, DetailActivity.class);
                 ItemListBean itemListBean=itemListBeans.get(id-1);
-                mPresenter.addHistoryBeanToDB(itemListBean);
                 intent.putExtra("itemListBean",itemListBean);
                 mContext.startActivity(intent);
             }
@@ -106,7 +103,6 @@ public class DailyFragment extends RootFragment<DailyPresenter> implements Daily
             public void onItemClick(int id) {
                 Intent intent=new Intent();
                 Bundle bundle=new Bundle();
-                Log.d("hzj", "onItemClick: ");
                 intent.setClass(mContext, DetailActivity.class);
                 ItemListBean itemListBean=listBeans.get(id);
 
@@ -141,7 +137,6 @@ public class DailyFragment extends RootFragment<DailyPresenter> implements Daily
             }
         }
         stateStart();
-        Log.d("hzj", "showContent: "+itemListBeans.size());
         isLoading=false;
         mAdapter.addDailyData(itemListBeans);
     }
