@@ -3,6 +3,7 @@ package com.example.rj.openeyesvideo.ui.fragment;
 import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -34,11 +35,17 @@ public class MyFragment extends SimpleFragment{
 
     @BindView(R.id.view_main)
     RecyclerView myRecyclerView;
+    @BindView(R.id.toolbar_title)
+    TextView toolbarTitle;
+    @BindView(R.id.ic_toolbar_search)
+    ImageView toolbarSearch;
     List<String> list=new ArrayList<String>(5);
 
 
     @Override
     protected void initEventAndData() {
+        toolbarTitle.setText("我");
+        toolbarSearch.setVisibility(View.GONE);
         list.clear();
         list.add("观看记录");
         list.add("我的喜欢");

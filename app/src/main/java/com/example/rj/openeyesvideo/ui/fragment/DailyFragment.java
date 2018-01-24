@@ -7,6 +7,9 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.example.rj.openeyesvideo.R;
 import com.example.rj.openeyesvideo.base.BaseFragment;
@@ -32,11 +35,17 @@ public class DailyFragment extends RootFragment<DailyPresenter> implements Daily
 
     @BindView(R.id.view_main)
     RecyclerView mRecyclerView;
-
+    @BindView(R.id.toolbar_title)
+    TextView toolbarTitle;
+    @BindView(R.id.ic_toolbar_search)
+    ImageView toolbarSearch;
+    @BindView(R.id.toolbar)
+    RelativeLayout toolbar;
     @BindView(R.id.view_refresh)
     SwipeRefreshLayout mSwipeRefreshLayout;
 
     private List<ItemListBean> itemListBeans = new ArrayList<>();
+    private List<ItemListBean> firstItemListBeans=new ArrayList<>();
 
     LinearLayoutManager mLayoutManager;
 
@@ -56,6 +65,9 @@ public class DailyFragment extends RootFragment<DailyPresenter> implements Daily
         initRecyclerView();
         initSwipeRefresh();
         stateLoading();
+        toolbar.setBackgroundColor(0x00000000);
+        toolbarTitle.setText("");
+        toolbarSearch.setImageResource(R.mipmap.ic_action_search_white);
     }
 
     private void initRecyclerView() {
@@ -73,6 +85,7 @@ public class DailyFragment extends RootFragment<DailyPresenter> implements Daily
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
+                setToolBar();
                 int lastItemPositon= mLayoutManager.findLastCompletelyVisibleItemPosition();
                 int totalPotions=mLayoutManager.getItemCount();
                 if(lastItemPositon>=totalPotions-4 && dy>0 && totalPotions>5){
@@ -97,19 +110,24 @@ public class DailyFragment extends RootFragment<DailyPresenter> implements Daily
         });
     }
 
-    private void initOnItemClickListener(BaseRecyclerAdapter mAdapter, final List<ItemListBean> listBeans) {
-        mAdapter.setOnItemClickListener(new BaseRecyclerAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(int id) {
-                Intent intent=new Intent();
-                Bundle bundle=new Bundle();
-                intent.setClass(mContext, DetailActivity.class);
-                ItemListBean itemListBean=listBeans.get(id);
-
-                mContext.startActivity(intent);
+    private void setToolBar() {
+        int firstItemPosition=mLayoutManager.findFirstVisibleItemPosition();
+        if(firstItemPosition==0){
+            toolbar.setBackgroundColor(0x00000000);
+            toolbarTitle.setText("");
+            toolbarSearch.setImageResource(R.mipmap.ic_action_search_white);
+        }else {
+            if(itemListBeans.size()>1){
+                ItemListBean itemListBean=itemListBeans.get(firstItemPosition-1);
+                if(itemListBean.getType()=="textHeader"){
+                    toolbar.setBackgroundColor(Color.WHITE);
+                    toolbarTitle.setText(itemListBean.getData().getText());
+                    toolbarSearch.setImageResource(R.mipmap.ic_action_search);
+                }
             }
-        });
+        }
     }
+
 
     private void initSwipeRefresh() {
         mSwipeRefreshLayout.setColorSchemeColors(Color.BLACK,Color.BLACK,Color.BLACK);
@@ -130,15 +148,22 @@ public class DailyFragment extends RootFragment<DailyPresenter> implements Daily
     @Override
     public void showContent(List<ItemListBean> list) {
         for(ItemListBean itemListBean: list){
-            if (itemListBean.getType().equals("video")){
-                if(itemListBean.getData().getAuthor()!=null){
-                    itemListBeans.add(itemListBean);
-                }
-            }
+                itemListBeans.add(itemListBean);
         }
         stateStart();
         isLoading=false;
         mAdapter.addDailyData(itemListBeans);
+    }
+
+    @Override
+    public void showFirstContent(List<ItemListBean> listBeans) {
+        for(ItemListBean itemListBean :listBeans){
+            if(itemListBean.getType().equals("video")){
+                firstItemListBeans.add(itemListBean);
+            }else {
+
+            }
+        }
     }
 
 }

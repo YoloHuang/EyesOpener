@@ -4,6 +4,9 @@ import android.content.Intent;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.rj.openeyesvideo.R;
 import com.example.rj.openeyesvideo.base.Contract.TagContract;
@@ -26,6 +29,10 @@ public class TagsFragment extends RootFragment<TagsPresenter> implements TagCont
 
     @BindView(R.id.view_main)
     RecyclerView mRecyclerView;
+    @BindView(R.id.toolbar_title)
+    TextView toolbarTitle;
+    @BindView(R.id.ic_toolbar_search)
+    ImageView toolbarSearch;
     private List<TagsBean> itemListBeans = new ArrayList<>();
 
     GridLayoutManager mLayoutManager;
@@ -43,6 +50,8 @@ public class TagsFragment extends RootFragment<TagsPresenter> implements TagCont
     protected void initEventAndData() {
         super.initEventAndData();
         initRecyclerView();
+        toolbarTitle.setText("分类");
+        toolbarSearch.setVisibility(View.GONE);
         stateLoading();
     }
 

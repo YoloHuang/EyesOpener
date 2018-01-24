@@ -3,6 +3,9 @@ package com.example.rj.openeyesvideo.ui.fragment;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.rj.openeyesvideo.R;
 import com.example.rj.openeyesvideo.base.BaseFragment;
@@ -29,6 +32,10 @@ public class HotFragment extends BaseFragment<HotPresenter> implements HotContra
     ViewPager mViewPager;
     @BindView(R.id.tag_test)
     TabLayout mTabLayout;
+    @BindView(R.id.toolbar_title)
+    TextView toolbarTitle;
+    @BindView(R.id.ic_toolbar_search)
+    ImageView toolbarSearch;
 
 
     String[] tabTitle = new String[]{"周排行","月排行","总排行"};
@@ -44,6 +51,8 @@ public class HotFragment extends BaseFragment<HotPresenter> implements HotContra
 
     @Override
     protected void initEventAndData() {
+        toolbarTitle.setText("热门");
+        toolbarSearch.setVisibility(View.GONE);
         fragments.add(new WeekFragment());
         fragments.add(new MonthFragment());
         fragments.add(new AllHotFragment());

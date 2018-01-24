@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp_top"
+        android:layout_width="match_parent"
+        android:layout_height="270dp"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="270dp">
+            <ImageView
+                android:id="@+id/iv_top_show"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/home_page_header_icon"
+                android:layout_centerInParent="true"
+                />
+            <com.example.rj.openeyesvideo.widget.JumpShowTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_top_title"
+                android:layout_below="@id/iv_top_show"
+                android:gravity="center"
+                app:IsBold="true"
+                app:textColor="@color/colorWhite"
+                app:textSize="55px"/>
+            <com.example.rj.openeyesvideo.widget.JumpShowTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_top_des"
+                android:gravity="center"
+                android:layout_below="@id/tv_top_title"
+                app:textColor="@color/colorWhite"
+                app:textSize="50px"
+                />
+        </RelativeLayout>
+
+
+</FrameLayout>

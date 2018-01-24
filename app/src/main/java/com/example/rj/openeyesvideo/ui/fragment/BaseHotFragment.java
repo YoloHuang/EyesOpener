@@ -3,6 +3,7 @@ package com.example.rj.openeyesvideo.ui.fragment;
 import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.TextView;
 
 import com.example.rj.openeyesvideo.R;
 import com.example.rj.openeyesvideo.base.Contract.HotTopContract;
@@ -27,6 +28,7 @@ public abstract class BaseHotFragment extends RootFragment<WeekPresenter> implem
 
     @BindView(R.id.view_main)
     RecyclerView mRecyclerView;
+
     private List<ItemListBean> itemListBeans = new ArrayList<>();
 
     LinearLayoutManager mLayoutManager;

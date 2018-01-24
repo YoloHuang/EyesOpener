@@ -24,6 +24,7 @@ public class DailyPresenter extends RxPresenter<DailyContract.View> implements D
 
     List<ItemListBean> itemListBeans;
     List<ItemListBean> moreItemListBeans;
+    List<ItemListBean> firstItemListBeans;
     String nextUrl;
     long nextDate;
 
@@ -45,9 +46,10 @@ public class DailyPresenter extends RxPresenter<DailyContract.View> implements D
                 nextUrl=dailyBean.getNextPageUrl();
                 String nextDateName=nextUrl.substring(nextUrl.indexOf("=")+1,nextUrl.indexOf("&"));
                 nextDate=Long.decode(nextDateName);
-                itemListBeans=dailyBean.getIssueList().get(0).getItemList();
+                firstItemListBeans=dailyBean.getIssueList().get(0).getItemList();
+                mView.showFirstContent(firstItemListBeans);
                 if(null!=dailyBean.getIssueList().get(1)){
-                    itemListBeans.addAll(dailyBean.getIssueList().get(1).getItemList());
+                    itemListBeans=dailyBean.getIssueList().get(1).getItemList();
                 }
                 mView.showContent(itemListBeans);
             }

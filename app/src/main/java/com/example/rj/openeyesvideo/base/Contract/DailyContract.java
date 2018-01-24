@@ -14,6 +14,7 @@ import java.util.List;
 public interface DailyContract {
     interface View extends BaseView{
         void showContent(List<ItemListBean> list);
+        void showFirstContent(List<ItemListBean> listBeans);
     }
     interface Presenter extends BasePresenter<View>{
         void getDailyData();

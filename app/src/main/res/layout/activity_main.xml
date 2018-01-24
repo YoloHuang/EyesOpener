@@ -6,17 +6,6 @@
     android:fitsSystemWindows="true"
     android:orientation="vertical">
 
-    <FrameLayout
-        android:id="@+id/toolbar_container"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <include layout="@layout/view_toolbar"/>
-        <com.miguelcatalan.materialsearchview.MaterialSearchView
-            android:id="@+id/view_search"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-    </FrameLayout>
 
     <LinearLayout
         android:layout_width="match_parent"

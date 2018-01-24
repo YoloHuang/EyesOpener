@@ -1,34 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_marginStart="10dp"
-    android:layout_marginTop="5dp"
-    android:orientation="horizontal"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
-    <ImageView
-        android:layout_width="150dp"
-        android:layout_height="90dp"
-        android:scaleType="centerCrop"
-        android:id="@+id/item_video_image"/>
     <LinearLayout
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="15dp"
-        android:orientation="vertical"
-        android:layout_toRightOf="@id/item_video_image">
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="90dp"
+            android:scaleType="centerCrop"
+            android:id="@+id/item_video_image"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:orientation="vertical"
+            android:layout_toRightOf="@id/item_video_image">
 
-        <TextView
-            android:id="@+id/item_video_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/colorWhite"
-            android:textSize="38px" />
-        <TextView
-            android:layout_width="match_parent"
-            android:id="@+id/item_video_tag"
-            android:layout_height="wrap_content"
-            android:textSize="38px"
-            android:textColor="@color/colorWhite"/>
+            <com.example.rj.openeyesvideo.widget.JumpShowTextView
+                android:id="@+id/item_video_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="2dp"
+                app:textColor="@color/colorWhite"
+                app:IsBold="true"
+                app:textSize="40px" />
+            <TextView
+                android:layout_width="match_parent"
+                android:id="@+id/item_video_tag"
+                android:layout_height="wrap_content"
+                android:textSize="38px"
+                android:textColor="@color/colorWhite"/>
+        </LinearLayout>
+
     </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="#55ffffff"/>
 </LinearLayout>

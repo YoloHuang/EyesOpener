@@ -123,6 +123,7 @@ public  class ItemListBean  implements Serializable {
         private List<?> labelList;
         private List<?> subtitles;
         private String coverForFeed;
+        private String text;
 
         public String getDataType() {
             return dataType;
@@ -450,6 +451,14 @@ public  class ItemListBean  implements Serializable {
 
         public void setCoverForFeed(String coverForFeed) {
             this.coverForFeed = coverForFeed;
+        }
+
+        public String getText() {
+            return text;
+        }
+
+        public void setText(String text) {
+            this.text = text;
         }
 
         public static class ProviderBean implements Serializable{

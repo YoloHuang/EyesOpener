@@ -2,30 +2,28 @@ package com.example.rj.openeyesvideo.widget;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.graphics.Canvas;
+
 import android.graphics.Color;
-import android.os.Handler;
+
+import android.graphics.Paint;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.text.Layout;
-import android.text.StaticLayout;
-import android.text.TextPaint;
+
 import android.util.AttributeSet;
 import android.util.Log;
-import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.example.rj.openeyesvideo.R;
-import com.example.rj.openeyesvideo.util.TextUtil;
 
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.disposables.Disposables.*;
+
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 
 
 /**
@@ -76,17 +74,19 @@ public class JumpShowTextView extends FrameLayout {
     }
 
     private void createText() {
+        Log.d("hzj", "createText: textColor"+textColor);
+
         placeHolder=new TextView(context);
         placeHolder.getPaint().setTextSize(textSize);
         placeHolder.setSingleLine(isSinglen);
-        placeHolder.getPaint().setColor(textColor);
+        placeHolder.setTextColor(textColor);
         placeHolder.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT));
         placeHolder.setVisibility(INVISIBLE);
 
         realTextView=new TextView(context);
         realTextView.getPaint().setTextSize(textSize);
         realTextView.setSingleLine(isSinglen);
-        placeHolder.getPaint().setColor(textColor);
+        realTextView.setTextColor(textColor);
         realTextView.getPaint().setFakeBoldText(isBold);
         realTextView.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT));
     }
@@ -95,43 +95,28 @@ public class JumpShowTextView extends FrameLayout {
         addView(placeHolder);
         addView(realTextView);
     }
-//    private void initText(final String text) {
-//        new Thread(){
-//            @Override
-//            public void run() {
-//                super.run();
-//                content=TextUtil.getListContent(text);
-//                placeHolder.setText(text);
-//            }
-//        }.run();
-//
-//    }
 
     boolean isRun=false;
 
     private void startView(){
-        time=4000/text.length();
+        time=1000/text.length();
         if (isRun){
             realTextView.setText(text);
         }else {
             for(int i=0;i<text.length();i++){
-                final String finalReal = text.substring(0,i);
-                new Thread(){
-                    @Override
-                    public void run() {
-                        super.run();
-                        try {
-                            sleep(time);
-                            Log.d("hzj", "run: time"+time);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                        realTextView.setText(finalReal);
-                        Log.d("hzj", "startView: finalReal=="+finalReal);
-                        isRun=true;
-                    }
-                }.start();
+                Observable.interval(time,TimeUnit.MILLISECONDS)
+                        .take(i)
+                        .subscribeOn(Schedulers.newThread())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(new Consumer<Long>() {
+                            @Override
+                            public void accept(Long aLong) throws Exception {
+                                String finalReal=text.substring(0,aLong.intValue());
+                                realTextView.setText(finalReal);
+                            }
+                        });
             }
+            isRun=true;
         }
 
     }

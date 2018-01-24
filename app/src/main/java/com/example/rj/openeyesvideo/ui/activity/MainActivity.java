@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,16 +38,16 @@ import butterknife.BindView;
 
 public class MainActivity extends BaseActivity<MainPresenter> implements MainContract.View {
 
-    @BindView(R.id.toolbar_title)
-    TextView toolbar_title;
-    @BindView(R.id.view_search)
-    MaterialSearchView mMaterialSearchView;
+//    @BindView(R.id.toolbar_title)
+//    TextView toolbar_title;
+//    @BindView(R.id.view_search)
+//    MaterialSearchView mMaterialSearchView;
     @BindView(R.id.vp_openeyes)
     ViewPager mViewPager;
     @BindView(R.id.tab_openeyes)
     TabLayout mTabLayout;
-    @BindView(R.id.toolbar)
-    Toolbar mToolbar;
+//    @BindView(R.id.toolbar)
+//    RelativeLayout mToolbar;
 //    @BindView(R.id.iv_tab)
 //    ImageView imageTab;
 //    @BindView(R.id.tv_tab)
@@ -66,9 +67,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
     @Override
     protected void initEventAndData() {
         FileDownloader.setup(mContext);
-        toolbar_title.setText(R.string.app_name);
-        mToolbar.setTitle("");
-        setSupportActionBar(mToolbar);
+        //toolbar_title.setText(R.string.app_name);
         fragments.add(new DailyFragment());
         fragments.add(new HotFragment());
         fragments.add(new TagsFragment());
@@ -106,7 +105,6 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
                 TextView textView=tab.getCustomView().findViewById(R.id.tv_tab);
                 textView.setSelected(true);
                 imageView.setImageResource(tabIconSelect[tab.getPosition()]);
-
             }
 
             @Override
@@ -124,32 +122,24 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
             }
         });
 
-        mMaterialSearchView.setOnQueryTextListener(new MaterialSearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                return false;
-            }
-        });
-        mMaterialSearchView.setVoiceSearch(false);
-        mMaterialSearchView.setCursorDrawable(R.drawable.custom_cursor);
-        mPresenter.getSearchSuggestions();
+//        mMaterialSearchView.setOnQueryTextListener(new MaterialSearchView.OnQueryTextListener() {
+//            @Override
+//            public boolean onQueryTextSubmit(String query) {
+//                return false;
+//            }
+//
+//            @Override
+//            public boolean onQueryTextChange(String newText) {
+//                return false;
+//            }
+//        });
+//        mMaterialSearchView.setVoiceSearch(false);
+//        mMaterialSearchView.setCursorDrawable(R.drawable.custom_cursor);
+//        mPresenter.getSearchSuggestions();
     }
 
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main_menu,menu);
-        MenuItem item=menu.findItem(R.id.action_search);
-        item.setVisible(true);
-        mMaterialSearchView.setMenuItem(item);
-        mSearchMenuItem=item;
-        return true;
-    }
+
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {

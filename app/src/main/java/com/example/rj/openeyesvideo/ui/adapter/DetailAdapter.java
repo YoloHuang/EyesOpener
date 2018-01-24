@@ -80,9 +80,15 @@ int likeCount;
             ((InfoViewHolder)holder).likenum.setSelected(islike);
             ((InfoViewHolder)holder).replynum.setText(""+data.getData().getConsumption().getReplyCount());
             ((InfoViewHolder)holder).sharenum.setText(""+data.getData().getConsumption().getShareCount());
-            ((InfoViewHolder)holder).textAuthor.setText(data.getData().getAuthor().getName());
-            ((InfoViewHolder)holder).textdiscribtion.setText(data.getData().getAuthor().getDescription());
-            ImageLoader.loadCircle(mContext,data.getData().getAuthor().getIcon(),((InfoViewHolder)holder).imageAuthor);
+            if(data.getData().getAuthor()==null){
+                ((InfoViewHolder)holder).textAuthor.setVisibility(View.GONE);
+                ((InfoViewHolder)holder).textdiscribtion.setVisibility(View.GONE);
+                ((InfoViewHolder)holder).imageAuthor.setVisibility(View.GONE);
+            }else {
+                ((InfoViewHolder)holder).textAuthor.setText(data.getData().getAuthor().getName());
+                ((InfoViewHolder)holder).textdiscribtion.setText(data.getData().getAuthor().getDescription());
+                ImageLoader.loadCircle(mContext,data.getData().getAuthor().getIcon(),((InfoViewHolder)holder).imageAuthor);
+            }
             ((InfoViewHolder) holder).likenum.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -208,7 +214,7 @@ int likeCount;
         @BindView(R.id.item_video_image)
         ImageView videoImage;
         @BindView(R.id.item_video_name)
-        TextView relateItemName;
+        JumpShowTextView relateItemName;
         @BindView(R.id.item_video_tag)
         TextView relateITemTag;
 

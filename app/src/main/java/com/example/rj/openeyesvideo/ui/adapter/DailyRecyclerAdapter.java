@@ -1,6 +1,7 @@
 package com.example.rj.openeyesvideo.ui.adapter;
 
 import android.content.Context;
+import android.support.v4.view.ViewPager;
 import android.support.v7.util.DiffUtil;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.ViewHolder;
@@ -17,6 +18,7 @@ import com.example.rj.openeyesvideo.model.bean.DailyBean;
 import com.example.rj.openeyesvideo.model.bean.ItemListBean;
 import com.example.rj.openeyesvideo.ui.view.ItemDailyView;
 import com.example.rj.openeyesvideo.util.DiffUtilCallBack;
+import com.example.rj.openeyesvideo.widget.JumpShowTextView;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -33,20 +35,26 @@ import butterknife.ButterKnife;
 public class DailyRecyclerAdapter extends BaseRecyclerAdapter<ItemListBean> {
 
 
+    ViewPager viewPager;
+    TopAdapter topAdapter;
+    List<ItemListBean> topList;
+
+
     public enum ITEM_TYPE{
         TYPE_DATE,
-        TYPE_NEW
+        TYPE_NEW,
+        TYPE_TOP
     }
 
 
     @Override
     public int getItemViewType(int position) {
         if(position==0){
+            return ITEM_TYPE.TYPE_TOP.ordinal();
+        }else if(datas.get(position).getType().equals("textHeader")){
             return ITEM_TYPE.TYPE_DATE.ordinal();
-        }else {
-            return ITEM_TYPE.TYPE_NEW.ordinal();
         }
-
+        return ITEM_TYPE.TYPE_NEW.ordinal();
     }
 
     @Override
@@ -64,6 +72,9 @@ public class DailyRecyclerAdapter extends BaseRecyclerAdapter<ItemListBean> {
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if(viewType==ITEM_TYPE.TYPE_DATE.ordinal()){
             return new DateViewHolder(mLayoutInflater.inflate(R.layout.item_date,parent,false));
+        }else if(viewType==ITEM_TYPE.TYPE_TOP.ordinal()){
+            topAdapter=new TopAdapter(mContext,topList);
+            return new TopViewHolder(mLayoutInflater.inflate(R.layout.item_top,parent,false));
         }else {
             return new ItemViewHolder(mLayoutInflater.inflate(R.layout.item_daily,parent,false));
         }
@@ -73,9 +84,14 @@ public class DailyRecyclerAdapter extends BaseRecyclerAdapter<ItemListBean> {
     public void convert(ViewHolder holder, final int position) {
 
         if(holder instanceof DateViewHolder){
-            String date=getDate();
-            ((DateViewHolder)holder).textView.setText(date);
-        }else {
+            //((DateViewHolder)holder).textView.setTypeface(mContext,"fonts/Lobster-1.4.otf");
+            ((DateViewHolder)holder).textView.setText(datas.get(position-1).getData().getText());
+        }else if(holder instanceof TopViewHolder){
+            ((TopViewHolder)holder).topPager.setAdapter(topAdapter);
+            viewPager=((TopViewHolder)holder).topPager;
+            ((TopViewHolder)holder).topDes.setText(topList.get(0).getData().getDescription());
+            ((TopViewHolder)holder).topTitle.setText(topList.get(0).getData().getTitle());
+        } else {
             String detail;
             if(datas.get(position-1).getData().getAuthor()==null){
                 detail="开眼精选 / # "+datas.get(position-1).getData().getCategory();
@@ -132,6 +148,21 @@ public class DailyRecyclerAdapter extends BaseRecyclerAdapter<ItemListBean> {
         }
     }
 
+    public static class TopViewHolder extends ViewHolder{
+
+        @BindView(R.id.vp_top)
+        ViewPager topPager;
+        @BindView(R.id.tv_top_des)
+        JumpShowTextView topDes;
+        @BindView(R.id.tv_top_title)
+        JumpShowTextView topTitle;
+
+        public TopViewHolder(View itemView) {
+            super(itemView);
+            ButterKnife.bind(this,itemView);
+        }
+    }
+
     public void addDailyData(List<ItemListBean> listBeans){
         Log.d("hzj", "addDailyData: "+datas.size());
         DiffUtil.DiffResult diffResult=DiffUtil.calculateDiff(new DiffUtilCallBack(datas,listBeans),false);
@@ -139,6 +170,10 @@ public class DailyRecyclerAdapter extends BaseRecyclerAdapter<ItemListBean> {
         datas.addAll(listBeans);
         //datas=listBeans;
         diffResult.dispatchUpdatesTo(this);
+    }
+
+    public void addTopData(List<ItemListBean> listBeans){
+        topList=listBeans;
     }
 
 }
