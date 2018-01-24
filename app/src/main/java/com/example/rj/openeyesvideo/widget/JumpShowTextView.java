@@ -20,8 +20,10 @@ import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
+import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 
+import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
@@ -43,6 +45,8 @@ public class JumpShowTextView extends FrameLayout {
     Context context;
     TypedArray array;
     long time;
+    boolean withAnimation=true;
+    private Observable observable;
 
 
     public JumpShowTextView(@NonNull Context context) {
@@ -67,6 +71,7 @@ public class JumpShowTextView extends FrameLayout {
 
     public void setText(String text){
         this.text=text;
+        //isRun=false;
         //initText(text);
         placeHolder.setText(text);
         placeHolder.setVisibility(INVISIBLE);
@@ -100,6 +105,9 @@ public class JumpShowTextView extends FrameLayout {
 
     private void startView(){
         time=1000/text.length();
+        if(withAnimation){
+
+        }
         if (isRun){
             realTextView.setText(text);
         }else {
@@ -108,12 +116,29 @@ public class JumpShowTextView extends FrameLayout {
                         .take(i)
                         .subscribeOn(Schedulers.newThread())
                         .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(new Consumer<Long>() {
+                        .subscribe(new Observer<Long>() {
                             @Override
-                            public void accept(Long aLong) throws Exception {
+                            public void onSubscribe(Disposable d) {
+
+                            }
+
+                            @Override
+                            public void onNext(Long aLong) {
                                 String finalReal=text.substring(0,aLong.intValue());
                                 realTextView.setText(finalReal);
+                                isRun=true;
                             }
+
+                            @Override
+                            public void onError(Throwable e) {
+
+                            }
+
+                            @Override
+                            public void onComplete() {
+                                isRun=false;
+                            }
+//
                         });
             }
             isRun=true;

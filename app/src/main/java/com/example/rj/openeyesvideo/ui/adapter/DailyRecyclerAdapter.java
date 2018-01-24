@@ -17,6 +17,7 @@ import com.example.rj.openeyesvideo.model.DataManager;
 import com.example.rj.openeyesvideo.model.bean.DailyBean;
 import com.example.rj.openeyesvideo.model.bean.ItemListBean;
 import com.example.rj.openeyesvideo.ui.view.ItemDailyView;
+import com.example.rj.openeyesvideo.ui.view.TopPageView;
 import com.example.rj.openeyesvideo.util.DiffUtilCallBack;
 import com.example.rj.openeyesvideo.widget.JumpShowTextView;
 
@@ -38,6 +39,9 @@ public class DailyRecyclerAdapter extends BaseRecyclerAdapter<ItemListBean> {
     ViewPager viewPager;
     TopAdapter topAdapter;
     List<ItemListBean> topList;
+    JumpShowTextView topTitle;
+    JumpShowTextView topDes;
+    View topItemView;
 
 
     public enum ITEM_TYPE{
@@ -51,7 +55,7 @@ public class DailyRecyclerAdapter extends BaseRecyclerAdapter<ItemListBean> {
     public int getItemViewType(int position) {
         if(position==0){
             return ITEM_TYPE.TYPE_TOP.ordinal();
-        }else if(datas.get(position).getType().equals("textHeader")){
+        }else if(datas.get(position-1).getType().equals("textHeader")){
             return ITEM_TYPE.TYPE_DATE.ordinal();
         }
         return ITEM_TYPE.TYPE_NEW.ordinal();
@@ -65,6 +69,27 @@ public class DailyRecyclerAdapter extends BaseRecyclerAdapter<ItemListBean> {
 
     public DailyRecyclerAdapter(Context context, List<ItemListBean> datas) {
         super(context, datas);
+
+    }
+
+    private void setOnPageChange() {
+        viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                topDes.setText(topList.get(position).getData().getSlogan());
+                topTitle.setText(topList.get(position).getData().getTitle());
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
     }
 
 
@@ -73,8 +98,9 @@ public class DailyRecyclerAdapter extends BaseRecyclerAdapter<ItemListBean> {
         if(viewType==ITEM_TYPE.TYPE_DATE.ordinal()){
             return new DateViewHolder(mLayoutInflater.inflate(R.layout.item_date,parent,false));
         }else if(viewType==ITEM_TYPE.TYPE_TOP.ordinal()){
-            topAdapter=new TopAdapter(mContext,topList);
-            return new TopViewHolder(mLayoutInflater.inflate(R.layout.item_top,parent,false));
+            View itemView=new TopPageView(mContext);
+            itemView.setLayoutParams(new RecyclerView.LayoutParams(RecyclerView.LayoutParams.MATCH_PARENT,RecyclerView.LayoutParams.WRAP_CONTENT));
+            return new TopViewHolder(itemView);
         }else {
             return new ItemViewHolder(mLayoutInflater.inflate(R.layout.item_daily,parent,false));
         }
@@ -87,10 +113,10 @@ public class DailyRecyclerAdapter extends BaseRecyclerAdapter<ItemListBean> {
             //((DateViewHolder)holder).textView.setTypeface(mContext,"fonts/Lobster-1.4.otf");
             ((DateViewHolder)holder).textView.setText(datas.get(position-1).getData().getText());
         }else if(holder instanceof TopViewHolder){
-            ((TopViewHolder)holder).topPager.setAdapter(topAdapter);
-            viewPager=((TopViewHolder)holder).topPager;
-            ((TopViewHolder)holder).topDes.setText(topList.get(0).getData().getDescription());
-            ((TopViewHolder)holder).topTitle.setText(topList.get(0).getData().getTitle());
+            topItemView=((TopViewHolder)holder).itemView;
+            if(topItemView instanceof TopPageView){
+                ((TopPageView) topItemView).setData(topList);
+            }
         } else {
             String detail;
             if(datas.get(position-1).getData().getAuthor()==null){
@@ -113,12 +139,7 @@ public class DailyRecyclerAdapter extends BaseRecyclerAdapter<ItemListBean> {
         }
     }
 
-    private String getDate() {
-        Date dt= new Date(System.currentTimeMillis());
-        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("MM/dd/yyyy");
-        String dateString = simpleDateFormat.format(dt);
-        return dateString;
-    }
+
 
     public static class DateViewHolder extends ViewHolder{
 
@@ -150,16 +171,8 @@ public class DailyRecyclerAdapter extends BaseRecyclerAdapter<ItemListBean> {
 
     public static class TopViewHolder extends ViewHolder{
 
-        @BindView(R.id.vp_top)
-        ViewPager topPager;
-        @BindView(R.id.tv_top_des)
-        JumpShowTextView topDes;
-        @BindView(R.id.tv_top_title)
-        JumpShowTextView topTitle;
-
         public TopViewHolder(View itemView) {
             super(itemView);
-            ButterKnife.bind(this,itemView);
         }
     }
 
@@ -175,5 +188,15 @@ public class DailyRecyclerAdapter extends BaseRecyclerAdapter<ItemListBean> {
     public void addTopData(List<ItemListBean> listBeans){
         topList=listBeans;
     }
+
+
+    public void changeTopPageView(int item){
+        Log.d("hzj", "changeTopPageView: item==="+item);
+        if(topItemView instanceof TopPageView){
+            ((TopPageView) topItemView).changeTopPageView(item);
+        }
+    }
+
+
 
 }

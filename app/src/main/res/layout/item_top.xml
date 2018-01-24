@@ -8,7 +8,7 @@
         android:id="@+id/vp_top"
         android:layout_width="match_parent"
         android:layout_height="270dp"/>
-        <RelativeLayout
+    <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="270dp">
             <ImageView
@@ -26,7 +26,7 @@
                 android:gravity="center"
                 app:IsBold="true"
                 app:textColor="@color/colorWhite"
-                app:textSize="55px"/>
+                app:textSize="50px"/>
             <com.example.rj.openeyesvideo.widget.JumpShowTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -34,9 +34,9 @@
                 android:gravity="center"
                 android:layout_below="@id/tv_top_title"
                 app:textColor="@color/colorWhite"
-                app:textSize="50px"
+                app:textSize="45px"
                 />
-        </RelativeLayout>
+    </RelativeLayout>
 
 
 </FrameLayout>

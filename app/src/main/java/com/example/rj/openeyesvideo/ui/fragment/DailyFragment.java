@@ -22,8 +22,10 @@ import com.example.rj.openeyesvideo.ui.activity.DetailActivity;
 import com.example.rj.openeyesvideo.ui.adapter.BaseRecyclerAdapter;
 import com.example.rj.openeyesvideo.ui.adapter.DailyRecyclerAdapter;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import butterknife.BindView;
 
@@ -44,6 +46,8 @@ public class DailyFragment extends RootFragment<DailyPresenter> implements Daily
     @BindView(R.id.view_refresh)
     SwipeRefreshLayout mSwipeRefreshLayout;
 
+    SimpleDateFormat simpleDateFormat=new SimpleDateFormat("- MMM. dd, 'Brunch' -", Locale.ENGLISH);
+
     private List<ItemListBean> itemListBeans = new ArrayList<>();
     private List<ItemListBean> firstItemListBeans=new ArrayList<>();
 
@@ -52,6 +56,7 @@ public class DailyFragment extends RootFragment<DailyPresenter> implements Daily
     DailyRecyclerAdapter mAdapter;
 
     boolean isLoading=false;
+    boolean dataReady=false;
 
 
     @Override
@@ -110,6 +115,20 @@ public class DailyFragment extends RootFragment<DailyPresenter> implements Daily
         });
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        if(dataReady && mLayoutManager.findFirstVisibleItemPosition()==0){
+            mPresenter.startInterval();
+        }
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        mPresenter.stopInterval();
+    }
+
     private void setToolBar() {
         int firstItemPosition=mLayoutManager.findFirstVisibleItemPosition();
         if(firstItemPosition==0){
@@ -119,10 +138,14 @@ public class DailyFragment extends RootFragment<DailyPresenter> implements Daily
         }else {
             if(itemListBeans.size()>1){
                 ItemListBean itemListBean=itemListBeans.get(firstItemPosition-1);
+                toolbar.setBackgroundColor(Color.WHITE);
+                toolbarTitle.setText(itemListBean.getData().getText());
+                toolbarSearch.setImageResource(R.mipmap.ic_action_search);
                 if(itemListBean.getType()=="textHeader"){
-                    toolbar.setBackgroundColor(Color.WHITE);
+                    Log.d("hzj", "setToolBar: "+itemListBean.getData().getText());
                     toolbarTitle.setText(itemListBean.getData().getText());
-                    toolbarSearch.setImageResource(R.mipmap.ic_action_search);
+                }else {
+                    toolbarTitle.setText(simpleDateFormat.format(itemListBean.getData().getDate()));
                 }
             }
         }
@@ -148,11 +171,15 @@ public class DailyFragment extends RootFragment<DailyPresenter> implements Daily
     @Override
     public void showContent(List<ItemListBean> list) {
         for(ItemListBean itemListBean: list){
+            if(itemListBean.getType().equals("textHeader")||itemListBean.getType().equals("video")) {
                 itemListBeans.add(itemListBean);
+            }
         }
         stateStart();
         isLoading=false;
+        dataReady=true;
         mAdapter.addDailyData(itemListBeans);
+        mPresenter.startInterval();
     }
 
     @Override
@@ -160,10 +187,14 @@ public class DailyFragment extends RootFragment<DailyPresenter> implements Daily
         for(ItemListBean itemListBean :listBeans){
             if(itemListBean.getType().equals("video")){
                 firstItemListBeans.add(itemListBean);
-            }else {
-
             }
         }
+        mAdapter.addTopData(firstItemListBeans);
+    }
+
+    @Override
+    public void changeTopPageView(int item) {
+        mAdapter.changeTopPageView(item);
     }
 
 }

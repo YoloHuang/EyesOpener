@@ -10,10 +10,15 @@ import com.example.rj.openeyesvideo.model.bean.ItemListBean;
 import com.example.rj.openeyesvideo.util.RxUtil;
 import com.example.rj.openeyesvideo.widget.CommonSubscriber;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
 
+import io.reactivex.Flowable;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
 /**
@@ -24,9 +29,13 @@ public class DailyPresenter extends RxPresenter<DailyContract.View> implements D
 
     List<ItemListBean> itemListBeans;
     List<ItemListBean> moreItemListBeans;
-    List<ItemListBean> firstItemListBeans;
+    List<ItemListBean> firstItemListBeans=new ArrayList<>();
     String nextUrl;
     long nextDate;
+    int topcount=0;
+    int toplistNum;
+
+    private Disposable intervalDisposable;
 
 
     @Inject
@@ -46,7 +55,12 @@ public class DailyPresenter extends RxPresenter<DailyContract.View> implements D
                 nextUrl=dailyBean.getNextPageUrl();
                 String nextDateName=nextUrl.substring(nextUrl.indexOf("=")+1,nextUrl.indexOf("&"));
                 nextDate=Long.decode(nextDateName);
-                firstItemListBeans=dailyBean.getIssueList().get(0).getItemList();
+                for (ItemListBean itemListBean:dailyBean.getIssueList().get(0).getItemList()){
+                    if(itemListBean.getType().equals("video")){
+                        firstItemListBeans.add(itemListBean);
+                    }
+                }
+                toplistNum=firstItemListBeans.size();
                 mView.showFirstContent(firstItemListBeans);
                 if(null!=dailyBean.getIssueList().get(1)){
                     itemListBeans=dailyBean.getIssueList().get(1).getItemList();
@@ -74,5 +88,35 @@ public class DailyPresenter extends RxPresenter<DailyContract.View> implements D
             }
         }));
     }
+
+    @Override
+    public void startInterval() {
+        if(intervalDisposable!=null && !intervalDisposable.isDisposed()){
+            return;
+        }
+        intervalDisposable= Flowable.interval(4, TimeUnit.SECONDS)
+                .onBackpressureDrop()
+                .compose(RxUtil.<Long>rxSchedulerHelper())
+                .subscribe(new Consumer<Long>() {
+                    @Override
+                    public void accept(Long aLong) throws Exception {
+                        Log.d("hzj", "accept:topcount== "+topcount+"toplistNum"+toplistNum);
+                        if(topcount==toplistNum){
+                            topcount=0;
+                        }
+                        mView.changeTopPageView(topcount++);
+                        ;
+                    }
+                });
+        addSubscribe(intervalDisposable);
+    }
+
+    @Override
+    public void stopInterval() {
+        if(intervalDisposable!=null && ! intervalDisposable.isDisposed()){
+            intervalDisposable.dispose();
+        }
+    }
+
 
 }

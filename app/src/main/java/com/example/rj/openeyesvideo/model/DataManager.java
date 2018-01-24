@@ -1,5 +1,7 @@
 package com.example.rj.openeyesvideo.model;
 
+import android.util.Log;
+
 import com.example.rj.openeyesvideo.APP.Constants;
 import com.example.rj.openeyesvideo.model.DB.DBHelper;
 import com.example.rj.openeyesvideo.model.bean.DailyBean;
@@ -188,7 +190,7 @@ public class DataManager implements ApiHelper,DBHelper{
 
                     @Override
                     protected void progress(BaseDownloadTask task, int soFarBytes, int totalBytes) {
-
+                        Log.d("hzj", "progress:soFarBytes =="+soFarBytes+"--totalBytes=="+totalBytes);
                     }
 
                     @Override

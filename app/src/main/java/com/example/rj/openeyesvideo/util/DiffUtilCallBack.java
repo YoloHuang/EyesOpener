@@ -35,16 +35,29 @@ public class DiffUtilCallBack extends DiffUtil.Callback {
 
     @Override
     public boolean areItemsTheSame(int oldItemPosition, int newItemPosition) {
-        return moldDatas.get(oldItemPosition).getData().getTitle().equals(mNewDatas.get(newItemPosition).getData().getTitle());
+        if(moldDatas.get(oldItemPosition).getType().equals("textHeader") ||mNewDatas.get(newItemPosition).getType().equals("textHeader")){
+            if(moldDatas.get(oldItemPosition).getType().equals(mNewDatas.get(newItemPosition).getType())){
+                return moldDatas.get(oldItemPosition).getData().getText().equals(mNewDatas.get(newItemPosition).getData().getText());
+            }else {
+                return false;
+            }
+        }else {
+            return moldDatas.get(oldItemPosition).getData().getTitle().equals(mNewDatas.get(newItemPosition).getData().getTitle());
+        }
     }
 
     @Override
     public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
         ItemListBean oldItem=moldDatas.get(oldItemPosition);
         ItemListBean newItem=mNewDatas.get(newItemPosition);
-        if(!oldItem.getData().getTags().get(0).getName().equals(newItem.getData().getTags().get(0).getName())){
-            return false;
+        if(moldDatas.get(oldItemPosition).getType().equals("textHeader") ||mNewDatas.get(newItemPosition).getType().equals("textHeader")){
+            if(moldDatas.get(oldItemPosition).getType().equals(mNewDatas.get(newItemPosition).getType())){
+                return moldDatas.get(oldItemPosition).getData().getText().equals(mNewDatas.get(newItemPosition).getData().getText());
+            }else {
+                return false;
+            }
+        }else {
+            return oldItem.getData().getTags().get(0).getName().equals(newItem.getData().getTags().get(0).getName());
         }
-        return true;
     }
 }

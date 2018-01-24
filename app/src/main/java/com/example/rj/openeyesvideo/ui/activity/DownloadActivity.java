@@ -37,7 +37,7 @@ public class DownloadActivity extends RootActivity<DownloadPresenter> implements
     @Override
     protected void initEventAndData() {
         super.initEventAndData();
-        title.setText("观看记录");
+        title.setText("我的缓存");
         toolbar.setTitle("");
         stateLoading();
         initRecyclerView();

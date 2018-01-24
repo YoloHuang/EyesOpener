@@ -3,6 +3,7 @@ package com.example.rj.openeyesvideo.ui.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.view.PagerAdapter;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import com.example.rj.openeyesvideo.ui.activity.DetailActivity;
 
 import org.slf4j.ILoggerFactory;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -24,7 +26,7 @@ import java.util.List;
 public class TopAdapter extends PagerAdapter {
 
     Context context;
-    List<ItemListBean> listBeans;
+    List<ItemListBean> listBeans=new ArrayList<>();
 
     public TopAdapter(Context context, List<ItemListBean> listBeans){
         this.context=context;
@@ -35,6 +37,7 @@ public class TopAdapter extends PagerAdapter {
     public Object instantiateItem(final ViewGroup container, final int position) {
         View view= LayoutInflater.from(context).inflate(R.layout.item_top_image,container,false);
         ImageView imageView=view.findViewById(R.id.iv_top);
+        Log.d("hzj", "instantiateItem: getfeed=="+listBeans.get(position).getData().getCover().getFeed());
         ImageLoader.load(context,listBeans.get(position).getData().getCover().getFeed(),imageView);
         view.setOnClickListener(new View.OnClickListener() {
             @Override

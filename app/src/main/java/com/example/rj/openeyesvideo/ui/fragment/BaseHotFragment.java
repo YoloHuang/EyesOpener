@@ -82,7 +82,7 @@ public abstract class BaseHotFragment extends RootFragment<WeekPresenter> implem
 
     @Override
     protected int getLayoutId() {
-        return R.layout.fragment_listcomment;
+        return R.layout.fragment_hotitem;
     }
 
 }

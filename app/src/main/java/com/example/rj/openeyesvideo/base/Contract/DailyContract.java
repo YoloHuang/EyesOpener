@@ -15,9 +15,12 @@ public interface DailyContract {
     interface View extends BaseView{
         void showContent(List<ItemListBean> list);
         void showFirstContent(List<ItemListBean> listBeans);
+        void changeTopPageView(int item);
     }
     interface Presenter extends BasePresenter<View>{
         void getDailyData();
         void getMoreData();
+        void startInterval();
+        void stopInterval();
     }
 }
