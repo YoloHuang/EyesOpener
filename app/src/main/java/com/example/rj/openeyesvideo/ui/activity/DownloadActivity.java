@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.rj.openeyesvideo.R;
@@ -25,8 +26,8 @@ public class DownloadActivity extends RootActivity<DownloadPresenter> implements
 
     @BindView(R.id.toolbar_title)
     TextView title;
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
+    @BindView(R.id.ic_toolbar_search)
+    ImageView toolbarSearch;
     @BindView(R.id.view_main)
     RecyclerView mRecyclerView;
 
@@ -38,10 +39,8 @@ public class DownloadActivity extends RootActivity<DownloadPresenter> implements
     protected void initEventAndData() {
         super.initEventAndData();
         title.setText("我的缓存");
-        toolbar.setTitle("");
         stateLoading();
         initRecyclerView();
-        setSupportActionBar(toolbar);
         mPresenter.getDownloadData();
     }
 

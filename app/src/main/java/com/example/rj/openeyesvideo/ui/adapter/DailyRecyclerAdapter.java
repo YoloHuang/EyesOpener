@@ -197,6 +197,12 @@ public class DailyRecyclerAdapter extends BaseRecyclerAdapter<ItemListBean> {
         }
     }
 
+    public void stopChangeTopPageView(){
+        if(topItemView instanceof TopPageView){
+            ((TopPageView) topItemView).stopChangeTopPageView();
+        }
+    }
+
 
 
 }

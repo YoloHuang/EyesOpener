@@ -133,7 +133,8 @@ int likeCount;
         }else if(holder instanceof RelateViewHolder) {
 
             ((RelateViewHolder)holder).relateItemName.setText(datas.get(position-2).getData().getTitle());
-            ((RelateViewHolder)holder).relateITemTag.setText("#"+datas.get(position-2).getData().getCategory());
+            String time=datas.get(position-2).getData().getDuration()/60+"'"+datas.get(position-2).getData().getDuration()%60+"''";
+            ((RelateViewHolder)holder).relateITemTag.setText("#"+datas.get(position-2).getData().getCategory()+" / "+time);
             ImageLoader.loadRound (mContext,datas.get(position-2).getData().getCover().getFeed() ,((RelateViewHolder)holder).videoImage);
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

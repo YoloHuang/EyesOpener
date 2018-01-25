@@ -5,9 +5,12 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.example.rj.openeyesvideo.R;
 import com.example.rj.openeyesvideo.model.bean.ItemListBean;
@@ -35,6 +38,8 @@ public class TopPageView extends FrameLayout {
     JumpShowTextView topDes;
     @BindView(R.id.tv_top_title)
     JumpShowTextView topTitle;
+//    LinearLayout linearLayout;
+//    LinearLayout indicators;
 
     TopAdapter topAdapter;
     List<ItemListBean> listBeans;
@@ -56,9 +61,37 @@ public class TopPageView extends FrameLayout {
     }
 
     private void initView() {
+
         View.inflate(context, R.layout.item_top,this);
+
         ButterKnife.bind(this);
+//       topDes.setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+//        newView();
+//        viewPager.setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,810));
+//
+//        LinearLayout.LayoutParams layoutParams=new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+//        layoutParams.gravity= Gravity.BOTTOM ;
+//        linearLayout.setLayoutParams(layoutParams);
+//        linearLayout.setGravity(Gravity.CENTER_HORIZONTAL);
+//        linearLayout.setOrientation(LinearLayout.VERTICAL);
+//
+//        imageView.setImageResource(R.mipmap.home_page_header_icon);
+//        imageView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,110));
+//        imageView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+//
+//        topTitle.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+//        topTitle.
+
     }
+//
+//    private void newView() {
+//        linearLayout=new LinearLayout(context);
+//        imageView=new ImageView(context);
+//        viewPager=new ViewPager(context);
+//        topDes=new JumpShowTextView(context);
+//        topTitle=new JumpShowTextView(context);
+//        indicators=new LinearLayout(context);
+//    }
 
     public void setData(List<ItemListBean> itemListBeans){
         this.listBeans=itemListBeans;
@@ -78,6 +111,8 @@ public class TopPageView extends FrameLayout {
 
             @Override
             public void onPageSelected(int position) {
+                topDes.setWithAnimation(true);
+                topTitle.setWithAnimation(true);
                 topDes.setText(listBeans.get(position).getData().getSlogan());
                 topTitle.setText(listBeans.get(position).getData().getTitle());
             }
@@ -89,9 +124,11 @@ public class TopPageView extends FrameLayout {
         });
     }
 
-    public void changeTopPageView(int item){
-        viewPager.setCurrentItem(item);
-        topDes.setText(listBeans.get(item).getData().getSlogan());
-        topTitle.setText(listBeans.get(item).getData().getTitle());
+    public void changeTopPageView(int position){
+        viewPager.setCurrentItem(position);
+    }
+
+    public void stopChangeTopPageView(){
+
     }
 }

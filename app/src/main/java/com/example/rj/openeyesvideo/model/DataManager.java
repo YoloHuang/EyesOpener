@@ -99,6 +99,16 @@ public class DataManager implements ApiHelper,DBHelper{
         return mApiHelper.getMoreReplyBean(id,lastId,num);
     }
 
+    @Override
+    public Flowable<String[]> getHotSearch() {
+        return mApiHelper.getHotSearch();
+    }
+
+    @Override
+    public Flowable<SearchResultBean> getSearchResultBean(int start, int num, String query) {
+        return mApiHelper.getSearchResultBean(start,num,query);
+    }
+
 //    @Override
 //    public Flowable<HotBean> getHistroicalHotBean() {
 //        return mApiHelper.getHistroicalHotBean();

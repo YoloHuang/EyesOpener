@@ -8,9 +8,13 @@
         android:id="@+id/vp_top"
         android:layout_width="match_parent"
         android:layout_height="270dp"/>
-    <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="270dp">
+    <LinearLayout
+            android:orientation="vertical"
+            android:gravity="center_horizontal|bottom"
+            android:layout_gravity="center_horizontal|bottom"
+            android:layout_width="wrap_content"
+        android:layout_marginBottom="60px"
+            android:layout_height="wrap_content">
             <ImageView
                 android:id="@+id/iv_top_show"
                 android:layout_width="wrap_content"
@@ -19,24 +23,24 @@
                 android:layout_centerInParent="true"
                 />
             <com.example.rj.openeyesvideo.widget.JumpShowTextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/tv_top_title"
-                android:layout_below="@id/iv_top_show"
                 android:gravity="center"
+                android:layout_marginBottom="20px"
                 app:IsBold="true"
                 app:textColor="@color/colorWhite"
                 app:textSize="50px"/>
             <com.example.rj.openeyesvideo.widget.JumpShowTextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/tv_top_des"
                 android:gravity="center"
-                android:layout_below="@id/tv_top_title"
                 app:textColor="@color/colorWhite"
                 app:textSize="45px"
                 />
-    </RelativeLayout>
+
+    </LinearLayout>
 
 
 </FrameLayout>

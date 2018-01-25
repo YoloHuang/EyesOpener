@@ -66,4 +66,10 @@ public interface Api {
 
     @GET("v2/replies/video?")
     Flowable<ReplyBean> getMoreReplyBean(@Query("videoId")int id,@Query("lastId")int lastId,@Query("num")int num);
+
+    @GET("v3/queries/hot")
+    Flowable<String[]> getHotSearch();
+
+    @GET("v1/search?")
+    Flowable<SearchResultBean> getSearchResultBean(@Query("start")int start,@Query("num")int num,@Query("query")String query);
 }

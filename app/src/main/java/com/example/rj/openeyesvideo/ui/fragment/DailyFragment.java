@@ -3,10 +3,14 @@ package com.example.rj.openeyesvideo.ui.fragment;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -57,6 +61,7 @@ public class DailyFragment extends RootFragment<DailyPresenter> implements Daily
 
     boolean isLoading=false;
     boolean dataReady=false;
+    String TAG="hzj";
 
 
     @Override
@@ -66,6 +71,7 @@ public class DailyFragment extends RootFragment<DailyPresenter> implements Daily
 
     @Override
     protected void initEventAndData() {
+        Log.d(TAG, "initEventAndData: ");
         super.initEventAndData();
         initRecyclerView();
         initSwipeRefresh();
@@ -117,34 +123,87 @@ public class DailyFragment extends RootFragment<DailyPresenter> implements Daily
 
     @Override
     public void onStart() {
+        Log.d(TAG, "onStart: ");
         super.onStart();
-        if(dataReady && mLayoutManager.findFirstVisibleItemPosition()==0){
+        if(dataReady){
             mPresenter.startInterval();
         }
     }
 
     @Override
     public void onStop() {
+        Log.d(TAG, "onStop: ");
         super.onStop();
         mPresenter.stopInterval();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        Log.d(TAG, "onPause: ");
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.d(TAG, "onResume: ");
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        Log.d(TAG, "onCreateView: ");
+        return super.onCreateView(inflater, container, savedInstanceState);
+        
+    }
+
+    @Override
+    public void onLazyInitView(@Nullable Bundle savedInstanceState) {
+        super.onLazyInitView(savedInstanceState);
+        Log.d(TAG, "onLazyInitView: ");
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        Log.d(TAG, "onViewCreated: ");
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        Log.d(TAG, "setUserVisibleHint: "+isVisibleToUser);
+        if(isVisibleToUser){
+            if(dataReady){
+                mPresenter.startInterval();
+            }
+        }else {
+            if(mPresenter!=null){
+                mPresenter.stopInterval();
+            }
+        }
+
     }
 
     private void setToolBar() {
         int firstItemPosition=mLayoutManager.findFirstVisibleItemPosition();
         if(firstItemPosition==0){
+            mPresenter.startInterval();
             toolbar.setBackgroundColor(0x00000000);
             toolbarTitle.setText("");
             toolbarSearch.setImageResource(R.mipmap.ic_action_search_white);
         }else {
+            mPresenter.stopInterval();
             if(itemListBeans.size()>1){
                 ItemListBean itemListBean=itemListBeans.get(firstItemPosition-1);
                 toolbar.setBackgroundColor(Color.WHITE);
-                toolbarTitle.setText(itemListBean.getData().getText());
                 toolbarSearch.setImageResource(R.mipmap.ic_action_search);
-                if(itemListBean.getType()=="textHeader"){
+                Log.d("hzj", "setToolBar: itemListBean=="+itemListBean.getData().getText()+"getType"+itemListBean.getType());
+                if(itemListBean.getType().equals("textHeader")){
                     Log.d("hzj", "setToolBar: "+itemListBean.getData().getText());
                     toolbarTitle.setText(itemListBean.getData().getText());
                 }else {
+                    Log.d("hzj", "setToolBar:setText "+simpleDateFormat.format(itemListBean.getData().getDate()));
                     toolbarTitle.setText(simpleDateFormat.format(itemListBean.getData().getDate()));
                 }
             }

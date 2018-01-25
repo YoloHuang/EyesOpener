@@ -16,9 +16,12 @@ import android.widget.TextView;
 
 import com.example.rj.openeyesvideo.R;
 
+import org.reactivestreams.Subscriber;
+
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
+import io.reactivex.Flowable;
 import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -45,32 +48,40 @@ public class JumpShowTextView extends FrameLayout {
     Context context;
     TypedArray array;
     long time;
-    boolean withAnimation=true;
-    private Observable observable;
+
+    public void setWithAnimation(boolean withAnimation) {
+        this.withAnimation = withAnimation;
+    }
+
+    boolean withAnimation = true;
+    private Disposable disposable;
+    private Subscriber<Long> subscriber;
+    String finalReal;
+    int count = 0;
 
 
     public JumpShowTextView(@NonNull Context context) {
-        this(context,null);
+        this(context, null);
     }
 
     public JumpShowTextView(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        this.context=context;
-        array=context.obtainStyledAttributes(attrs,R.styleable.JumpShowTextView);
-        textSize=array.getDimension(R.styleable.JumpShowTextView_textSize,20);
-        textColor=array.getColor(R.styleable.JumpShowTextView_textColor,Color.WHITE);
-        isBold=array.getBoolean(R.styleable.JumpShowTextView_IsBold,false);
-        isSinglen=array.getBoolean(R.styleable.JumpShowTextView_IsSinglen,false);
+        this.context = context;
+        array = context.obtainStyledAttributes(attrs, R.styleable.JumpShowTextView);
+        textSize = array.getDimension(R.styleable.JumpShowTextView_textSize, 20);
+        textColor = array.getColor(R.styleable.JumpShowTextView_textColor, Color.WHITE);
+        isBold = array.getBoolean(R.styleable.JumpShowTextView_IsBold, false);
+        isSinglen = array.getBoolean(R.styleable.JumpShowTextView_IsSinglen, false);
         createText();
         initView();
     }
 
     public JumpShowTextView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
-        this(context,attrs);
+        this(context, attrs);
     }
 
-    public void setText(String text){
-        this.text=text;
+    public void setText(String text) {
+        this.text = text;
         //isRun=false;
         //initText(text);
         placeHolder.setText(text);
@@ -79,69 +90,69 @@ public class JumpShowTextView extends FrameLayout {
     }
 
     private void createText() {
-        Log.d("hzj", "createText: textColor"+textColor);
+        Log.d("hzj", "createText: textColor" + textColor);
 
-        placeHolder=new TextView(context);
+        placeHolder = new TextView(context);
         placeHolder.getPaint().setTextSize(textSize);
         placeHolder.setSingleLine(isSinglen);
         placeHolder.setTextColor(textColor);
-        placeHolder.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT));
+        placeHolder.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
         placeHolder.setVisibility(INVISIBLE);
 
-        realTextView=new TextView(context);
+        realTextView = new TextView(context);
         realTextView.getPaint().setTextSize(textSize);
         realTextView.setSingleLine(isSinglen);
         realTextView.setTextColor(textColor);
         realTextView.getPaint().setFakeBoldText(isBold);
-        realTextView.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT));
+        realTextView.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
     }
+
     private void initView() {
         removeAllViews();
         addView(placeHolder);
         addView(realTextView);
     }
 
-    boolean isRun=false;
+    boolean isRun = false;
 
-    private void startView(){
-        time=1000/text.length();
-        if(withAnimation){
-
-        }
-        if (isRun){
-            realTextView.setText(text);
-        }else {
-            for(int i=0;i<text.length();i++){
-                Observable.interval(time,TimeUnit.MILLISECONDS)
-                        .take(i)
+    private void startView() {
+        count = 0;
+        time = 1000 / text.length();
+        Log.d("hzj", "startView: time"+time+"withAnimation"+withAnimation+"isrun"+isRun);
+        if (withAnimation) {
+            if (isRun) {
+                if (disposable != null && !disposable.isDisposed()) {
+                    disposable.dispose();
+                    isRun=false;
+                    realTextView.setText(text);
+                }
+            } else {
+                isRun = true;
+                disposable = Flowable.interval(time, TimeUnit.MILLISECONDS)
+                        .take(text.length())
                         .subscribeOn(Schedulers.newThread())
                         .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(new Observer<Long>() {
+                        .subscribe(new Consumer<Long>() {
                             @Override
-                            public void onSubscribe(Disposable d) {
-
-                            }
-
-                            @Override
-                            public void onNext(Long aLong) {
-                                String finalReal=text.substring(0,aLong.intValue());
+                            public void accept(Long aLong) throws Exception {
+                                count++;
+                                if (count < text.length()) {
+                                    finalReal = text.substring(0, count);
+                                } else {
+                                    finalReal = text;
+                                    isRun = false;
+                                }
+                                Log.d("hzj", "accept: count=="+count+"---length=="+text.length()+"--finalReal=="+finalReal);
                                 realTextView.setText(finalReal);
-                                isRun=true;
                             }
-
-                            @Override
-                            public void onError(Throwable e) {
-
-                            }
-
-                            @Override
-                            public void onComplete() {
-                                isRun=false;
-                            }
-//
                         });
             }
-            isRun=true;
+            withAnimation=false;
+        }else {
+            if(disposable!=null && !disposable.isDisposed()){
+                disposable.dispose();
+            }
+           realTextView.setText(text);
         }
 
     }

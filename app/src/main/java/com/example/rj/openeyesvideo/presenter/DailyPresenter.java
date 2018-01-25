@@ -32,7 +32,7 @@ public class DailyPresenter extends RxPresenter<DailyContract.View> implements D
     List<ItemListBean> firstItemListBeans=new ArrayList<>();
     String nextUrl;
     long nextDate;
-    int topcount=0;
+    int topcount=1;
     int toplistNum;
 
     private Disposable intervalDisposable;
@@ -105,7 +105,6 @@ public class DailyPresenter extends RxPresenter<DailyContract.View> implements D
                             topcount=0;
                         }
                         mView.changeTopPageView(topcount++);
-                        ;
                     }
                 });
         addSubscribe(intervalDisposable);

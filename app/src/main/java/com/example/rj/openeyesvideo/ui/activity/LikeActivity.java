@@ -6,6 +6,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.rj.openeyesvideo.R;
@@ -26,8 +27,8 @@ public class LikeActivity extends RootActivity<LikePresenter> implements LikeCon
 
     @BindView(R.id.toolbar_title)
     TextView title;
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
+    @BindView(R.id.ic_toolbar_search)
+    ImageView toolbarSearch;
     @BindView(R.id.view_main)
     RecyclerView mRecyclerView;
 
@@ -40,10 +41,8 @@ public class LikeActivity extends RootActivity<LikePresenter> implements LikeCon
     protected void initEventAndData() {
         super.initEventAndData();
         title.setText("我的喜欢");
-        toolbar.setTitle("");
         stateLoading();
         initRecyclerView();
-        setSupportActionBar(toolbar);
         mPresenter.getLikeData();
     }
 

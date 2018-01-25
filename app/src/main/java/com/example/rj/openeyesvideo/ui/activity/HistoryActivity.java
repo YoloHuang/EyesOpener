@@ -6,6 +6,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 
@@ -27,8 +28,8 @@ public class HistoryActivity extends RootActivity<HistoryPresenter> implements H
 
     @BindView(R.id.toolbar_title)
     TextView title;
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
+    @BindView(R.id.ic_toolbar_search)
+    ImageView toolbarSearch;
     @BindView(R.id.view_main)
     RecyclerView mRecyclerView;
 
@@ -40,10 +41,9 @@ public class HistoryActivity extends RootActivity<HistoryPresenter> implements H
     protected void initEventAndData() {
         super.initEventAndData();
         title.setText("观看记录");
-        toolbar.setTitle("");
+
         stateLoading();
         initRecyclerView();
-        setSupportActionBar(toolbar);
         mPresenter.getHistoryData();
 
     }

@@ -73,6 +73,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
         fragments.add(new TagsFragment());
         fragments.add(new MyFragment());
         mMainAdapter=new MainAdapter(getSupportFragmentManager(),fragments);
+
         mViewPager.setAdapter(mMainAdapter);
 //        mTabLayout.addTab(mTabLayout.newTab().setText(tabTitle[0]));
 //        mTabLayout.addTab(mTabLayout.newTab().setText(tabTitle[1]));

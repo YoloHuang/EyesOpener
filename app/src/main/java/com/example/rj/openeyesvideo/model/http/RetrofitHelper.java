@@ -85,6 +85,16 @@ public class RetrofitHelper implements ApiHelper {
         return api.getMoreReplyBean(id,lastId,num);
     }
 
+    @Override
+    public Flowable<String[]> getHotSearch() {
+        return api.getHotSearch();
+    }
+
+    @Override
+    public Flowable<SearchResultBean> getSearchResultBean(int start, int num, String query) {
+        return api.getSearchResultBean(start,num,query);
+    }
+
 //    @Override
 //    public Flowable<HotBean> getHistroicalHotBean() {
 //        return api.getHistoricalHotBean();
