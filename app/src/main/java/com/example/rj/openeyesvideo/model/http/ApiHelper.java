@@ -35,7 +35,7 @@ public interface ApiHelper {
     Flowable<ReplyBean> getReplyBean(int id);
     Flowable<ReplyBean> getMoreReplyBean(int id,int lastId,int num);
 
-    Flowable<String[]> getHotSearch();
+    Flowable<List<String>> getHotSearch();
     Flowable<SearchResultBean> getSearchResultBean(int start,int num,String query);
 
 }

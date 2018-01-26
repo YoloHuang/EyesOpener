@@ -1,5 +1,7 @@
 package com.example.rj.openeyesvideo.di.component;
 
+import android.app.Activity;
+
 import com.example.rj.openeyesvideo.APP.App;
 import com.example.rj.openeyesvideo.di.module.AppModule;
 import com.example.rj.openeyesvideo.di.module.HttpModule;
@@ -18,7 +20,6 @@ import dagger.Component;
 @Component(modules = {AppModule.class, HttpModule.class})
 public interface AppComponent {
     App getContext();
-
     RetrofitHelper retrofitHelper();
     RealmHelper realmHelper();
     DataManager getDataManager();

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/tv_search_hot_title"
+    android:textSize="40px"
+    android:padding="5dp"
+    android:layout_margin="5dp"
+    android:singleLine="true"
+    android:textColor="@color/colorWhite"
+    android:background="@color/colorGrey"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+</TextView>

@@ -86,7 +86,7 @@ public class RetrofitHelper implements ApiHelper {
     }
 
     @Override
-    public Flowable<String[]> getHotSearch() {
+    public Flowable<List<String>> getHotSearch() {
         return api.getHotSearch();
     }
 

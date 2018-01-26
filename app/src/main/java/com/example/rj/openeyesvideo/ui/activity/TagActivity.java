@@ -41,8 +41,6 @@ public class TagActivity extends RootActivity<TagChildPresenter> implements TagC
     AppBarLayout appbar;
     @BindView(R.id.toolbar_title)
     TextView toolbar_title;
-//    @BindView(R.id.swipe_refresh)
-//    SwipeRefreshLayout swipeRefresh;
 
 
     List<ItemListBean> mItemListBeans=new ArrayList<>();
@@ -57,31 +55,9 @@ public class TagActivity extends RootActivity<TagChildPresenter> implements TagC
         super.initEventAndData();
         initRecyclerView();
         initIntent();
-        //initRefreashView();
         stateLoading();
     }
 
-//    private void initRefreashView() {
-//        appbar.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
-//            @Override
-//            public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
-//                if (verticalOffset >= 0) {
-//                    swipeRefresh.setEnabled(true);
-//                } else {
-//                    swipeRefresh.setEnabled(false);
-//                    float rate = (float)(SystemUtil.dp2px(mContext, 256) + verticalOffset * 2) / SystemUtil.dp2px(mContext, 256);
-//                    if (rate >= 0)
-//                        ivOrigin.setAlpha(rate);
-//                }
-//            }
-//        });
-//        swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-//            @Override
-//            public void onRefresh() {
-//                mPresenter.getTagChildData(tagId);
-//            }
-//        });
-//    }
 
     private void initIntent() {
         Intent intent=getIntent();
@@ -131,10 +107,8 @@ public class TagActivity extends RootActivity<TagChildPresenter> implements TagC
                 super.onScrolled(recyclerView, dx, dy);
                 int lastItemPositon= mLinearLayoutManager.findLastCompletelyVisibleItemPosition();
                 int totalPotions=mLinearLayoutManager.getItemCount();
-                Log.d("hzj", "onScrolled: lastItemPositon:"+lastItemPositon+",totalPotions:"+totalPotions+";isloading:"+isLoading);
                 if(lastItemPositon>=totalPotions-6 && dy>0 && totalPotions<=66){
                     if(isLoading){
-                        Log.d("hzj", "onScrolled: "+isLoading);
                     }else {
                         isLoading=true;
                         mPresenter.getMoreData(tagId);
@@ -159,7 +133,6 @@ public class TagActivity extends RootActivity<TagChildPresenter> implements TagC
                 }
             }
         }
-        Log.d("hzj", "showContents: mItemListBeans"+mItemListBeans.size());
         mAdapter.addTagChildData(mItemListBeans);
         stateStart();
         isLoading=false;

@@ -23,6 +23,10 @@
         <item name="android:activityOpenEnterAnimation">@anim/activity_alpha_in</item>
         <item name="android:activityOpenExitAnimation">@anim/activity_alpha_in</item>
     </style>
+    <style name="SearchTheme" parent="MainTheme">
+        <item name="colorControlNormal">@color/colorGrey</item>
+        <item name="colorControlActivated">@color/colorGrey</item>
+    </style>
 
     <style name="MaterialSearchViewStyle">
         <!-- -->

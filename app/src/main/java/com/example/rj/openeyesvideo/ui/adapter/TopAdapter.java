@@ -37,7 +37,6 @@ public class TopAdapter extends PagerAdapter {
     public Object instantiateItem(final ViewGroup container, final int position) {
         View view= LayoutInflater.from(context).inflate(R.layout.item_top_image,container,false);
         ImageView imageView=view.findViewById(R.id.iv_top);
-        Log.d("hzj", "instantiateItem: getfeed=="+listBeans.get(position).getData().getCover().getFeed());
         ImageLoader.load(context,listBeans.get(position).getData().getCover().getFeed(),imageView);
         view.setOnClickListener(new View.OnClickListener() {
             @Override

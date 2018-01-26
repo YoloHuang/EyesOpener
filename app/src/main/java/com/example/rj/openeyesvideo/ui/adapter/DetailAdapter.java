@@ -149,6 +149,7 @@ int likeCount;
 
     public void getItemData(ItemListBean itemListBean){
         this.data=itemListBean;
+        notifyDataSetChanged();
     }
 
     public void setlike(boolean islike){

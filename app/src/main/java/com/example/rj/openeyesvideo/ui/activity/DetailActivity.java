@@ -72,6 +72,7 @@ public class DetailActivity extends RootActivity<DetailPresenter> implements Det
     @Override
     protected void initEventAndData() {
         super.initEventAndData();
+        itemListBean=(ItemListBean) getIntent().getSerializableExtra("itemListBean");
         getIntentData();
         initRecyclerView();
         stateLoading();
@@ -162,11 +163,20 @@ public class DetailActivity extends RootActivity<DetailPresenter> implements Det
         mAdapter.setOnItemClickListener(new DetailAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int id) {
-                Intent intent=new Intent();
-                intent.setClass(mContext,DetailActivity.class);
-                ItemListBean itemListBean=listBeans.get(id-2);
-                intent.putExtra("itemListBean",itemListBean);
-                mContext.startActivity(intent);
+//                Intent intent=new Intent();
+//                intent.setClass(mContext,DetailActivity.class);
+//                ItemListBean itemListBean=listBeans.get(id-2);
+//                intent.putExtra("itemListBean",itemListBean);
+//                mContext.startActivity(intent);
+                itemListBean=listBeans.get(id-2);
+                stateLoading();
+                getIntentData();
+                mAdapter.getItemData(itemListBean);
+                mPresenter.isLike(id);
+                listBeans.clear();
+                initVedio();
+                Log.d("hzj", "onItemClick: newid+"+itemListBean.getData().getId()+"oldid"+id);
+                mPresenter.getVedioData(itemListBean.getData().getId());
             }
         });
         mAdapter.setOnButtonClickListener(new DetailAdapter.OnButtonClickListener() {
@@ -219,7 +229,7 @@ public class DetailActivity extends RootActivity<DetailPresenter> implements Det
     }
 
     private void getIntentData() {
-        itemListBean=(ItemListBean) getIntent().getSerializableExtra("itemListBean");
+
         Log.d("hzj", "getIntentData: itemListBean"+itemListBean.getData().getPlayUrl());
         Url=itemListBean.getData().getPlayUrl();
         //Url=getIntent().getExtras().getString("url");
@@ -343,18 +353,7 @@ public class DetailActivity extends RootActivity<DetailPresenter> implements Det
     }
 
 
-//    @Override
-//    public void onBackPresse() {
-//        Log.d("hzj", "onBackPressedSupport: ");
-//        if (orientationUtils!=null){
-//            Log.d("hzj", "onBackPressedSupport: orientationUtils");
-//            orientationUtils.backToProtVideo();
-//        }
-//        if (StandardGSYVideoPlayer.backFromWindowFull(this)){
-//            return;
-//        }
-//        super.onBackPressed();
-//    }
+
 
     @Override
     public void onBackPressedSupport() {

@@ -100,7 +100,7 @@ public class DataManager implements ApiHelper,DBHelper{
     }
 
     @Override
-    public Flowable<String[]> getHotSearch() {
+    public Flowable<List<String>> getHotSearch() {
         return mApiHelper.getHotSearch();
     }
 

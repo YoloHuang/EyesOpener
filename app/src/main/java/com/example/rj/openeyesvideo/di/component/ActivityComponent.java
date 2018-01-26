@@ -9,6 +9,7 @@ import com.example.rj.openeyesvideo.ui.activity.DownloadActivity;
 import com.example.rj.openeyesvideo.ui.activity.HistoryActivity;
 import com.example.rj.openeyesvideo.ui.activity.LikeActivity;
 import com.example.rj.openeyesvideo.ui.activity.MainActivity;
+import com.example.rj.openeyesvideo.ui.activity.SearchActivity;
 import com.example.rj.openeyesvideo.ui.activity.TagActivity;
 import com.example.rj.openeyesvideo.ui.activity.WelcomeActivity;
 
@@ -28,4 +29,5 @@ public interface ActivityComponent {
     void inject(HistoryActivity historyActivity);
     void inject(LikeActivity likeActivity);
     void inject(DownloadActivity downloadActivity);
+    void inject(SearchActivity searchActivity);
 }

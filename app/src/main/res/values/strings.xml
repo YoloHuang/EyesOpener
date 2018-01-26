@@ -3,4 +3,6 @@
     <string name="action_search">搜索</string>
     <string name="title_today">今天推荐</string>
     <string name="error_tips">糟糕！加载失败了= = \n 一些可能的原因：\n1.惨不忍睹的网络环境\n 2.服务器君的不定期抽风</string>
+    <string name="search_tip">输入标题或者描述中的关键词找到更多视频</string>
+    <string name="search_hot">- 热门搜索词 -</string>
 </resources>

@@ -90,7 +90,6 @@ public class JumpShowTextView extends FrameLayout {
     }
 
     private void createText() {
-        Log.d("hzj", "createText: textColor" + textColor);
 
         placeHolder = new TextView(context);
         placeHolder.getPaint().setTextSize(textSize);
@@ -118,7 +117,6 @@ public class JumpShowTextView extends FrameLayout {
     private void startView() {
         count = 0;
         time = 1000 / text.length();
-        Log.d("hzj", "startView: time"+time+"withAnimation"+withAnimation+"isrun"+isRun);
         if (withAnimation) {
             if (isRun) {
                 if (disposable != null && !disposable.isDisposed()) {
@@ -142,7 +140,6 @@ public class JumpShowTextView extends FrameLayout {
                                     finalReal = text;
                                     isRun = false;
                                 }
-                                Log.d("hzj", "accept: count=="+count+"---length=="+text.length()+"--finalReal=="+finalReal);
                                 realTextView.setText(finalReal);
                             }
                         });

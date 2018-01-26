@@ -23,6 +23,7 @@ import com.example.rj.openeyesvideo.model.bean.DailyBean;
 import com.example.rj.openeyesvideo.model.bean.ItemListBean;
 import com.example.rj.openeyesvideo.presenter.DailyPresenter;
 import com.example.rj.openeyesvideo.ui.activity.DetailActivity;
+import com.example.rj.openeyesvideo.ui.activity.SearchActivity;
 import com.example.rj.openeyesvideo.ui.adapter.BaseRecyclerAdapter;
 import com.example.rj.openeyesvideo.ui.adapter.DailyRecyclerAdapter;
 
@@ -79,6 +80,14 @@ public class DailyFragment extends RootFragment<DailyPresenter> implements Daily
         toolbar.setBackgroundColor(0x00000000);
         toolbarTitle.setText("");
         toolbarSearch.setImageResource(R.mipmap.ic_action_search_white);
+        toolbarSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent searchIntent=new Intent();
+                searchIntent.setClass(mContext, SearchActivity.class);
+                mContext.startActivity(searchIntent);
+            }
+        });
     }
 
     private void initRecyclerView() {
@@ -123,7 +132,6 @@ public class DailyFragment extends RootFragment<DailyPresenter> implements Daily
 
     @Override
     public void onStart() {
-        Log.d(TAG, "onStart: ");
         super.onStart();
         if(dataReady){
             mPresenter.startInterval();
@@ -132,7 +140,6 @@ public class DailyFragment extends RootFragment<DailyPresenter> implements Daily
 
     @Override
     public void onStop() {
-        Log.d(TAG, "onStop: ");
         super.onStop();
         mPresenter.stopInterval();
     }
@@ -140,39 +147,13 @@ public class DailyFragment extends RootFragment<DailyPresenter> implements Daily
     @Override
     public void onPause() {
         super.onPause();
-        Log.d(TAG, "onPause: ");
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        Log.d(TAG, "onResume: ");
-    }
 
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        Log.d(TAG, "onCreateView: ");
-        return super.onCreateView(inflater, container, savedInstanceState);
-        
-    }
-
-    @Override
-    public void onLazyInitView(@Nullable Bundle savedInstanceState) {
-        super.onLazyInitView(savedInstanceState);
-        Log.d(TAG, "onLazyInitView: ");
-    }
-
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        Log.d(TAG, "onViewCreated: ");
-    }
 
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-        Log.d(TAG, "setUserVisibleHint: "+isVisibleToUser);
         if(isVisibleToUser){
             if(dataReady){
                 mPresenter.startInterval();
@@ -198,12 +179,9 @@ public class DailyFragment extends RootFragment<DailyPresenter> implements Daily
                 ItemListBean itemListBean=itemListBeans.get(firstItemPosition-1);
                 toolbar.setBackgroundColor(Color.WHITE);
                 toolbarSearch.setImageResource(R.mipmap.ic_action_search);
-                Log.d("hzj", "setToolBar: itemListBean=="+itemListBean.getData().getText()+"getType"+itemListBean.getType());
                 if(itemListBean.getType().equals("textHeader")){
-                    Log.d("hzj", "setToolBar: "+itemListBean.getData().getText());
                     toolbarTitle.setText(itemListBean.getData().getText());
                 }else {
-                    Log.d("hzj", "setToolBar:setText "+simpleDateFormat.format(itemListBean.getData().getDate()));
                     toolbarTitle.setText(simpleDateFormat.format(itemListBean.getData().getDate()));
                 }
             }

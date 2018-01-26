@@ -7,6 +7,7 @@ import android.content.Context;
 import com.example.rj.openeyesvideo.di.component.AppComponent;
 import com.example.rj.openeyesvideo.di.component.DaggerAppComponent;
 import com.example.rj.openeyesvideo.di.module.AppModule;
+import com.example.rj.openeyesvideo.ui.activity.DetailActivity;
 import com.liulishuo.filedownloader.FileDownloader;
 
 import java.io.File;
@@ -48,6 +49,14 @@ public class App extends Application {
     public void addActivity(Activity activity){
         if(activities==null){
             activities=new HashSet<>();
+        }
+        if(activity instanceof DetailActivity){
+            for (Activity activity1 :activities){
+                if(activity1 instanceof DetailActivity){
+                    removeActivity(activity1);
+                    activity1.finish();
+                }
+            }
         }
         activities.add(activity);
     }

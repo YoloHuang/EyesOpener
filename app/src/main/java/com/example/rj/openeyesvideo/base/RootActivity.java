@@ -42,6 +42,7 @@ public abstract class RootActivity<T extends BasePresenter> extends BaseActivity
         View.inflate(mContext, R.layout.view_progress, mParent);
         viewLoading = mParent.findViewById(R.id.view_loading);
         ivLoading = (ProgressImageView) viewLoading.findViewById(R.id.iv_progress);
+        viewLoading.setLayoutParams(viewMain.getLayoutParams());
         viewLoading.setVisibility(View.GONE);
         viewMain.setVisibility(View.VISIBLE);
     }

@@ -42,8 +42,11 @@
         <activity
             android:name=".ui.activity.LikeActivity"
             android:theme="@style/MainTheme" />
-        <activity android:name=".ui.activity.DownloadActivity"
+        <activity
+            android:name=".ui.activity.DownloadActivity"
             android:theme="@style/MainTheme" />
+        <activity android:name=".ui.activity.SearchActivity"
+            android:theme="@style/SearchTheme"/>
     </application>
 
 </manifest>

@@ -34,14 +34,13 @@ public class SearchPresenter extends RxPresenter<SearchContract.View> implements
     @Override
     public void getHotSearchData() {
         addSubscribe(mDataManager.getHotSearch()
-        .compose(RxUtil.<String[]>rxSchedulerHelper())
-        .subscribeWith(new CommonSubscriber<String[]>(mView) {
+        .compose(RxUtil.<List<String>>rxSchedulerHelper())
+        .subscribeWith(new CommonSubscriber<List<String>>(mView) {
             @Override
-            public void onNext(String[] strings) {
-                for(int i=0;i<strings.length;i++){
-                    hotSearch.add(strings[i]);
-                }
-                mView.showHotSearch(hotSearch);
+            public void onNext(List<String> strings) {
+                Log.d("hzj", "onNext: strings"+strings);
+                hotSearch=strings;
+                mView.showHotSearch(strings);
             }
         }));
     }
