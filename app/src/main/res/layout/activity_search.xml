@@ -15,6 +15,7 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
             android:id="@+id/et_search"
             android:layout_toLeftOf="@id/iv_dosearch"
             android:singleLine="true"
@@ -56,15 +57,25 @@
             android:textStyle="bold"
             android:text="@string/search_hot"/>
 
-        <android.support.v7.widget.RecyclerView
-            android:layout_width="250dp"
+        <!--<android.support.v7.widget.RecyclerView-->
+            <!--android:layout_width="250dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_below="@id/tv_search_hot"-->
+            <!--android:layout_marginTop="20dp"-->
+            <!--android:id="@+id/rv_search_hot"-->
+            <!--android:layout_centerHorizontal="true">
+            </android.support.v7.widget.RecyclerView>-->
+
+        <com.zhy.view.flowlayout.TagFlowLayout
+            android:layout_width="350dp"
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_search_hot"
+            android:layout_centerHorizontal="true"
             android:layout_marginTop="20dp"
-            android:id="@+id/rv_search_hot"
-            android:layout_centerHorizontal="true">
+            android:padding="20dp"
+            app:max_select="1"
+            android:id="@+id/fl_searchhot"/>
 
-        </android.support.v7.widget.RecyclerView>
     </RelativeLayout>
 
 </RelativeLayout>

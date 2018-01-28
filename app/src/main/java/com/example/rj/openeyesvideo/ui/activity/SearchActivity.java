@@ -6,10 +6,13 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.example.rj.openeyesvideo.R;
 import com.example.rj.openeyesvideo.base.BaseActivity;
@@ -17,6 +20,9 @@ import com.example.rj.openeyesvideo.base.Contract.SearchContract;
 import com.example.rj.openeyesvideo.model.bean.ItemListBean;
 import com.example.rj.openeyesvideo.presenter.SearchPresenter;
 import com.example.rj.openeyesvideo.ui.adapter.SearchHotAdapter;
+import com.zhy.view.flowlayout.FlowLayout;
+import com.zhy.view.flowlayout.TagAdapter;
+import com.zhy.view.flowlayout.TagFlowLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,12 +36,12 @@ public class SearchActivity extends BaseActivity<SearchPresenter> implements Sea
     ImageView doSearch;
     @BindView(R.id.et_search)
     EditText editSearch;
-    @BindView(R.id.rv_search_hot)
-    RecyclerView hotRecyclerView;
+    @BindView(R.id.fl_searchhot)
+    TagFlowLayout flowLayout;
 
 
-    SearchHotAdapter hotAdapter;
-    GridLayoutManager gridLayoutManager;
+
+
     LinearLayoutManager linearLayoutManager;
     RelativeLayout root;
 
@@ -44,11 +50,16 @@ public class SearchActivity extends BaseActivity<SearchPresenter> implements Sea
 
     @Override
     protected void initEventAndData() {
-        hotAdapter=new SearchHotAdapter(mContext,hotList);
-        gridLayoutManager=new GridLayoutManager(mContext,3);
-        hotRecyclerView.setAdapter(hotAdapter);
-        hotRecyclerView.setLayoutManager(gridLayoutManager);
+
         mPresenter.getHotSearchData();
+
+        flowLayout.setOnTagClickListener(new TagFlowLayout.OnTagClickListener() {
+            @Override
+            public boolean onTagClick(View view, int position, FlowLayout parent) {
+                mPresenter.getSearchData(hotList.get(position));
+                return true;
+            }
+        });
     }
 
     @Override
@@ -60,7 +71,15 @@ public class SearchActivity extends BaseActivity<SearchPresenter> implements Sea
     public void showHotSearch(List<String> stringList) {
         Log.d("hzj", "showHotSearch: "+stringList.get(0));
         this.hotList=stringList;
-        hotAdapter.getHotData(hotList);
+        flowLayout.setAdapter(new TagAdapter<String>(hotList) {
+            @Override
+            public View getView(FlowLayout parent, int position, String o) {
+                TextView text=(TextView) LayoutInflater.from(SearchActivity.this)
+                        .inflate(R.layout.view_search_hot,parent,false);
+                text.setText(hotList.get(position));
+                return text;
+            }
+        });
     }
 
     @Override

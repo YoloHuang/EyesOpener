@@ -72,26 +72,6 @@ public class DailyRecyclerAdapter extends BaseRecyclerAdapter<ItemListBean> {
 
     }
 
-    private void setOnPageChange() {
-        viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-                topDes.setText(topList.get(position).getData().getSlogan());
-                topTitle.setText(topList.get(position).getData().getTitle());
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        });
-    }
-
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {

@@ -2,7 +2,7 @@
 <TextView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/tv_search_hot_title"
-    android:textSize="40px"
+    android:textSize="35px"
     android:padding="5dp"
     android:layout_margin="5dp"
     android:singleLine="true"
