@@ -23,14 +23,14 @@
             android:orientation="vertical"
             android:layout_toRightOf="@id/item_video_image">
 
-            <com.example.rj.openeyesvideo.widget.JumpShowTextView
+            <TextView
                 android:id="@+id/item_video_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="2dp"
-                app:textColor="@color/colorWhite"
-                app:IsBold="true"
-                app:textSize="40px" />
+                android:textColor="@color/colorWhite"
+                android:textStyle="bold"
+                android:textSize="40px" />
             <TextView
                 android:layout_width="match_parent"
                 android:id="@+id/item_video_tag"

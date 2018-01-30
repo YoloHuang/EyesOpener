@@ -19,8 +19,12 @@
             android:id="@+id/et_search"
             android:layout_toLeftOf="@id/iv_dosearch"
             android:singleLine="true"
+            android:background="@null"
+            android:hint="@string/search_hint"
+            android:textSize="30px"
             android:textColor="@color/colorBlack"
             android:gravity="center"
+            android:imeOptions="actionSearch"
             android:layout_centerInParent="true"/>
         <ImageView
             android:layout_width="wrap_content"
@@ -33,6 +37,7 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:id="@+id/view_search_tip"
         android:layout_width="match_parent"
         android:layout_below="@id/view_search_title"
         android:layout_height="match_parent">

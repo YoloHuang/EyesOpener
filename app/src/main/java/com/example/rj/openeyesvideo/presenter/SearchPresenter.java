@@ -53,12 +53,11 @@ public class SearchPresenter extends RxPresenter<SearchContract.View> implements
             @Override
             public void onNext(SearchResultBean searchResultBean) {
                 nextUrl=searchResultBean.getNextPageUrl();
-                for(ItemListBean itemListBean :searchResultBean.getItemList()){
-                    if(itemListBean.getType().equals("video")){
-                        listBeans.add(itemListBean);
-                    }
+                listBeans.clear();
+                for(ItemListBean resultBean :searchResultBean.getItemList()){
+                        listBeans.add(resultBean);
                 }
-                mView.showResult(listBeans);
+                mView.showResult(listBeans,searchResultBean.getTotal());
             }
         }));
 
@@ -78,9 +77,8 @@ public class SearchPresenter extends RxPresenter<SearchContract.View> implements
                 @Override
                 public void onNext(SearchResultBean searchResultBean) {
                     for(ItemListBean itemListBean:searchResultBean.getItemList()){
-                        if(itemListBean.getType().equals("video")){
                             moreListBeans.add(itemListBean);
-                        }
+
                     }
                     mView.showMoreResult(moreListBeans);
                     nextUrl=searchResultBean.getNextPageUrl();

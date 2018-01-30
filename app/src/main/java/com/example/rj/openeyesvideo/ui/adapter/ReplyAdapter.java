@@ -1,6 +1,7 @@
 package com.example.rj.openeyesvideo.ui.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.util.Log;
@@ -57,12 +58,12 @@ public class ReplyAdapter extends BaseRecyclerAdapter<ReplyBean.ItemListBean> {
         View itemView;
         if(viewType==ITEM_TYPE.TYPE_END.ordinal()){
             itemView=new ListEndView(mContext);
-            itemView.setLayoutParams(new RecyclerView.LayoutParams(RecyclerView.LayoutParams.MATCH_PARENT,RecyclerView.LayoutParams.WRAP_CONTENT));
         }else if(viewType==ITEM_TYPE.TYPE_TITLE.ordinal()){
             itemView=new ItemReplyTitleView(mContext);
         }else {
             itemView=new ItemReplyView(mContext);
         }
+        itemView.setLayoutParams(new RecyclerView.LayoutParams(RecyclerView.LayoutParams.MATCH_PARENT,RecyclerView.LayoutParams.WRAP_CONTENT));
         return new ViewHolder(itemView);
     }
 
@@ -74,7 +75,7 @@ public class ReplyAdapter extends BaseRecyclerAdapter<ReplyBean.ItemListBean> {
         }else if(itemView instanceof ItemReplyTitleView){
             ((ItemReplyTitleView) itemView).setData(datas.get(position));
         }else if (itemView instanceof ListEndView){
-
+            ((ListEndView) itemView).textEnd.setTextColor(Color.WHITE);
         }
     }
 

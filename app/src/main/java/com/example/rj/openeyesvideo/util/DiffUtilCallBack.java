@@ -1,6 +1,7 @@
 package com.example.rj.openeyesvideo.util;
 
 import android.support.v7.util.DiffUtil;
+import android.util.Log;
 
 import com.example.rj.openeyesvideo.model.bean.DailyBean;
 import com.example.rj.openeyesvideo.model.bean.ItemListBean;

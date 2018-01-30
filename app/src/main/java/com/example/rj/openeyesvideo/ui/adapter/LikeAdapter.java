@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.example.rj.openeyesvideo.R;
 import com.example.rj.openeyesvideo.component.ImageLoader;
 import com.example.rj.openeyesvideo.model.bean.LikeBean;
+import com.example.rj.openeyesvideo.ui.view.ListEndView;
 
 import java.util.List;
 
@@ -23,6 +24,20 @@ import butterknife.ButterKnife;
 
 public class LikeAdapter extends BaseRecyclerAdapter<LikeBean> {
 
+    public enum ITEM_TYPE{
+        TYPE_NEW,
+        TYPE_END
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        if(position==datas.size()){
+            return ITEM_TYPE.TYPE_END.ordinal();
+        }else {
+            return ITEM_TYPE.TYPE_NEW.ordinal();
+        }
+    }
+
 
     public LikeAdapter(Context context, List<LikeBean> datas) {
         super(context, datas);
@@ -30,7 +45,14 @@ public class LikeAdapter extends BaseRecyclerAdapter<LikeBean> {
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ItemViewHolder(mLayoutInflater.inflate(R.layout.item_daily,parent,false));
+        if(viewType==ITEM_TYPE.TYPE_NEW.ordinal()){
+            return new ItemViewHolder(mLayoutInflater.inflate(R.layout.item_daily,parent,false));
+        }else {
+            View view=new ListEndView(mContext);
+            view.setLayoutParams(new RecyclerView.LayoutParams(RecyclerView.LayoutParams.MATCH_PARENT,RecyclerView.LayoutParams.WRAP_CONTENT));
+            return new Holder(view);
+        }
+
     }
 
     @Override
@@ -52,7 +74,7 @@ public class LikeAdapter extends BaseRecyclerAdapter<LikeBean> {
 
     @Override
     public int getItemCount() {
-        return datas.size();
+        return datas.size()+1;
     }
 
     public void  addLikeData(List<LikeBean> LikeBean){
@@ -77,6 +99,13 @@ public class LikeAdapter extends BaseRecyclerAdapter<LikeBean> {
         public ItemViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this,itemView);
+        }
+    }
+
+    public static class Holder extends RecyclerView.ViewHolder{
+
+        public Holder(View itemView) {
+            super(itemView);
         }
     }
 

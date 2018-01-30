@@ -8,8 +8,8 @@ import java.util.List;
 
 public class SearchResultBean {
 
-    public int count;
-    public int total;
+    private int count;
+    private int total;
 
     public String getNextPageUrl() {
         return nextPageUrl;
@@ -19,8 +19,8 @@ public class SearchResultBean {
         this.nextPageUrl = nextPageUrl;
     }
 
-    String nextPageUrl;
-    public List<ItemListBean> itemList;
+    private String nextPageUrl;
+    private List<ItemListBean> itemList;
 
     public int getCount() {
         return count;
@@ -45,4 +45,5 @@ public class SearchResultBean {
     public void setItemList(List<ItemListBean> itemList) {
         this.itemList = itemList;
     }
+
 }

@@ -6,8 +6,11 @@ import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 
 import com.example.rj.openeyesvideo.R;
+
+import butterknife.BindView;
 
 /**
  * Created by rj on 2018/1/11.
@@ -15,6 +18,8 @@ import com.example.rj.openeyesvideo.R;
 
 public class ListEndView extends FrameLayout {
 
+    @BindView(R.id.text_end)
+    public TextView textEnd;
     Context context;
 
     public ListEndView(@NonNull Context context) {

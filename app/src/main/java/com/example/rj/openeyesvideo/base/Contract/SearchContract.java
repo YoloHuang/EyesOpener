@@ -3,6 +3,7 @@ package com.example.rj.openeyesvideo.base.Contract;
 import com.example.rj.openeyesvideo.base.BasePresenter;
 import com.example.rj.openeyesvideo.base.BaseView;
 import com.example.rj.openeyesvideo.model.bean.ItemListBean;
+import com.example.rj.openeyesvideo.model.bean.SearchResultBean;
 
 import java.util.List;
 
@@ -13,8 +14,9 @@ import java.util.List;
 public interface SearchContract {
     interface View extends BaseView{
         void  showHotSearch(List<String> stringList);
-        void  showResult(List<ItemListBean> listBeans);
+        void  showResult(List<ItemListBean> listBeans,int total);
         void showMoreResult(List<ItemListBean> listBeans);
+        void addProgressView();
     }
     interface Presenter extends BasePresenter<View>{
         void getHotSearchData();

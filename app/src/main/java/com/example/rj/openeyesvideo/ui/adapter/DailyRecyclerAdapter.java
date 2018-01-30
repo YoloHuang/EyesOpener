@@ -16,6 +16,7 @@ import com.example.rj.openeyesvideo.component.ImageLoader;
 import com.example.rj.openeyesvideo.model.DataManager;
 import com.example.rj.openeyesvideo.model.bean.DailyBean;
 import com.example.rj.openeyesvideo.model.bean.ItemListBean;
+import com.example.rj.openeyesvideo.ui.view.ItemDailyDateView;
 import com.example.rj.openeyesvideo.ui.view.ItemDailyView;
 import com.example.rj.openeyesvideo.ui.view.TopPageView;
 import com.example.rj.openeyesvideo.util.DiffUtilCallBack;
@@ -36,11 +37,8 @@ import butterknife.ButterKnife;
 public class DailyRecyclerAdapter extends BaseRecyclerAdapter<ItemListBean> {
 
 
-    ViewPager viewPager;
-    TopAdapter topAdapter;
+
     List<ItemListBean> topList;
-    JumpShowTextView topTitle;
-    JumpShowTextView topDes;
     View topItemView;
 
 
@@ -75,42 +73,32 @@ public class DailyRecyclerAdapter extends BaseRecyclerAdapter<ItemListBean> {
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View itemView;
         if(viewType==ITEM_TYPE.TYPE_DATE.ordinal()){
-            return new DateViewHolder(mLayoutInflater.inflate(R.layout.item_date,parent,false));
+            itemView=new ItemDailyDateView(mContext);
         }else if(viewType==ITEM_TYPE.TYPE_TOP.ordinal()){
-            View itemView=new TopPageView(mContext);
-            itemView.setLayoutParams(new RecyclerView.LayoutParams(RecyclerView.LayoutParams.MATCH_PARENT,RecyclerView.LayoutParams.WRAP_CONTENT));
-            return new TopViewHolder(itemView);
+           itemView=new TopPageView(mContext);
+
         }else {
-            return new ItemViewHolder(mLayoutInflater.inflate(R.layout.item_daily,parent,false));
+            itemView=new ItemDailyView(mContext);
         }
+        itemView.setLayoutParams(new RecyclerView.LayoutParams(RecyclerView.LayoutParams.MATCH_PARENT,RecyclerView.LayoutParams.WRAP_CONTENT));
+        return new Holder(itemView);
     }
 
     @Override
     public void convert(ViewHolder holder, final int position) {
-
-        if(holder instanceof DateViewHolder){
-            //((DateViewHolder)holder).textView.setTypeface(mContext,"fonts/Lobster-1.4.otf");
-            ((DateViewHolder)holder).textView.setText(datas.get(position-1).getData().getText());
-        }else if(holder instanceof TopViewHolder){
-            topItemView=((TopViewHolder)holder).itemView;
-            if(topItemView instanceof TopPageView){
-                ((TopPageView) topItemView).setData(topList);
-            }
+        View view=holder.itemView;
+        if(view instanceof ItemDailyDateView){
+            ((ItemDailyDateView) view).setData(datas.get(position-1));
+        }else if(view instanceof TopPageView){
+            topItemView=view;
+            ((TopPageView) view).setData(topList);
         } else {
-            String detail;
-            if(datas.get(position-1).getData().getAuthor()==null){
-                detail="开眼精选 / # "+datas.get(position-1).getData().getCategory();
-            }else {
-                detail=datas.get(position-1).getData().getAuthor().getName()+" / #" +datas.get(position-1).getData().getCategory();
-                ImageLoader.loadCircle(mContext,datas.get(position-1).getData().getAuthor().getIcon(),((ItemViewHolder)holder).mAuthorImage);
-            }
-            ((ItemViewHolder)holder).mAuthorText.setText(detail);
-            ((ItemViewHolder)holder).mTitleTest.setText(datas.get(position-1).getData().getTitle());
-            ImageLoader.load(mContext,datas.get(position-1).getData().getCover().getFeed(),((ItemViewHolder)holder).mDailyImage);
-            holder.itemView.setOnClickListener(new View.OnClickListener() {
+            ((ItemDailyView)view).setData(datas.get(position-1));
+            ((ItemDailyView) view).setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View v) {
+                public void onClick(View view) {
                     if(onItemClickListener!=null){
                         onItemClickListener.onItemClick(position);
                     }
@@ -120,38 +108,9 @@ public class DailyRecyclerAdapter extends BaseRecyclerAdapter<ItemListBean> {
     }
 
 
+    public static class Holder extends ViewHolder{
 
-    public static class DateViewHolder extends ViewHolder{
-
-        @BindView(R.id.text_date)
-        TextView textView;
-
-        public DateViewHolder(View itemView) {
-            super(itemView);
-            ButterKnife.bind(this,itemView);
-        }
-    }
-
-    public static class ItemViewHolder extends ViewHolder{
-
-        @BindView(R.id.iv_daily_item_image)
-        ImageView mDailyImage;
-        @BindView(R.id.iv_daily_author)
-        ImageView mAuthorImage;
-        @BindView(R.id.item_text_author)
-        TextView mAuthorText;
-        @BindView(R.id.item_text_title)
-        TextView mTitleTest;
-
-        public ItemViewHolder(View itemView) {
-            super(itemView);
-            ButterKnife.bind(this,itemView);
-        }
-    }
-
-    public static class TopViewHolder extends ViewHolder{
-
-        public TopViewHolder(View itemView) {
+        public Holder(View itemView) {
             super(itemView);
         }
     }

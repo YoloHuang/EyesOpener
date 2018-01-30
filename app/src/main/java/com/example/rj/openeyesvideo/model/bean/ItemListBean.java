@@ -124,6 +124,13 @@ public  class ItemListBean  implements Serializable {
         private List<?> subtitles;
         private String coverForFeed;
         private String text;
+        private int count;
+        private List<ItemListBean> itemList;
+
+        private HeaderBean header;
+
+        public DataBean() {
+        }
 
         public String getDataType() {
             return dataType;
@@ -459,6 +466,152 @@ public  class ItemListBean  implements Serializable {
 
         public void setText(String text) {
             this.text = text;
+        }
+
+        public int getCount() {
+            return count;
+        }
+
+        public void setCount(int count) {
+            this.count = count;
+        }
+
+        public List<ItemListBean> getListBeans() {
+            return itemList;
+        }
+
+        public void setListBeans(List<ItemListBean> listBeans) {
+            this.itemList = listBeans;
+        }
+
+        public HeaderBean getHeader() {
+            return header;
+        }
+
+        public void setHeader(HeaderBean header) {
+            this.header = header;
+        }
+
+        public static class HeaderBean {
+
+
+            private int id;
+            private String icon;
+            private String iconType;
+            private String title;
+            private Object subTitle;
+            private String description;
+            private String actionUrl;
+            private FollowBean follow;
+            private boolean ifPgc;
+
+            public int getId() {
+                return id;
+            }
+
+            public void setId(int id) {
+                this.id = id;
+            }
+
+            public String getIcon() {
+                return icon;
+            }
+
+            public void setIcon(String icon) {
+                this.icon = icon;
+            }
+
+            public String getIconType() {
+                return iconType;
+            }
+
+            public void setIconType(String iconType) {
+                this.iconType = iconType;
+            }
+
+            public String getTitle() {
+                return title;
+            }
+
+            public void setTitle(String title) {
+                this.title = title;
+            }
+
+            public Object getSubTitle() {
+                return subTitle;
+            }
+
+            public void setSubTitle(Object subTitle) {
+                this.subTitle = subTitle;
+            }
+
+            public String getDescription() {
+                return description;
+            }
+
+            public void setDescription(String description) {
+                this.description = description;
+            }
+
+            public String getActionUrl() {
+                return actionUrl;
+            }
+
+            public void setActionUrl(String actionUrl) {
+                this.actionUrl = actionUrl;
+            }
+
+            public FollowBean getFollow() {
+                return follow;
+            }
+
+            public void setFollow(FollowBean follow) {
+                this.follow = follow;
+            }
+
+            public boolean isIfPgc() {
+                return ifPgc;
+            }
+
+            public void setIfPgc(boolean ifPgc) {
+                this.ifPgc = ifPgc;
+            }
+
+            public static class FollowBean {
+                /**
+                 * itemType : author
+                 * itemId : 550
+                 * followed : false
+                 */
+
+                private String itemType;
+                private int itemId;
+                private boolean followed;
+
+                public String getItemType() {
+                    return itemType;
+                }
+
+                public void setItemType(String itemType) {
+                    this.itemType = itemType;
+                }
+
+                public int getItemId() {
+                    return itemId;
+                }
+
+                public void setItemId(int itemId) {
+                    this.itemId = itemId;
+                }
+
+                public boolean isFollowed() {
+                    return followed;
+                }
+
+                public void setFollowed(boolean followed) {
+                    this.followed = followed;
+                }
+            }
         }
 
         public static class ProviderBean implements Serializable{

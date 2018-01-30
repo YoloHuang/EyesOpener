@@ -1,12 +1,22 @@
 package com.example.rj.openeyesvideo.ui.view;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.example.rj.openeyesvideo.R;
+import com.example.rj.openeyesvideo.component.ImageLoader;
+import com.example.rj.openeyesvideo.model.bean.ItemListBean;
+import com.example.rj.openeyesvideo.ui.activity.DetailActivity;
+import com.example.rj.openeyesvideo.ui.adapter.DailyRecyclerAdapter;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * Created by rj on 2018/1/11.
@@ -14,7 +24,17 @@ import com.example.rj.openeyesvideo.R;
 
 public class ItemDailyView extends LinearLayout {
 
-    Context context;
+    @BindView(R.id.iv_daily_item_image)
+    ImageView mDailyImage;
+    @BindView(R.id.iv_daily_author)
+    ImageView mAuthorImage;
+    @BindView(R.id.item_text_author)
+    TextView mAuthorText;
+    @BindView(R.id.item_text_title)
+    TextView mTitleTest;
+
+    Context mContext;
+    ItemListBean itemListBean;
 
     public ItemDailyView(Context context) {
         this(context,null);
@@ -26,11 +46,36 @@ public class ItemDailyView extends LinearLayout {
 
     public ItemDailyView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        this.context=context;
+        this.mContext=context;
         initView();
     }
     private void initView(){
-        View.inflate(context, R.layout.item_daily,this);
+        View.inflate(mContext, R.layout.item_daily,this);
+        ButterKnife.bind(this);
+    }
 
+    public void setData(ItemListBean itemListBean){
+        this.itemListBean=itemListBean;
+        String detail;
+        if(itemListBean.getData().getAuthor()==null){
+            detail="开眼精选 / # "+itemListBean.getData().getCategory();
+        }else {
+            detail=itemListBean.getData().getAuthor().getName()+" / #" +itemListBean.getData().getCategory();
+            ImageLoader.loadCircle(mContext,itemListBean.getData().getAuthor().getIcon(),mAuthorImage);
+        }
+        mAuthorText.setText(detail);
+        mTitleTest.setText(itemListBean.getData().getTitle());
+        ImageLoader.load(mContext,itemListBean.getData().getCover().getFeed(),mDailyImage);
+    }
+    public void setclick(){
+        this.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent();
+                intent.setClass(mContext, DetailActivity.class);
+                intent.putExtra("itemListBean",itemListBean);
+                mContext.startActivity(intent);
+            }
+        });
     }
 }

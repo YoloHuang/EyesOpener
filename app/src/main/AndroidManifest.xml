@@ -46,6 +46,7 @@
             android:name=".ui.activity.DownloadActivity"
             android:theme="@style/MainTheme" />
         <activity android:name=".ui.activity.SearchActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/SearchTheme"/>
     </application>
 

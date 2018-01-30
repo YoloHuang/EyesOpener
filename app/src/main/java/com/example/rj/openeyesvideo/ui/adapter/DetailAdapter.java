@@ -12,6 +12,7 @@ import com.example.rj.openeyesvideo.R;
 import com.example.rj.openeyesvideo.component.ImageLoader;
 import com.example.rj.openeyesvideo.model.bean.ItemListBean;
 import com.example.rj.openeyesvideo.ui.activity.DetailActivity;
+import com.example.rj.openeyesvideo.ui.view.ListEndView;
 import com.example.rj.openeyesvideo.util.DiffUtilCallBack;
 import com.example.rj.openeyesvideo.widget.JumpShowTextView;
 
@@ -33,7 +34,8 @@ int likeCount;
     public enum ITEM_TYPE{
         TYPE_INFO,
         TYPE_TEXT,
-        YTPE_VIDEO
+        YTPE_VIDEO,
+        TYPE_END
     }
 
     @Override
@@ -42,6 +44,8 @@ int likeCount;
             return ITEM_TYPE.TYPE_INFO.ordinal();
         }else if (position==1){
             return ITEM_TYPE.TYPE_TEXT.ordinal();
+        }else if(position==(datas.size()+2)){
+            return ITEM_TYPE.TYPE_END.ordinal();
         }else {
             return ITEM_TYPE.YTPE_VIDEO.ordinal();
         }
@@ -59,6 +63,10 @@ int likeCount;
             return new InfoViewHolder(mLayoutInflater.inflate(R.layout.item_detail_info,parent,false));
         }else if(viewType==ITEM_TYPE.TYPE_TEXT.ordinal()){
             return new TextViewHolder(mLayoutInflater.inflate(R.layout.item_detail_text,parent,false));
+        }else if(viewType==ITEM_TYPE.TYPE_END.ordinal()){
+            View listEndView=new ListEndView(mContext);
+            listEndView.setLayoutParams(new RecyclerView.LayoutParams(RecyclerView.LayoutParams.MATCH_PARENT,RecyclerView.LayoutParams.WRAP_CONTENT));
+            return new Holder(listEndView);
         }else {
             return new RelateViewHolder(mLayoutInflater.inflate(R.layout.item_detail_video,parent,false));
         }
@@ -165,7 +173,7 @@ int likeCount;
 
     @Override
     public int getItemCount() {
-        return datas.size()+2;
+        return datas.size()+3;
     }
 
     public class InfoViewHolder extends RecyclerView.ViewHolder{
@@ -216,7 +224,7 @@ int likeCount;
         @BindView(R.id.item_video_image)
         ImageView videoImage;
         @BindView(R.id.item_video_name)
-        JumpShowTextView relateItemName;
+        TextView relateItemName;
         @BindView(R.id.item_video_tag)
         TextView relateITemTag;
 
@@ -226,5 +234,10 @@ int likeCount;
         }
     }
 
+    public static class Holder extends RecyclerView.ViewHolder{
 
+        public Holder(View itemView) {
+            super(itemView);
+        }
+    }
 }

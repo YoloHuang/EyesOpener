@@ -3,16 +3,11 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
-    <view
-        android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:layout_alignParentBottom="true"
-        android:textColor="#55ffffff"
-        />
+
     <ImageView
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_margin="15dp"
+        android:layout_margin="12dp"
         android:id="@+id/iv_item_author"
         android:src="@mipmap/pgc_default_avatar"
         />
@@ -20,23 +15,43 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_vertical"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="12dp"
         android:orientation="vertical"
+        android:layout_toLeftOf="@id/tv_author_follow"
         android:layout_toRightOf="@id/iv_item_author">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorWhite"
+            android:textColor="@color/colorBlack"
             android:textSize="40px"
+            android:textStyle="bold"
+            android:paddingStart="5dp"
             android:id="@+id/tv_item_author_name"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorWhite"
+            android:textColor="@color/colorBlack"
+            android:layout_marginTop="5dp"
             android:singleLine="true"
             android:textSize="35px"
             android:paddingStart="5dp"
             android:id="@+id/tv_item_author_dis"/>
     </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_author_follow"
+        android:layout_marginLeft="9dp"
+        android:layout_marginRight="9dp"
+        android:background="@drawable/rect_radius"
+        android:text="+关注"
+        android:textColor="@color/colorGrey"
+        android:padding="5dp"
+        android:textSize="35px"
+        android:textStyle="bold"
+        android:layout_centerVertical="true"
+        android:layout_alignParentEnd="true"/>
 
 </RelativeLayout>

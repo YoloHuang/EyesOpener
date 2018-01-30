@@ -10,6 +10,6 @@
         android:layout_gravity="center"
         android:text="--The End--"
         android:textSize="45px"
-        android:textColor="@color/colorWhite"/>
+        android:textColor="@color/colorBlack"/>
 
 </FrameLayout>
