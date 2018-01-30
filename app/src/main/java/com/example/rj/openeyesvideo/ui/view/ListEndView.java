@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.example.rj.openeyesvideo.R;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * Created by rj on 2018/1/11.
@@ -38,6 +39,6 @@ public class ListEndView extends FrameLayout {
 
     private void initView() {
         View.inflate(context, R.layout.item_listend,this);
-
+        ButterKnife.bind(this);
     }
 }

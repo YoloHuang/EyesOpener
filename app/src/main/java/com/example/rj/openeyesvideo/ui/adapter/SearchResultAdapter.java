@@ -90,9 +90,11 @@ public class SearchResultAdapter extends BaseRecyclerAdapter<ItemListBean> {
 
 
     public void setData(List<ItemListBean> itemListBeans){
-        DiffUtil.DiffResult diffResult=DiffUtil.calculateDiff(new DiffUtilCallBack(datas,itemListBeans),false);
+        Log.d("hzj", "setData: "+datas.size());
+        //DiffUtil.DiffResult diffResult=DiffUtil.calculateDiff(new DiffUtilCallBack(datas,itemListBeans),false);
         datas.clear();
         datas.addAll(itemListBeans);
-        diffResult.dispatchUpdatesTo(this);
+        //diffResult.dispatchUpdatesTo(this);
+        notifyDataSetChanged();
     }
 }

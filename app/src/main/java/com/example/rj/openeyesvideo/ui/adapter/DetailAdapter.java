@@ -1,6 +1,7 @@
 package com.example.rj.openeyesvideo.ui.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v7.util.DiffUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -152,6 +153,11 @@ int likeCount;
                     }
                 }
             });
+        }else if(holder instanceof Holder){
+            View view=((Holder)holder).itemView;
+            if(view instanceof ListEndView){
+                ((ListEndView) view).textEnd.setTextColor(Color.WHITE);
+            }
         }
     }
 

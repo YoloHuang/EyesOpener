@@ -44,7 +44,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/tv_author_follow"
         android:layout_marginLeft="9dp"
-        android:layout_marginRight="9dp"
+        android:layout_marginRight="12dp"
         android:background="@drawable/rect_radius"
         android:text="+关注"
         android:textColor="@color/colorGrey"

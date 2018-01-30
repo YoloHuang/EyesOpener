@@ -57,19 +57,21 @@ public class LikeAdapter extends BaseRecyclerAdapter<LikeBean> {
 
     @Override
     public void convert(RecyclerView.ViewHolder holder, final int position) {
-        String detail=datas.get(position).getAuthorName()+" / #" +datas.get(position).getAuthorSlogen();
-        ((ItemViewHolder)holder).mAuthorText.setText(detail);
-        ((ItemViewHolder)holder).mTitleTest.setText(datas.get(position).getTitle());
-        ImageLoader.loadCircle(mContext,datas.get(position).getAuthorIcon(),((ItemViewHolder)holder).mAuthorImage);
-        ImageLoader.load(mContext,datas.get(position).getImage(),((ItemViewHolder)holder).mDailyImage);
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(onItemClickListener!=null){
-                    onItemClickListener.onItemClick(position);
+        if(holder instanceof ItemViewHolder){
+            String detail=datas.get(position).getAuthorName()+" / #" +datas.get(position).getAuthorSlogen();
+            ((ItemViewHolder)holder).mAuthorText.setText(detail);
+            ((ItemViewHolder)holder).mTitleTest.setText(datas.get(position).getTitle());
+            ImageLoader.loadCircle(mContext,datas.get(position).getAuthorIcon(),((ItemViewHolder)holder).mAuthorImage);
+            ImageLoader.load(mContext,datas.get(position).getImage(),((ItemViewHolder)holder).mDailyImage);
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(onItemClickListener!=null){
+                        onItemClickListener.onItemClick(position);
+                    }
                 }
-            }
-        });
+            });
+        }
     }
 
     @Override

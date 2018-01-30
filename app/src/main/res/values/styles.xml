@@ -11,9 +11,8 @@
         <item name="android:windowTranslucentStatus">true</item>
     </style>
 
-    <style name="SplashTheme" parent="AppTheme">
-        <item name="android:windowBackground">@drawable/splash_bg</item>
-        <item name="android:windowIsTranslucent">false</item>
+    <style name="SplashTheme" parent="MainTheme">
+        <item name="android:windowFullscreen">true</item>
     </style>
     <style name="MainTheme" parent="AppTheme">
         <item name="android:windowBackground">@color/colorBackground</item>

@@ -121,7 +121,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/colorBlack"
+                android:textColor="@color/colorWhite"
                 android:textSize="40px"
                 android:textStyle="bold"
                 android:paddingStart="5dp"
@@ -129,7 +129,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/colorBlack"
+                android:textColor="@color/colorWhite"
                 android:layout_marginTop="5dp"
                 android:singleLine="true"
                 android:textSize="35px"
@@ -142,7 +142,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/tv_author_follow"
             android:layout_marginLeft="9dp"
-            android:layout_marginRight="9dp"
+            android:layout_marginRight="12dp"
             android:background="@drawable/rect_radius"
             android:text="+关注"
             android:textColor="@color/colorGrey"

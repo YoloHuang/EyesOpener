@@ -6,6 +6,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -41,7 +42,7 @@ public class HistoryActivity extends RootActivity<HistoryPresenter> implements H
     protected void initEventAndData() {
         super.initEventAndData();
         title.setText("观看记录");
-
+        toolbarSearch.setVisibility(View.GONE);
         stateLoading();
         initRecyclerView();
         mPresenter.getHistoryData();
