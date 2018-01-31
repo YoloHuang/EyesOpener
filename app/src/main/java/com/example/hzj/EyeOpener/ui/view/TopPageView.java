@@ -121,6 +121,11 @@ public class TopPageView extends FrameLayout {
         });
     }
 
+    public void stopText(){
+        topDes.stopText();
+        topTitle.stopText();
+    }
+
     public void changeTopPageView(int position){
         viewPager.setCurrentItem(position);
     }

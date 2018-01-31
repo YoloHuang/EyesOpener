@@ -134,6 +134,7 @@ public class DailyFragment extends RootFragment<DailyPresenter> implements Daily
     @Override
     public void onStop() {
         super.onStop();
+        //mAdapter.stopText();
         mPresenter.stopInterval();
     }
 
@@ -154,6 +155,9 @@ public class DailyFragment extends RootFragment<DailyPresenter> implements Daily
         }else {
             if(mPresenter!=null){
                 mPresenter.stopInterval();
+            }
+            if(mAdapter!=null){
+                //mAdapter.stopText();
             }
         }
 

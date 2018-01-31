@@ -7,6 +7,7 @@ import com.example.hzj.EyeOpener.model.bean.ItemListBean;
 import java.util.List;
 
 /**
+ * 用contract将presenter和view联系起来
  * Created by hzj on 2017/12/20.
  */
 

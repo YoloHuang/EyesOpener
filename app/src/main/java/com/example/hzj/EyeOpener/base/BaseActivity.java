@@ -12,6 +12,8 @@ import javax.inject.Inject;
  */
 
 public abstract class BaseActivity<T extends BasePresenter> extends SimpleActivity implements BaseView {
+
+
     @Inject
     protected T mPresenter;
 
@@ -22,6 +24,8 @@ public abstract class BaseActivity<T extends BasePresenter> extends SimpleActivi
     private ActivityModule getActivityModule() {
         return new ActivityModule(this);
     }
+
+
 
     @Override
     protected void onViewCreate() {

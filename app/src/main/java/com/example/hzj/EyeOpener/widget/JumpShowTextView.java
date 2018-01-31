@@ -50,7 +50,7 @@ public class JumpShowTextView extends FrameLayout {
     }
 
     boolean withAnimation = true;
-    private Disposable disposable;
+    public Disposable disposable;
     private Subscriber<Long> subscriber;
     String finalReal;
     int count = 0;
@@ -150,6 +150,14 @@ public class JumpShowTextView extends FrameLayout {
            realTextView.setText(text);
         }
 
+    }
+
+    public void stopText(){
+        if(disposable!=null && !disposable.isDisposed()){
+            disposable.dispose();
+        }
+        isRun=false;
+        realTextView.setText(text);
     }
 
 
