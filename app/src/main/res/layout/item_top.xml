@@ -22,7 +22,7 @@
                 android:src="@mipmap/home_page_header_icon"
                 android:layout_centerInParent="true"
                 />
-            <com.example.rj.openeyesvideo.widget.JumpShowTextView
+            <com.example.hzj.EyeOpener.widget.JumpShowTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/tv_top_title"
@@ -31,7 +31,7 @@
                 app:IsBold="true"
                 app:textColor="@color/colorWhite"
                 app:textSize="50px"/>
-            <com.example.rj.openeyesvideo.widget.JumpShowTextView
+            <com.example.hzj.EyeOpener.widget.JumpShowTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/tv_top_des"

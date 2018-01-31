@@ -7,7 +7,7 @@
     android:gravity="center"
     android:layout_gravity="center"
     android:padding="30dp">
-    <com.example.rj.openeyesvideo.widget.ProgressImageView xmlns:android="http://schemas.android.com/apk/res/android"
+    <com.example.hzj.EyeOpener.widget.ProgressImageView xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/iv_progress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

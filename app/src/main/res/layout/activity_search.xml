@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="com.example.rj.openeyesvideo.ui.activity.SearchActivity">
+    tools:context="com.example.hzj.EyeOpener.ui.activity.SearchActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"

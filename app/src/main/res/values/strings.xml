@@ -6,4 +6,10 @@
     <string name="search_tip">输入标题或者描述中的关键词找到更多视频</string>
     <string name="search_hot">- 热门搜索词 -</string>
     <string name="search_hint">请在此输入关键词~</string>
+    <string name="setting_play">- 是否使用流量播放 -</string>
+    <string name="setting_download">- 是否使用流量下载 -</string>
+    <string name="app_version">1.0</string>
+    <string name="about_author">不如跳舞，ml091225@126.com</string>
+    <string name="about_dis">EyesOpener,一个使用开眼API制作的开源视频播放APP。为了熟悉Android当前主流框架的使用，同时也为了锻炼自己的代码能力做了这个项目，仅供学习使用哦~如果发现BUG，可以在GitHub上面提，也可以邮箱我~谢谢</string>
+    <string name="about_address"></string>
 </resources>
