@@ -2,26 +2,20 @@ package com.example.hzj.EyeOpener.widget;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-
 import android.graphics.Color;
-
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-
 import android.util.AttributeSet;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.example.hzj.EyeOpener.R;
 
-import org.reactivestreams.Subscriber;
-
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Flowable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
@@ -29,10 +23,12 @@ import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by hzj on 2018/1/23.
+ * 逐字显示，原理是，用一个不可见的TextView控制View的大小，用rxjava的interval实现逐字显示
  */
 
 public class JumpShowTextView extends FrameLayout {
 
+    public Disposable disposable;
     ArrayList<String> content;
     String text;
     TextView placeHolder;
@@ -44,16 +40,10 @@ public class JumpShowTextView extends FrameLayout {
     Context context;
     TypedArray array;
     long time;
-
-    public void setWithAnimation(boolean withAnimation) {
-        this.withAnimation = withAnimation;
-    }
-
     boolean withAnimation = true;
-    public Disposable disposable;
-    private Subscriber<Long> subscriber;
     String finalReal;
     int count = 0;
+    boolean isRun = false;
 
 
     public JumpShowTextView(@NonNull Context context) {
@@ -76,10 +66,12 @@ public class JumpShowTextView extends FrameLayout {
         this(context, attrs);
     }
 
+    public void setWithAnimation(boolean withAnimation) {
+        this.withAnimation = withAnimation;
+    }
+
     public void setText(String text) {
         this.text = text;
-        //isRun=false;
-        //initText(text);
         placeHolder.setText(text);
         placeHolder.setVisibility(INVISIBLE);
         startView();
@@ -89,7 +81,7 @@ public class JumpShowTextView extends FrameLayout {
 
         placeHolder = new TextView(context);
         placeHolder.getPaint().setTextSize(textSize);
-        placeHolder.getPaint().setShadowLayer(5,0,0,Color.BLACK);
+        placeHolder.getPaint().setShadowLayer(5, 0, 0, Color.BLACK);
         placeHolder.setSingleLine(isSinglen);
         placeHolder.setTextColor(textColor);
         placeHolder.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
@@ -97,7 +89,7 @@ public class JumpShowTextView extends FrameLayout {
 
         realTextView = new TextView(context);
         realTextView.getPaint().setTextSize(textSize);
-        realTextView.getPaint().setShadowLayer(5,0,0,Color.BLACK);
+        realTextView.getPaint().setShadowLayer(5, 0, 0, Color.BLACK);
         realTextView.setSingleLine(isSinglen);
         realTextView.setTextColor(textColor);
         realTextView.getPaint().setFakeBoldText(isBold);
@@ -110,8 +102,6 @@ public class JumpShowTextView extends FrameLayout {
         addView(realTextView);
     }
 
-    boolean isRun = false;
-
     private void startView() {
         count = 0;
         time = 1000 / text.length();
@@ -119,7 +109,7 @@ public class JumpShowTextView extends FrameLayout {
             if (isRun) {
                 if (disposable != null && !disposable.isDisposed()) {
                     disposable.dispose();
-                    isRun=false;
+                    isRun = false;
                     realTextView.setText(text);
                 }
             } else {
@@ -142,117 +132,25 @@ public class JumpShowTextView extends FrameLayout {
                             }
                         });
             }
-            withAnimation=false;
-        }else {
-            if(disposable!=null && !disposable.isDisposed()){
+            withAnimation = false;
+        } else {
+            if (disposable != null && !disposable.isDisposed()) {
                 disposable.dispose();
             }
-           realTextView.setText(text);
+            realTextView.setText(text);
         }
 
     }
 
-    public void stopText(){
-        if(disposable!=null && !disposable.isDisposed()){
+    public void stopText() {
+        if (disposable != null && !disposable.isDisposed()) {
             disposable.dispose();
         }
-        isRun=false;
+        isRun = false;
+    }
+
+    public void startText() {
         realTextView.setText(text);
     }
 
-
-//    Context context;
-//    private String content;
-//    private String textAlignment;
-//    private ArrayList<String> contents;
-//
-//    private int textColor;
-//    private float textSize;
-//    private float density;
-//    private TextPaint paint;
-//    int count=0;
-//    String totalText;
-//    long time;
-//
-//
-//
-//    public JumpShowTextView(Context context) {
-//        this(context,null,0);
-//    }
-//
-//    public JumpShowTextView(Context context, @Nullable AttributeSet attrs) {
-//        this(context,attrs,0);
-//    }
-//
-//    public JumpShowTextView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
-//        super(context, attrs, defStyleAttr);
-//        this.context=context;
-//        TypedArray array=context.obtainStyledAttributes(attrs, R.styleable.JumpShowTextView);
-//        textAlignment=array.getString(R.styleable.JumpShowTextView_TextAlignment);
-//        textColor=array.getColor(R.styleable.JumpShowTextView_TextColor, Color.WHITE);
-//        textSize=array.getDimension(R.styleable.JumpShowTextView_TextSize,20);
-//        initView();
-//    }
-//
-//    public void setContent(final String content) {
-//        new Thread(){
-//            @Override
-//            public void run() {
-//                super.run();
-//                contents= TextUtil.getListContent(content);
-//                Log.d("hzj", "run:contents "+contents.get(0));
-//                time=600/contents.size();
-//            }
-//        }.run();
-//    }
-//
-//    public void setTextAlignment(String textAlignment) {
-//        this.textAlignment = textAlignment;
-//    }
-//
-//    public void setTextColor(int textColor) {
-//        this.textColor = textColor;
-//    }
-//
-//    public void setTextSize(float textSize) {
-//        this.textSize = textSize;
-//    }
-//
-//    private void initView() {
-//        this.density=getResources().getDisplayMetrics().density;
-//        paint=new TextPaint();
-//        paint.setColor(textColor);
-//        paint.setTextSize(textSize);
-//    }
-//
-//    @Override
-//    protected void onDraw(Canvas canvas) {
-//        super.onDraw(canvas);
-//        drawText(canvas);
-//    }
-//
-//    private void drawText(Canvas canvas) {
-//        if(count>=contents.size()){
-//            return;
-//        }
-//        StaticLayout layout;
-//        totalText+=contents.get(count);
-//        Log.d("hzj", "drawText: totalText====="+totalText);
-//        layout = new StaticLayout(totalText, paint, getWidth() - (int) (2 * density), Layout.Alignment.ALIGN_NORMAL,(float) 1.5,(float) 0.0,true);
-//        canvas.translate(1*density,1*density);
-//        layout.draw(canvas);
-//        count++;
-//        startText();
-//    }
-//
-//    private void startText() {
-//        if(count!=contents.size()){
-//            new Handler().postDelayed(new Runnable() {
-//                @Override
-//                public void run() {
-//                    invalidate();
-//                }
-//            },time);
-//        }
-//    }
 }

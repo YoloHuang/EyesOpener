@@ -12,30 +12,51 @@ import java.util.List;
  */
 
 public interface DetailContract {
-    interface View extends BaseView{
+    interface View extends BaseView {
         void showContent(List<ItemListBean> itemListBeans);
-        void  setlike(boolean like);
+
+        void setlike(boolean like);
+
         void showReply(ReplyBean replyBean);
+
         void showMoreReply(ReplyBean replyBean);
+
         void showDownload();
+
         void showIsDownload();
+
         void showHadDownload();
+
         void showDownloadDialog();
     }
-    interface Presenter extends BasePresenter<View>{
+
+    interface Presenter extends BasePresenter<View> {
         void getVedioData(int id);
+
         void getReplyData(int id);
-        void getMoreReplyData(int id );
+
+        void getMoreReplyData(int id);
+
         void addToHistory(ItemListBean itemListBean);
+
         boolean isRead(int id);
+
         void isLike(int id);
+
         void deleteLikeId(int id);
+
         void deleteReadId(int id);
+
         void insertLikeId(ItemListBean itemListBean);
-        void download(String url,ItemListBean itemListBean);
+
+        void download(String url, ItemListBean itemListBean);
+
         boolean getPlaySetting();
-        boolean getDownloadSetting();
+
         void setPlaySetting(boolean playSetting);
+
+        boolean getDownloadSetting();
+
         void setDownloadSetting(boolean downloadSetting);
     }
 }

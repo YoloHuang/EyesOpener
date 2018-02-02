@@ -18,6 +18,9 @@ public class HistoryBean extends RealmObject {
     private String title;
     private long time;
 
+    public HistoryBean() {
+    }
+
     public String getImage() {
         return image;
     }
@@ -57,9 +60,6 @@ public class HistoryBean extends RealmObject {
     public void setId(int id) {
         this.id = id;
     }
-
-    public HistoryBean(){}
-
 
     public String getTitle() {
         return title;

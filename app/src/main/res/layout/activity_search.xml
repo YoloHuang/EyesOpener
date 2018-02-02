@@ -1,85 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/view_search"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/view_search"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     tools:context="com.example.hzj.EyeOpener.ui.activity.SearchActivity">
 
     <RelativeLayout
+        android:id="@+id/view_search_title"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:id="@+id/view_search_title">
+        android:layout_height="?attr/actionBarSize">
+
         <EditText
+            android:id="@+id/et_search"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
             android:layout_marginStart="20dp"
-            android:id="@+id/et_search"
             android:layout_toLeftOf="@id/iv_dosearch"
-            android:singleLine="true"
             android:background="@null"
-            android:hint="@string/search_hint"
-            android:textSize="30px"
-            android:textColor="@color/colorBlack"
             android:gravity="center"
+            android:hint="@string/search_hint"
             android:imeOptions="actionSearch"
-            android:layout_centerInParent="true"/>
+            android:singleLine="true"
+            android:textColor="@color/colorBlack"
+            android:textSize="30px" />
+
         <ImageView
+            android:id="@+id/iv_dosearch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
             android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
             android:layout_marginEnd="10dp"
-            android:id="@+id/iv_dosearch"
-            android:src="@mipmap/ic_action_search"/>
+            android:src="@mipmap/ic_action_search" />
     </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/view_search_tip"
         android:layout_width="match_parent"
-        android:layout_below="@id/view_search_title"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_below="@id/view_search_title">
+
         <TextView
+            android:id="@+id/tv_search_tip"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
-            android:id="@+id/tv_search_tip"
-            android:textSize="30px"
             android:gravity="center"
+            android:text="@string/search_tip"
             android:textColor="@color/colorGrey"
-            android:text="@string/search_tip"/>
+            android:textSize="30px" />
+
         <TextView
+            android:id="@+id/tv_search_hot"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_search_tip"
             android:layout_marginTop="20dp"
-            android:id="@+id/tv_search_hot"
             android:gravity="center"
+            android:text="@string/search_hot"
             android:textColor="@color/colorBlack"
             android:textSize="40px"
-            android:textStyle="bold"
-            android:text="@string/search_hot"/>
+            android:textStyle="bold" />
 
         <!--<android.support.v7.widget.RecyclerView-->
-            <!--android:layout_width="250dp"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_below="@id/tv_search_hot"-->
-            <!--android:layout_marginTop="20dp"-->
-            <!--android:id="@+id/rv_search_hot"-->
-            <!--android:layout_centerHorizontal="true">
-            </android.support.v7.widget.RecyclerView>-->
+        <!--android:layout_width="250dp"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_below="@id/tv_search_hot"-->
+        <!--android:layout_marginTop="20dp"-->
+        <!--android:id="@+id/rv_search_hot"-->
+        <!--android:layout_centerHorizontal="true">
+        </android.support.v7.widget.RecyclerView>-->
 
         <com.zhy.view.flowlayout.TagFlowLayout
+            android:id="@+id/fl_searchhot"
             android:layout_width="350dp"
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_search_hot"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="20dp"
             android:padding="20dp"
-            app:max_select="1"
-            android:id="@+id/fl_searchhot"/>
+            app:max_select="1" />
 
     </RelativeLayout>
 

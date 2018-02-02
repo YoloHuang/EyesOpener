@@ -34,10 +34,9 @@ public class HotFragment extends BaseFragment<HotPresenter> implements HotContra
     ImageView toolbarSearch;
 
 
-    String[] tabTitle = new String[]{"周排行","月排行","总排行"};
+    String[] tabTitle = new String[]{"周排行", "月排行", "总排行"};
     List<Fragment> fragments = new ArrayList<Fragment>();
     MainAdapter mMainAdapter;
-
 
 
     @Override
@@ -52,7 +51,7 @@ public class HotFragment extends BaseFragment<HotPresenter> implements HotContra
         fragments.add(new WeekFragment());
         fragments.add(new MonthFragment());
         fragments.add(new AllHotFragment());
-        mMainAdapter=new MainAdapter(getFragmentManager(),fragments);
+        mMainAdapter = new MainAdapter(getFragmentManager(), fragments);
         mViewPager.setAdapter(mMainAdapter);
         mTabLayout.addTab(mTabLayout.newTab().setText(tabTitle[0]));
         mTabLayout.addTab(mTabLayout.newTab().setText(tabTitle[1]));

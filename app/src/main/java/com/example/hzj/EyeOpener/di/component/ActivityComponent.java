@@ -19,19 +19,30 @@ import dagger.Component;
 
 /**
  * Created by hzj on 2017/12/18.
+ * 顾名思义，ActivityComponent类。用于dagger2的注入
  */
 @ActivityScope
-@Component(dependencies = AppComponent.class,modules = ActivityModule.class)
+@Component(dependencies = AppComponent.class, modules = ActivityModule.class)
 public interface ActivityComponent {
     Activity getActivity();
+
     void inject(WelcomeActivity welcomeActivity);
+
     void inject(MainActivity mainActivity);
+
     void inject(TagActivity tagActivity);
+
     void inject(DetailActivity detailActivity);
+
     void inject(HistoryActivity historyActivity);
+
     void inject(LikeActivity likeActivity);
+
     void inject(DownloadActivity downloadActivity);
+
     void inject(SearchActivity searchActivity);
+
     void inject(SettingActivity settingActivity);
+
     void inject(AboutActivity aboutActivity);
 }

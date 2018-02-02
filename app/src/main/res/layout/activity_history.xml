@@ -6,11 +6,13 @@
     android:fitsSystemWindows="true"
     android:orientation="vertical"
     tools:context="com.example.hzj.EyeOpener.ui.activity.HistoryActivity">
-    <include layout="@layout/view_toolbar"/>
+
+    <include layout="@layout/view_toolbar" />
+
     <android.support.v7.widget.RecyclerView
+        android:id="@+id/view_main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/view_main"
-        android:scrollbars="vertical"/>
+        android:scrollbars="vertical" />
 
 </LinearLayout>

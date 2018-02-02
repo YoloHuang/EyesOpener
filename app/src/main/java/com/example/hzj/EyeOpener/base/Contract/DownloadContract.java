@@ -11,11 +11,13 @@ import java.util.List;
  */
 
 public interface DownloadContract {
-    interface View extends BaseView{
+    interface View extends BaseView {
         void showContent(List<DownloadBean> downloadBeans);
+
         void goToDetail(List<DownloadBean> downloadBeans);
     }
-    interface Presenter extends BasePresenter<View>{
+
+    interface Presenter extends BasePresenter<View> {
         void getDownloadData();
     }
 

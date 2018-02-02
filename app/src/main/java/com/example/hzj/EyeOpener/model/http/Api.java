@@ -22,54 +22,109 @@ import retrofit2.http.Query;
 
 public interface Api {
 
-    String HOST="http://baobab.kaiyanapp.com/api/";
+    String HOST = "http://baobab.kaiyanapp.com/api/";
 
-    @GET("v3/queries/hot")
-    Flowable<List<String>> getTrendingTag();
-
-    @GET("v1/search?num=10")
-    Flowable<SearchResultBean> query(@Query("query") String key, @Query("start") int start);
-
-    //每日推荐
+    /**
+     * 获取每日数据
+     *
+     * @return
+     */
     @GET("v2/feed?num=2")
     Flowable<DailyBean> getDailyBean();
 
+    /**
+     * 获取之前日期数据
+     *
+     * @param date
+     * @return
+     */
     @GET("v2/feed?num=2")
     Flowable<DailyBean> getDailyBean(@Query("date") long date);
 
 
-
-    //热门
+    /**
+     * 获取热门数据，
+     *
+     * @param type week,month,history
+     * @return
+     */
     @GET("v3/ranklist?num=10")
     Flowable<HotBean> getWeekHotBean(@Query("strategy") String type);
 
 
-    //所有分类
+    /**
+     * 获取所有分类
+     *
+     * @return
+     */
     @GET("v2/categories")
     Flowable<List<TagsBean>> getTagsBean();
 
 
-    //分类视频
+    /**
+     * 获取该分类下所有视频
+     *
+     * @param start
+     * @param num
+     * @param id
+     * @return
+     */
     @GET("v4/categories/videoList?strategy=date")
-    Flowable<TagChildBean> getTagChildBean(@Query("start")int start,@Query("num")int num,@Query("id")int id);
+    Flowable<TagChildBean> getTagChildBean(@Query("start") int start, @Query("num") int num, @Query("id") int id);
 
 
-    //相关视频推荐
+    /**
+     * 根据视频ID，获取相关推荐视频
+     *
+     * @param id
+     * @return
+     */
     @GET("v4/video/related?")
-    Flowable<RelateBean> getRelateBean(@Query("id")int id);
+    Flowable<RelateBean> getRelateBean(@Query("id") int id);
 
+    /**
+     * 根据ID来获取dataBean
+     *
+     * @param id
+     * @return
+     */
     @GET("v1/video/{id}")
     Flowable<ItemListBean.DataBean> getDataBean(@Path("id") int id);
 
+    /**
+     * 根据ID获取评论内容
+     *
+     * @param id
+     * @return
+     */
     @GET("v2/replies/video?")
-    Flowable<ReplyBean> getReplyBean(@Query("videoId")int id);
+    Flowable<ReplyBean> getReplyBean(@Query("videoId") int id);
 
+    /**
+     * 根据ID获取更多评论内容
+     *
+     * @param id
+     * @return
+     */
     @GET("v2/replies/video?")
-    Flowable<ReplyBean> getMoreReplyBean(@Query("videoId")int id,@Query("lastId")int lastId,@Query("num")int num);
+    Flowable<ReplyBean> getMoreReplyBean(@Query("videoId") int id, @Query("lastId") int lastId, @Query("num") int num);
 
+
+    /**
+     * 获取搜索热门
+     *
+     * @return
+     */
     @GET("v3/queries/hot")
     Flowable<List<String>> getHotSearch();
 
+    /**
+     * 根据搜索关键词获取内容
+     *
+     * @param query
+     * @param start
+     * @return
+     */
     @GET("v1/search?")
-    Flowable<SearchResultBean> getSearchResultBean(@Query("start")int start,@Query("num")int num,@Query("query")String query);
+    Flowable<SearchResultBean> getSearchResultBean(@Query("start") int start, @Query("num") int num, @Query("query") String query);
 }

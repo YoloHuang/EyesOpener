@@ -11,15 +11,21 @@ import java.util.List;
  */
 
 public interface SearchContract {
-    interface View extends BaseView{
-        void  showHotSearch(List<String> stringList);
-        void  showResult(List<ItemListBean> listBeans,int total);
+    interface View extends BaseView {
+        void showHotSearch(List<String> stringList);
+
+        void showResult(List<ItemListBean> listBeans, int total);
+
         void showMoreResult(List<ItemListBean> listBeans);
+
         void addProgressView();
     }
-    interface Presenter extends BasePresenter<View>{
+
+    interface Presenter extends BasePresenter<View> {
         void getHotSearchData();
+
         void getSearchData(String query);
+
         void getMoreData(String query);
     }
 }

@@ -10,6 +10,8 @@ public class SearchResultBean {
 
     private int count;
     private int total;
+    private String nextPageUrl;
+    private List<ItemListBean> itemList;
 
     public String getNextPageUrl() {
         return nextPageUrl;
@@ -18,9 +20,6 @@ public class SearchResultBean {
     public void setNextPageUrl(String nextPageUrl) {
         this.nextPageUrl = nextPageUrl;
     }
-
-    private String nextPageUrl;
-    private List<ItemListBean> itemList;
 
     public int getCount() {
         return count;

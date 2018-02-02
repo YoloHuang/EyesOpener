@@ -8,6 +8,7 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.example.hzj.EyeOpener.R;
 import com.example.hzj.EyeOpener.model.bean.ItemListBean;
@@ -35,68 +36,54 @@ public class TopPageView extends FrameLayout {
     JumpShowTextView topDes;
     @BindView(R.id.tv_top_title)
     JumpShowTextView topTitle;
-//    LinearLayout linearLayout;
-//    LinearLayout indicators;
+    @BindView(R.id.ll_top_indicator)
+    LinearLayout indicators;
 
     TopAdapter topAdapter;
     List<ItemListBean> listBeans;
 
+    int newPosition;
+
     public TopPageView(@NonNull Context context) {
-        this(context,null);
+        this(context, null);
 
     }
 
     public TopPageView(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        this.context=context;
+        this.context = context;
         initView();
     }
 
 
     public TopPageView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
-        this(context,attrs);
+        this(context, attrs);
     }
 
     private void initView() {
 
-        View.inflate(context, R.layout.item_top,this);
-
+        View.inflate(context, R.layout.item_top, this);
+        newPosition = 1;
         ButterKnife.bind(this);
-//       topDes.setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-//        newView();
-//        viewPager.setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,810));
-//
-//        LinearLayout.LayoutParams layoutParams=new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-//        layoutParams.gravity= Gravity.BOTTOM ;
-//        linearLayout.setLayoutParams(layoutParams);
-//        linearLayout.setGravity(Gravity.CENTER_HORIZONTAL);
-//        linearLayout.setOrientation(LinearLayout.VERTICAL);
-//
-//        imageView.setImageResource(R.mipmap.home_page_header_icon);
-//        imageView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,110));
-//        imageView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
-//
-//        topTitle.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
-//        topTitle.
-
     }
-//
-//    private void newView() {
-//        linearLayout=new LinearLayout(context);
-//        imageView=new ImageView(context);
-//        viewPager=new ViewPager(context);
-//        topDes=new JumpShowTextView(context);
-//        topTitle=new JumpShowTextView(context);
-//        indicators=new LinearLayout(context);
-//    }
 
-    public void setData(List<ItemListBean> itemListBeans){
-        this.listBeans=itemListBeans;
-        topAdapter=new TopAdapter(context,listBeans);
+    public void setData(List<ItemListBean> itemListBeans) {
+        this.listBeans = itemListBeans;
+        topAdapter = new TopAdapter(context, listBeans);
         viewPager.setAdapter(topAdapter);
         setOnPageChange();
+        addIndicator(listBeans.size());
         topDes.setText(listBeans.get(0).getData().getSlogan());
         topTitle.setText(listBeans.get(0).getData().getTitle());
+    }
+
+    private void addIndicator(int size) {
+        indicators.removeAllViews();
+        for (int i = 0; i < size; i++) {
+            Indicator indicator = new Indicator(context);
+            indicators.addView(indicator);
+            if (i == 0) indicator.setImageView(true);
+        }
     }
 
     private void setOnPageChange() {
@@ -110,8 +97,16 @@ public class TopPageView extends FrameLayout {
             public void onPageSelected(int position) {
                 topDes.setWithAnimation(true);
                 topTitle.setWithAnimation(true);
+                newPosition = position + 1;
                 topDes.setText(listBeans.get(position).getData().getSlogan());
                 topTitle.setText(listBeans.get(position).getData().getTitle());
+                for (int j = 0; j < listBeans.size(); j++) {
+                    if (j == position) {
+                        ((Indicator) indicators.getChildAt(j)).setImageView(true);
+                    } else {
+                        ((Indicator) indicators.getChildAt(j)).setImageView(false);
+                    }
+                }
             }
 
             @Override
@@ -121,13 +116,23 @@ public class TopPageView extends FrameLayout {
         });
     }
 
-    public void stopText(){
+    public void stopText() {
         topDes.stopText();
         topTitle.stopText();
     }
 
-    public void changeTopPageView(int position){
-        viewPager.setCurrentItem(position);
+    public void startText() {
+        topDes.startText();
+        topTitle.startText();
+    }
+
+    public void changeTopPageView() {
+        if (newPosition < listBeans.size()) {
+            viewPager.setCurrentItem(newPosition);
+        } else {
+            newPosition = 0;
+            viewPager.setCurrentItem(newPosition);
+        }
     }
 
 

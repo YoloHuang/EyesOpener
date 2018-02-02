@@ -17,23 +17,17 @@ import io.reactivex.Flowable;
 
 /**
  * Created by hzj on 2017/12/21.
+ * retrofit实现类，具体retrofit在httpModule中实例化
  */
 
 public class RetrofitHelper implements ApiHelper {
     private Api api;
 
     @Inject
-    public RetrofitHelper(Api api){this.api=api;}
-
-    @Override
-    public Flowable<List<String>> getTrendingTagInfo() {
-        return api.getTrendingTag();
+    public RetrofitHelper(Api api) {
+        this.api = api;
     }
 
-    @Override
-    public Flowable<SearchResultBean> query(String key, int start) {
-        return api.query(key,start);
-    }
 
     @Override
     public Flowable<DailyBean> getDailyBean() {
@@ -45,10 +39,6 @@ public class RetrofitHelper implements ApiHelper {
         return api.getDailyBean(date);
     }
 
-//    @Override
-//    public Flowable<HotBean> getMonthHotBean() {
-//        return api.getMonthHotBean();
-//    }
 
     @Override
     public Flowable<HotBean> getWeekHotBean(String type) {
@@ -62,7 +52,7 @@ public class RetrofitHelper implements ApiHelper {
 
     @Override
     public Flowable<TagChildBean> getTagChildBean(int start, int num, int id) {
-        return api.getTagChildBean(start,num,id);
+        return api.getTagChildBean(start, num, id);
     }
 
     @Override
@@ -82,7 +72,7 @@ public class RetrofitHelper implements ApiHelper {
 
     @Override
     public Flowable<ReplyBean> getMoreReplyBean(int id, int lastId, int num) {
-        return api.getMoreReplyBean(id,lastId,num);
+        return api.getMoreReplyBean(id, lastId, num);
     }
 
     @Override
@@ -92,11 +82,7 @@ public class RetrofitHelper implements ApiHelper {
 
     @Override
     public Flowable<SearchResultBean> getSearchResultBean(int start, int num, String query) {
-        return api.getSearchResultBean(start,num,query);
+        return api.getSearchResultBean(start, num, query);
     }
 
-//    @Override
-//    public Flowable<HotBean> getHistroicalHotBean() {
-//        return api.getHistoricalHotBean();
-//    }
 }

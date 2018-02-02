@@ -9,16 +9,13 @@ import java.util.List;
 
 /**
  * Created by hzj on 2017/12/21.
+ * 数据库操作接口类
  */
 
 public interface DBHelper {
-
     void insertReadId(ItemListBean itemListBean);
 
-
-
     void insertLikeId(ItemListBean itemListBean);
-
 
 
     void deleteLikeId(int id);
@@ -29,9 +26,6 @@ public interface DBHelper {
 
     List<LikeBean> getLikeBeans();
 
-    void checkHistoryTime(int id ,long time);
-
-    void checkLikeTime(int id ,long time);
 
     HistoryBean getHistoryBean(int id);
 
@@ -40,7 +34,10 @@ public interface DBHelper {
     int checkDownload(int id);
 
     List<DownloadBean> getDownloadBeans();
+
     void insertDownloadId(ItemListBean itemListBean);
+
     void deleteDownloadId(int id);
+
     void setDownload(int id);
 }

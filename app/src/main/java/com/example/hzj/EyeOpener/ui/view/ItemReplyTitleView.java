@@ -2,7 +2,6 @@ package com.example.hzj.EyeOpener.ui.view;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -23,16 +22,16 @@ public class ItemReplyTitleView extends RelativeLayout {
     TextView replyTitle;
 
     public ItemReplyTitleView(Context context) {
-        this(context,null);
+        this(context, null);
     }
 
     public ItemReplyTitleView(Context context, AttributeSet attrs) {
-        this(context,null,0);
+        this(context, null, 0);
     }
 
     public ItemReplyTitleView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        this.context=context;
+        this.context = context;
         initView();
 
     }
@@ -43,13 +42,12 @@ public class ItemReplyTitleView extends RelativeLayout {
     }
 
     private void initView() {
-        View.inflate(context, R.layout.item_replytitle,this);
+        View.inflate(context, R.layout.item_replytitle, this);
         ButterKnife.bind(this);
     }
 
-    public void setData(ReplyBean.ItemListBean itemListBean){
-        Log.d("hzj", "setData: "+itemListBean.getType());
-        if(itemListBean.getType().equals("leftAlignTextHeader")){
+    public void setData(ReplyBean.ItemListBean itemListBean) {
+        if (itemListBean.getType().equals("leftAlignTextHeader")) {
             replyTitle.setText(itemListBean.getData().getText());
         }
     }

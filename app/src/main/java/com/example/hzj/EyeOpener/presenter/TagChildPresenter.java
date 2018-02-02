@@ -25,38 +25,48 @@ public class TagChildPresenter extends RxPresenter<TagChildContract.View> implem
     List<ItemListBean> listBeans;
 
     @Inject
-    public TagChildPresenter(DataManager dataManager){
-        this.mDataManager=dataManager;
+    public TagChildPresenter(DataManager dataManager) {
+        this.mDataManager = dataManager;
     }
 
+    /**
+     * 根据tag id获取该分类下数据
+     *
+     * @param id
+     */
     @Override
     public void getTagChildData(int id) {
-        totalItems=10;
-        addSubscribe(mDataManager.getTagChildBean(0,10,id)
-        .compose(RxUtil.<TagChildBean>rxSchedulerHelper())
-        .subscribeWith(new CommonSubscriber<TagChildBean>(mView) {
-            @Override
-            public void onNext(TagChildBean tagChildBean) {
-                totalItems=tagChildBean.getCount();
-                listBeans=tagChildBean.getItemList();
-                Log.d("hzj", "onNext: listBeans"+listBeans+"totalItems:"+totalItems);
-                mView.showContents(listBeans);
-            }
-        }));
+        totalItems = 10;
+        addSubscribe(mDataManager.getTagChildBean(0, 10, id)
+                .compose(RxUtil.<TagChildBean>rxSchedulerHelper())
+                .subscribeWith(new CommonSubscriber<TagChildBean>(mView) {
+                    @Override
+                    public void onNext(TagChildBean tagChildBean) {
+                        totalItems = tagChildBean.getCount();
+                        listBeans = tagChildBean.getItemList();
+                        Log.d("hzj", "onNext: listBeans" + listBeans + "totalItems:" + totalItems);
+                        mView.showContents(listBeans);
+                    }
+                }));
     }
 
+    /**
+     * 获取该分类下更多数据
+     *
+     * @param id
+     */
     @Override
     public void getMoreData(int id) {
-        addSubscribe(mDataManager.getTagChildBean(totalItems,10,id)
-        .compose(RxUtil.<TagChildBean>rxSchedulerHelper())
-        .subscribeWith(new CommonSubscriber<TagChildBean>(mView) {
-            @Override
-            public void onNext(TagChildBean tagChildBean) {
-                totalItems=totalItems+tagChildBean.getCount();
-                listBeans.clear();
-                listBeans.addAll(tagChildBean.getItemList());
-                mView.showMoreContents(listBeans);
-            }
-        }));
+        addSubscribe(mDataManager.getTagChildBean(totalItems, 10, id)
+                .compose(RxUtil.<TagChildBean>rxSchedulerHelper())
+                .subscribeWith(new CommonSubscriber<TagChildBean>(mView) {
+                    @Override
+                    public void onNext(TagChildBean tagChildBean) {
+                        totalItems = totalItems + tagChildBean.getCount();
+                        listBeans.clear();
+                        listBeans.addAll(tagChildBean.getItemList());
+                        mView.showMoreContents(listBeans);
+                    }
+                }));
     }
 }

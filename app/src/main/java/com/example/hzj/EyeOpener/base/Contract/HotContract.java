@@ -8,10 +8,11 @@ import com.example.hzj.EyeOpener.base.BaseView;
  */
 
 public interface HotContract {
-    interface View extends BaseView{
+    interface View extends BaseView {
 
     }
-    interface Presenter extends BasePresenter<View>{
+
+    interface Presenter extends BasePresenter<View> {
 
     }
 }

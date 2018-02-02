@@ -7,6 +7,7 @@ import io.reactivex.disposables.Disposable;
 
 /**
  * Created by hzj on 2017/12/18.
+ * 基于basePresenter,作用是在此完成与View的关联。使用一个CompositeDisposable对所有的订阅周期进行管理
  */
 
 public class RxPresenter<T extends BaseView> implements BasePresenter<T> {
@@ -15,15 +16,15 @@ public class RxPresenter<T extends BaseView> implements BasePresenter<T> {
     protected CompositeDisposable mCompositeDisposable;
     protected DataManager mDataManager;
 
-    protected  void addSubscribe(Disposable disposable){
-        if(mCompositeDisposable==null){
-            mCompositeDisposable=new CompositeDisposable();
+    protected void addSubscribe(Disposable disposable) {
+        if (mCompositeDisposable == null) {
+            mCompositeDisposable = new CompositeDisposable();
         }
         mCompositeDisposable.add(disposable);
     }
 
-    protected void clearSubscribe(){
-        if(mCompositeDisposable!=null){
+    protected void clearSubscribe() {
+        if (mCompositeDisposable != null) {
             mCompositeDisposable.clear();
         }
     }
@@ -31,12 +32,12 @@ public class RxPresenter<T extends BaseView> implements BasePresenter<T> {
 
     @Override
     public void attachView(T view) {
-        this.mView=view;
+        this.mView = view;
     }
 
     @Override
     public void detachView() {
-        this.mView=null;
+        this.mView = null;
         clearSubscribe();
     }
 }

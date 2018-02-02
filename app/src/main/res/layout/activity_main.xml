@@ -12,12 +12,13 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:orientation="vertical">
+
         <android.support.v4.view.ViewPager
             android:id="@+id/vp_openeyes"
             android:layout_width="fill_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
-            />
+            android:layout_weight="1" />
+
         <android.support.design.widget.TabLayout
             android:id="@+id/tab_openeyes"
             android:layout_width="match_parent"
@@ -26,8 +27,7 @@
             app:tabIndicatorColor="@color/colorWhite"
             app:tabIndicatorHeight="0dp"
             app:tabSelectedTextColor="@color/colorBlack"
-            app:tabTextColor="@color/colorGrey"
-            />
+            app:tabTextColor="@color/colorGrey" />
     </LinearLayout>
 
 </LinearLayout>

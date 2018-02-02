@@ -45,17 +45,17 @@ public class SettingActivity extends BaseActivity<SettingPresenter> implements S
 
     @Override
     protected void initEventAndData() {
-        cacheFile=new File(Constants.PATH_CACHE);
-        downloadSetting=mPresenter.getDownloadSetting();
-        playSetting=mPresenter.getPlaySetting();
-        Log.d("hzj", "initEventAndData: "+downloadSetting+playSetting);
+        cacheFile = new File(Constants.PATH_CACHE);
+        downloadSetting = mPresenter.getDownloadSetting();
+        playSetting = mPresenter.getPlaySetting();
+        Log.d("hzj", "initEventAndData: " + downloadSetting + playSetting);
         cache.setText(Acache.getCacheSize(cacheFile));
         title.setText("设置");
         search.setVisibility(View.GONE);
         setSelected();
     }
 
-    void setSelected(){
+    void setSelected() {
         downloadSettingTrue.setSelected(downloadSetting);
         downloadSettingFalse.setSelected(!downloadSetting);
         playSettingFalse.setSelected(!playSetting);
@@ -63,51 +63,54 @@ public class SettingActivity extends BaseActivity<SettingPresenter> implements S
     }
 
     @OnClick(R.id.tv_downloadsetting_false)
-    void setDownloadSettingFalse(){
-        if(downloadSetting){
-            downloadSetting=false;
+    void setDownloadSettingFalse() {
+        if (downloadSetting) {
+            downloadSetting = false;
             mPresenter.setDownloadSetting(downloadSetting);
             setSelected();
         }
     }
 
     @OnClick(R.id.tv_downloadsetting_true)
-    void setDownloadSettingTrue(){
-        if(!downloadSetting){
-            downloadSetting=true;
+    void setDownloadSettingTrue() {
+        if (!downloadSetting) {
+            downloadSetting = true;
             mPresenter.setDownloadSetting(downloadSetting);
             setSelected();
         }
     }
 
     @OnClick(R.id.tv_playsetting_true)
-    void setPlaySettingTrue(){
-        if(!playSetting){
-            playSetting=true;
+    void setPlaySettingTrue() {
+        if (!playSetting) {
+            playSetting = true;
             mPresenter.setPlaySetting(playSetting);
             setSelected();
         }
     }
 
     @OnClick(R.id.tv_playsetting_false)
-    void setPlaySettingFalse(){
-        if(playSetting){
-            playSetting=false;
+    void setPlaySettingFalse() {
+        if (playSetting) {
+            playSetting = false;
             mPresenter.setPlaySetting(playSetting);
             setSelected();
         }
     }
 
+    /**
+     * 清理缓存
+     */
     @OnClick(R.id.tv_cleancache)
-    void cleanCache(){
+    void cleanCache() {
         Acache.deleteDir(cacheFile);
         cache.setText(Acache.getCacheSize(cacheFile));
         showCleanToast();
     }
 
     @OnClick(R.id.tv_search_update)
-    void checkUpdate(){
-        Toast.makeText(mContext,"当前已是最新版本~",Toast.LENGTH_SHORT).show();
+    void checkUpdate() {
+        Toast.makeText(mContext, "当前已是最新版本~", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -117,7 +120,7 @@ public class SettingActivity extends BaseActivity<SettingPresenter> implements S
 
     @Override
     public void showCleanToast() {
-        Toast.makeText(mContext,"缓存已清除~",Toast.LENGTH_SHORT).show();
+        Toast.makeText(mContext, "缓存已清除~", Toast.LENGTH_SHORT).show();
     }
 
     @Override

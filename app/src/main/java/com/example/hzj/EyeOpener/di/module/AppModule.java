@@ -20,36 +20,46 @@ import dagger.Provides;
 @Module
 public class AppModule {
     private final App app;
-    public AppModule(App app){this.app=app;}
+
+    public AppModule(App app) {
+        this.app = app;
+    }
 
     @Provides
     @Singleton
-    App provideApp(){return app;}
+    App provideApp() {
+        return app;
+    }
 
-    //因为dataManager构造方法中有ApiHelper,所以这里需要provide ApiHelper
+    /**
+     * 因为dataManager构造方法中有ApiHelper，RealmHelper，ImplPreferenceHelper,所以这里需要provide
+     *
+     * @param retrofitHelper
+     * @return
+     */
     @Provides
     @Singleton
-    ApiHelper provideHttpHelper(RetrofitHelper retrofitHelper){
+    ApiHelper provideHttpHelper(RetrofitHelper retrofitHelper) {
         return retrofitHelper;
     }
 
 
     @Provides
     @Singleton
-    DBHelper provideDBHelper(RealmHelper realmHelper){
+    DBHelper provideDBHelper(RealmHelper realmHelper) {
         return realmHelper;
     }
 
     @Provides
     @Singleton
-    PreferenceHelper provideImplPreferenceHelper(ImplPreferenceHelper implPreferenceHelper){
+    PreferenceHelper provideImplPreferenceHelper(ImplPreferenceHelper implPreferenceHelper) {
         return implPreferenceHelper;
     }
 
     @Provides
     @Singleton
-    DataManager provideDataManager(ApiHelper apiHelper,DBHelper dbHelper,PreferenceHelper preferenceHelper){
-        return new DataManager(apiHelper,dbHelper,preferenceHelper);
+    DataManager provideDataManager(ApiHelper apiHelper, DBHelper dbHelper, PreferenceHelper preferenceHelper) {
+        return new DataManager(apiHelper, dbHelper, preferenceHelper);
     }
 
 }

@@ -12,6 +12,6 @@ public class AllHotFragment extends BaseHotFragment {
 
     @Override
     protected void initInject() {
-        getFragmentComponent().inject(this  );
+        getFragmentComponent().inject(this);
     }
 }

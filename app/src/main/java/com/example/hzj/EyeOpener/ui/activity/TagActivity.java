@@ -39,11 +39,11 @@ public class TagActivity extends RootActivity<TagChildPresenter> implements TagC
     TextView toolbar_title;
 
 
-    List<ItemListBean> mItemListBeans=new ArrayList<>();
+    List<ItemListBean> mItemListBeans = new ArrayList<>();
     TagChildAdapter mAdapter;
-    boolean isLoading=true;
+    boolean isLoading = true;
     LinearLayoutManager mLinearLayoutManager;
-     int tagId;
+    int tagId;
 
 
     @Override
@@ -54,13 +54,15 @@ public class TagActivity extends RootActivity<TagChildPresenter> implements TagC
         stateLoading();
     }
 
-
+    /**
+     * 获取intent传递过来的数据
+     */
     private void initIntent() {
-        Intent intent=getIntent();
-        tagId=intent.getExtras().getInt("TagId");
-        final String tagName=intent.getExtras().getString("TagName");
-        final String TagImage=intent.getExtras().getString("TagImage");
-        final String TagSlogen=intent.getExtras().getString("TagSlogen");
+        Intent intent = getIntent();
+        tagId = intent.getExtras().getInt("TagId");
+        final String tagName = intent.getExtras().getString("TagName");
+        final String TagImage = intent.getExtras().getString("TagImage");
+        final String TagSlogen = intent.getExtras().getString("TagSlogen");
         toolbar_title.setText(tagName);
         mToolBar.setTitle("");
         setSupportActionBar(mToolBar);
@@ -72,24 +74,24 @@ public class TagActivity extends RootActivity<TagChildPresenter> implements TagC
                 onBackPressed();
             }
         });
-        ImageLoader.load(mContext,TagImage,ivOrigin);
+        ImageLoader.load(mContext, TagImage, ivOrigin);
         tvDes.setText(TagSlogen);
         mPresenter.getTagChildData(tagId);
         mAdapter.setOnItemClickListener(new TagChildAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int id) {
-                Intent childIntent=new Intent();
-                ItemListBean itemListBean=mItemListBeans.get(id);
-                childIntent.putExtra("itemListBean",itemListBean);
-                childIntent.setClass(mContext,DetailActivity.class);
+                Intent childIntent = new Intent();
+                ItemListBean itemListBean = mItemListBeans.get(id);
+                childIntent.putExtra("itemListBean", itemListBean);
+                childIntent.setClass(mContext, DetailActivity.class);
                 mContext.startActivity(childIntent);
             }
         });
     }
 
     private void initRecyclerView() {
-        mAdapter=new TagChildAdapter(mContext,mItemListBeans);
-        mLinearLayoutManager=new LinearLayoutManager(mContext);
+        mAdapter = new TagChildAdapter(mContext, mItemListBeans);
+        mLinearLayoutManager = new LinearLayoutManager(mContext);
         rvThemeChildList.setLayoutManager(mLinearLayoutManager);
         rvThemeChildList.setAdapter(mAdapter);
         rvThemeChildList.setOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -101,12 +103,12 @@ public class TagActivity extends RootActivity<TagChildPresenter> implements TagC
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-                int lastItemPositon= mLinearLayoutManager.findLastCompletelyVisibleItemPosition();
-                int totalPotions=mLinearLayoutManager.getItemCount();
-                if(lastItemPositon>=totalPotions-6 && dy>0 && totalPotions<=66){
-                    if(isLoading){
-                    }else {
-                        isLoading=true;
+                int lastItemPositon = mLinearLayoutManager.findLastCompletelyVisibleItemPosition();
+                int totalPotions = mLinearLayoutManager.getItemCount();
+                if (lastItemPositon >= totalPotions - 6 && dy > 0 && totalPotions <= 66) {
+                    if (isLoading) {
+                    } else {
+                        isLoading = true;
                         mPresenter.getMoreData(tagId);
                     }
                 }
@@ -122,30 +124,30 @@ public class TagActivity extends RootActivity<TagChildPresenter> implements TagC
     @Override
     public void showContents(List<ItemListBean> itemListBeans) {
         mItemListBeans.clear();
-        for(ItemListBean itemListBean: itemListBeans){
-            if (itemListBean.getType().equals("video")){
-                if(itemListBean.getData().getAuthor()!=null){
+        for (ItemListBean itemListBean : itemListBeans) {
+            if (itemListBean.getType().equals("video")) {
+                if (itemListBean.getData().getAuthor() != null) {
                     mItemListBeans.add(itemListBean);
                 }
             }
         }
         mAdapter.addTagChildData(mItemListBeans);
         stateStart();
-        isLoading=false;
+        isLoading = false;
     }
 
     @Override
     public void showMoreContents(List<ItemListBean> itemListBeans) {
-        for(ItemListBean itemListBean: itemListBeans){
-            if (itemListBean.getType().equals("video")){
-                if(itemListBean.getData().getAuthor()!=null){
+        for (ItemListBean itemListBean : itemListBeans) {
+            if (itemListBean.getType().equals("video")) {
+                if (itemListBean.getData().getAuthor() != null) {
                     mItemListBeans.add(itemListBean);
                 }
             }
         }
         mAdapter.addTagChildData(mItemListBeans);
         stateStart();
-        isLoading=false;
+        isLoading = false;
     }
 
     @Override

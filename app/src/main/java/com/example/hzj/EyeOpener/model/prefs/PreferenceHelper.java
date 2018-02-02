@@ -8,9 +8,9 @@ public interface PreferenceHelper {
 
     boolean getPlaySetting();
 
-    boolean getDowmloadSetting();
-
     void setPlaySetting(boolean playSetting);
+
+    boolean getDowmloadSetting();
 
     void setDownloadSetting(boolean downloadSetting);
 

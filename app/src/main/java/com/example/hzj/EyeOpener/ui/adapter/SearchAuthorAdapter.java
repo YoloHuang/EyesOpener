@@ -13,17 +13,17 @@ import com.example.hzj.EyeOpener.ui.view.SearchAuthorItemView;
 
 /**
  * Created by hzj on 2018/1/29.
+ * search结果中author栏的adapter
  */
 
 public class SearchAuthorAdapter extends PagerAdapter {
 
     Context context;
     ItemListBean itemListBean;
-    private LayoutInflater inflater;
 
-    public SearchAuthorAdapter(Context context, ItemListBean list){
-        this.context=context;
-        this.itemListBean=list;
+    public SearchAuthorAdapter(Context context, ItemListBean list) {
+        this.context = context;
+        this.itemListBean = list;
     }
 
     @Override
@@ -33,20 +33,20 @@ public class SearchAuthorAdapter extends PagerAdapter {
 
     @Override
     public boolean isViewFromObject(View view, Object object) {
-        return view==object;
+        return view == object;
     }
 
     @Override
     public Object instantiateItem(final ViewGroup container, final int position) {
-        SearchAuthorItemView view=new SearchAuthorItemView(context);
+        SearchAuthorItemView view = new SearchAuthorItemView(context);
         view.setData(itemListBean.getData().getListBeans().get(position));
         container.addView(view);
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent();
+                Intent intent = new Intent();
                 intent.setClass(context, DetailActivity.class);
-                intent.putExtra("itemListBean",itemListBean.getData().getListBeans().get(position));
+                intent.putExtra("itemListBean", itemListBean.getData().getListBeans().get(position));
                 context.startActivity(intent);
             }
         });
@@ -55,6 +55,6 @@ public class SearchAuthorAdapter extends PagerAdapter {
 
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
-        container.removeView((View)object);
+        container.removeView((View) object);
     }
 }

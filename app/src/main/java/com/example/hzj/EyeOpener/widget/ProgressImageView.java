@@ -10,7 +10,7 @@ import android.view.View;
  * Created by hzj on 2017/12/25.
  */
 
-public class ProgressImageView extends AppCompatImageView{
+public class ProgressImageView extends AppCompatImageView {
 
 
     public ProgressImageView(Context context) {

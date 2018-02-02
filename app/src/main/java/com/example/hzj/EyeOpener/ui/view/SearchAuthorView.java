@@ -4,7 +4,6 @@ import android.content.Context;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -37,32 +36,31 @@ public class SearchAuthorView extends LinearLayout {
     SearchAuthorAdapter adapter;
 
     public SearchAuthorView(Context context) {
-        this(context,null);
+        this(context, null);
     }
 
     public SearchAuthorView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        this.context=context;
+        this.context = context;
         initView();
     }
 
     public SearchAuthorView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
-        this(context,attrs);
+        this(context, attrs);
     }
 
 
     private void initView() {
-        View.inflate(context, R.layout.item_search_author,this);
+        View.inflate(context, R.layout.item_search_author, this);
         ButterKnife.bind(this);
     }
 
-    public  void getData(ItemListBean resultBean){
-        this.resultBean=resultBean;
-        ImageLoader.loadCircle(context,resultBean.getData().getHeader().getIcon(),authorIcon);
+    public void getData(ItemListBean resultBean) {
+        this.resultBean = resultBean;
+        ImageLoader.loadCircle(context, resultBean.getData().getHeader().getIcon(), authorIcon);
         authorDis.setText(resultBean.getData().getHeader().getDescription());
         authorName.setText(resultBean.getData().getHeader().getTitle());
-        Log.d("hzj", "getData: "+resultBean.getData().getListBeans().size());
-        adapter=new SearchAuthorAdapter(context,resultBean);
+        adapter = new SearchAuthorAdapter(context, resultBean);
         viewPager.setAdapter(adapter);
         viewPager.setOffscreenPageLimit(3);
         viewPager.setPageMargin(8);

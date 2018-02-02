@@ -20,77 +20,76 @@ import butterknife.ButterKnife;
 
 public class MyRecycleradapter extends BaseRecyclerAdapter<String> {
 
-    public enum ITEM_TYPE{
-        TYPE_IMAGE,
-        TYPE_TEXT
+    public MyRecycleradapter(Context context, List<String> datas) {
+        super(context, datas);
+        this.datas = datas;
     }
-
 
     @Override
     public int getItemViewType(int position) {
-        if(position==0){
+        if (position == 0) {
             return ITEM_TYPE.TYPE_IMAGE.ordinal();
-        }else {
+        } else {
             return ITEM_TYPE.TYPE_TEXT.ordinal();
         }
 
     }
 
-    public MyRecycleradapter(Context context, List<String> datas) {
-        super(context, datas);
-        this.datas=datas;
-    }
-
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        if(viewType==ITEM_TYPE.TYPE_IMAGE.ordinal()){
-            return new ImageViewHolder(mLayoutInflater.inflate(R.layout.item_myimage,parent,false));
-        }else {
-            return new TextViewHolder(mLayoutInflater.inflate(R.layout.item_mytext,parent,false));
+        if (viewType == ITEM_TYPE.TYPE_IMAGE.ordinal()) {
+            return new ImageViewHolder(mLayoutInflater.inflate(R.layout.item_myimage, parent, false));
+        } else {
+            return new TextViewHolder(mLayoutInflater.inflate(R.layout.item_mytext, parent, false));
         }
     }
 
     @Override
     public void convert(RecyclerView.ViewHolder holder, final int position) {
-        if(holder instanceof TextViewHolder) {
-            ((TextViewHolder) holder).textView.setText(datas.get(position-1));
+        if (holder instanceof TextViewHolder) {
+            ((TextViewHolder) holder).textView.setText(datas.get(position - 1));
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(onItemClickListener!=null){
+                    if (onItemClickListener != null) {
                         onItemClickListener.onItemClick(position);
                     }
                 }
             });
-        }else {
-            ((ImageViewHolder)holder).imageView.setImageResource(R.mipmap.iv_top);
+        } else {
+            ((ImageViewHolder) holder).imageView.setImageResource(R.mipmap.iv_top);
         }
     }
 
     @Override
     public int getItemCount() {
-        return datas.size()+1;
+        return datas.size() + 1;
     }
 
-    public static class TextViewHolder extends RecyclerView.ViewHolder{
+    public enum ITEM_TYPE {
+        TYPE_IMAGE,
+        TYPE_TEXT
+    }
+
+    public static class TextViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.text_my)
         TextView textView;
 
         public TextViewHolder(View itemView) {
             super(itemView);
-            ButterKnife.bind(this,itemView);
+            ButterKnife.bind(this, itemView);
         }
     }
 
-    public static class ImageViewHolder extends RecyclerView.ViewHolder{
+    public static class ImageViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.view_my)
         ImageView imageView;
 
         public ImageViewHolder(View itemView) {
             super(itemView);
-            ButterKnife.bind(this,itemView);
+            ButterKnife.bind(this, itemView);
         }
     }
 }

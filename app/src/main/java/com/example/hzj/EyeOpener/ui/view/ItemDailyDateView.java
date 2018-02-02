@@ -23,26 +23,26 @@ public class ItemDailyDateView extends RelativeLayout {
     Context context;
 
     public ItemDailyDateView(Context context) {
-        this(context,null);
+        this(context, null);
     }
 
     public ItemDailyDateView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        this.context=context;
+        this.context = context;
         initView();
     }
 
     public ItemDailyDateView(Context context, AttributeSet attrs, int defStyleAttr) {
-        this(context,attrs);
+        this(context, attrs);
     }
 
 
     private void initView() {
-        View.inflate(context, R.layout.item_date,this);
+        View.inflate(context, R.layout.item_date, this);
         ButterKnife.bind(this);
     }
 
-    public void setData(ItemListBean itemListBean){
+    public void setData(ItemListBean itemListBean) {
         textView.setText(itemListBean.getData().getText());
     }
 }

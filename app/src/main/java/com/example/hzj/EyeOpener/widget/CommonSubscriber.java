@@ -9,32 +9,33 @@ import retrofit2.HttpException;
 
 /**
  * Created by hzj on 2017/12/25.
+ * 统一观察者
  */
 
 public abstract class CommonSubscriber<T> extends ResourceSubscriber<T> {
 
-    private BaseView mBaseView;
     String ErrorMsg;
+    private BaseView mBaseView;
 
-    protected CommonSubscriber(BaseView baseView, String ErrorMsg){
-        this.mBaseView=baseView;
-        this.ErrorMsg=ErrorMsg;
+    protected CommonSubscriber(BaseView baseView, String ErrorMsg) {
+        this.mBaseView = baseView;
+        this.ErrorMsg = ErrorMsg;
     }
 
-    protected CommonSubscriber(BaseView baseView){
-        this.mBaseView=baseView;
+    protected CommonSubscriber(BaseView baseView) {
+        this.mBaseView = baseView;
     }
 
     @Override
     public void onError(Throwable t) {
-        if(mBaseView==null){
+        if (mBaseView == null) {
             return;
         }
-        if(ErrorMsg!=null && !TextUtils.isEmpty(ErrorMsg)){
+        if (ErrorMsg != null && !TextUtils.isEmpty(ErrorMsg)) {
             mBaseView.showErrorMsg(ErrorMsg);
-        }else if(t instanceof HttpException){
+        } else if (t instanceof HttpException) {
             mBaseView.showErrorMsg("数据加载失败~");
-        }else {
+        } else {
             mBaseView.showErrorMsg("未知错误= = ！");
         }
     }

@@ -8,6 +8,7 @@ import javax.inject.Inject;
 
 /**
  * Created by rj on 2018/1/31.
+ * aboutActivity所关联的presenter，暂时不做任何处理
  */
 
 public class AboutPresenter extends RxPresenter<BaseView>{

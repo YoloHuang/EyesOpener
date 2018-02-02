@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/detail_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/detail_root"
     tools:context="com.example.hzj.EyeOpener.ui.activity.DetailActivity">
 
     <com.shuyu.gsyvideoplayer.video.StandardGSYVideoPlayer
+        android:id="@+id/vedio_player"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:id="@+id/vedio_player"/>
+        android:layout_height="250dp" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/view_main"
@@ -20,7 +19,6 @@
         android:layout_below="@+id/vedio_player"
         android:background="@mipmap/recommend_bg_unlike"
         android:overScrollMode="never" />
-
 
 
 </RelativeLayout>

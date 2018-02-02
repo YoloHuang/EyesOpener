@@ -25,19 +25,15 @@ public abstract class BaseHotFragment extends RootFragment<WeekPresenter> implem
 
     @BindView(R.id.view_main)
     RecyclerView mRecyclerView;
-
-    private List<ItemListBean> itemListBeans = new ArrayList<>();
-
     LinearLayoutManager mLayoutManager;
-
     HotTopAdapter mAdapter;
-
+    private List<ItemListBean> itemListBeans = new ArrayList<>();
 
     @Override
     public void showContents(List<ItemListBean> listBean) {
-        for(ItemListBean itemListBean: listBean){
-            if (itemListBean.getType().equals("video")){
-                if(itemListBean.getData().getAuthor()!=null){
+        for (ItemListBean itemListBean : listBean) {
+            if (itemListBean.getType().equals("video")) {
+                if (itemListBean.getData().getAuthor() != null) {
                     itemListBeans.add(itemListBean);
                 }
             }
@@ -58,18 +54,18 @@ public abstract class BaseHotFragment extends RootFragment<WeekPresenter> implem
     }
 
     private void initRecyclerView() {
-        mLayoutManager=new LinearLayoutManager(mContext);
+        mLayoutManager = new LinearLayoutManager(mContext);
         mRecyclerView.setLayoutManager(mLayoutManager);
-        mAdapter=new HotTopAdapter(mContext,itemListBeans);
+        mAdapter = new HotTopAdapter(mContext, itemListBeans);
         mRecyclerView.setAdapter(mAdapter);
         getHotData();
         mAdapter.setOnItemClickListener(new HotTopAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int id) {
-                Intent intent=new Intent();
+                Intent intent = new Intent();
                 intent.setClass(mContext, DetailActivity.class);
-                ItemListBean itemListBean=itemListBeans.get(id);
-                intent.putExtra("itemListBean",itemListBean);
+                ItemListBean itemListBean = itemListBeans.get(id);
+                intent.putExtra("itemListBean", itemListBean);
                 mContext.startActivity(intent);
             }
         });

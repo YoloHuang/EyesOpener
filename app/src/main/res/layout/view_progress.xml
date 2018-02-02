@@ -3,15 +3,16 @@
     android:id="@+id/view_loading"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_gravity="center"
     android:background="@mipmap/recommend_bg_unlike"
     android:gravity="center"
-    android:layout_gravity="center"
     android:padding="30dp">
+
     <com.example.hzj.EyeOpener.widget.ProgressImageView xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/iv_progress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:layout_margin="30dp"
-        android:src="@drawable/svg_anim_logo"
-        android:layout_gravity="center" />
+        android:src="@drawable/svg_anim_logo" />
 </FrameLayout>

@@ -4,7 +4,6 @@ import android.content.Context;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -29,46 +28,42 @@ public class ReplyView extends RelativeLayout {
 
     @BindView(R.id.view_main)
     public RecyclerView recyclerView;
-
-    Context context;
     public LinearLayoutManager linearLayoutManager;
+    Context context;
     ReplyAdapter replyAdapter;
-    List<ReplyBean.ItemListBean> listBeans=new ArrayList<>();
+    List<ReplyBean.ItemListBean> listBeans = new ArrayList<>();
 
 
     public ReplyView(Context context) {
 
-        this(context,null);
+        this(context, null);
     }
 
     public ReplyView(Context context, AttributeSet attrs) {
-        this(context,null,0);
+        this(context, null, 0);
     }
 
     public ReplyView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        this.context=context;
+        this.context = context;
         initView();
     }
 
     private void initView() {
-        Log.d("hzj", "initView: ");
-        View.inflate(context, R.layout.layout_reply,this);
+        View.inflate(context, R.layout.layout_reply, this);
         ButterKnife.bind(this);
-        replyAdapter=new ReplyAdapter(context,listBeans);
-        Log.d("hzj", "initView: "+replyAdapter.toString());
+        replyAdapter = new ReplyAdapter(context, listBeans);
         recyclerView.setAdapter(replyAdapter);
-        linearLayoutManager=new LinearLayoutManager(context);
+        linearLayoutManager = new LinearLayoutManager(context);
         recyclerView.setLayoutManager(linearLayoutManager);
 
     }
 
-    public void getData(ReplyBean replyBean){
-        Log.d("hzj", "getData: ");
+    public void getData(ReplyBean replyBean) {
         replyAdapter.getData(replyBean);
     }
 
-    public  void getMoreData(ReplyBean replyBean){
+    public void getMoreData(ReplyBean replyBean) {
         replyAdapter.getMoreData(replyBean);
     }
 

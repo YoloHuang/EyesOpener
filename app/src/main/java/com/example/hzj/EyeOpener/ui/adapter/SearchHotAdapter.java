@@ -15,25 +15,24 @@ import butterknife.ButterKnife;
 
 /**
  * Created by hzj on 2018/1/26.
+ * search热门关键词
  */
 
 public class SearchHotAdapter extends BaseRecyclerAdapter<String> {
 
 
-
     public SearchHotAdapter(Context context, List<String> datas) {
         super(context, datas);
-        //this.datas=datas;
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new HotTitleViewHolder(mLayoutInflater.inflate(R.layout.view_search_hot,parent,false));
+        return new HotTitleViewHolder(mLayoutInflater.inflate(R.layout.view_search_hot, parent, false));
     }
 
     @Override
     public void convert(RecyclerView.ViewHolder holder, int position) {
-        ((HotTitleViewHolder)holder).hotTitle.setText(datas.get(position));
+        ((HotTitleViewHolder) holder).hotTitle.setText(datas.get(position));
     }
 
     @Override
@@ -48,13 +47,8 @@ public class SearchHotAdapter extends BaseRecyclerAdapter<String> {
 
         public HotTitleViewHolder(View itemView) {
             super(itemView);
-            ButterKnife.bind(this,itemView);
+            ButterKnife.bind(this, itemView);
         }
-    }
-
-    public void getHotData( List<String> datas){
-        this.datas=datas;
-        notifyDataSetChanged();
     }
 
 }

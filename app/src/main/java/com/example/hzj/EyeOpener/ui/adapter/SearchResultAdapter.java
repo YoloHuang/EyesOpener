@@ -15,24 +15,23 @@ import java.util.List;
 
 /**
  * Created by hzj on 2018/1/30.
+ * 搜索结果，根据type分为author栏和消息栏
  */
 
 public class SearchResultAdapter extends BaseRecyclerAdapter<ItemListBean> {
 
 
-    public enum ITEM_TYPE{
-        TYPE_AUTHOR,
-        TYPE_NEW,
-        TYPE_END
+    public SearchResultAdapter(Context context, List<ItemListBean> datas) {
+        super(context, datas);
     }
 
     @Override
     public int getItemViewType(int position) {
-        if(position==datas.size()){
+        if (position == datas.size()) {
             return ITEM_TYPE.TYPE_END.ordinal();
-        }else if(datas.get(position).getType().equals("videoCollectionWithBrief")){
+        } else if (datas.get(position).getType().equals("videoCollectionWithBrief")) {
             return ITEM_TYPE.TYPE_AUTHOR.ordinal();
-        }else {
+        } else {
             return ITEM_TYPE.TYPE_NEW.ordinal();
         }
     }
@@ -40,32 +39,28 @@ public class SearchResultAdapter extends BaseRecyclerAdapter<ItemListBean> {
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView;
-        if(viewType==ITEM_TYPE.TYPE_AUTHOR.ordinal()){
-            itemView=new SearchAuthorView(mContext);
-        }else if(viewType==ITEM_TYPE.TYPE_END.ordinal()){
-            itemView=new ListEndView(mContext);
-        }else {
-            itemView=new ItemDailyView(mContext);
+        if (viewType == ITEM_TYPE.TYPE_AUTHOR.ordinal()) {
+            itemView = new SearchAuthorView(mContext);
+        } else if (viewType == ITEM_TYPE.TYPE_END.ordinal()) {
+            itemView = new ListEndView(mContext);
+        } else {
+            itemView = new ItemDailyView(mContext);
         }
-        itemView.setLayoutParams(new RecyclerView.LayoutParams(RecyclerView.LayoutParams.MATCH_PARENT,RecyclerView.LayoutParams.WRAP_CONTENT));
+        itemView.setLayoutParams(new RecyclerView.LayoutParams(RecyclerView.LayoutParams.MATCH_PARENT, RecyclerView.LayoutParams.WRAP_CONTENT));
         return new Holder(itemView);
-    }
-
-    public SearchResultAdapter(Context context, List<ItemListBean> datas) {
-        super(context, datas);
     }
 
     @Override
     public void convert(RecyclerView.ViewHolder holder, final int position) {
-        View view=holder.itemView;
-        if(view instanceof SearchAuthorView){
-            ((SearchAuthorView)view).getData(datas.get(position));
-        }else if(view instanceof ItemDailyView){
-            ((ItemDailyView)view).setData(datas.get(position));
+        View view = holder.itemView;
+        if (view instanceof SearchAuthorView) {
+            ((SearchAuthorView) view).getData(datas.get(position));
+        } else if (view instanceof ItemDailyView) {
+            ((ItemDailyView) view).setData(datas.get(position));
             ((ItemDailyView) view).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if(onItemClickListener!=null){
+                    if (onItemClickListener != null) {
                         onItemClickListener.onItemClick(position);
                     }
                 }
@@ -75,7 +70,19 @@ public class SearchResultAdapter extends BaseRecyclerAdapter<ItemListBean> {
 
     @Override
     public int getItemCount() {
-        return datas.size()+1;
+        return datas.size() + 1;
+    }
+
+    public void setData(List<ItemListBean> itemListBeans) {
+        datas.clear();
+        datas.addAll(itemListBeans);
+        notifyDataSetChanged();
+    }
+
+    public enum ITEM_TYPE {
+        TYPE_AUTHOR,
+        TYPE_NEW,
+        TYPE_END
     }
 
     public static class Holder extends RecyclerView.ViewHolder {
@@ -83,15 +90,5 @@ public class SearchResultAdapter extends BaseRecyclerAdapter<ItemListBean> {
         public Holder(View itemView) {
             super(itemView);
         }
-    }
-
-
-    public void setData(List<ItemListBean> itemListBeans){
-        Log.d("hzj", "setData: "+datas.size());
-        //DiffUtil.DiffResult diffResult=DiffUtil.calculateDiff(new DiffUtilCallBack(datas,itemListBeans),false);
-        datas.clear();
-        datas.addAll(itemListBeans);
-        //diffResult.dispatchUpdatesTo(this);
-        notifyDataSetChanged();
     }
 }

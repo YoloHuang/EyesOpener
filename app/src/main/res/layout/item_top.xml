@@ -1,44 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
     <android.support.v4.view.ViewPager
         android:id="@+id/vp_top"
         android:layout_width="match_parent"
-        android:layout_height="270dp"/>
+        android:layout_height="270dp" />
+
     <LinearLayout
-            android:orientation="vertical"
-            android:gravity="center_horizontal|bottom"
-            android:layout_gravity="center_horizontal|bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|bottom"
+        android:layout_marginBottom="40px"
+        android:gravity="center_horizontal|bottom"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/iv_top_show"
             android:layout_width="wrap_content"
-        android:layout_marginBottom="60px"
-            android:layout_height="wrap_content">
-            <ImageView
-                android:id="@+id/iv_top_show"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/home_page_header_icon"
-                android:layout_centerInParent="true"
-                />
-            <com.example.hzj.EyeOpener.widget.JumpShowTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/tv_top_title"
-                android:gravity="center"
-                android:layout_marginBottom="20px"
-                app:IsBold="true"
-                app:textColor="@color/colorWhite"
-                app:textSize="50px"/>
-            <com.example.hzj.EyeOpener.widget.JumpShowTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/tv_top_des"
-                android:gravity="center"
-                app:textColor="@color/colorWhite"
-                app:textSize="45px"
-                />
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:src="@mipmap/home_page_header_icon" />
+
+        <com.example.hzj.EyeOpener.widget.JumpShowTextView
+            android:id="@+id/tv_top_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20px"
+            android:gravity="center"
+            app:IsBold="true"
+            app:textColor="@color/colorWhite"
+            app:textSize="50px" />
+
+        <com.example.hzj.EyeOpener.widget.JumpShowTextView
+            android:id="@+id/tv_top_des"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            app:textColor="@color/colorWhite"
+            app:textSize="45px" />
+
+        <LinearLayout
+            android:id="@+id/ll_top_indicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+        </LinearLayout>
 
     </LinearLayout>
 

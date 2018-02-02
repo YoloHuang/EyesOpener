@@ -28,16 +28,21 @@ import retrofit2.converter.gson.GsonConverterFactory;
 @Module
 public class HttpModule {
 
-    //retrofitHelper的构造方法中有个API，所以这里要provide api
+    /**
+     * retrofitHelper的构造方法中有个API，所以这里要provide api
+     *
+     * @param retrofit
+     * @return
+     */
     @Provides
     @Singleton
-    Api provideApi(Retrofit retrofit){
+    Api provideApi(Retrofit retrofit) {
         return retrofit.create(Api.class);
     }
 
     @Provides
     @Singleton
-    Retrofit provideRetrofit(Retrofit.Builder builder, OkHttpClient okHttpClient){
+    Retrofit provideRetrofit(Retrofit.Builder builder, OkHttpClient okHttpClient) {
         return builder
                 .baseUrl(Api.HOST)
                 .client(okHttpClient)
@@ -46,29 +51,36 @@ public class HttpModule {
                 .build();
     }
 
+
+    /**
+     * 在这里设置统一的okhttp缓存管理
+     *
+     * @param builder
+     * @return
+     */
     @Provides
     @Singleton
-    OkHttpClient provideOkhttpClient(OkHttpClient.Builder builder){
-        File cacheFile=new File(Constants.PATH_CACHE);
-        Cache cache = new Cache(cacheFile,1024*1024*50);
-        Interceptor cacheInterceptor=new Interceptor() {
+    OkHttpClient provideOkhttpClient(OkHttpClient.Builder builder) {
+        File cacheFile = new File(Constants.PATH_CACHE);
+        Cache cache = new Cache(cacheFile, 1024 * 1024 * 50);
+        Interceptor cacheInterceptor = new Interceptor() {
             @Override
             public Response intercept(Chain chain) throws IOException {
-                Request request=chain.request();
-                if(!SystemUtil.isNetworkConnected()){
-                    request=request.newBuilder()
+                Request request = chain.request();
+                if (!SystemUtil.isNetworkConnected()) {
+                    request = request.newBuilder()
                             .cacheControl(CacheControl.FORCE_CACHE)
                             .build();
                 }
-                Response response=chain.proceed(request);
-                if(SystemUtil.isNetworkConnected()){
-                    int maxAge=0;
+                Response response = chain.proceed(request);
+                if (SystemUtil.isNetworkConnected()) {
+                    int maxAge = 0;
                     response.newBuilder()
                             .header("Cache-Control", "public, max-age=" + maxAge)
                             .removeHeader("Pragma")
                             .build();
-                }else {
-                    int maxStale=60*60*24*3;
+                } else {
+                    int maxStale = 60 * 60 * 24 * 3;
                     response.newBuilder()
                             .header("Cache-Control", "public, only-if-cached, max-stale=" + maxStale)
                             .removeHeader("Pragma")
@@ -92,13 +104,13 @@ public class HttpModule {
 
     @Provides
     @Singleton
-    Retrofit.Builder provideRetrofitBuilder(){
-        return  new Retrofit.Builder();
+    Retrofit.Builder provideRetrofitBuilder() {
+        return new Retrofit.Builder();
     }
 
     @Provides
     @Singleton
-    OkHttpClient.Builder provideOkhttpClientBuilder(){
+    OkHttpClient.Builder provideOkhttpClientBuilder() {
         return new OkHttpClient.Builder();
     }
 

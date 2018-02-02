@@ -8,6 +8,8 @@ import com.example.hzj.EyeOpener.widget.ProgressImageView;
 
 /**
  * Created by hzj on 2017/12/25.
+ * 基于BaseActivity，在界面布局中存在RecyclerView时，当数据没加载完成时，调用stateLoading来显示progres
+ * 数据加载完成后，调用stateStart开始显示主布局
  */
 
 public abstract class RootActivity<T extends BasePresenter> extends BaseActivity<T> {

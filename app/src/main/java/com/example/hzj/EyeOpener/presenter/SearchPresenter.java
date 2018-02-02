@@ -17,73 +17,87 @@ import javax.inject.Inject;
 
 /**
  * Created by hzj on 2018/1/25.
+ * SearchActivity所关联类
  */
 
 public class SearchPresenter extends RxPresenter<SearchContract.View> implements SearchContract.Presenter {
 
-    List<String> hotSearch=new ArrayList<>();
+    List<String> hotSearch = new ArrayList<>();
     String nextUrl;
-    List<ItemListBean> listBeans=new ArrayList<>();
-    List<ItemListBean> moreListBeans=new ArrayList<>();
+    List<ItemListBean> listBeans = new ArrayList<>();
+    List<ItemListBean> moreListBeans = new ArrayList<>();
 
     @Inject
-    public SearchPresenter(DataManager manager){
-        this.mDataManager=manager;
+    public SearchPresenter(DataManager manager) {
+        this.mDataManager = manager;
     }
 
+    /**
+     * 获取热门搜索关键词
+     */
     @Override
     public void getHotSearchData() {
         addSubscribe(mDataManager.getHotSearch()
-        .compose(RxUtil.<List<String>>rxSchedulerHelper())
-        .subscribeWith(new CommonSubscriber<List<String>>(mView) {
-            @Override
-            public void onNext(List<String> strings) {
-                Log.d("hzj", "onNext: strings"+strings);
-                hotSearch=strings;
-                mView.showHotSearch(strings);
-            }
-        }));
+                .compose(RxUtil.<List<String>>rxSchedulerHelper())
+                .subscribeWith(new CommonSubscriber<List<String>>(mView) {
+                    @Override
+                    public void onNext(List<String> strings) {
+                        Log.d("hzj", "onNext: strings" + strings);
+                        hotSearch = strings;
+                        mView.showHotSearch(strings);
+                    }
+                }));
     }
 
+    /**
+     * 根据query获取搜索内容
+     *
+     * @param query
+     */
     @Override
     public void getSearchData(String query) {
-        addSubscribe(mDataManager.getSearchResultBean(0,10,query)
-        .compose(RxUtil.<SearchResultBean>rxSchedulerHelper())
-        .subscribeWith(new CommonSubscriber<SearchResultBean>(mView) {
-            @Override
-            public void onNext(SearchResultBean searchResultBean) {
-                nextUrl=searchResultBean.getNextPageUrl();
-                listBeans.clear();
-                for(ItemListBean resultBean :searchResultBean.getItemList()){
-                        listBeans.add(resultBean);
-                }
-                mView.showResult(listBeans,searchResultBean.getTotal());
-            }
-        }));
+        addSubscribe(mDataManager.getSearchResultBean(0, 10, query)
+                .compose(RxUtil.<SearchResultBean>rxSchedulerHelper())
+                .subscribeWith(new CommonSubscriber<SearchResultBean>(mView) {
+                    @Override
+                    public void onNext(SearchResultBean searchResultBean) {
+                        nextUrl = searchResultBean.getNextPageUrl();
+                        listBeans.clear();
+                        for (ItemListBean resultBean : searchResultBean.getItemList()) {
+                            listBeans.add(resultBean);
+                        }
+                        mView.showResult(listBeans, searchResultBean.getTotal());
+                    }
+                }));
 
     }
 
+    /**
+     * 获取更多搜索数据
+     *
+     * @param query
+     */
     @Override
     public void getMoreData(String query) {
-        if(nextUrl==null){
+        if (nextUrl == null) {
             return;
-        }else {
-            final String startS=nextUrl.substring(nextUrl.indexOf("=")+1,nextUrl.indexOf("&"));
-            Log.d("hzj", "getMoreReplyData: "+startS);
-            int start= Integer.valueOf(startS).intValue();
-            addSubscribe(mDataManager.getSearchResultBean(start,10,query)
-            .compose(RxUtil.<SearchResultBean>rxSchedulerHelper())
-            .subscribeWith(new CommonSubscriber<SearchResultBean>(mView) {
-                @Override
-                public void onNext(SearchResultBean searchResultBean) {
-                    for(ItemListBean itemListBean:searchResultBean.getItemList()){
-                            moreListBeans.add(itemListBean);
+        } else {
+            final String startS = nextUrl.substring(nextUrl.indexOf("=") + 1, nextUrl.indexOf("&"));
+            Log.d("hzj", "getMoreReplyData: " + startS);
+            int start = Integer.valueOf(startS).intValue();
+            addSubscribe(mDataManager.getSearchResultBean(start, 10, query)
+                    .compose(RxUtil.<SearchResultBean>rxSchedulerHelper())
+                    .subscribeWith(new CommonSubscriber<SearchResultBean>(mView) {
+                        @Override
+                        public void onNext(SearchResultBean searchResultBean) {
+                            for (ItemListBean itemListBean : searchResultBean.getItemList()) {
+                                moreListBeans.add(itemListBean);
 
-                    }
-                    mView.showMoreResult(moreListBeans);
-                    nextUrl=searchResultBean.getNextPageUrl();
-                }
-            }));
+                            }
+                            mView.showMoreResult(moreListBeans);
+                            nextUrl = searchResultBean.getNextPageUrl();
+                        }
+                    }));
         }
 
     }

@@ -16,8 +16,8 @@ public class RxUtil {
     /**
      * 统一线程处理
      */
-    public static <T>FlowableTransformer<T,T> rxSchedulerHelper(){
-        return  new FlowableTransformer<T, T>() {
+    public static <T> FlowableTransformer<T, T> rxSchedulerHelper() {
+        return new FlowableTransformer<T, T>() {
             @Override
             public Publisher<T> apply(Flowable<T> upstream) {
                 return upstream.observeOn(AndroidSchedulers.mainThread())

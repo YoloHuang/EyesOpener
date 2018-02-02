@@ -8,13 +8,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import me.yokeyword.fragmentation.SupportFragment;
 
 /**
  * Created by hzj on 2017/12/18.
+ * 最基本的fragment，主要进行的操作是，ButterKnife的绑定，View的初始化和绑定
  */
 
 public abstract class SimpleFragment extends SupportFragment {
@@ -26,21 +26,21 @@ public abstract class SimpleFragment extends SupportFragment {
 
     @Override
     public void onAttach(Context context) {
-        mActivity=(Activity)context;
-        mContext=context;
+        mActivity = (Activity) context;
+        mContext = context;
         super.onAttach(context);
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        unbinder= ButterKnife.bind(this,view);
+        unbinder = ButterKnife.bind(this, view);
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        mView=inflater.inflate(getLayoutId(),null);
+        mView = inflater.inflate(getLayoutId(), null);
         return mView;
     }
 

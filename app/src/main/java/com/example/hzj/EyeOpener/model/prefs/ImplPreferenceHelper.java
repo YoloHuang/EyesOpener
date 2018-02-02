@@ -14,34 +14,53 @@ import javax.inject.Inject;
 
 public class ImplPreferenceHelper implements PreferenceHelper {
 
-    private static final Boolean DEFAULT_DOWNLOADSETTING=false;
-    private static final Boolean DEFAULT_PLAYSETTING=false;
+    private static final Boolean DEFAULT_DOWNLOADSETTING = false;
+    private static final Boolean DEFAULT_PLAYSETTING = false;
 
     private final SharedPreferences preferences;
 
     @Inject
-    public ImplPreferenceHelper(){
+    public ImplPreferenceHelper() {
         preferences = App.getApp().getSharedPreferences("my_oe", Context.MODE_PRIVATE);
     }
 
-
+    /**
+     * 获取关于是否使用流量播放的设置
+     *
+     * @return
+     */
     @Override
     public boolean getPlaySetting() {
-        return preferences.getBoolean(Constants.PLAYSETTING,DEFAULT_PLAYSETTING);
+        return preferences.getBoolean(Constants.PLAYSETTING, DEFAULT_PLAYSETTING);
     }
 
-    @Override
-    public boolean getDowmloadSetting() {
-        return preferences.getBoolean(Constants.DOWNLOADSETTING,DEFAULT_DOWNLOADSETTING);
-    }
-
+    /**
+     * 设置是否使用流量观看
+     *
+     * @param playSetting
+     */
     @Override
     public void setPlaySetting(boolean playSetting) {
-        preferences.edit().putBoolean(Constants.PLAYSETTING,playSetting).apply();
+        preferences.edit().putBoolean(Constants.PLAYSETTING, playSetting).apply();
     }
 
+    /**
+     * 获取是否使用流量下载的设置
+     *
+     * @return
+     */
+    @Override
+    public boolean getDowmloadSetting() {
+        return preferences.getBoolean(Constants.DOWNLOADSETTING, DEFAULT_DOWNLOADSETTING);
+    }
+
+    /**
+     * 设置是否使用流量下载
+     *
+     * @param downloadSetting
+     */
     @Override
     public void setDownloadSetting(boolean downloadSetting) {
-        preferences.edit().putBoolean(Constants.DOWNLOADSETTING,downloadSetting).apply();
+        preferences.edit().putBoolean(Constants.DOWNLOADSETTING, downloadSetting).apply();
     }
 }

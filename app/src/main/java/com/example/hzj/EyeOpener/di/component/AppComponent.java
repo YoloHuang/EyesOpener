@@ -13,12 +13,16 @@ import dagger.Component;
 
 /**
  * Created by hzj on 2017/12/18.
+ * 提供全局单例类的实例
  */
 @Singleton
 @Component(modules = {AppModule.class, HttpModule.class})
 public interface AppComponent {
     App getContext();
+
     RetrofitHelper retrofitHelper();
+
     RealmHelper realmHelper();
+
     DataManager getDataManager();
 }

@@ -1,69 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/colorBackground"
     android:orientation="vertical">
+
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
         android:background="@color/colorBackground"
-        app:cardElevation="2dp"
-        app:cardCornerRadius="10dp">
+        app:cardCornerRadius="10dp"
+        app:cardElevation="2dp">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
             <ImageView
+                android:id="@+id/iv_daily_item_image"
                 android:layout_width="match_parent"
                 android:layout_height="205dp"
-                android:scaleType="centerCrop"
                 android:layout_marginBottom="2dp"
-                android:id="@+id/iv_daily_item_image"/>
+                android:scaleType="centerCrop" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:orientation="horizontal">
+
                 <ImageView
-                    android:layout_marginStart="10dp"
-                    android:layout_marginEnd="2dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
+                    android:id="@+id/iv_daily_author"
                     android:layout_width="36dp"
                     android:layout_height="match_parent"
-                    android:id="@+id/iv_daily_author"/>
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginEnd="2dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp" />
+
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:orientation="vertical">
+
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
                         android:id="@+id/item_text_title"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginEnd="10dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginBottom="2dp"
-                        android:layout_weight="2"
-                        android:singleLine="true"
-                        android:textSize="10dp"/>
-                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/item_text_author"
-                        android:layout_weight="2"
-                        android:layout_marginStart="10dp"
+                        android:layout_marginBottom="2dp"
                         android:layout_marginEnd="10dp"
-                        android:layout_marginTop="2dp"
-                        android:layout_marginBottom="10dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_weight="2"
                         android:singleLine="true"
-                        android:textSize="10dp"/>
+                        android:textSize="10dp" />
+
+                    <TextView
+                        android:id="@+id/item_text_author"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="2dp"
+                        android:layout_weight="2"
+                        android:singleLine="true"
+                        android:textSize="10dp" />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>

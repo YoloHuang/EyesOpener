@@ -29,22 +29,22 @@ public class HotTopAdapter extends BaseRecyclerAdapter<ItemListBean> {
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ItemViewHolder(mLayoutInflater.inflate(R.layout.item_hot,parent,false));
+        return new ItemViewHolder(mLayoutInflater.inflate(R.layout.item_hot, parent, false));
     }
 
     @Override
     public void convert(RecyclerView.ViewHolder holder, final int position) {
-        String detail=datas.get(position).getData().getAuthor().getName()+" / #" +datas.get(position).getData().getCategory();
-        int duration=datas.get(position).getData().getDuration();
-        String time=duration/60+":"+duration%60;
-        ((ItemViewHolder)holder).mHotTag.setText(detail);
-        ((ItemViewHolder)holder).mHotTitle.setText(datas.get(position).getData().getTitle());
-        ((ItemViewHolder)holder).mHotTime.setText(time);
-        ImageLoader.load(mContext,datas.get(position).getData().getCover().getFeed(),((ItemViewHolder)holder).mHotImage);
+        String detail = datas.get(position).getData().getAuthor().getName() + " / #" + datas.get(position).getData().getCategory();
+        int duration = datas.get(position).getData().getDuration();
+        String time = duration / 60 + ":" + duration % 60;
+        ((ItemViewHolder) holder).mHotTag.setText(detail);
+        ((ItemViewHolder) holder).mHotTitle.setText(datas.get(position).getData().getTitle());
+        ((ItemViewHolder) holder).mHotTime.setText(time);
+        ImageLoader.load(mContext, datas.get(position).getData().getCover().getFeed(), ((ItemViewHolder) holder).mHotImage);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(onItemClickListener!=null){
+                if (onItemClickListener != null) {
                     onItemClickListener.onItemClick(position);
 
                 }
@@ -52,7 +52,18 @@ public class HotTopAdapter extends BaseRecyclerAdapter<ItemListBean> {
         });
     }
 
-    public static class ItemViewHolder extends RecyclerView.ViewHolder{
+    @Override
+    public int getItemCount() {
+        return datas.size();
+    }
+
+    public void addHotTopData(List<ItemListBean> itemListBeans) {
+        datas.clear();
+        datas.addAll(itemListBeans);
+        notifyDataSetChanged();
+    }
+
+    public static class ItemViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.iv_hot_item)
         ImageView mHotImage;
@@ -65,19 +76,7 @@ public class HotTopAdapter extends BaseRecyclerAdapter<ItemListBean> {
 
         public ItemViewHolder(View itemView) {
             super(itemView);
-            ButterKnife.bind(this,itemView);
+            ButterKnife.bind(this, itemView);
         }
-    }
-
-    @Override
-    public int getItemCount() {
-        return datas.size();
-    }
-
-    public void  addHotTopData(List<ItemListBean> itemListBeans){
-        datas.clear();
-        datas.addAll(itemListBeans);
-        //datas=listBeans;
-        notifyDataSetChanged();
     }
 }

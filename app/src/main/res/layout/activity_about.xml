@@ -1,74 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
     android:background="@color/colorWhite"
+    android:fitsSystemWindows="true"
     tools:context="com.example.hzj.EyeOpener.ui.activity.AboutActivity">
-    <include layout="@layout/view_toolbar"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/tv_about_author"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="100dp"
-        android:textSize="45px"
-        android:textColor="@color/colorBlack"
-        android:text="作者"/>
+
+    <include layout="@layout/view_toolbar" />
 
     <TextView
+        android:id="@+id/tv_about_author"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp"
+        android:text="作者"
+        android:textColor="@color/colorBlack"
+        android:textSize="45px" />
+
+    <TextView
         android:id="@+id/tv_about_author_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_below="@id/tv_about_author"
-        android:layout_marginTop="10dp"
         android:layout_centerHorizontal="true"
-        android:textSize="45px"
+        android:layout_marginTop="10dp"
+        android:text="@string/about_author"
         android:textColor="@color/colorGrey"
-        android:text="@string/about_author"/>
+        android:textSize="45px" />
+
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:id="@+id/tv_about_project"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_below="@id/tv_about_author_name"
-        android:layout_marginTop="20dp"
         android:layout_centerHorizontal="true"
-        android:textSize="45px"
+        android:layout_marginTop="20dp"
+        android:text="项目简介"
         android:textColor="@color/colorBlack"
-        android:text="项目简介"/>
+        android:textSize="45px" />
+
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:id="@+id/tv_about_project_dis"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_below="@id/tv_about_project"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="20dp"
+        android:layout_centerHorizontal="true"
         android:layout_marginLeft="20dp"
-        android:layout_centerHorizontal="true"
-        android:textSize="45px"
-        android:textColor="@color/colorGrey"
-        android:text="@string/about_dis"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/tv_about_address"
-        android:layout_below="@id/tv_about_project_dis"
-        android:layout_marginTop="20dp"
-        android:layout_centerHorizontal="true"
-        android:textSize="45px"
-        android:textColor="@color/colorBlack"
-        android:text="项目地址"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/tv_about_address_dis"
-        android:layout_below="@id/tv_about_address"
+        android:layout_marginRight="20dp"
         android:layout_marginTop="10dp"
-        android:layout_centerHorizontal="true"
-        android:textSize="45px"
+        android:text="@string/about_dis"
         android:textColor="@color/colorGrey"
-        android:text="@string/about_address"/>
+        android:textSize="45px" />
+
+    <TextView
+        android:id="@+id/tv_about_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_about_project_dis"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:text="项目地址"
+        android:textColor="@color/colorBlack"
+        android:textSize="45px" />
+
+    <TextView
+        android:id="@+id/tv_about_address_dis"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_about_address"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:text="@string/about_address"
+        android:textColor="@color/colorGrey"
+        android:textSize="45px" />
 
 </RelativeLayout>

@@ -24,21 +24,21 @@ public class ListEndView extends FrameLayout {
     Context context;
 
     public ListEndView(@NonNull Context context) {
-        this(context,null);
+        this(context, null);
     }
 
     public ListEndView(@NonNull Context context, @Nullable AttributeSet attrs) {
-        this(context,null,0);
+        this(context, null, 0);
     }
 
     public ListEndView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        this.context=context;
+        this.context = context;
         initView();
     }
 
     private void initView() {
-        View.inflate(context, R.layout.item_listend,this);
+        View.inflate(context, R.layout.item_listend, this);
         ButterKnife.bind(this);
     }
 }

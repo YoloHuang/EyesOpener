@@ -17,7 +17,7 @@ public class MainAdapter extends FragmentPagerAdapter {
 
     public MainAdapter(FragmentManager fm, List<Fragment> fragments) {
         super(fm);
-        this.fragments=fragments;
+        this.fragments = fragments;
     }
 
     @Override
@@ -31,6 +31,13 @@ public class MainAdapter extends FragmentPagerAdapter {
     }
 
 
+    /**
+     * 这边注释掉destoryItem，是为了在主界面左右切换时，不需要反复重新加载fragment
+     *
+     * @param container
+     * @param position
+     * @param object
+     */
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
         //super.destroyItem(container, position, object);

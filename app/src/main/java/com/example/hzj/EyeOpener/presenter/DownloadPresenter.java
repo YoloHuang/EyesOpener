@@ -11,6 +11,7 @@ import javax.inject.Inject;
 
 /**
  * Created by hzj on 2018/1/22.
+ * DownloadActivity所关联Presenter
  */
 
 public class DownloadPresenter extends RxPresenter<DownloadContract.View> implements DownloadContract.Presenter {
@@ -18,13 +19,16 @@ public class DownloadPresenter extends RxPresenter<DownloadContract.View> implem
     List<DownloadBean> downloadBeans;
 
     @Inject
-    public DownloadPresenter(DataManager dataManager){
-        this.mDataManager=dataManager;
+    public DownloadPresenter(DataManager dataManager) {
+        this.mDataManager = dataManager;
     }
 
+    /**
+     * 获取下载记录
+     */
     @Override
     public void getDownloadData() {
-        downloadBeans=mDataManager.getDownloadBeans();
+        downloadBeans = mDataManager.getDownloadBeans();
         mView.showContent(downloadBeans);
     }
 }

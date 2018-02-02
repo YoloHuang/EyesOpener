@@ -9,6 +9,7 @@ import javax.inject.Inject;
 
 /**
  * Created by hzj on 2017/12/18.
+ * 基于SimpleActivity,在SimpleActivity的基础上，进行dagger2注入，与presenter的绑定等操作
  */
 
 public abstract class BaseActivity<T extends BasePresenter> extends SimpleActivity implements BaseView {
@@ -17,7 +18,7 @@ public abstract class BaseActivity<T extends BasePresenter> extends SimpleActivi
     @Inject
     protected T mPresenter;
 
-    protected ActivityComponent getActivityComponent(){
+    protected ActivityComponent getActivityComponent() {
         return DaggerActivityComponent.builder().appComponent(App.getAppComponent()).activityModule(getActivityModule()).build();
     }
 
@@ -26,19 +27,18 @@ public abstract class BaseActivity<T extends BasePresenter> extends SimpleActivi
     }
 
 
-
     @Override
     protected void onViewCreate() {
         super.onViewCreate();
         initInject();
-        if(mPresenter!=null){
+        if (mPresenter != null) {
             mPresenter.attachView(this);
         }
     }
 
     @Override
     protected void onDestroy() {
-        if(mPresenter!=null){
+        if (mPresenter != null) {
             mPresenter.detachView();
         }
         super.onDestroy();

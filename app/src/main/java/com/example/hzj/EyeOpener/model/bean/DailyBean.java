@@ -5,6 +5,7 @@ import java.util.List;
 
 /**
  * Created by hzj on 2017/12/18.
+ * 首页日报所获取的数据类，使用GsonFormat解析所得
  */
 
 public class DailyBean {
@@ -12,6 +13,7 @@ public class DailyBean {
 
     private String nextPageUrl;
     private List<IssueListBean> issueList;
+    private Long nextPublishTime;
 
     public Long getNextPublishTime() {
         return nextPublishTime;
@@ -20,8 +22,6 @@ public class DailyBean {
     public void setNextPublishTime(Long nextPublishTime) {
         this.nextPublishTime = nextPublishTime;
     }
-
-    private Long nextPublishTime;
 
     public String getNextPageUrl() {
         return nextPageUrl;

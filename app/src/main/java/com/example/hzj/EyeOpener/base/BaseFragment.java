@@ -13,15 +13,16 @@ import javax.inject.Inject;
 
 /**
  * Created by hzj on 2017/12/18.
+ * 基于SimpleFragment,在SimpleActivity的基础上，进行dagger2绑定和presenter的绑定关联
  */
 
-public abstract class BaseFragment<T extends BasePresenter> extends SimpleFragment implements BaseView  {
+public abstract class BaseFragment<T extends BasePresenter> extends SimpleFragment implements BaseView {
 
     @Inject
     protected
     T mPresenter;
 
-    protected FragmentComponent getFragmentComponent(){
+    protected FragmentComponent getFragmentComponent() {
         return DaggerFragmentComponent.builder().appComponent(App.getAppComponent()).fragmentModule(getFragmentModule()).build();
     }
 
@@ -38,8 +39,9 @@ public abstract class BaseFragment<T extends BasePresenter> extends SimpleFragme
 
     @Override
     public void onDestroyView() {
-        if(mPresenter!=null){
-        mPresenter.detachView();}
+        if (mPresenter != null) {
+            mPresenter.detachView();
+        }
         super.onDestroyView();
     }
 

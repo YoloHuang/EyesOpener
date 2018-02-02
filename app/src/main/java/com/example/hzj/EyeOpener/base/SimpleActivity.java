@@ -12,6 +12,7 @@ import me.yokeyword.fragmentation.SupportActivity;
 
 /**
  * Created by hzj on 2017/12/18.
+ * 最基本的Activity，主要进行的操作是，ButterKnife绑定，view的初始化，activity的增加与删除
  */
 
 public abstract class SimpleActivity extends SupportActivity {
@@ -25,8 +26,8 @@ public abstract class SimpleActivity extends SupportActivity {
         super.onCreate(savedInstanceState);
         setContentView(getLayout());
         onViewCreate();
-        unbinder= ButterKnife.bind(this);
-        mContext=this;
+        unbinder = ButterKnife.bind(this);
+        mContext = this;
         App.getApp().addActivity(this);
         initEventAndData();
     }

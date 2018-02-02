@@ -11,10 +11,11 @@ import java.util.List;
  */
 
 public interface HotTopContract {
-    interface View extends BaseView{
-        void showContents(List<ItemListBean>  listBean);
+    interface View extends BaseView {
+        void showContents(List<ItemListBean> listBean);
     }
-    interface Presenter extends BasePresenter<View>{
+
+    interface Presenter extends BasePresenter<View> {
         void getHotData(String type);
     }
 }

@@ -11,22 +11,22 @@ import java.util.List;
 
 /**
  * Created by hzj on 2017/12/22.
+ * 基础recyclerView类，完成基本封装
  */
 
 public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter {
 
 
-    protected List<T> datas=new ArrayList<>();
+    protected List<T> datas = new ArrayList<>();
     protected Context mContext;
     protected LayoutInflater mLayoutInflater;
     protected OnItemClickListener onItemClickListener;
     protected OnButtonClickListener onButtonClickListener;
 
 
-    public BaseRecyclerAdapter(Context context, List<T> datas){
-        mContext=context;
-        //this.datas=datas;
-        this.mLayoutInflater=LayoutInflater.from(context);
+    public BaseRecyclerAdapter(Context context, List<T> datas) {
+        mContext = context;
+        this.mLayoutInflater = LayoutInflater.from(context);
     }
 
 
@@ -40,19 +40,21 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter {
         convert(holder, position);
     }
 
-    public abstract void convert(RecyclerView.ViewHolder holder,int position);
+    public abstract void convert(RecyclerView.ViewHolder holder, int position);
 
-    public void setOnItemClickListener(OnItemClickListener onItemClickListener){
-        this.onItemClickListener=onItemClickListener;
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
     }
 
-    public interface OnItemClickListener{
+    public void setOnButtonClickListener(OnButtonClickListener onButtonClickListener) {
+        this.onButtonClickListener = onButtonClickListener;
+    }
+
+    public interface OnItemClickListener {
         void onItemClick(int id);
     }
-    public interface OnButtonClickListener{
-        void onButtonClick(View view,int position);
-    }
-    public void setOnButtonClickListener(OnButtonClickListener onButtonClickListener){
-        this.onButtonClickListener=onButtonClickListener;
+
+    public interface OnButtonClickListener {
+        void onButtonClick(View view, int position);
     }
 }

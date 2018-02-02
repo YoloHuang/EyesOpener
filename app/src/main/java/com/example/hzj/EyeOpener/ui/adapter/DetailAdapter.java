@@ -27,150 +27,146 @@ import butterknife.ButterKnife;
 
 public class DetailAdapter extends BaseRecyclerAdapter<ItemListBean> {
 
-ItemListBean data;
-boolean islike;
-int likeCount;
+    ItemListBean data;
+    boolean islike;
+    int likeCount;
 
-    public enum ITEM_TYPE{
-        TYPE_INFO,
-        TYPE_TEXT,
-        YTPE_VIDEO,
-        TYPE_END
+
+    public DetailAdapter(Context context, List<ItemListBean> datas) {
+        super(context, datas);
+
     }
 
+    /**
+     * 根据不同type显示不同数据
+     */
     @Override
     public int getItemViewType(int position) {
-        if(position==0){
+        if (position == 0) {
             return ITEM_TYPE.TYPE_INFO.ordinal();
-        }else if (position==1){
+        } else if (position == 1) {
             return ITEM_TYPE.TYPE_TEXT.ordinal();
-        }else if(position==(datas.size()+2)){
+        } else if (position == (datas.size() + 2)) {
             return ITEM_TYPE.TYPE_END.ordinal();
-        }else {
+        } else {
             return ITEM_TYPE.YTPE_VIDEO.ordinal();
         }
     }
 
-    public DetailAdapter(Context context, List<ItemListBean> datas){
-        super(context,datas);
-
-    }
-
-
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        if(viewType==ITEM_TYPE.TYPE_INFO.ordinal()){
-            return new InfoViewHolder(mLayoutInflater.inflate(R.layout.item_detail_info,parent,false));
-        }else if(viewType==ITEM_TYPE.TYPE_TEXT.ordinal()){
-            return new TextViewHolder(mLayoutInflater.inflate(R.layout.item_detail_text,parent,false));
-        }else if(viewType==ITEM_TYPE.TYPE_END.ordinal()){
-            View listEndView=new ListEndView(mContext);
-            listEndView.setLayoutParams(new RecyclerView.LayoutParams(RecyclerView.LayoutParams.MATCH_PARENT,RecyclerView.LayoutParams.WRAP_CONTENT));
+        if (viewType == ITEM_TYPE.TYPE_INFO.ordinal()) {
+            return new InfoViewHolder(mLayoutInflater.inflate(R.layout.item_detail_info, parent, false));
+        } else if (viewType == ITEM_TYPE.TYPE_TEXT.ordinal()) {
+            return new TextViewHolder(mLayoutInflater.inflate(R.layout.item_detail_text, parent, false));
+        } else if (viewType == ITEM_TYPE.TYPE_END.ordinal()) {
+            View listEndView = new ListEndView(mContext);
+            listEndView.setLayoutParams(new RecyclerView.LayoutParams(RecyclerView.LayoutParams.MATCH_PARENT, RecyclerView.LayoutParams.WRAP_CONTENT));
             return new Holder(listEndView);
-        }else {
-            return new RelateViewHolder(mLayoutInflater.inflate(R.layout.item_detail_video,parent,false));
+        } else {
+            return new RelateViewHolder(mLayoutInflater.inflate(R.layout.item_detail_video, parent, false));
         }
     }
 
     @Override
     public void convert(final RecyclerView.ViewHolder holder, final int position) {
-        if(holder instanceof InfoViewHolder){
-            ((InfoViewHolder)holder).detailDescribe.setText(data.getData().getDescription());
-            int duration=data.getData().getDuration();
-            String time=duration/60+"'"+duration%60+"''";
-            ((InfoViewHolder)holder).detailTag.setText("#"+data.getData().getCategory()+" / "+time+" / "+"开眼精选");
-            ((InfoViewHolder)holder).detailTitle.setText(data.getData().getTitle());
-            likeCount=data.getData().getConsumption().getCollectionCount();
-            if(islike){
+        if (holder instanceof InfoViewHolder) {
+            ((InfoViewHolder) holder).detailDescribe.setText(data.getData().getDescription());
+            int duration = data.getData().getDuration();
+            String time = duration / 60 + "'" + duration % 60 + "''";
+            ((InfoViewHolder) holder).detailTag.setText("#" + data.getData().getCategory() + " / " + time + " / " + "开眼精选");
+            ((InfoViewHolder) holder).detailTitle.setText(data.getData().getTitle());
+            likeCount = data.getData().getConsumption().getCollectionCount();
+            if (islike) {
                 likeCount++;
             }
-            ((InfoViewHolder)holder).likenum.setText(""+likeCount);
-            ((InfoViewHolder)holder).likenum.setSelected(islike);
-            ((InfoViewHolder)holder).replynum.setText(""+data.getData().getConsumption().getReplyCount());
-            ((InfoViewHolder)holder).sharenum.setText(""+data.getData().getConsumption().getShareCount());
-            if(data.getData().getAuthor()==null){
-                ((InfoViewHolder)holder).textAuthor.setVisibility(View.GONE);
-                ((InfoViewHolder)holder).textdiscribtion.setVisibility(View.GONE);
-                ((InfoViewHolder)holder).imageAuthor.setVisibility(View.GONE);
-            }else {
-                ((InfoViewHolder)holder).textAuthor.setText(data.getData().getAuthor().getName());
-                ((InfoViewHolder)holder).textdiscribtion.setText(data.getData().getAuthor().getDescription());
-                ImageLoader.loadCircle(mContext,data.getData().getAuthor().getIcon(),((InfoViewHolder)holder).imageAuthor);
+            ((InfoViewHolder) holder).likenum.setText("" + likeCount);
+            ((InfoViewHolder) holder).likenum.setSelected(islike);
+            ((InfoViewHolder) holder).replynum.setText("" + data.getData().getConsumption().getReplyCount());
+            ((InfoViewHolder) holder).sharenum.setText("" + data.getData().getConsumption().getShareCount());
+            if (data.getData().getAuthor() == null) {
+                ((InfoViewHolder) holder).textAuthor.setVisibility(View.GONE);
+                ((InfoViewHolder) holder).textdiscribtion.setVisibility(View.GONE);
+                ((InfoViewHolder) holder).imageAuthor.setVisibility(View.GONE);
+            } else {
+                ((InfoViewHolder) holder).textAuthor.setText(data.getData().getAuthor().getName());
+                ((InfoViewHolder) holder).textdiscribtion.setText(data.getData().getAuthor().getDescription());
+                ImageLoader.loadCircle(mContext, data.getData().getAuthor().getIcon(), ((InfoViewHolder) holder).imageAuthor);
             }
             ((InfoViewHolder) holder).likenum.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(onButtonClickListener!=null){
-                        onButtonClickListener.onButtonClick(v,0);
-                        if(((InfoViewHolder) holder).likenum.isSelected()){
+                    if (onButtonClickListener != null) {
+                        onButtonClickListener.onButtonClick(v, 0);
+                        if (((InfoViewHolder) holder).likenum.isSelected()) {
                             ((InfoViewHolder) holder).likenum.setSelected(false);
                             likeCount--;
-                            ((InfoViewHolder)holder).likenum.setText(""+likeCount);
-                        }else {
+                            ((InfoViewHolder) holder).likenum.setText("" + likeCount);
+                        } else {
                             ((InfoViewHolder) holder).likenum.setSelected(true);
                             likeCount++;
-                            ((InfoViewHolder)holder).likenum.setText(""+likeCount);
+                            ((InfoViewHolder) holder).likenum.setText("" + likeCount);
                         }
                     }
                 }
             });
-            ((InfoViewHolder)holder).sharenum.setOnClickListener(new View.OnClickListener() {
+            ((InfoViewHolder) holder).sharenum.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(onButtonClickListener!=null){
-                        onButtonClickListener.onButtonClick(v,1);
+                    if (onButtonClickListener != null) {
+                        onButtonClickListener.onButtonClick(v, 1);
                     }
                 }
             });
-            ((InfoViewHolder)holder).replynum.setOnClickListener(new View.OnClickListener() {
+            ((InfoViewHolder) holder).replynum.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(onButtonClickListener!=null){
-                        onButtonClickListener.onButtonClick(v,2);
+                    if (onButtonClickListener != null) {
+                        onButtonClickListener.onButtonClick(v, 2);
                     }
                 }
             });
-            ((InfoViewHolder)holder).download.setOnClickListener(new View.OnClickListener() {
+            ((InfoViewHolder) holder).download.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(onButtonClickListener!=null){
-                        onButtonClickListener.onButtonClick(v,3);
+                    if (onButtonClickListener != null) {
+                        onButtonClickListener.onButtonClick(v, 3);
                     }
                 }
             });
-        }else if(holder instanceof RelateViewHolder) {
+        } else if (holder instanceof RelateViewHolder) {
 
-            ((RelateViewHolder)holder).relateItemName.setText(datas.get(position-2).getData().getTitle());
-            String time=datas.get(position-2).getData().getDuration()/60+"'"+datas.get(position-2).getData().getDuration()%60+"''";
-            ((RelateViewHolder)holder).relateITemTag.setText("#"+datas.get(position-2).getData().getCategory()+" / "+time);
-            ImageLoader.loadRound (mContext,datas.get(position-2).getData().getCover().getFeed() ,((RelateViewHolder)holder).videoImage);
+            ((RelateViewHolder) holder).relateItemName.setText(datas.get(position - 2).getData().getTitle());
+            String time = datas.get(position - 2).getData().getDuration() / 60 + "'" + datas.get(position - 2).getData().getDuration() % 60 + "''";
+            ((RelateViewHolder) holder).relateITemTag.setText("#" + datas.get(position - 2).getData().getCategory() + " / " + time);
+            ImageLoader.loadRound(mContext, datas.get(position - 2).getData().getCover().getFeed(), ((RelateViewHolder) holder).videoImage);
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(onItemClickListener!=null){
+                    if (onItemClickListener != null) {
                         onItemClickListener.onItemClick(position);
                     }
                 }
             });
-        }else if(holder instanceof Holder){
-            View view=((Holder)holder).itemView;
-            if(view instanceof ListEndView){
+        } else if (holder instanceof Holder) {
+            View view = ((Holder) holder).itemView;
+            if (view instanceof ListEndView) {
                 ((ListEndView) view).textEnd.setTextColor(Color.WHITE);
             }
         }
     }
 
-    public void getItemData(ItemListBean itemListBean){
-        this.data=itemListBean;
+    public void getItemData(ItemListBean itemListBean) {
+        this.data = itemListBean;
         notifyDataSetChanged();
     }
 
-    public void setlike(boolean islike){
-        this.islike=islike;
+    public void setlike(boolean islike) {
+        this.islike = islike;
     }
 
-    public void getData(List<ItemListBean> itemListBeans){
-        DiffUtil.DiffResult diffResult=DiffUtil.calculateDiff(new DiffUtilCallBack(datas,itemListBeans),false);
+    public void getData(List<ItemListBean> itemListBeans) {
+        DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(new DiffUtilCallBack(datas, itemListBeans), false);
         datas.clear();
         datas.addAll(itemListBeans);
         diffResult.dispatchUpdatesTo(this);
@@ -178,10 +174,24 @@ int likeCount;
 
     @Override
     public int getItemCount() {
-        return datas.size()+3;
+        return datas.size() + 3;
     }
 
-    public class InfoViewHolder extends RecyclerView.ViewHolder{
+    public enum ITEM_TYPE {
+        TYPE_INFO,
+        TYPE_TEXT,
+        YTPE_VIDEO,
+        TYPE_END
+    }
+
+    public static class Holder extends RecyclerView.ViewHolder {
+
+        public Holder(View itemView) {
+            super(itemView);
+        }
+    }
+
+    public class InfoViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.tv_item_author_name)
         TextView textAuthor;
@@ -205,26 +215,25 @@ int likeCount;
         TextView download;
 
 
-
         public InfoViewHolder(View itemView) {
             super(itemView);
-            ButterKnife.bind(this,itemView);
-            
+            ButterKnife.bind(this, itemView);
+
         }
     }
 
-    public class TextViewHolder extends RecyclerView.ViewHolder{
+    public class TextViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.relate_title)
         TextView relateTitle;
 
         public TextViewHolder(View itemView) {
             super(itemView);
-            ButterKnife.bind(this,itemView);
+            ButterKnife.bind(this, itemView);
         }
     }
 
-    public class RelateViewHolder extends RecyclerView.ViewHolder{
+    public class RelateViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.item_video_image)
         ImageView videoImage;
@@ -235,14 +244,7 @@ int likeCount;
 
         public RelateViewHolder(View itemView) {
             super(itemView);
-            ButterKnife.bind(this,itemView);
-        }
-    }
-
-    public static class Holder extends RecyclerView.ViewHolder{
-
-        public Holder(View itemView) {
-            super(itemView);
+            ButterKnife.bind(this, itemView);
         }
     }
 }

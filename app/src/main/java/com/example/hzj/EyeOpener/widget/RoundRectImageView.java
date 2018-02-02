@@ -15,6 +15,7 @@ import android.util.AttributeSet;
 
 /**
  * Created by hzj on 2017/12/22.
+ * 暂时无用
  */
 
 public class RoundRectImageView extends android.support.v7.widget.AppCompatImageView {
@@ -31,20 +32,20 @@ public class RoundRectImageView extends android.support.v7.widget.AppCompatImage
 
     public RoundRectImageView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        paint=new Paint();
+        paint = new Paint();
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
-        Drawable drawable=getDrawable();
-        if(null!= drawable){
+        Drawable drawable = getDrawable();
+        if (null != drawable) {
             Bitmap bitmap = ((BitmapDrawable) drawable).getBitmap();
             Bitmap b = getRoundBitmap(bitmap, 20);
             final Rect rectSrc = new Rect(0, 0, b.getWidth(), b.getHeight());
-            final Rect rectDest = new Rect(0,0,getWidth(),getHeight());
+            final Rect rectDest = new Rect(0, 0, getWidth(), getHeight());
             paint.reset();
             canvas.drawBitmap(b, rectSrc, rectDest, paint);
-        }else {
+        } else {
             super.onDraw(canvas);
         }
 

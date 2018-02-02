@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    
+
     <declare-styleable name="JumpShowTextView">
-        <attr name="textColor" format="color"/>
-        <attr name="textSize" format="dimension"/>
-        <attr name="IsBold" format="boolean"/>
-        <attr name="IsSinglen" format="boolean"/>
-        <attr name="android:text"/>
+        <attr name="textColor" format="color" />
+        <attr name="textSize" format="dimension" />
+        <attr name="IsBold" format="boolean" />
+        <attr name="IsSinglen" format="boolean" />
+        <attr name="android:text" />
     </declare-styleable>
 
 </resources>

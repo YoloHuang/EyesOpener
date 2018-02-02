@@ -30,7 +30,7 @@ public class DownloadActivity extends RootActivity<DownloadPresenter> implements
 
     LinearLayoutManager linearLayoutManager;
     DownloadAdapter mAdapter;
-    List<DownloadBean> downloadBeans=new ArrayList<>();
+    List<DownloadBean> downloadBeans = new ArrayList<>();
 
     @Override
     protected void initEventAndData() {
@@ -43,14 +43,13 @@ public class DownloadActivity extends RootActivity<DownloadPresenter> implements
     }
 
     private void initRecyclerView() {
-        linearLayoutManager=new LinearLayoutManager(mContext);
-        mAdapter=new DownloadAdapter(mContext,downloadBeans);
+        linearLayoutManager = new LinearLayoutManager(mContext);
+        mAdapter = new DownloadAdapter(mContext, downloadBeans);
         mRecyclerView.setLayoutManager(linearLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.setOnItemClickListener(new HistoryAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int id) {
-                //mPresenter.getDataBean(historyBeans.get(id).getId());
 
             }
         });
@@ -59,7 +58,7 @@ public class DownloadActivity extends RootActivity<DownloadPresenter> implements
     @Override
     public void showContent(List<DownloadBean> bean) {
         stateStart();
-        this.downloadBeans=bean;
+        this.downloadBeans = bean;
         mAdapter.addDownloadData(downloadBeans);
     }
 

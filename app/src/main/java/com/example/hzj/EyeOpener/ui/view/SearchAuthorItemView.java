@@ -25,34 +25,33 @@ public class SearchAuthorItemView extends CardView {
     @BindView(R.id.item_text_title)
     TextView textTitle;
     @BindView(R.id.item_text_tag)
-            TextView textTag;
+    TextView textTag;
 
     Context context;
 
     public SearchAuthorItemView(Context context) {
-       this(context,null);
+        this(context, null);
     }
 
     public SearchAuthorItemView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        this.context=context;
+        this.context = context;
         initView();
     }
 
 
-
     public SearchAuthorItemView(Context context, AttributeSet attrs, int defStyleAttr) {
-        this(context,attrs);
+        this(context, attrs);
     }
 
     private void initView() {
-        View.inflate(context, R.layout.item_search_authoritem,this);
+        View.inflate(context, R.layout.item_search_authoritem, this);
         ButterKnife.bind(this);
     }
 
-    public void  setData(ItemListBean itemListBean){
-        textTag.setText("# "+itemListBean.getData().getCategory());
+    public void setData(ItemListBean itemListBean) {
+        textTag.setText("# " + itemListBean.getData().getCategory());
         textTitle.setText(itemListBean.getData().getTitle());
-        ImageLoader.load(context,itemListBean.getData().getCover().getFeed(),itemImage);
+        ImageLoader.load(context, itemListBean.getData().getCover().getFeed(), itemImage);
     }
 }

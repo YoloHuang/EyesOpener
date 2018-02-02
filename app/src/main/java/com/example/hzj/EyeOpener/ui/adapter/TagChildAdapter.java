@@ -3,7 +3,6 @@ package com.example.hzj.EyeOpener.ui.adapter;
 import android.content.Context;
 import android.support.v7.util.DiffUtil;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -26,7 +25,6 @@ import butterknife.ButterKnife;
 public class TagChildAdapter extends BaseRecyclerAdapter<ItemListBean> {
 
 
-
     public TagChildAdapter(Context context, List<ItemListBean> datas) {
         super(context, datas);
     }
@@ -34,20 +32,20 @@ public class TagChildAdapter extends BaseRecyclerAdapter<ItemListBean> {
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ItemViewHolder(mLayoutInflater.inflate(R.layout.item_tagchild,parent,false));
+        return new ItemViewHolder(mLayoutInflater.inflate(R.layout.item_tagchild, parent, false));
     }
 
     @Override
     public void convert(RecyclerView.ViewHolder holder, final int position) {
-        String detail=datas.get(position).getData().getAuthor().getName()+" / #" +datas.get(position).getData().getCategory();
-        ((ItemViewHolder)holder).mAuthorText.setText(detail);
-        ((ItemViewHolder)holder).mTitleTest.setText(datas.get(position).getData().getTitle());
-        ImageLoader.loadCircle(mContext,datas.get(position).getData().getAuthor().getIcon(),((ItemViewHolder)holder).mAuthorImage);
-        ImageLoader.load(mContext,datas.get(position).getData().getCover().getFeed(),((ItemViewHolder)holder).mDailyImage);
+        String detail = datas.get(position).getData().getAuthor().getName() + " / #" + datas.get(position).getData().getCategory();
+        ((ItemViewHolder) holder).mAuthorText.setText(detail);
+        ((ItemViewHolder) holder).mTitleTest.setText(datas.get(position).getData().getTitle());
+        ImageLoader.loadCircle(mContext, datas.get(position).getData().getAuthor().getIcon(), ((ItemViewHolder) holder).mAuthorImage);
+        ImageLoader.load(mContext, datas.get(position).getData().getCover().getFeed(), ((ItemViewHolder) holder).mDailyImage);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(onItemClickListener!=null){
+                if (onItemClickListener != null) {
                     onItemClickListener.onItemClick(position);
                 }
             }
@@ -59,7 +57,14 @@ public class TagChildAdapter extends BaseRecyclerAdapter<ItemListBean> {
         return datas.size();
     }
 
-    public static class ItemViewHolder extends RecyclerView.ViewHolder{
+    public void addTagChildData(List<ItemListBean> itemListBeans) {
+        DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(new DiffUtilCallBack(datas, itemListBeans), false);
+        datas.clear();
+        datas.addAll(itemListBeans);
+        diffResult.dispatchUpdatesTo(this);
+    }
+
+    public static class ItemViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.iv_daily_item_image)
         ImageView mDailyImage;
@@ -72,15 +77,7 @@ public class TagChildAdapter extends BaseRecyclerAdapter<ItemListBean> {
 
         public ItemViewHolder(View itemView) {
             super(itemView);
-            ButterKnife.bind(this,itemView);
+            ButterKnife.bind(this, itemView);
         }
-    }
-    public void addTagChildData(List<ItemListBean> itemListBeans){
-        DiffUtil.DiffResult diffResult=DiffUtil.calculateDiff(new DiffUtilCallBack(datas,itemListBeans),false);
-        datas.clear();
-        datas.addAll(itemListBeans);
-        Log.d("hzj", "addTagChildData: datas"+datas.size());
-        //datas=listBeans;
-        diffResult.dispatchUpdatesTo(this);
     }
 }

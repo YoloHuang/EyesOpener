@@ -1,57 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <ImageView
+        android:id="@+id/iv_item_author"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_margin="12dp"
-        android:id="@+id/iv_item_author"
-        android:src="@mipmap/pgc_default_avatar"
-        />
+        android:src="@mipmap/pgc_default_avatar" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:layout_marginBottom="12dp"
-        android:orientation="vertical"
+        android:layout_marginTop="10dp"
         android:layout_toLeftOf="@id/tv_author_follow"
-        android:layout_toRightOf="@id/iv_item_author">
+        android:layout_toRightOf="@id/iv_item_author"
+        android:orientation="vertical">
+
         <TextView
+            android:id="@+id/tv_item_author_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:paddingStart="5dp"
             android:textColor="@color/colorBlack"
             android:textSize="40px"
-            android:textStyle="bold"
-            android:paddingStart="5dp"
-            android:id="@+id/tv_item_author_name"/>
+            android:textStyle="bold" />
+
         <TextView
+            android:id="@+id/tv_item_author_dis"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorBlack"
             android:layout_marginTop="5dp"
-            android:singleLine="true"
-            android:textSize="35px"
             android:paddingStart="5dp"
-            android:id="@+id/tv_item_author_dis"/>
+            android:singleLine="true"
+            android:textColor="@color/colorBlack"
+            android:textSize="35px" />
     </LinearLayout>
 
     <TextView
+        android:id="@+id/tv_author_follow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/tv_author_follow"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
         android:layout_marginLeft="9dp"
         android:layout_marginRight="12dp"
         android:background="@drawable/rect_radius"
+        android:padding="5dp"
         android:text="+关注"
         android:textColor="@color/colorGrey"
-        android:padding="5dp"
         android:textSize="35px"
-        android:textStyle="bold"
-        android:layout_centerVertical="true"
-        android:layout_alignParentEnd="true"/>
+        android:textStyle="bold" />
 
 </RelativeLayout>

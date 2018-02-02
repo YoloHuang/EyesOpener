@@ -47,39 +47,40 @@ public class ItemReplyView extends LinearLayout {
     Context context;
 
     public ItemReplyView(Context context, @Nullable AttributeSet attrs) {
-        this(context,null,0);
+        this(context, null, 0);
 
     }
 
     public ItemReplyView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        this.context=context;
+        this.context = context;
         initView();
     }
 
     public ItemReplyView(Context context) {
-        this(context,null);
+        this(context, null);
 
     }
 
     private void initView() {
-        View.inflate(context, R.layout.item_reply,this);
+        View.inflate(context, R.layout.item_reply, this);
         ButterKnife.bind(this);
     }
-    public void setData(ReplyBean.ItemListBean itemListBean){
-        replyLike.setText(""+itemListBean.getData().getLikeCount());
-        replytime.setText(DataUtil.timeFormat(itemListBean.getData().getCreateTime()) );
-        ImageLoader.loadCircle(context,itemListBean.getData().getUser().getAvatar(),replyAvatar);
+
+    public void setData(ReplyBean.ItemListBean itemListBean) {
+        replyLike.setText("" + itemListBean.getData().getLikeCount());
+        replytime.setText(DataUtil.timeFormat(itemListBean.getData().getCreateTime()));
+        ImageLoader.loadCircle(context, itemListBean.getData().getUser().getAvatar(), replyAvatar);
         replyName.setText(itemListBean.getData().getUser().getNickname());
         replyMessage.setText(itemListBean.getData().getMessage());
-        if(itemListBean.getData().getParentReply()==null){
+        if (itemListBean.getData().getParentReply() == null) {
             relpyParent.setVisibility(View.GONE);
             parentreply.setVisibility(View.GONE);
-        }else {
-            relpyParent.setText("回复:"+itemListBean.getData().getParentReply().getUser().getNickname());
+        } else {
+            relpyParent.setText("回复:" + itemListBean.getData().getParentReply().getUser().getNickname());
             parentReplyName.setText(itemListBean.getData().getParentReply().getUser().getNickname());
             parentReplyMessage.setText(itemListBean.getData().getParentReply().getMessage());
-            ImageLoader.loadCircle(context,itemListBean.getData().getParentReply().getUser().getAvatar(),parentreplyAvatar);
+            ImageLoader.loadCircle(context, itemListBean.getData().getParentReply().getUser().getAvatar(), parentreplyAvatar);
         }
     }
 }

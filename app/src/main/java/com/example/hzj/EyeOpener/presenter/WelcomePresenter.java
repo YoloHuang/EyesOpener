@@ -13,31 +13,32 @@ import io.reactivex.functions.Consumer;
 
 /**
  * Created by hzj on 2017/12/18.
+ * 由于没有get到开屏欢迎界面API，所以暂时没有办法获取欢迎界面
  */
 
 public class WelcomePresenter extends RxPresenter<WelcomeContract.View> implements WelcomeContract.Presenter {
 
-    private static final int COUNT_DOWN_TIME=2200;
+    private static final int COUNT_DOWN_TIME = 2200;
 
     @Inject
-    public WelcomePresenter(){
+    public WelcomePresenter() {
 
     }
 
     @Override
     public void getData() {
-        int image=R.mipmap.welcome_bg;
+        int image = R.mipmap.welcome_bg;
         mView.showContent(image);
         startCountDowm();
     }
 
     private void startCountDowm() {
         addSubscribe(Flowable.timer(COUNT_DOWN_TIME, TimeUnit.MILLISECONDS)
-        .subscribe(new Consumer<Long>() {
-            @Override
-            public void accept(Long aLong) throws Exception {
-                mView.jumpToMain();
-            }
-        }));
+                .subscribe(new Consumer<Long>() {
+                    @Override
+                    public void accept(Long aLong) throws Exception {
+                        mView.jumpToMain();
+                    }
+                }));
     }
 }

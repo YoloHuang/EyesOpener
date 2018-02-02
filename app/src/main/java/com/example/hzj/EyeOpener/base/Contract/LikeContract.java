@@ -14,10 +14,13 @@ import java.util.List;
 public interface LikeContract {
     interface View extends BaseView {
         void showContent(List<LikeBean> LikeBeans);
+
         void goToDetail(ItemListBean.DataBean dataBean);
     }
+
     interface Presenter extends BasePresenter<View> {
         void getLikeData();
+
         void getDataBean(int id);
     }
 }

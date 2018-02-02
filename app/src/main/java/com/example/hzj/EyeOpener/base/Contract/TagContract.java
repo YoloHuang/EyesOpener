@@ -11,10 +11,11 @@ import java.util.List;
  */
 
 public interface TagContract {
-    interface View extends BaseView{
-        void  showContents(List<TagsBean> tagsBeans);
+    interface View extends BaseView {
+        void showContents(List<TagsBean> tagsBeans);
     }
-    interface Presenter extends BasePresenter<View>{
+
+    interface Presenter extends BasePresenter<View> {
         void getTagsDatas();
     }
 }

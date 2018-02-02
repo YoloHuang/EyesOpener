@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal">
 
     <TextView
+        android:id="@+id/relate_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:gravity="center_vertical"
         android:text="相关推荐"
         android:textColor="@color/colorWhite"
-        android:textSize="20dp"
-        android:id="@+id/relate_title"
-        android:layout_marginStart="10dp"
-        android:gravity="center_vertical"/>
+        android:textSize="20dp" />
+
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@mipmap/ic_action_more_arrow"
         android:layout_marginStart="40dp"
-        />
+        android:src="@mipmap/ic_action_more_arrow" />
 
 </LinearLayout>

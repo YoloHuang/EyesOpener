@@ -15,8 +15,8 @@ ext {
             okhttp      : "3.6.0",
             dagger2     : "2.0.2",
             butterknife : "8.2.1",
-            blockcanary : "1.2.1",
-            leakcanary  : "1.4-beta2"
+            blockcanary : "1.5.0",
+            leakcanary  : "1.5.4"
     ]
 
     dependencies = [
@@ -63,8 +63,8 @@ ext {
             "crashreport"               : "com.tencent.bugly:crashreport:latest.release",
 
             //canary
-            "blockcanary-android"       : "com.github.moduth:blockcanary-android:${dependVersion.blockcanary}",
-            "blockcanary-no-op"         : "com.github.moduth:blockcanary-no-op:${dependVersion.blockcanary}",
+            "blockcanary-android"       : "com.github.markzhai:blockcanary-android:${dependVersion.blockcanary}",
+            "blockcanary-no-op"         : "com.github.markzhai:blockcanary-no-op:${dependVersion.blockcanary}",
             "leakcanary-android"        : "com.squareup.leakcanary:leakcanary-android:${dependVersion.leakcanary}",
             "leakcanary-android-no-op"  : "com.squareup.leakcanary:leakcanary-android-no-op:${dependVersion.leakcanary}",
 

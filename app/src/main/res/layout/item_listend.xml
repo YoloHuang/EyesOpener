@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content">
+
     <TextView
+        android:id="@+id/text_end"
         android:layout_width="match_parent"
         android:layout_height="150dp"
-        android:id="@+id/text_end"
-        android:gravity="center"
         android:layout_gravity="center"
+        android:gravity="center"
         android:text="--The End--"
-        android:textSize="45px"
-        android:textColor="@color/colorBlack"/>
+        android:textColor="@color/colorBlack"
+        android:textSize="45px" />
 
 </FrameLayout>

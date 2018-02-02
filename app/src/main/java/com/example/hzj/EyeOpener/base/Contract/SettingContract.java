@@ -9,14 +9,17 @@ import com.example.hzj.EyeOpener.base.BaseView;
 
 public interface SettingContract {
 
-    interface View extends BaseView{
-       void  showCleanToast();
+    interface View extends BaseView {
+        void showCleanToast();
     }
-    interface Presenter extends BasePresenter<View>{
+
+    interface Presenter extends BasePresenter<View> {
         boolean getPlaySetting();
-        boolean getDownloadSetting();
+
         void setPlaySetting(boolean playSetting);
+
+        boolean getDownloadSetting();
+
         void setDownloadSetting(boolean downloadSetting);
-        void cleanCache();
     }
 }

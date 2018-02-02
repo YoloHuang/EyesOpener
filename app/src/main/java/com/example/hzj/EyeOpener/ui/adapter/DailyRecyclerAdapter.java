@@ -4,7 +4,6 @@ import android.content.Context;
 import android.support.v7.util.DiffUtil;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.ViewHolder;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -22,24 +21,25 @@ import java.util.List;
 
 public class DailyRecyclerAdapter extends BaseRecyclerAdapter<ItemListBean> {
 
-
-
     List<ItemListBean> topList;
     View topItemView;
 
+    public DailyRecyclerAdapter(Context context, List<ItemListBean> datas) {
+        super(context, datas);
 
-    public enum ITEM_TYPE{
-        TYPE_DATE,
-        TYPE_NEW,
-        TYPE_TOP
     }
 
-
+    /**
+     * 第一栏显示topViewPager，后面根据数据类型显示日期或者具体数据
+     *
+     * @param position
+     * @return
+     */
     @Override
     public int getItemViewType(int position) {
-        if(position==0){
+        if (position == 0) {
             return ITEM_TYPE.TYPE_TOP.ordinal();
-        }else if(datas.get(position-1).getType().equals("textHeader")){
+        } else if (datas.get(position - 1).getType().equals("textHeader")) {
             return ITEM_TYPE.TYPE_DATE.ordinal();
         }
         return ITEM_TYPE.TYPE_NEW.ordinal();
@@ -50,42 +50,35 @@ public class DailyRecyclerAdapter extends BaseRecyclerAdapter<ItemListBean> {
         return datas.size();
     }
 
-
-    public DailyRecyclerAdapter(Context context, List<ItemListBean> datas) {
-        super(context, datas);
-
-    }
-
-
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView;
-        if(viewType==ITEM_TYPE.TYPE_DATE.ordinal()){
-            itemView=new ItemDailyDateView(mContext);
-        }else if(viewType==ITEM_TYPE.TYPE_TOP.ordinal()){
-           itemView=new TopPageView(mContext);
+        if (viewType == ITEM_TYPE.TYPE_DATE.ordinal()) {
+            itemView = new ItemDailyDateView(mContext);
+        } else if (viewType == ITEM_TYPE.TYPE_TOP.ordinal()) {
+            itemView = new TopPageView(mContext);
 
-        }else {
-            itemView=new ItemDailyView(mContext);
+        } else {
+            itemView = new ItemDailyView(mContext);
         }
-        itemView.setLayoutParams(new RecyclerView.LayoutParams(RecyclerView.LayoutParams.MATCH_PARENT,RecyclerView.LayoutParams.WRAP_CONTENT));
+        itemView.setLayoutParams(new RecyclerView.LayoutParams(RecyclerView.LayoutParams.MATCH_PARENT, RecyclerView.LayoutParams.WRAP_CONTENT));
         return new Holder(itemView);
     }
 
     @Override
     public void convert(ViewHolder holder, final int position) {
-        View view=holder.itemView;
-        if(view instanceof ItemDailyDateView){
-            ((ItemDailyDateView) view).setData(datas.get(position-1));
-        }else if(view instanceof TopPageView){
-            topItemView=view;
+        View view = holder.itemView;
+        if (view instanceof ItemDailyDateView) {
+            ((ItemDailyDateView) view).setData(datas.get(position - 1));
+        } else if (view instanceof TopPageView) {
+            topItemView = view;
             ((TopPageView) view).setData(topList);
         } else {
-            ((ItemDailyView)view).setData(datas.get(position-1));
+            ((ItemDailyView) view).setData(datas.get(position - 1));
             ((ItemDailyView) view).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if(onItemClickListener!=null){
+                    if (onItemClickListener != null) {
                         onItemClickListener.onItemClick(position);
                     }
                 }
@@ -93,43 +86,61 @@ public class DailyRecyclerAdapter extends BaseRecyclerAdapter<ItemListBean> {
         }
     }
 
+    /**
+     * 调用DiffUtil来进行判断数据是否一致，从而在adapter中更新数据
+     *
+     * @param listBeans
+     */
+    public void addDailyData(List<ItemListBean> listBeans) {
+        DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(new DiffUtilCallBack(datas, listBeans), false);
+        datas.clear();
+        datas.addAll(listBeans);
+        diffResult.dispatchUpdatesTo(this);
+    }
 
-    public static class Holder extends ViewHolder{
+    public void addTopData(List<ItemListBean> listBeans) {
+        topList = listBeans;
+    }
+
+    /**
+     * 切换TopViewPager的ImageView
+     */
+    public void changeTopPageView() {
+        if (topItemView instanceof TopPageView) {
+            ((TopPageView) topItemView).changeTopPageView();
+        }
+    }
+
+    /**
+     * 停止JumpShowTextView的跳转显示
+     */
+    public void stopText() {
+        if (topItemView instanceof TopPageView) {
+            ((TopPageView) topItemView).stopText();
+        }
+    }
+
+    /**
+     * JumpShowTextView直接显示
+     */
+    public void startText() {
+        if (topItemView instanceof TopPageView) {
+            ((TopPageView) topItemView).startText();
+        }
+    }
+
+    public enum ITEM_TYPE {
+        TYPE_DATE,
+        TYPE_NEW,
+        TYPE_TOP
+    }
+
+    public static class Holder extends ViewHolder {
 
         public Holder(View itemView) {
             super(itemView);
         }
     }
-
-    public void addDailyData(List<ItemListBean> listBeans){
-        Log.d("hzj", "addDailyData: "+datas.size());
-        DiffUtil.DiffResult diffResult=DiffUtil.calculateDiff(new DiffUtilCallBack(datas,listBeans),false);
-        datas.clear();
-        datas.addAll(listBeans);
-        //datas=listBeans;
-        diffResult.dispatchUpdatesTo(this);
-    }
-
-    public void addTopData(List<ItemListBean> listBeans){
-        topList=listBeans;
-    }
-
-
-    public void changeTopPageView(int item){
-        Log.d("hzj", "changeTopPageView: item==="+item);
-        if(topItemView instanceof TopPageView){
-            ((TopPageView) topItemView).changeTopPageView(item);
-        }
-    }
-
-    public void stopText(){
-        if(topItemView instanceof TopPageView){
-            ((TopPageView) topItemView).stopText();
-        }
-    }
-
-
-
 
 
 }

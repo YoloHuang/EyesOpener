@@ -13,10 +13,9 @@ import javax.inject.Inject;
 public class MainPresenter extends RxPresenter<MainContract.View> implements MainContract.Presenter {
 
 
-
     @Inject
-    public MainPresenter(DataManager dataManager){
-        mDataManager=dataManager;
+    public MainPresenter(DataManager dataManager) {
+        mDataManager = dataManager;
     }
 
     @Override
@@ -26,8 +25,6 @@ public class MainPresenter extends RxPresenter<MainContract.View> implements Mai
 
     @Override
     public void getSearchSuggestions() {
-       // addSubscribe(mDataManager.getTrendingTagInfo()
-       // .compose());
     }
 
 }

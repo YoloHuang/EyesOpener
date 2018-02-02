@@ -7,7 +7,7 @@ import io.realm.annotations.PrimaryKey;
  * Created by hzj on 2017/12/21.
  */
 
-public class LikeBean extends RealmObject{
+public class LikeBean extends RealmObject {
 
     @PrimaryKey
     private int id;
@@ -18,6 +18,9 @@ public class LikeBean extends RealmObject{
     private String authorIcon;
     private String title;
     private long time;
+
+    public LikeBean() {
+    }
 
     public String getImage() {
         return image;
@@ -50,8 +53,6 @@ public class LikeBean extends RealmObject{
     public void setAuthorIcon(String authorIcon) {
         this.authorIcon = authorIcon;
     }
-
-    public LikeBean(){}
 
     public int getId() {
         return id;

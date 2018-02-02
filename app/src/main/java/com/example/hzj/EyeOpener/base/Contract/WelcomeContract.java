@@ -8,11 +8,13 @@ import com.example.hzj.EyeOpener.base.BaseView;
  */
 
 public interface WelcomeContract {
-    interface View extends BaseView{
+    interface View extends BaseView {
         void showContent(int image);
+
         void jumpToMain();
     }
-    interface Presenter extends BasePresenter<View>{
+
+    interface Presenter extends BasePresenter<View> {
         void getData();
     }
 }

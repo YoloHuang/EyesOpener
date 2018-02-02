@@ -5,9 +5,10 @@ import java.util.List;
 
 /**
  * Created by hzj on 2017/12/27.
+ * 将所有的ItemListBean集中于此类，并应用Serializable接口从而可以在activity之间传递
  */
 
-public  class ItemListBean  implements Serializable {
+public class ItemListBean implements Serializable {
     /**
      * type : banner2
      * data : {"dataType":"Banner","id":0,"title":"","description":"","image":"http://img.kaiyanapp.com/eef24aa10ab6cf17b5a512943ec22053.jpeg?imageMogr2/quality/60/format/jpg","actionUrl":"","adTrack":null,"shade":false,"label":null,"labelList":null,"header":null}
@@ -35,7 +36,7 @@ public  class ItemListBean  implements Serializable {
         this.data = data;
     }
 
-    public static class DataBean implements Serializable{
+    public static class DataBean implements Serializable {
 
         /**
          * dataType : VideoBeanForClient
@@ -612,7 +613,7 @@ public  class ItemListBean  implements Serializable {
             }
         }
 
-        public static class ProviderBean implements Serializable{
+        public static class ProviderBean implements Serializable {
             /**
              * name : YouTube
              * alias : youtube
@@ -648,7 +649,7 @@ public  class ItemListBean  implements Serializable {
             }
         }
 
-        public static class AuthorBean implements Serializable{
+        public static class AuthorBean implements Serializable {
             /**
              * id : 2165
              * icon : http://img.kaiyanapp.com/924ebc6780d59925c8a346a5dafc90bb.jpeg
@@ -773,7 +774,7 @@ public  class ItemListBean  implements Serializable {
                 this.ifPgc = ifPgc;
             }
 
-            public static class FollowBean implements Serializable{
+            public static class FollowBean implements Serializable {
                 /**
                  * itemType : author
                  * itemId : 2165
@@ -809,7 +810,7 @@ public  class ItemListBean  implements Serializable {
                 }
             }
 
-            public static class ShieldBean implements Serializable{
+            public static class ShieldBean implements Serializable {
                 /**
                  * itemType : author
                  * itemId : 2165
@@ -846,7 +847,7 @@ public  class ItemListBean  implements Serializable {
             }
         }
 
-        public static class CoverBean implements Serializable{
+        public static class CoverBean implements Serializable {
             /**
              * feed : http://img.kaiyanapp.com/16fda01339d2eadd6580dfc90c4cb133.jpeg?imageMogr2/quality/60/format/jpg
              * detail : http://img.kaiyanapp.com/16fda01339d2eadd6580dfc90c4cb133.jpeg?imageMogr2/quality/60/format/jpg
@@ -902,7 +903,7 @@ public  class ItemListBean  implements Serializable {
             }
         }
 
-        public static class WebUrlBean implements Serializable{
+        public static class WebUrlBean implements Serializable {
             /**
              * raw : http://www.eyepetizer.net/detail.html?vid=28140
              * forWeibo : http://wandou.im/3npa1u
@@ -928,7 +929,7 @@ public  class ItemListBean  implements Serializable {
             }
         }
 
-        public static class ConsumptionBean implements Serializable{
+        public static class ConsumptionBean implements Serializable {
             /**
              * collectionCount : 613
              * shareCount : 648
@@ -964,7 +965,7 @@ public  class ItemListBean  implements Serializable {
             }
         }
 
-        public static class PlayInfoBean implements Serializable{
+        public static class PlayInfoBean implements Serializable {
             /**
              * height : 480
              * width : 854
@@ -1029,7 +1030,7 @@ public  class ItemListBean  implements Serializable {
                 this.urlList = urlList;
             }
 
-            public static class UrlListBean implements Serializable{
+            public static class UrlListBean implements Serializable {
                 /**
                  * name : aliyun
                  * url : http://baobab.kaiyanapp.com/api/v1/playUrl?vid=28140&editionType=normal&source=aliyun
@@ -1066,7 +1067,7 @@ public  class ItemListBean  implements Serializable {
             }
         }
 
-        public static class TagsBean implements Serializable{
+        public static class TagsBean implements Serializable {
             /**
              * id : 112
              * name : 友情

@@ -33,13 +33,9 @@ public class TagsFragment extends RootFragment<TagsPresenter> implements TagCont
     TextView toolbarTitle;
     @BindView(R.id.ic_toolbar_search)
     ImageView toolbarSearch;
-    private List<TagsBean> itemListBeans = new ArrayList<>();
-
     GridLayoutManager mLayoutManager;
-
     TagsAdapter mAdapter;
-
-
+    private List<TagsBean> itemListBeans = new ArrayList<>();
 
     @Override
     protected void initInject() {
@@ -56,20 +52,20 @@ public class TagsFragment extends RootFragment<TagsPresenter> implements TagCont
     }
 
     private void initRecyclerView() {
-        mLayoutManager=new GridLayoutManager(mContext,2);
+        mLayoutManager = new GridLayoutManager(mContext, 2);
         mRecyclerView.setLayoutManager(mLayoutManager);
-        mAdapter=new TagsAdapter(mContext,itemListBeans);
+        mAdapter = new TagsAdapter(mContext, itemListBeans);
         mRecyclerView.setAdapter(mAdapter);
         mPresenter.getTagsDatas();
         mAdapter.setOnItemClickListener(new TagsAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int id) {
-                Intent intent=new Intent();
+                Intent intent = new Intent();
                 intent.setClass(mContext, TagActivity.class);
-                intent.putExtra("TagId",itemListBeans.get(id).getId());
-                intent.putExtra("TagName",itemListBeans.get(id).getName());
-                intent.putExtra("TagImage",itemListBeans.get(id).getBgPicture());
-                intent.putExtra("TagSlogen",itemListBeans.get(id).getDescription());
+                intent.putExtra("TagId", itemListBeans.get(id).getId());
+                intent.putExtra("TagName", itemListBeans.get(id).getName());
+                intent.putExtra("TagImage", itemListBeans.get(id).getBgPicture());
+                intent.putExtra("TagSlogen", itemListBeans.get(id).getDescription());
                 mContext.startActivity(intent);
             }
         });
@@ -84,7 +80,6 @@ public class TagsFragment extends RootFragment<TagsPresenter> implements TagCont
     @Override
     public void showContents(List<TagsBean> tagsBean) {
         itemListBeans.addAll(tagsBean);
-        Log.d("hzj", "showContents: itemListBeans"+itemListBeans.size());
         mAdapter.addTagsData(itemListBeans);
         stateStart();
     }

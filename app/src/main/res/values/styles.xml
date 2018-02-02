@@ -14,6 +14,7 @@
     <style name="SplashTheme" parent="MainTheme">
         <item name="android:windowFullscreen">true</item>
     </style>
+
     <style name="MainTheme" parent="AppTheme">
         <item name="android:windowBackground">@color/colorBackground</item>
         <item name="android:windowIsTranslucent">false</item>
@@ -22,6 +23,7 @@
         <item name="android:activityOpenEnterAnimation">@anim/activity_alpha_in</item>
         <item name="android:activityOpenExitAnimation">@anim/activity_alpha_in</item>
     </style>
+
     <style name="SearchTheme" parent="MainTheme">
         <item name="colorControlNormal">@color/colorGrey</item>
         <item name="colorControlActivated">@color/colorGrey</item>
@@ -53,7 +55,7 @@
         <item name="android:hint">@string/search_hint</item>
     </style>
 
-    <style name="TabSelect" >
+    <style name="TabSelect">
         <item name="android:textSize">12px</item>
     </style>
 

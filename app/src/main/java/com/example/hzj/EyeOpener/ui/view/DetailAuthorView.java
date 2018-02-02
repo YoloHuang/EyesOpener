@@ -14,6 +14,7 @@ import butterknife.ButterKnife;
 
 /**
  * Created by hzj on 2018/1/2.
+ * Author View，用于搜索结果中
  */
 
 public class DetailAuthorView extends RelativeLayout {
@@ -29,23 +30,22 @@ public class DetailAuthorView extends RelativeLayout {
 
 
     public DetailAuthorView(Context context) {
-        this(context,null);
+        this(context, null);
     }
 
     public DetailAuthorView(Context context, AttributeSet attrs) {
-        this(context,null,0);
+        this(context, null, 0);
     }
 
     public DetailAuthorView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        this.context=context;
+        this.context = context;
         initView();
     }
 
 
-
     private void initView() {
-        View.inflate(context,R.layout.item_detail_author,this);
+        View.inflate(context, R.layout.item_detail_author, this);
         ButterKnife.bind(this);
         initListener();
     }

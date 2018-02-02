@@ -12,12 +12,15 @@ import java.util.List;
  */
 
 public interface HistroyContract {
-    interface View extends BaseView{
+    interface View extends BaseView {
         void showContent(List<HistoryBean> historyBeans);
+
         void goToDetail(ItemListBean.DataBean dataBean);
     }
-    interface Presenter extends BasePresenter<View>{
+
+    interface Presenter extends BasePresenter<View> {
         void getHistoryData();
+
         void getDataBean(int id);
     }
 }

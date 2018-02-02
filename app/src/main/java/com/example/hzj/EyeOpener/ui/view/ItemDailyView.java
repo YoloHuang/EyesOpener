@@ -1,7 +1,6 @@
 package com.example.hzj.EyeOpener.ui.view;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
@@ -12,7 +11,6 @@ import android.widget.TextView;
 import com.example.hzj.EyeOpener.R;
 import com.example.hzj.EyeOpener.component.ImageLoader;
 import com.example.hzj.EyeOpener.model.bean.ItemListBean;
-import com.example.hzj.EyeOpener.ui.activity.DetailActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -36,45 +34,35 @@ public class ItemDailyView extends LinearLayout {
     ItemListBean itemListBean;
 
     public ItemDailyView(Context context) {
-        this(context,null);
+        this(context, null);
     }
 
     public ItemDailyView(Context context, @Nullable AttributeSet attrs) {
-        this(context,null,0);
+        this(context, attrs, 0);
     }
 
     public ItemDailyView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        this.mContext=context;
+        this.mContext = context;
         initView();
     }
-    private void initView(){
-        View.inflate(mContext, R.layout.item_daily,this);
+
+    private void initView() {
+        View.inflate(mContext, R.layout.item_daily, this);
         ButterKnife.bind(this);
     }
 
-    public void setData(ItemListBean itemListBean){
-        this.itemListBean=itemListBean;
+    public void setData(ItemListBean itemListBean) {
+        this.itemListBean = itemListBean;
         String detail;
-        if(itemListBean.getData().getAuthor()==null){
-            detail="开眼精选 / # "+itemListBean.getData().getCategory();
-        }else {
-            detail=itemListBean.getData().getAuthor().getName()+" / #" +itemListBean.getData().getCategory();
-            ImageLoader.loadCircle(mContext,itemListBean.getData().getAuthor().getIcon(),mAuthorImage);
+        if (itemListBean.getData().getAuthor() == null) {
+            detail = "开眼精选 / # " + itemListBean.getData().getCategory();
+        } else {
+            detail = itemListBean.getData().getAuthor().getName() + " / #" + itemListBean.getData().getCategory();
+            ImageLoader.loadCircle(mContext, itemListBean.getData().getAuthor().getIcon(), mAuthorImage);
         }
         mAuthorText.setText(detail);
         mTitleTest.setText(itemListBean.getData().getTitle());
-        ImageLoader.load(mContext,itemListBean.getData().getCover().getFeed(),mDailyImage);
-    }
-    public void setclick(){
-        this.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent=new Intent();
-                intent.setClass(mContext, DetailActivity.class);
-                intent.putExtra("itemListBean",itemListBean);
-                mContext.startActivity(intent);
-            }
-        });
+        ImageLoader.load(mContext, itemListBean.getData().getCover().getFeed(), mDailyImage);
     }
 }

@@ -13,32 +13,48 @@ import javax.inject.Inject;
 public class SettingPresenter extends RxPresenter<SettingContract.View> implements SettingContract.Presenter {
 
     @Inject
-    public SettingPresenter(DataManager dataManager){
-        this.mDataManager=dataManager;
+    public SettingPresenter(DataManager dataManager) {
+        this.mDataManager = dataManager;
     }
 
+    /**
+     * 获取关于是否使用流量播放的设置
+     *
+     * @return
+     */
     @Override
     public boolean getPlaySetting() {
         return mDataManager.getPlaySetting();
     }
 
-    @Override
-    public boolean getDownloadSetting() {
-        return mDataManager.getDowmloadSetting();
-    }
-
+    /**
+     * 设置是否使用流量观看
+     *
+     * @param playSetting
+     */
     @Override
     public void setPlaySetting(boolean playSetting) {
         mDataManager.setPlaySetting(playSetting);
     }
 
+    /**
+     * 获取是否使用流量下载的设置
+     *
+     * @return
+     */
+    @Override
+    public boolean getDownloadSetting() {
+        return mDataManager.getDowmloadSetting();
+    }
+
+    /**
+     * 设置是否使用流量下载
+     *
+     * @param downloadSetting
+     */
     @Override
     public void setDownloadSetting(boolean downloadSetting) {
         mDataManager.setDownloadSetting(downloadSetting);
     }
 
-    @Override
-    public void cleanCache() {
-
-    }
 }

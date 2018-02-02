@@ -19,19 +19,26 @@ import javax.inject.Inject;
 public class LikePresenter extends RxPresenter<LikeContract.View> implements LikeContract.Presenter {
 
     List<LikeBean> likeBeans;
-    ItemListBean.DataBean dataBean;
 
     @Inject
-    public LikePresenter(DataManager dataManager){
-        this.mDataManager=dataManager;
+    public LikePresenter(DataManager dataManager) {
+        this.mDataManager = dataManager;
     }
 
+    /**
+     * 获取所有like数据
+     */
     @Override
     public void getLikeData() {
-        likeBeans=mDataManager.getLikeBeans();
+        likeBeans = mDataManager.getLikeBeans();
         mView.showContent(likeBeans);
     }
 
+    /**
+     * 根据ID，获取DataBean
+     *
+     * @param id
+     */
     @Override
     public void getDataBean(int id) {
         addSubscribe(mDataManager.getDataBean(id)

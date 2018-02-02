@@ -1,54 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="250dp">
+
     <ImageView
+        android:id="@+id/iv_hot_item"
         android:layout_width="match_parent"
         android:layout_height="250dp"
-        android:id="@+id/iv_hot_item"
-        android:scaleType="centerCrop"/>
+        android:scaleType="centerCrop" />
+
     <View
         android:layout_width="match_parent"
         android:layout_height="250dp"
         android:background="#5000" />
+
     <RelativeLayout
         android:layout_width="match_parent"
-        android:gravity="center"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:gravity="center">
+
         <TextView
             android:id="@+id/tv_hot_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:textColor="@color/colorWhite"
             android:textSize="45px"
-            android:textStyle="bold"
-            android:textColor="@color/colorWhite"/>
+            android:textStyle="bold" />
+
         <TextView
             android:id="@+id/tv_hot_tag"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="42px"
-            android:gravity="center"
-            android:layout_marginTop="3dp"
             android:layout_below="@id/tv_hot_title"
-            android:textColor="@color/colorWhite"/>
+            android:layout_marginTop="3dp"
+            android:gravity="center"
+            android:textColor="@color/colorWhite"
+            android:textSize="42px" />
     </RelativeLayout>
+
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
+        android:layout_height="match_parent">
+
         <TextView
             android:id="@+id/tv_hot_time"
-            android:background="@color/colorBlack"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginEnd="10dp"
+            android:layout_alignParentEnd="true"
             android:layout_marginBottom="10dp"
+            android:layout_marginEnd="10dp"
+            android:background="@color/colorBlack"
+            android:paddingStart="5dp"
             android:textColor="@color/colorWhite"
-            android:textSize="35px"
-            android:paddingStart="5dp"/>
+            android:textSize="35px" />
     </RelativeLayout>
 
 </FrameLayout>

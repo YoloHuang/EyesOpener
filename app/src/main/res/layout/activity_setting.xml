@@ -1,138 +1,145 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
     android:background="@color/colorWhite"
+    android:fitsSystemWindows="true"
     tools:context="com.example.hzj.EyeOpener.ui.activity.SettingActivity">
-    <include layout="@layout/view_toolbar"/>
+
+    <include layout="@layout/view_toolbar" />
+
     <TextView
+        android:id="@+id/tv_setting_playtip"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/tv_setting_playtip"
         android:layout_centerHorizontal="true"
-        android:textSize="45px"
         android:layout_marginTop="100dp"
         android:text="@string/setting_play"
-        />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/tv_setting_playL"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/tv_setting_playtip"
-        android:layout_marginTop="10dp"
-        android:textSize="45px"
-        android:textColor="@color/colorBlack"
-        android:text=" | "/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/tv_playsetting_true"
-        android:textColor="@drawable/tab_select"
-        android:layout_toLeftOf="@id/tv_setting_playL"
-        android:layout_below="@id/tv_setting_playtip"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="10dp"
-        android:textSize="45px"
-        android:text="打开"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/tv_playsetting_false"
-        android:textColor="@drawable/tab_select"
-        android:layout_toRightOf="@id/tv_setting_playL"
-        android:layout_below="@id/tv_setting_playtip"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"
-        android:textSize="45px"
-        android:text="关闭"/>
+        android:textSize="45px" />
 
     <TextView
+        android:id="@+id/tv_setting_playL"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/tv_setting_downloadtip"
+        android:layout_below="@id/tv_setting_playtip"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:text=" | "
+        android:textColor="@color/colorBlack"
+        android:textSize="45px" />
+
+    <TextView
+        android:id="@+id/tv_playsetting_true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_setting_playtip"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_toLeftOf="@id/tv_setting_playL"
+        android:text="打开"
+        android:textColor="@drawable/tab_select"
+        android:textSize="45px" />
+
+    <TextView
+        android:id="@+id/tv_playsetting_false"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_setting_playtip"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_toRightOf="@id/tv_setting_playL"
+        android:text="关闭"
+        android:textColor="@drawable/tab_select"
+        android:textSize="45px" />
+
+    <TextView
+        android:id="@+id/tv_setting_downloadtip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_below="@id/tv_setting_playL"
-        android:textSize="45px"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="15dp"
         android:text="@string/setting_download"
-        />
+        android:textSize="45px" />
+
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:id="@+id/tv_setting_downloadL"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/tv_setting_downloadtip"
-        android:layout_marginTop="10dp"
-        android:textSize="45px"
-        android:textColor="@color/colorBlack"
-        android:text=" | "/>
-    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/tv_setting_downloadtip"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:text=" | "
+        android:textColor="@color/colorBlack"
+        android:textSize="45px" />
+
+    <TextView
         android:id="@+id/tv_downloadsetting_true"
-        android:textColor="@drawable/tab_select"
-        android:layout_toLeftOf="@id/tv_setting_downloadL"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_below="@id/tv_setting_downloadtip"
-        android:layout_marginTop="10dp"
         android:layout_marginRight="10dp"
-        android:textSize="45px"
-        android:text="打开"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/tv_downloadsetting_false"
+        android:layout_marginTop="10dp"
+        android:layout_toLeftOf="@id/tv_setting_downloadL"
+        android:text="打开"
         android:textColor="@drawable/tab_select"
-        android:layout_toRightOf="@id/tv_setting_downloadL"
+        android:textSize="45px" />
+
+    <TextView
+        android:id="@+id/tv_downloadsetting_false"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_below="@id/tv_setting_downloadtip"
-        android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"
-        android:textSize="45px"
-        android:text="关闭"/>
+        android:layout_marginTop="10dp"
+        android:layout_toRightOf="@id/tv_setting_downloadL"
+        android:text="关闭"
+        android:textColor="@drawable/tab_select"
+        android:textSize="45px" />
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:id="@+id/tv_cleancache"
-        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_below="@id/tv_setting_downloadL"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="25dp"
+        android:text="清除缓存"
         android:textColor="@color/colorBlack"
-        android:textSize="45px"
-        android:text="清除缓存"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/tv_cache"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/tv_cleancache"
-        android:layout_marginTop="10dp"
-        android:textColor="@color/colorGrey"
-        android:textSize="40px"
-        android:text="0kB"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/tv_search_update"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/tv_cache"
-        android:layout_marginTop="15dp"
-        android:textColor="@color/colorBlack"
-        android:textSize="45px"
-        android:text="版本更新"/>
+        android:textSize="45px" />
 
     <TextView
+        android:id="@+id/tv_cache"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/tv_version"
+        android:layout_below="@id/tv_cleancache"
         android:layout_centerHorizontal="true"
-        android:layout_below="@id/tv_search_update"
         android:layout_marginTop="10dp"
-        android:textSize="40px"
+        android:text="0kB"
         android:textColor="@color/colorGrey"
-        android:text="@string/app_version"/>
+        android:textSize="40px" />
+
+    <TextView
+        android:id="@+id/tv_search_update"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_cache"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:text="版本更新"
+        android:textColor="@color/colorBlack"
+        android:textSize="45px" />
+
+    <TextView
+        android:id="@+id/tv_version"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_search_update"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:text="@string/app_version"
+        android:textColor="@color/colorGrey"
+        android:textSize="40px" />
 
 </RelativeLayout>

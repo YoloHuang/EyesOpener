@@ -12,15 +12,21 @@ import java.util.List;
  */
 
 public interface DailyContract {
-    interface View extends BaseView{
+    interface View extends BaseView {
         void showContent(List<ItemListBean> list);
+
         void showFirstContent(List<ItemListBean> listBeans);
-        void changeTopPageView(int item);
+
+        void changeTopPageView();
     }
-    interface Presenter extends BasePresenter<View>{
+
+    interface Presenter extends BasePresenter<View> {
         void getDailyData();
+
         void getMoreData();
+
         void startInterval();
+
         void stopInterval();
     }
 }

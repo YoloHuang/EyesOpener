@@ -1,7 +1,6 @@
 package com.example.hzj.EyeOpener.ui.activity;
 
 
-
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -47,57 +46,61 @@ public class SearchActivity extends BaseActivity<SearchPresenter> implements Sea
 
     SearchResultView searchResultView;
     RelativeLayout.LayoutParams mLayoutParams;
-    List<ItemListBean> resultList=new ArrayList<>();
+    List<ItemListBean> resultList = new ArrayList<>();
 
     InputMethodManager inputMethodManager;
 
-    boolean isloading=false;
+    boolean isloading = false;
     String queryString;
 
 
-    List<String> hotList=new ArrayList<>();
+    List<String> hotList = new ArrayList<>();
 
     @Override
     protected void initEventAndData() {
         mPresenter.getHotSearchData();
-        inputMethodManager= (InputMethodManager) mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
+        inputMethodManager = (InputMethodManager) mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
         doSearch.setFocusable(true);
         doSearch.setFocusableInTouchMode(true);
+        /**
+         * 初始化flowLayout，设置点击监听
+         */
         flowLayout.setOnTagClickListener(new TagFlowLayout.OnTagClickListener() {
             @Override
             public boolean onTagClick(View view, int position, FlowLayout parent) {
-                queryString=hotList.get(position);
+                queryString = hotList.get(position);
                 hideInputMethod();
                 mPresenter.getSearchData(queryString);
                 addProgressView();
                 return true;
             }
         });
-
+        //设置输入法中搜索按钮监听
         editSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
-                boolean handled=false;
-                if(i== EditorInfo.IME_ACTION_SEARCH ){
-                    if(editSearch.getText().toString().equals("")){
-                        Toast.makeText(mContext,"请输入要搜索的信息~",Toast.LENGTH_SHORT).show();
-                    }else {
+                boolean handled = false;
+                if (i == EditorInfo.IME_ACTION_SEARCH) {
+                    if (editSearch.getText().toString().equals("")) {
+                        Toast.makeText(mContext, "请输入要搜索的信息~", Toast.LENGTH_SHORT).show();
+                    } else {
                         hideInputMethod();
-                        queryString=editSearch.getText().toString();
+                        queryString = editSearch.getText().toString();
                         mPresenter.getSearchData(queryString);
                         addProgressView();
-                        handled=true;
+                        handled = true;
                     }
                 }
                 return handled;
             }
         });
+        //设置搜索图标点击监听
         doSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(editSearch.getText().toString().equals("")){
-                    Toast.makeText(mContext,"请输入要搜索的信息~",Toast.LENGTH_SHORT).show();
-                }else {
+                if (editSearch.getText().toString().equals("")) {
+                    Toast.makeText(mContext, "请输入要搜索的信息~", Toast.LENGTH_SHORT).show();
+                } else {
                     hideInputMethod();
                     queryString = editSearch.getText().toString();
                     mPresenter.getSearchData(queryString);
@@ -109,11 +112,13 @@ public class SearchActivity extends BaseActivity<SearchPresenter> implements Sea
 
     }
 
+    /**
+     * 隐藏键盘输入法
+     */
     private void hideInputMethod() {
         doSearch.requestFocus();
-        Log.d("hzj", "hideInputMethod: =="+inputMethodManager.isActive());
-        if(inputMethodManager.isActive()){
-            inputMethodManager.hideSoftInputFromWindow(editSearch.getWindowToken(),0);
+        if (inputMethodManager.isActive()) {
+            inputMethodManager.hideSoftInputFromWindow(editSearch.getWindowToken(), 0);
         }
     }
 
@@ -122,15 +127,20 @@ public class SearchActivity extends BaseActivity<SearchPresenter> implements Sea
         return R.layout.activity_search;
     }
 
+    /**
+     * 显示热门搜索关键词
+     *
+     * @param stringList
+     */
     @Override
     public void showHotSearch(List<String> stringList) {
-        Log.d("hzj", "showHotSearch: "+stringList.get(0));
-        this.hotList=stringList;
+        Log.d("hzj", "showHotSearch: " + stringList.get(0));
+        this.hotList = stringList;
         flowLayout.setAdapter(new TagAdapter<String>(hotList) {
             @Override
             public View getView(FlowLayout parent, int position, String o) {
-                TextView text=(TextView) LayoutInflater.from(SearchActivity.this)
-                        .inflate(R.layout.view_search_hot,parent,false);
+                TextView text = (TextView) LayoutInflater.from(SearchActivity.this)
+                        .inflate(R.layout.view_search_hot, parent, false);
                 text.setText(hotList.get(position));
                 return text;
             }
@@ -138,16 +148,23 @@ public class SearchActivity extends BaseActivity<SearchPresenter> implements Sea
 
     }
 
+    /**
+     * 显示搜索结果，覆盖之前的热门关键词等界面
+     *
+     * @param listBeans
+     * @param total
+     */
     @Override
     public void showResult(List<ItemListBean> listBeans, final int total) {
         resultList.clear();
         resultList.addAll(listBeans);
-        searchResultView=new SearchResultView(mContext);
-        mLayoutParams=new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,RelativeLayout.LayoutParams.MATCH_PARENT);
-        mLayoutParams.addRule(RelativeLayout.BELOW,R.id.view_search_title);
+        searchResultView = new SearchResultView(mContext);
+        mLayoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
+        mLayoutParams.addRule(RelativeLayout.BELOW, R.id.view_search_title);
         searchResultView.setLayoutParams(mLayoutParams);
         searchResultView.setdata(resultList);
         root.addView(searchResultView);
+        //下拉加载更多
         searchResultView.recyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
@@ -157,11 +174,11 @@ public class SearchActivity extends BaseActivity<SearchPresenter> implements Sea
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-                int lastItemPositon= searchResultView.manager.findLastCompletelyVisibleItemPosition();
-                int totalPotions=searchResultView.manager.getItemCount();
-                if(lastItemPositon>totalPotions-4 && dy>0 && totalPotions<total){
-                    if(!isloading){
-                        isloading=true;
+                int lastItemPositon = searchResultView.manager.findLastCompletelyVisibleItemPosition();
+                int totalPotions = searchResultView.manager.getItemCount();
+                if (lastItemPositon > totalPotions - 4 && dy > 0 && totalPotions < total) {
+                    if (!isloading) {
+                        isloading = true;
                         mPresenter.getMoreData(queryString);
                     }
                 }
@@ -169,17 +186,25 @@ public class SearchActivity extends BaseActivity<SearchPresenter> implements Sea
         });
     }
 
+    /**
+     * 加载更多搜索结果
+     *
+     * @param listBeans
+     */
     @Override
     public void showMoreResult(List<ItemListBean> listBeans) {
-        if(searchResultView!=null){
+        if (searchResultView != null) {
             searchResultView.setMoreData(listBeans);
         }
-        isloading=false;
+        isloading = false;
     }
 
+    /**
+     * 在搜索过程中，移除所有View
+     */
     @Override
     public void addProgressView() {
-        if(searchResultView!=null){
+        if (searchResultView != null) {
             root.removeView(searchResultView);
         }
         root.removeView(tip);
@@ -188,7 +213,7 @@ public class SearchActivity extends BaseActivity<SearchPresenter> implements Sea
 
     @Override
     protected void initInject() {
-    getActivityComponent().inject(this);
+        getActivityComponent().inject(this);
     }
 
 

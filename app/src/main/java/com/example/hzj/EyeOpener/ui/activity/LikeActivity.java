@@ -34,7 +34,7 @@ public class LikeActivity extends RootActivity<LikePresenter> implements LikeCon
 
     LinearLayoutManager linearLayoutManager;
     LikeAdapter mAdapter;
-    List<LikeBean> LikeBeans=new ArrayList<>();
+    List<LikeBean> LikeBeans = new ArrayList<>();
 
 
     @Override
@@ -48,8 +48,8 @@ public class LikeActivity extends RootActivity<LikePresenter> implements LikeCon
     }
 
     private void initRecyclerView() {
-        linearLayoutManager=new LinearLayoutManager(mContext);
-        mAdapter=new LikeAdapter(mContext,LikeBeans);
+        linearLayoutManager = new LinearLayoutManager(mContext);
+        mAdapter = new LikeAdapter(mContext, LikeBeans);
         mRecyclerView.setLayoutManager(linearLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.setOnItemClickListener(new HistoryAdapter.OnItemClickListener() {
@@ -70,18 +70,22 @@ public class LikeActivity extends RootActivity<LikePresenter> implements LikeCon
     @Override
     public void showContent(List<LikeBean> LikeBeans) {
         stateStart();
-        this.LikeBeans=LikeBeans;
-        Log.d("hzj", "showContent: historyBeans"+LikeBeans.size());
+        this.LikeBeans = LikeBeans;
         mAdapter.addLikeData(LikeBeans);
     }
 
+    /**
+     * 跳转到DetailActivity界面
+     *
+     * @param dataBean
+     */
     @Override
     public void goToDetail(ItemListBean.DataBean dataBean) {
-        ItemListBean itemListBean=new ItemListBean();
+        ItemListBean itemListBean = new ItemListBean();
         itemListBean.setData(dataBean);
-        Intent intent=new Intent();
-        intent.setClass(mContext,DetailActivity.class);
-        intent.putExtra("itemListBean",itemListBean);
+        Intent intent = new Intent();
+        intent.setClass(mContext, DetailActivity.class);
+        intent.putExtra("itemListBean", itemListBean);
         mContext.startActivity(intent);
     }
 

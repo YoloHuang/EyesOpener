@@ -5,6 +5,7 @@ import io.realm.annotations.PrimaryKey;
 
 /**
  * Created by hzj on 2018/1/22.
+ * 下载管理所使用的数据类
  */
 
 public class DownloadBean extends RealmObject {
@@ -18,6 +19,9 @@ public class DownloadBean extends RealmObject {
     private String title;
     private long time;
     private int isdownload;
+
+    public DownloadBean() {
+    }
 
     public String getImage() {
         return image;
@@ -58,9 +62,6 @@ public class DownloadBean extends RealmObject {
     public void setId(int id) {
         this.id = id;
     }
-
-    public DownloadBean(){}
-
 
     public String getTitle() {
         return title;

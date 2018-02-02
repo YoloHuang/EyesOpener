@@ -21,20 +21,25 @@ public class WeekPresenter extends RxPresenter<HotTopContract.View> implements H
     List<ItemListBean> itemListBeans;
 
     @Inject
-    public WeekPresenter(DataManager dataManager){
-        mDataManager=dataManager;
+    public WeekPresenter(DataManager dataManager) {
+        mDataManager = dataManager;
     }
 
+    /**
+     * 获取当前type下所有热门内容
+     *
+     * @param type
+     */
     @Override
     public void getHotData(String type) {
         addSubscribe(mDataManager.getWeekHotBean(type)
-        .compose(RxUtil.<HotBean>rxSchedulerHelper())
-        .subscribeWith(new CommonSubscriber<HotBean>(mView) {
-            @Override
-            public void onNext(HotBean hotBean) {
-                itemListBeans=hotBean.getItemList();
-                mView.showContents(itemListBeans);
-            }
-        }));
+                .compose(RxUtil.<HotBean>rxSchedulerHelper())
+                .subscribeWith(new CommonSubscriber<HotBean>(mView) {
+                    @Override
+                    public void onNext(HotBean hotBean) {
+                        itemListBeans = hotBean.getItemList();
+                        mView.showContents(itemListBeans);
+                    }
+                }));
     }
 }

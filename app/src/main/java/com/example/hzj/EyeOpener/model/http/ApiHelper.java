@@ -15,27 +15,31 @@ import io.reactivex.Flowable;
 
 /**
  * Created by hzj on 2017/12/21.
+ * API接口类
  */
 
 public interface ApiHelper {
-    Flowable<List<String>> getTrendingTagInfo();
-
-    Flowable<SearchResultBean> query(String key,int start);
 
     Flowable<DailyBean> getDailyBean();
+
     Flowable<DailyBean> getDailyBean(long date);
 
-    //Flowable<HotBean> getMonthHotBean();
     Flowable<HotBean> getWeekHotBean(String type);
-    //Flowable<HotBean> getHistroicalHotBean();
+
     Flowable<List<TagsBean>> getTagsBean();
-    Flowable<TagChildBean> getTagChildBean(int start,int num,int id);
+
+    Flowable<TagChildBean> getTagChildBean(int start, int num, int id);
+
     Flowable<RelateBean> getRelateBean(int id);
+
     Flowable<ItemListBean.DataBean> getDataBean(int id);
+
     Flowable<ReplyBean> getReplyBean(int id);
-    Flowable<ReplyBean> getMoreReplyBean(int id,int lastId,int num);
+
+    Flowable<ReplyBean> getMoreReplyBean(int id, int lastId, int num);
 
     Flowable<List<String>> getHotSearch();
-    Flowable<SearchResultBean> getSearchResultBean(int start,int num,String query);
+
+    Flowable<SearchResultBean> getSearchResultBean(int start, int num, String query);
 
 }

@@ -4,11 +4,9 @@ package com.example.hzj.EyeOpener.ui.activity;
 import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 
 import com.example.hzj.EyeOpener.R;
 import com.example.hzj.EyeOpener.base.Contract.HistroyContract;
@@ -34,7 +32,7 @@ public class HistoryActivity extends RootActivity<HistoryPresenter> implements H
 
     LinearLayoutManager linearLayoutManager;
     HistoryAdapter mAdapter;
-    List<HistoryBean> historyBeans=new ArrayList<>();
+    List<HistoryBean> historyBeans = new ArrayList<>();
 
     @Override
     protected void initEventAndData() {
@@ -48,8 +46,8 @@ public class HistoryActivity extends RootActivity<HistoryPresenter> implements H
     }
 
     private void initRecyclerView() {
-        linearLayoutManager=new LinearLayoutManager(mContext);
-        mAdapter=new HistoryAdapter(mContext,historyBeans);
+        linearLayoutManager = new LinearLayoutManager(mContext);
+        mAdapter = new HistoryAdapter(mContext, historyBeans);
         mRecyclerView.setLayoutManager(linearLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.setOnItemClickListener(new HistoryAdapter.OnItemClickListener() {
@@ -69,18 +67,22 @@ public class HistoryActivity extends RootActivity<HistoryPresenter> implements H
     @Override
     public void showContent(List<HistoryBean> beans) {
         stateStart();
-        historyBeans=beans;
-        Log.d("hzj", "showContent: historyBeans"+historyBeans.size());
+        historyBeans = beans;
         mAdapter.addHistoryData(historyBeans);
     }
 
+    /**
+     * 跳转到DetailActivity界面
+     *
+     * @param dataBean
+     */
     @Override
     public void goToDetail(ItemListBean.DataBean dataBean) {
-        ItemListBean itemListBean=new ItemListBean();
+        ItemListBean itemListBean = new ItemListBean();
         itemListBean.setData(dataBean);
-        Intent intent=new Intent();
-        intent.setClass(mContext,DetailActivity.class);
-        intent.putExtra("itemListBean",itemListBean);
+        Intent intent = new Intent();
+        intent.setClass(mContext, DetailActivity.class);
+        intent.putExtra("itemListBean", itemListBean);
         mContext.startActivity(intent);
     }
 

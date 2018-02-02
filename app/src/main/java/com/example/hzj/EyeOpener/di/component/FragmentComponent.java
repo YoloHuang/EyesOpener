@@ -15,16 +15,23 @@ import dagger.Component;
 
 /**
  * Created by hzj on 2017/12/18.
+ * FragmentComponent类
  */
 @FragmentScope
-@Component(dependencies = AppComponent.class,modules = FragmentModule.class)
+@Component(dependencies = AppComponent.class, modules = FragmentModule.class)
 public interface FragmentComponent {
     Activity getActivity();
+
     void inject(DailyFragment dailyFragment);
+
     void inject(HotFragment hotFragment);
+
     void inject(TagsFragment tagsFragment);
+
     void inject(WeekFragment weekFragment);
+
     void inject(MonthFragment MonthFragment);
+
     void inject(AllHotFragment AllHotFragment);
 
 }

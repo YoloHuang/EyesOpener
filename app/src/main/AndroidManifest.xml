@@ -56,10 +56,12 @@
             android:theme="@style/SearchTheme" />
         <activity
             android:name="com.example.hzj.EyeOpener.ui.activity.SettingActivity"
-             />
-        <activity android:name="com.example.hzj.EyeOpener.ui.activity.AboutActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/MainTheme"/>
+            android:theme="@style/MainTheme" />
+        <activity
+            android:name="com.example.hzj.EyeOpener.ui.activity.AboutActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/MainTheme" />
     </application>
 
 </manifest>

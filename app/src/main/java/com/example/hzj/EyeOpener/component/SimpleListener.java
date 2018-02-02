@@ -4,6 +4,7 @@ import com.shuyu.gsyvideoplayer.listener.StandardVideoAllCallBack;
 
 /**
  * Created by hzj on 2017/12/28.
+ * gsyvideoplayer所需基础类
  */
 
 public class SimpleListener implements StandardVideoAllCallBack {
