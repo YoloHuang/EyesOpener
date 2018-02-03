@@ -3,6 +3,8 @@
  EyesOpener，一款开眼高仿APP，
  基于 `MVP+rxjava2+Retrofit+Dagger2+Glide+Realm+GSYVideoPlayer`    
  出于学习的目的使用开眼API做的这款开源视频播放APP，基本涵盖了当前Android主流开源框架，是一个非常适合小白学习的项目。废话不多说，先上截图：
+ ![image](https://github.com/zhijianhuang/picture/blob/master/daily.jpg)
+ 
  
  #### tips
  * 项目还是测试阶段，如果大家有发现BUG或者什么好的建议，可直接提[issue](https://github.com/zhijianhuang/EyesOpener/issues)
