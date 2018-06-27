@@ -27,7 +27,6 @@
         </activity>
         <activity
             android:name="com.example.hzj.EyeOpener.ui.activity.MainActivity"
-            android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
             android:name="com.example.hzj.EyeOpener.ui.activity.TagActivity"
